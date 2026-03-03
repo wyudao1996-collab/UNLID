@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNLID 事業調査レポート</title>
+  <style>
+    /* ===== Base ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      color: #1a1a1a;
+      background: #f5f5f5;
+    }
+
+    /* ===== Layout ===== */
+    .page {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    /* ===== Cover ===== */
+    .cover {
+      background: linear-gradient(135deg, #1a2a4a 0%, #2d4a7a 60%, #3a6090 100%);
+      color: #fff;
+      padding: 60px 60px 50px;
+    }
+    .cover .label {
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #90b8e0;
+      margin-bottom: 16px;
+    }
+    .cover h1 {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    .cover .subtitle {
+      font-size: 16px;
+      color: #b0cce0;
+      margin-bottom: 36px;
+    }
+    .cover-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 24px;
+      font-size: 13px;
+      color: #90b8e0;
+    }
+    .cover-meta span strong { color: #fff; }
+
+    /* ===== Body ===== */
+    .body { padding: 0 60px 60px; }
+
+    /* ===== Summary Box ===== */
+    .summary-box {
+      background: #f0f6ff;
+      border-left: 4px solid #2d4a7a;
+      border-radius: 0 6px 6px 0;
+      padding: 24px 28px;
+      margin: 36px 0;
+    }
+    .summary-box h2 {
+      font-size: 16px;
+      color: #2d4a7a;
+      margin-bottom: 12px;
+      border: none;
+      padding: 0;
+    }
+    .summary-box p { margin-bottom: 8px; }
+
+    /* ===== TOC ===== */
+    .toc {
+      background: #fafafa;
+      border: 1px solid #e8e8e8;
+      border-radius: 6px;
+      padding: 24px 28px;
+      margin: 36px 0;
+    }
+    .toc h3 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #888;
+      margin-bottom: 14px;
+    }
+    .toc ol {
+      padding-left: 20px;
+    }
+    .toc li {
+      padding: 3px 0;
+      font-size: 14px;
+    }
+    .toc a {
+      color: #2d4a7a;
+      text-decoration: none;
+    }
+    .toc a:hover { text-decoration: underline; }
+
+    /* ===== Section ===== */
+    .section {
+      margin-top: 56px;
+      padding-top: 36px;
+      border-top: 2px solid #e8e8e8;
+    }
+    .section:first-child { border-top: none; margin-top: 36px; }
+
+    h2 {
+      font-size: 22px;
+      color: #1a2a4a;
+      margin-bottom: 24px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d4a7a;
+    }
+    h3 {
+      font-size: 17px;
+      color: #2d4a7a;
+      margin: 28px 0 14px;
+    }
+    h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #444;
+      margin: 20px 0 10px;
+      text-transform: none;
+    }
+
+    p { margin-bottom: 12px; }
+
+    /* ===== Tables ===== */
+    .table-wrap { overflow-x: auto; margin: 16px 0 24px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    thead tr {
+      background: #1a2a4a;
+      color: #fff;
+    }
+    thead th {
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    tbody tr:nth-child(even) { background: #f7f9fc; }
+    tbody tr:hover { background: #eef4ff; }
+    tbody td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #e8e8e8;
+      vertical-align: top;
+    }
+
+    /* ===== Code / Pre ===== */
+    pre {
+      background: #f4f4f4;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin: 14px 0 20px;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-x: auto;
+      font-family: 'Courier New', 'Consolas', monospace;
+      white-space: pre;
+    }
+
+    /* ===== Blockquote ===== */
+    blockquote {
+      background: #fff8e6;
+      border-left: 4px solid #f0a500;
+      padding: 14px 18px;
+      margin: 16px 0 20px;
+      border-radius: 0 6px 6px 0;
+      font-size: 14px;
+    }
+    blockquote strong { color: #c07800; }
+
+    /* ===== Lists ===== */
+    ul, ol {
+      padding-left: 22px;
+      margin: 10px 0 14px;
+    }
+    li { margin-bottom: 5px; }
+
+    /* ===== Inline ===== */
+    strong { color: #1a2a4a; }
+
+    /* ===== Tags ===== */
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .tag-high { background: #ffe0e0; color: #c00; }
+    .tag-mid  { background: #fff0d0; color: #a06000; }
+    .tag-low  { background: #e0f0e0; color: #006020; }
+
+    /* ===== Highlight Box ===== */
+    .highlight-box {
+      background: #1a2a4a;
+      color: #fff;
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin: 24px 0;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .highlight-box strong { color: #90d0ff; }
+
+    /* ===== Metric Cards ===== */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0 28px;
+    }
+    .metric-card {
+      border: 1px solid #dce6f0;
+      border-radius: 8px;
+      padding: 18px;
+      text-align: center;
+    }
+    .metric-card .label { font-size: 12px; color: #888; margin-bottom: 6px; }
+    .metric-card .value { font-size: 22px; font-weight: 700; color: #1a2a4a; }
+    .metric-card .sub   { font-size: 12px; color: #aaa; margin-top: 4px; }
+
+    /* ===== Footer ===== */
+    .footer {
+      background: #1a2a4a;
+      color: #7090b0;
+      font-size: 12px;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* ===== Print ===== */
+    @media print {
+      body { background: #fff; }
+      .page { box-shadow: none; border-radius: 0; margin: 0; }
+      .section { page-break-inside: avoid; }
+      h2 { page-break-after: avoid; }
+    }
+
+    @media (max-width: 680px) {
+      .cover, .body { padding: 24px; }
+      .cover h1 { font-size: 22px; }
+      .metric-grid { grid-template-columns: 1fr; }
+      .footer { padding: 16px 24px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ===== Cover ===== -->
+  <div class="cover">
+    <div class="label">Business Research Report</div>
+    <h1>UNLID 事業調査レポート</h1>
+    <div class="subtitle">市場機会・顧客定義・競合環境の総合分析</div>
+    <div class="cover-meta">
+      <span><strong>作成日</strong>：2026年3月</span>
+      <span><strong>バージョン</strong>：1.0</span>
+      <span><strong>対象読者</strong>：投資家・事業パートナー・経営幹部</span>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- ===== Executive Summary ===== -->
+    <div class="summary-box">
+      <h2>エグゼクティブサマリー</h2>
+      <p>UNLID は、<strong>「企業向け研修外注（B2B）」と「若手個人向けスキルアップ（B2C）」を一体で提供する</strong>、日本で唯一のデュアルモデル事業を構築する。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>論点</th><th>結論</th></tr></thead>
+          <tbody>
+            <tr><td><strong>市場規模</strong></td><td>B2B研修外注市場 約5,000億円 ＋ B2C eラーニング市場 約1,200億円。両市場とも年率5〜20%成長中</td></tr>
+            <tr><td><strong>顧客の解像度</strong></td><td>B2B：中堅企業（100〜500名）人事担当者。B2C：入社1〜3年目のモヤモヤ若手。両者の課題は深く連動</td></tr>
+            <tr><td><strong>競合の空白地帯</strong></td><td>「企業が買える × 若手が使いたい」を同時に満たすサービスが市場に<strong>存在しない</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="highlight-box">
+        <strong>3〜5年での現実的目標収益：30〜60億円</strong>（B2B SOM 30〜50億円 ＋ B2C SOM 3〜10億円）
+      </div>
+    </div>
+
+    <!-- ===== TOC ===== -->
+    <div class="toc">
+      <h3>目次</h3>
+      <ol>
+        <li><a href="#sec1">顧客定義</a></li>
+        <li><a href="#sec2">市場調査</a></li>
+        <li><a href="#sec3">競合分析</a></li>
+        <li><a href="#sec4">ホワイトスペースとUNLIDの戦略ポジション</a></li>
+        <li><a href="#sec5">市場規模サマリー（TAM/SAM/SOM）</a></li>
+        <li><a href="#sec6">戦略的提言</a></li>
+      </ol>
+    </div>
+
+    <!-- ===== Section 1: 顧客定義 ===== -->
+    <div class="section" id="sec1">
+      <h2>1. 顧客定義</h2>
+
+      <h3>1-1. B2Bターゲット：研修外注ニーズを持つ企業</h3>
+      <h4>ターゲット企業プロファイル</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>属性</th><th>詳細</th></tr></thead>
+          <tbody>
+            <tr><td>規模</td><td>従業員 <strong>100〜500名</strong>の中堅企業</td></tr>
+            <tr><td>業種</td><td>IT・金融・サービス業（親和性高）、製造業（一部）</td></tr>
+            <tr><td>担当者</td><td>人事部・人材開発部の研修担当者（30〜50代）</td></tr>
+            <tr><td>意思決定者</td><td>人事部長・経営幹部</td></tr>
+            <tr><td>年間研修予算</td><td>100万〜1,000万円規模</td></tr>
+            <tr><td>意思決定期間</td><td>1〜3ヶ月（予算サイクルは秋〜冬）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>このセグメントを優先する理由は3つある。</p>
+      <ul>
+        <li>予算の意思決定が比較的速く、外注経験がある</li>
+        <li>大手研修会社が「大企業向けに最適化」しているため、中堅企業は現状サービスに不満を持っている</li>
+        <li>若手の定着課題が深刻で、訴求しやすい</li>
+      </ul>
+
+      <h4>企業が抱える研修外注の課題</h4>
+      <pre>課題の構造：
+
+社内リソース不足（専任担当者がいない）
+    ↓
+コスト合理化ニーズ（内製固定費を下げたい）
+    ↓
+若手・新人の定着率低下（入社3年以内離職率 推定30〜35%）
+    ↓
+DX・法令対応の専門領域（社内では対応不可能）
+    ↓
+研修外注への依存度が高まる</pre>
+
+      <h4>企業が外注先に求める5条件</h4>
+      <ol>
+        <li><strong>専門性と実績</strong> — 業界・テーマへの深い知識、導入事例</li>
+        <li><strong>カスタマイズ対応</strong> — 自社カルチャー・課題に合わせた設計</li>
+        <li><strong>効果測定</strong> — 研修後の行動変容・成果の可視化</li>
+        <li><strong>コスト透明性</strong> — 明確な料金体系と費用対効果の根拠</li>
+        <li><strong>継続サポート</strong> — 単発でなく継続的な関係構築</li>
+      </ol>
+
+      <h4>購買行動フロー</h4>
+      <pre>課題認識 → 情報収集（Web・紹介）→ 複数社比較 → 提案依頼（RFP）→ 契約</pre>
+
+      <h3>1-2. B2Cターゲット：若手社員・若手ワーカー</h3>
+      <h4>ターゲット個人プロファイル</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>属性</th><th>詳細</th></tr></thead>
+          <tbody>
+            <tr><td>年齢</td><td><strong>22〜32歳</strong></td></tr>
+            <tr><td>状況</td><td>新卒入社1〜5年目 / 第二新卒 / 転職検討中</td></tr>
+            <tr><td>職種</td><td>営業・事務・IT・サービス業など</td></tr>
+            <tr><td>年収</td><td>250〜450万円</td></tr>
+            <tr><td>学習費支出</td><td>月額3,000〜10,000円が許容ライン</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>表層ニーズ vs 深層ニーズ</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>表層ニーズ（言葉にすること）</th><th>深層ニーズ（本当に求めていること）</th></tr></thead>
+          <tbody>
+            <tr><td>スキルを身につけたい</td><td><strong>自信を持って仕事をしたい</strong></td></tr>
+            <tr><td>資格を取りたい</td><td><strong>市場価値を高めて選択肢を広げたい</strong></td></tr>
+            <tr><td>副業・転職したい</td><td><strong>今の環境に依存しない自立</strong></td></tr>
+            <tr><td>給料を上げたい</td><td><strong>努力が正当に評価される環境</strong></td></tr>
+            <tr><td>コミュニケーション力を上げたい</td><td><strong>職場で認められたい・孤独を解消したい</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <blockquote><strong>示唆</strong>：若手はスキルを求めているのではなく、<strong>「自信と選択肢」</strong>を求めている。これがサービス設計の根幹になる。</blockquote>
+
+      <h3>1-3. B2BとB2Cの接続構造</h3>
+      <p>UNLIDが最も差別化できる構造は、B2BとB2Cを<strong>循環モデル</strong>として設計することにある。</p>
+      <pre>      企業（B2B）
+         ↓  研修を発注
+       UNLID
+         ↓  研修を提供
+      若手社員（B2C）
+         ↓  スキルアップ・キャリア実感
+      企業（B2B）
+         ↑  人材定着・生産性向上 → 継続発注</pre>
+      <ul>
+        <li><strong>B2Bへの訴求</strong>：「若手の離職を防ぎ、即戦力化を支援する研修」</li>
+        <li><strong>B2Cへの訴求</strong>：「会社が変わっても通用するスキルと自信」</li>
+      </ul>
+      <p>この循環が成立すれば、B2B顧客獲得がB2Cユーザー獲得を促進し、B2Cでの実績がB2B提案の根拠になる<strong>二重のネットワーク効果</strong>が生まれる。</p>
+    </div>
+
+    <!-- ===== Section 2: 市場調査 ===== -->
+    <div class="section" id="sec2">
+      <h2>2. 市場調査</h2>
+
+      <h3>2-1. B2B 企業研修市場</h3>
+      <h4>市場規模（国内推定）</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>区分</th><th>推定規模</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td>企業向け人材育成費全体</td><td>約1兆2,000億〜1兆5,000億円／年</td><td>企業人件費の推定1〜2%相当</td></tr>
+            <tr><td>うち外注・アウトソーシング</td><td><strong>約3,000億〜5,000億円／年</strong></td><td>全体の25〜35%が外注化</td></tr>
+            <tr><td>研修サービス専業市場</td><td>約2,000億〜3,500億円／年</td><td>eラーニング含む</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <blockquote>参考：矢野経済研究所「人材育成・研修サービス市場」、リクルートワークス研究所各種報告（概算・推計）</blockquote>
+
+      <h4>市場成長率とトレンド</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>期間</th><th>成長率（推定）</th><th>主な要因</th></tr></thead>
+          <tbody>
+            <tr><td>2020〜2022年</td><td>▲5〜10%</td><td>コロナ禍による対面研修停止</td></tr>
+            <tr><td>2022〜2024年</td><td>+8〜12%／年</td><td>オンライン研修普及・リスキリング需要</td></tr>
+            <tr><td>2025〜2027年（予測）</td><td><strong>+5〜8%／年</strong></td><td>DX人材育成・法令対応研修の継続需要</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>注目する4つのトレンド</h4>
+      <ol>
+        <li><strong>オンライン・ハイブリッド研修の定着</strong>：企業研修の推定50〜60%がオンライン/ハイブリッドへ移行</li>
+        <li><strong>リスキリング関連予算の拡大</strong>：DX・AI活用スキル研修は推定年率20%超の伸び</li>
+        <li><strong>研修のマイクロラーニング化</strong>：長時間集合研修から短尺・反復型へ</li>
+        <li><strong>研修効果測定（ROI可視化）への強いニーズ</strong>：「行動変容の証明」へシフト</li>
+      </ol>
+
+      <h4>外注化が進む5つのドライバー</h4>
+      <ol>
+        <li><strong>人事部門の人員不足</strong>：中堅企業の研修担当は1〜3名（兼任）が大半</li>
+        <li><strong>コスト合理化</strong>：内製固定費（年収500〜700万円/人）vs. 外注スポット費用</li>
+        <li><strong>テーマの多様化・高度化</strong>：DX・AI・グローバルなど社内対応が困難</li>
+        <li><strong>若手定着課題の深刻化</strong>：新卒3年以内離職率 推定30〜35%</li>
+        <li><strong>法令対応</strong>：ハラスメント対策・育児介護休業法改正等</li>
+      </ol>
+
+      <h3>2-2. B2C 若手スキルアップ市場</h3>
+      <h4>市場規模（国内推定）</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>市場区分</th><th>推定規模</th><th>成長率</th></tr></thead>
+          <tbody>
+            <tr><td>国内eラーニング市場全体（法人＋個人）</td><td>約3,000億〜4,000億円／年</td><td>+8〜12%／年</td></tr>
+            <tr><td><strong>個人向けオンライン学習</strong></td><td><strong>約800億〜1,200億円／年</strong></td><td><strong>+15〜20%／年</strong></td></tr>
+            <tr><td>オンライン動画学習（Udemy等）</td><td>約300億〜500億円／年</td><td>+20〜30%／年</td></tr>
+            <tr><td>キャリアコーチング・メンタリング</td><td>約100億〜200億円／年</td><td>+15〜20%／年</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>若手の学習実態データ（推定）</h4>
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="label">スキルアップしたい社会人比率</div>
+          <div class="value">70〜80%</div>
+          <div class="sub">意欲は高い</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">実際に学習行動に移している比率</div>
+          <div class="value">30〜40%</div>
+          <div class="sub">意欲の半分以下</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">オンラインコース完了率</div>
+          <div class="value">10〜15%</div>
+          <div class="sub">業界共通の課題</div>
+        </div>
+      </div>
+
+      <h4>費用支出の分布（若手社会人）</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>月額支出</th><th>比率（推定）</th><th>主な支出先</th></tr></thead>
+          <tbody>
+            <tr><td>0円</td><td>約40〜45%</td><td>—</td></tr>
+            <tr><td>〜1,000円</td><td>約15%</td><td>書籍、無料アプリ</td></tr>
+            <tr><td>1,001〜3,000円</td><td>約20%</td><td>サブスク型eラーニング</td></tr>
+            <tr><td>3,001〜10,000円</td><td>約15%</td><td>コーチング、有料コース</td></tr>
+            <tr><td>10,001円以上</td><td>約5〜10%</td><td>スクール、資格講座</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2-3. 既存市場の非効率（アンメットニーズ）</h3>
+      <h4>B2B（企業研修）の課題</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>課題</th><th>現状</th><th>生じる問題</th></tr></thead>
+          <tbody>
+            <tr><td>研修効果の不透明さ</td><td>「やりました」で終わる研修が多い</td><td>予算承認が取りにくい、継続発注されない</td></tr>
+            <tr><td>単発・点の施策</td><td>年1回の集合研修で終了</td><td>学習定着率が低く行動変容が起きない</td></tr>
+            <tr><td><strong>若手ニーズとの乖離</strong></td><td>上司世代が設計した研修が若手に響かない</td><td>参加率・満足度が低い</td></tr>
+            <tr><td>中堅向け選択肢不足</td><td>大手向け高単価・汎用格安の二極化</td><td>中堅企業のニーズが満たされない</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h4>B2C（個人向け学習）の課題</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>課題</th><th>現状</th><th>生じる問題</th></tr></thead>
+          <tbody>
+            <tr><td>学習継続率の低さ</td><td>完了率10〜15%</td><td>投資対効果が出ない</td></tr>
+            <tr><td>何を学ぶか分からない</td><td>コンテンツが多すぎて選べない</td><td>学習開始のハードルが高い</td></tr>
+            <tr><td>孤独な学習</td><td>一人でコンテンツを消化するだけ</td><td>モチベーション維持が難しい</td></tr>
+            <tr><td><strong>企業研修との分断</strong></td><td>会社の研修と自己学習が連携していない</td><td>重複・無駄が多い</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== Section 3: 競合分析 ===== -->
+    <div class="section" id="sec3">
+      <h2>3. 競合分析</h2>
+
+      <h3>3-1. B2B競合マップ</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>企業名</th><th>強み</th><th>弱み</th><th>価格帯</th><th>競合度</th></tr></thead>
+          <tbody>
+            <tr><td>リクルートMS</td><td>ブランド・データ・営業力</td><td>高コスト・大企業中心・画一的</td><td>高</td><td><span class="tag tag-mid">中</span></td></tr>
+            <tr><td>産業能率大学</td><td>学術的信頼性・体系性</td><td>トレンド対応遅い・UX古い</td><td>中〜高</td><td><span class="tag tag-low">低</span></td></tr>
+            <tr><td>インソース</td><td>低価格・コース数</td><td>汎用すぎる・カスタム不可</td><td>低</td><td><span class="tag tag-high">高</span></td></tr>
+            <tr><td>グロービス</td><td>MBA品質・eラーニング</td><td>価格高・実務から遠い</td><td>中〜高</td><td><span class="tag tag-mid">中</span></td></tr>
+            <tr><td>ラーニングエージェンシー</td><td>体系性・DX対応</td><td>認知度・中高価格</td><td>中〜高</td><td><span class="tag tag-high">高</span></td></tr>
+            <tr><td>識学</td><td>メソッド差別化</td><td>合う企業が限定的</td><td>高</td><td><span class="tag tag-low">低</span></td></tr>
+            <tr><td>Udemy Business</td><td>コース数・低コスト</td><td>日本語少・継続率低</td><td>低〜中</td><td><span class="tag tag-mid">中</span></td></tr>
+            <tr><td>Schoo for Business</td><td>日本語・安価</td><td>深度不足</td><td>低</td><td><span class="tag tag-mid">中</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>3-2. B2C競合マップ</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>サービス名</th><th>強み</th><th>弱み</th><th>価格帯</th><th>競合度</th></tr></thead>
+          <tbody>
+            <tr><td>Udemy（個人）</td><td>コース数・価格</td><td>継続サポートなし・品質ばらつき</td><td>低</td><td><span class="tag tag-high">高</span></td></tr>
+            <tr><td>Schoo（個人）</td><td>日本語・生放送・安価</td><td>深度不足</td><td>低</td><td><span class="tag tag-high">高</span></td></tr>
+            <tr><td>Coursera</td><td>世界大学連携・修了証</td><td>英語中心</td><td>中</td><td><span class="tag tag-low">低</span></td></tr>
+            <tr><td>TechAcademy</td><td>メンター・転職サポート</td><td>高価・プログラミング特化</td><td>高</td><td><span class="tag tag-low">低</span></td></tr>
+            <tr><td>ポテパンキャンプ</td><td>転職保証</td><td>高価・エンジニア特化</td><td>高</td><td><span class="tag tag-low">低</span></td></tr>
+            <tr><td>コーチング系（MENTO等）</td><td>1on1・パーソナライズ</td><td>高価・マインド中心</td><td>高</td><td><span class="tag tag-low">低</span></td></tr>
+            <tr><td>YouTube / SNS</td><td>無料・更新速度</td><td>体系性なし</td><td>無料</td><td><span class="tag tag-mid">中</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>3-3. 競合ポジショニングマップ</h3>
+      <pre>                     高価・カスタム
+                           ↑
+ グロービス(法人)  ●        |        ● RMS / 産業能率大
+ 識学             ●        |
+                           |
+ TechAcademy      ●       |
+ コーチング系      ●       |
+B2C ←─────────────────────────────────────── B2B
+ Coursera         ●       |        ● ラーニングエージェンシー
+                           |   ● インソース（法人）
+ Udemy(個人)      ●       |   ● Udemy Business
+ Schoo(個人)      ●       |   ● Schoo for Business
+                           |
+ YouTube / SNS    ●       |
+                           ↓
+                     安価・汎用
+
+       ★ UNLIDが狙う空白ゾーン（中価格帯・B2B×B2C接続領域）</pre>
+    </div>
+
+    <!-- ===== Section 4: ホワイトスペース ===== -->
+    <div class="section" id="sec4">
+      <h2>4. ホワイトスペースとUNLIDの戦略ポジション</h2>
+
+      <h3>4-1. 競合構造の本質的な分断</h3>
+      <pre>B2B競合（研修会社）    → 企業の人事担当者が満足するが、若手が「使いたい」と思わない
+B2C競合（個人サービス）→ 若手個人が使いたいが、企業の研修予算では購入されない</pre>
+      <div class="highlight-box">
+        <strong>「企業が買えて、若手が自ら使いたい」を同時に満たすサービスが、日本市場に存在しない。</strong>
+      </div>
+
+      <h3>4-2. UNLIDの4つのホワイトスペース</h3>
+
+      <h4>① 中堅企業×若手定着特化</h4>
+      <ul>
+        <li>大手研修会社は大企業向けに最適化（コスト・設計ともに中堅には過剰）</li>
+        <li>格安パッケージは汎用的すぎて「若手定着」「カルチャー醸成」に特化していない</li>
+        <li><strong>→ 従業員100〜500名の中堅企業に、若手離職を防ぐ研修を適正価格で提供</strong></li>
+      </ul>
+
+      <h4>② B2B研修×B2C自己学習の連携</h4>
+      <ul>
+        <li>企業研修と個人学習は完全に分断されており、連携したサービスはほぼ存在しない</li>
+        <li><strong>→ 企業が発注する研修と、個人が自主的に利用するスキルアップを一体化</strong></li>
+      </ul>
+
+      <h4>③ 行動変容・継続学習へのフォーカス</h4>
+      <ul>
+        <li>コンテンツ提供型は飽和。「継続できる仕組み・コミュニティ・成果実感」を提供するサービスが少ない</li>
+        <li><strong>→ コーチング・ピアラーニング・フィードバックサイクルを組み込んだ設計</strong></li>
+      </ul>
+
+      <h4>④ DX時代の実践的スキル</h4>
+      <ul>
+        <li>ChatGPT・AI活用、データ分析を「業務で使えるレベル」まで教えるサービスが不足</li>
+        <li><strong>→ 実務直結型DX・業務効率化スキルを若手向けに提供（B2B・B2C双方に需要）</strong></li>
+      </ul>
+
+      <h3>4-3. UNLIDの競合優位性整理</h3>
+      <h4>勝てる領域</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>領域</th><th>理由</th></tr></thead>
+          <tbody>
+            <tr><td>中堅企業（100〜500名）向け若手育成</td><td>大手は大企業寄り・ベンチャーはITに偏る。このセグメント特化が差別化</td></tr>
+            <tr><td>「若手が自ら使いたい」コンテンツ設計</td><td>既存研修会社は会社目線。若手の本音ニーズから設計する余地がある</td></tr>
+            <tr><td>B2B購買 × B2C体験の両立</td><td>競合は一方にしか最適化されていない</td></tr>
+            <tr><td>継続サポート・定点観測</td><td>単発研修ではなく継続関与。「研修後」の支援を独占できる</td></tr>
+            <tr><td>離職防止・定着率向上という経営指標との接続</td><td>研修満足度ではなく離職率・定着率への直接訴求は差別化</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>勝てない（戦わない）領域</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>領域</th><th>理由</th></tr></thead>
+          <tbody>
+            <tr><td>大企業向け大規模カスタム研修</td><td>RMS・産業能率大などが圧倒的な実績・ブランドを保有</td></tr>
+            <tr><td>コース数・コンテンツ量での勝負</td><td>Udemyには絶対に勝てない。量ではなく質・継続性・文脈で差別化</td></tr>
+            <tr><td>IT特化エンジニア転職支援</td><td>TechAcademy・ポテパンが専業展開</td></tr>
+            <tr><td>価格競争</td><td>インソースとの消耗戦は避ける。価格ではなく価値で勝負</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== Section 5: TAM/SAM/SOM ===== -->
+    <div class="section" id="sec5">
+      <h2>5. 市場規模サマリー（TAM/SAM/SOM）</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>指標</th><th>意味</th></tr></thead>
+          <tbody>
+            <tr><td><strong>TAM</strong>（Total Addressable Market）</td><td>理論的に獲得可能な最大市場規模</td></tr>
+            <tr><td><strong>SAM</strong>（Serviceable Addressable Market）</td><td>UNLIDが実際にアクセスできる市場規模</td></tr>
+            <tr><td><strong>SOM</strong>（Serviceable Obtainable Market）</td><td>現実的に獲得可能な規模（3〜5年以内）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>B2B 企業研修市場</h3>
+      <pre>TAM ：約5,000億円（国内企業研修外注市場全体）
+SAM ：約1,500億円（中堅企業・若手育成特化・IT/サービス業中心）
+SOM ：約30億〜50億円（初期3〜5年での現実的獲得規模）</pre>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>指標</th><th>推定規模</th><th>算出根拠</th></tr></thead>
+          <tbody>
+            <tr><td>TAM</td><td>約5,000億円</td><td>国内研修外注市場全体（推計）</td></tr>
+            <tr><td>SAM</td><td>約1,500億円</td><td>中堅企業（約3万社）×平均研修外注費 500万円/社</td></tr>
+            <tr><td>SOM</td><td>約30〜50億円</td><td>SAMの2〜3%シェア（300〜500社×平均単価 600〜1,000万円/社）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>B2C 若手スキルアップ市場</h3>
+      <pre>TAM ：約1,200億円（国内個人向けオンライン学習・社会人向け）
+SAM ：約300億円（22〜32歳・学習意欲があり課金意向がある若手層）
+SOM ：約3億〜10億円（初期3〜5年での現実的獲得規模）</pre>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>指標</th><th>推定規模</th><th>算出根拠</th></tr></thead>
+          <tbody>
+            <tr><td>TAM</td><td>約1,200億円</td><td>社会人個人向けオンライン学習市場（推計）</td></tr>
+            <tr><td>SAM</td><td>約300億円</td><td>22〜32歳・学習課金層（推定300万人）×月額1,000円×12ヶ月</td></tr>
+            <tr><td>SOM</td><td>約3〜10億円</td><td>SAMの1〜3%（3〜9万人×月額3,000円×12ヶ月）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>成長シナリオ（統合）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>フェーズ</th><th>目標</th><th>想定収益規模</th></tr></thead>
+          <tbody>
+            <tr><td>フェーズ1（0〜1年）</td><td>B2B参入・B2C実証</td><td>数千万円</td></tr>
+            <tr><td>フェーズ2（1〜3年）</td><td>B2B顧客100社・B2C1万人</td><td>1億〜5億円</td></tr>
+            <tr><td>フェーズ3（3〜5年）</td><td>B2B顧客500社・B2C5万人</td><td><strong>10億〜30億円</strong></td></tr>
+            <tr><td>長期目標（5年以上）</td><td>市場シェア確立</td><td><strong>50億円以上</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== Section 6: 戦略的提言 ===== -->
+    <div class="section" id="sec6">
+      <h2>6. 戦略的提言</h2>
+
+      <h3>6-1. 攻めるべき市場と差別化軸</h3>
+      <pre>B2B：従業員100〜500名・IT/サービス業・若手定着に課題がある中堅企業の人事担当者
+B2C：入社1〜3年目・モヤモヤしている若手（会社経由でのリーチも含む）</pre>
+
+      <h4>差別化の4軸</h4>
+      <ol>
+        <li><strong>若手視点の設計</strong>：若手が「自分のためになる」と感じるコンテンツ・体験の提供</li>
+        <li><strong>継続支援</strong>：単発研修ではなく、学習継続・行動変容まで伴走する仕組み</li>
+        <li><strong>B2B×B2Cの接続</strong>：企業の研修投資が若手の主体的成長に繋がることを可視化</li>
+        <li><strong>離職防止KPIとの接続</strong>：研修満足度ではなく「離職率・定着率への貢献」で評価</li>
+      </ol>
+
+      <h3>6-2. 避けるべき競合シナリオ</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>避けるべき競合</th><th>理由</th></tr></thead>
+          <tbody>
+            <tr><td>Udemyとのコース数・価格競争</td><td>資本力の差で消耗戦になる</td></tr>
+            <tr><td>RMS・グロービスとの大企業向けカスタム研修競争</td><td>実績・ブランド力で太刀打ちできない</td></tr>
+            <tr><td>TechAcademy等とのITスキル転職支援</td><td>特化型との正面衝突は得策でない</td></tr>
+            <tr><td>インソースとの価格競争</td><td>低価格モデルとの戦いは収益を圧迫する</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>6-3. UNLIDのユニークな価値提案</h3>
+      <div class="highlight-box">
+        「企業が買える研修を、若手が本当に使いたいと思う体験で届ける唯一のサービス」
+      </div>
+      <p>これは単なるスローガンではなく、競合分析から導き出された<strong>市場の空白</strong>に基づいている。</p>
+      <ul>
+        <li>B2B競合（研修会社）が「企業が買う」ことに最適化される一方、若手の体験は二の次</li>
+        <li>B2C競合（個人サービス）が「若手が使いたい」ことに最適化される一方、企業予算での購入は設計されていない</li>
+      </ul>
+      <p>UNLIDはこの<strong>両側のニーズを同時に満たす設計</strong>を持ち、競合が意図的に手を抜いているわけでもない「構造的な空白」を狙う。</p>
+
+      <h3>付記：調査上の注意事項</h3>
+      <ul>
+        <li>本レポートの市場規模数値はすべて<strong>推定・概算</strong>であり、公開情報・業界知見を元に合理的に算出したものである</li>
+        <li>競合他社の価格帯・サービス詳細は公開情報をもとに作成。各社公式情報で確認を要する</li>
+        <li>市場規模の定義・調査手法により数値は大きく異なる場合がある</li>
+        <li>事業計画への転用時は、最新の統計データ（矢野経済研究所・ICT総研・厚生労働省等）による検証を推奨する</li>
+        <li>SOM試算は保守的シナリオを想定しており、PMF達成後は大幅に上振れる可能性がある</li>
+      </ul>
+    </div>
+
+  </div><!-- /body -->
+
+  <div class="footer">
+    <span>UNLID 事業調査チーム</span>
+    <span>作成日：2026年3月　|　バージョン 1.0</span>
+    <span>参照元：顧客定義.md / 市場調査.md / 競合分析.md</span>
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>

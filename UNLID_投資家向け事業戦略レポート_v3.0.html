@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNLID 投資家向け事業戦略レポート v3.0</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      color: #1a1a1a;
+      background: #f0f2f5;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+
+    /* ===== Cover ===== */
+    .cover {
+      background: linear-gradient(135deg, #0d1f3c 0%, #1a3560 55%, #1e4d8c 100%);
+      color: #fff;
+      padding: 64px 64px 52px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      right: -80px; top: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .cover::after {
+      content: '';
+      position: absolute;
+      right: 60px; bottom: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+    }
+    .cover .label {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7ab0e0;
+      margin-bottom: 18px;
+    }
+    .cover h1 {
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+    .cover .subtitle {
+      font-size: 16px;
+      color: #a0c4e8;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+    .cover .version-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 12px;
+      color: #c0d8f0;
+      margin-bottom: 36px;
+    }
+    .cover-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 24px;
+      font-size: 13px;
+      color: #7ab0e0;
+    }
+    .cover-meta span strong { color: #fff; }
+
+    /* ===== Body ===== */
+    .body { padding: 0 64px 64px; }
+
+    /* ===== Summary Box ===== */
+    .summary-box {
+      background: linear-gradient(135deg, #f0f6ff 0%, #e8f2ff 100%);
+      border-left: 5px solid #1a3560;
+      border-radius: 0 8px 8px 0;
+      padding: 28px 32px;
+      margin: 40px 0;
+    }
+    .summary-box .summary-title {
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #1a3560;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .summary-box p { margin-bottom: 10px; font-size: 15px; }
+
+    /* ===== Highlight Box ===== */
+    .highlight-box {
+      background: #0d1f3c;
+      color: #fff;
+      border-radius: 8px;
+      padding: 22px 28px;
+      margin: 20px 0;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .highlight-box strong { color: #7ac8ff; }
+
+    .highlight-box-warn {
+      background: linear-gradient(135deg, #fff8e0, #fff3cc);
+      border-left: 5px solid #f0a500;
+      border-radius: 0 8px 8px 0;
+      padding: 18px 24px;
+      margin: 18px 0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .highlight-box-warn strong { color: #b07000; }
+
+    /* ===== TOC ===== */
+    .toc {
+      background: #fafbfc;
+      border: 1px solid #e0e8f0;
+      border-radius: 8px;
+      padding: 26px 32px;
+      margin: 36px 0;
+    }
+    .toc-title {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #999;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .toc ol { padding-left: 20px; }
+    .toc li { padding: 4px 0; font-size: 14px; }
+    .toc a { color: #1a3560; text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+
+    /* ===== Section ===== */
+    .section {
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 2px solid #edf0f4;
+    }
+    .section:first-of-type { border-top: none; margin-top: 40px; }
+
+    h2 {
+      font-size: 22px;
+      color: #0d1f3c;
+      margin-bottom: 26px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid #1a3560;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    h2 .sec-num {
+      font-size: 13px;
+      color: #1a3560;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    h3 {
+      font-size: 17px;
+      color: #1a3560;
+      margin: 32px 0 14px;
+      padding-left: 12px;
+      border-left: 3px solid #4a90d9;
+    }
+    h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+      margin: 22px 0 10px;
+    }
+    p { margin-bottom: 12px; }
+
+    /* ===== Tables ===== */
+    .table-wrap { overflow-x: auto; margin: 16px 0 24px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    thead tr { background: #0d1f3c; color: #fff; }
+    thead th { padding: 11px 16px; text-align: left; font-weight: 600; }
+    tbody tr:nth-child(even) { background: #f7f9fc; }
+    tbody tr:hover { background: #edf4ff; transition: background 0.15s; }
+    tbody td {
+      padding: 10px 16px;
+      border-bottom: 1px solid #e8edf4;
+      vertical-align: top;
+    }
+
+    /* ===== Pre / Code ===== */
+    pre {
+      background: #f2f4f8;
+      border: 1px solid #dde3ec;
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin: 14px 0 20px;
+      font-size: 13px;
+      line-height: 1.65;
+      overflow-x: auto;
+      font-family: 'Courier New', 'Consolas', monospace;
+      white-space: pre;
+    }
+
+    /* ===== Blockquote ===== */
+    blockquote {
+      background: #fffbf0;
+      border-left: 4px solid #f0a500;
+      padding: 14px 20px;
+      margin: 16px 0 20px;
+      border-radius: 0 6px 6px 0;
+      font-size: 14px;
+    }
+    blockquote strong { color: #c07800; }
+
+    /* ===== Lists ===== */
+    ul, ol { padding-left: 24px; margin: 10px 0 14px; }
+    li { margin-bottom: 6px; }
+
+    strong { color: #0d1f3c; }
+
+    /* ===== Tags ===== */
+    .tag {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .tag-high { background: #ffe0e0; color: #c00; }
+    .tag-mid  { background: #fff0d0; color: #a06000; }
+    .tag-low  { background: #e0f0e0; color: #006020; }
+    .tag-crit { background: #1a3560; color: #fff; }
+
+    /* ===== Metric Grid ===== */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0 28px;
+    }
+    .metric-card {
+      border: 1px solid #d8e4f0;
+      border-radius: 10px;
+      padding: 20px 16px;
+      text-align: center;
+      background: linear-gradient(135deg, #fff 0%, #f5f9ff 100%);
+    }
+    .metric-card .m-label { font-size: 12px; color: #888; margin-bottom: 8px; line-height: 1.4; }
+    .metric-card .m-value { font-size: 24px; font-weight: 700; color: #0d1f3c; }
+    .metric-card .m-sub   { font-size: 12px; color: #aaa; margin-top: 5px; }
+
+    /* ===== Phase Cards ===== */
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0 28px;
+    }
+    .phase-card {
+      border-radius: 10px;
+      padding: 20px 18px;
+      border: 1px solid #d8e4f0;
+    }
+    .phase-card.p0 { border-top: 4px solid #888; }
+    .phase-card.p1 { border-top: 4px solid #4a90d9; }
+    .phase-card.p2 { border-top: 4px solid #1a7040; }
+    .phase-card.p3 { border-top: 4px solid #0d1f3c; }
+    .phase-card.p4 { border-top: 4px solid #7b2fbf; }
+    .phase-card .ph-name { font-size: 12px; font-weight: 700; color: #888; margin-bottom: 6px; }
+    .phase-card .ph-title { font-size: 15px; font-weight: 700; color: #0d1f3c; margin-bottom: 12px; }
+    .phase-card ul { padding-left: 16px; font-size: 13px; }
+    .phase-card li { margin-bottom: 5px; color: #444; }
+
+    /* ===== Flow Box ===== */
+    .flow-box {
+      background: #f7f9fc;
+      border: 1px solid #dde3ec;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 14px 0 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    /* ===== Risk Table ===== */
+    .risk-crit td:first-child { border-left: 4px solid #c00; }
+    .risk-high td:first-child { border-left: 4px solid #f0a500; }
+    .risk-mid  td:first-child { border-left: 4px solid #4a90d9; }
+
+    /* ===== Rank Cards ===== */
+    .rank-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 16px 0 24px;
+    }
+    .rank-card {
+      border-radius: 8px;
+      padding: 16px 14px;
+      text-align: center;
+      border: 1px solid #dde3ec;
+    }
+    .rank-card.r0 { background: #f8f8f8; border-top: 3px solid #aaa; }
+    .rank-card.r1 { background: #f0f7ff; border-top: 3px solid #4a90d9; }
+    .rank-card.r2 { background: #f0fff4; border-top: 3px solid #1a9050; }
+    .rank-card.r3 { background: #fffbf0; border-top: 3px solid #d4a017; }
+    .rank-card .rk-name  { font-size: 13px; font-weight: 700; color: #0d1f3c; margin-bottom: 4px; }
+    .rank-card .rk-cond  { font-size: 11px; color: #888; margin-bottom: 10px; line-height: 1.4; }
+    .rank-card .rk-pay   { font-size: 16px; font-weight: 700; color: #0d1f3c; }
+    .rank-card .rk-month { font-size: 11px; color: #888; margin-top: 4px; }
+
+    /* ===== Positioning Map ===== */
+    .pos-map {
+      background: #f7f9fc;
+      border: 1px solid #dde3ec;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 14px 0 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 12.5px;
+      line-height: 1.7;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    /* ===== Barrier Cards ===== */
+    .barrier-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin: 16px 0 24px;
+    }
+    .barrier-card {
+      border: 1px solid #d8e4f0;
+      border-radius: 8px;
+      padding: 18px 20px;
+      background: linear-gradient(135deg, #fff 0%, #f8fbff 100%);
+    }
+    .barrier-card .b-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0d1f3c;
+      margin-bottom: 8px;
+    }
+    .barrier-card .b-desc {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      background: #0d1f3c;
+      color: #6080a0;
+      font-size: 12px;
+      padding: 20px 64px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* ===== Print ===== */
+    @media print {
+      body { background: #fff; }
+      .page { box-shadow: none; border-radius: 0; margin: 0; }
+      .section { page-break-inside: avoid; }
+      h2 { page-break-after: avoid; }
+    }
+
+    @media (max-width: 720px) {
+      .cover, .body { padding: 24px; }
+      .cover h1 { font-size: 22px; }
+      .metric-grid, .phase-grid, .rank-grid, .barrier-grid { grid-template-columns: 1fr; }
+      .footer { padding: 16px 24px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ===== Cover ===== -->
+  <div class="cover">
+    <div class="label">Investor Strategy Report · Version 3.0</div>
+    <h1>UNLID 投資家向け事業戦略レポート v3.0</h1>
+    <div class="subtitle">AI FDEフラクショナル × SME × 副業若手ワーカー × スカウト人材紹介 + 将来SaaS構想<br>需要・市場規模・競合・参入障壁・リスク 統合分析</div>
+    <div class="version-badge">Version 3.0 — AI FDE×フラクショナル×SMEに完全刷新・最新データ統合</div>
+    <div class="cover-meta">
+      <span><strong>作成日</strong>：2026年3月</span>
+      <span><strong>対象読者</strong>：投資家・事業パートナー・経営幹部</span>
+      <span><strong>機密区分</strong>：Confidential</span>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- ===== Executive Summary ===== -->
+    <div class="summary-box">
+      <div class="summary-title">Executive Summary</div>
+      <p>UNLIDが狙うのは、<strong>日本の中小企業（SME）のAI実装を「現場に入って成果を出す」フラクショナルFDEで支援し、その監督下で副業若手ワーカーが実務を担って実績ログを積み、最終的にスカウト型人材紹介で収益化するエコシステム</strong>だ。将来はその実績ログをGitHubのビジネス職版SaaSとして外販する。</p>
+      <div class="table-wrap" style="margin-top:16px;">
+        <table>
+          <thead><tr><th>論点</th><th>結論</th></tr></thead>
+          <tbody>
+            <tr><td><strong>何をやるか</strong></td><td>フラクショナルFDE（週1〜2日複数社掛け持ち）がSMEのAI実装支援。副業若手が実務を担当</td></tr>
+            <tr><td><strong>市場の空白</strong></td><td>LayerX（エンタープライズ特化）・サーキュレーション（既存プロ人材）・顧問名鑑（OB中心）のどれもSME×AI×若手育成×完遂ログを組み合わせたモデルは存在しない</td></tr>
+            <tr><td><strong>TAM</strong></td><td>5,000億〜9,000億円（AI業務支援+人材紹介市場）</td></tr>
+            <tr><td><strong>SAM</strong></td><td>280億〜560億円</td></tr>
+            <tr><td><strong>SOM（3〜5年）</strong></td><td><strong>4〜6億円</strong>（FDE数がボトルネック）／認定FDE拡張で10〜15億円</td></tr>
+            <tr><td><strong>将来SaaS</strong></td><td>完遂ログのGitHub化→採用企業が閲覧課金する採用プラットフォームへ</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== TOC ===== -->
+    <div class="toc">
+      <div class="toc-title">Table of Contents</div>
+      <ol>
+        <li><a href="#sec1">事業の本質と独自性</a></li>
+        <li><a href="#sec2">なぜ今か——構造的追い風</a></li>
+        <li><a href="#sec3">市場規模（TAM/SAM/SOM）</a></li>
+        <li><a href="#sec4">競合分析——真の競合は誰か</a></li>
+        <li><a href="#sec5">参入障壁——なぜ真似されにくいか</a></li>
+        <li><a href="#sec6">サービス設計（フラクショナルFDE×副業ワーカー）</a></li>
+        <li><a href="#sec7">収益モデル</a></li>
+        <li><a href="#sec8">将来構想——完遂ログのSaaS化</a></li>
+        <li><a href="#sec9">リスクと対策</a></li>
+        <li><a href="#sec10">ロードマップ</a></li>
+        <li><a href="#sec11">KPI設計</a></li>
+      </ol>
+    </div>
+
+    <!-- ===== Section 1 ===== -->
+    <div class="section" id="sec1">
+      <h2><span class="sec-num">01</span> 事業の本質と独自性</h2>
+
+      <h3>1-1. 一言で言えば</h3>
+      <blockquote>
+        「中小企業のAI実装を、現場に入る正社員FDEが責任を持って成果を出す。その監督下で副業若手が実務を担い、実績ログを積む。ログが証明書になり、採用に繋がる」
+      </blockquote>
+
+      <h3>1-2. 3市場の交差点</h3>
+      <div class="flow-box">市場①：BPO・業務委託（TAM 4〜5兆円）
+  企業が「AI実装・業務改善」の解決に払う金
+
+市場②：副業・ギグワーカー（TAM 20兆円）
+  若者が「実戦経験＋副収入」を求める流れ
+
+市場③：人材紹介（TAM 3,000〜4,000億円）
+  企業が即戦力を採用するために払うフィー
+
+→ 3市場を一つのエコシステムで統合する
+  既存プレイヤーはそれぞれ1市場しか見ていない</div>
+
+      <h3>1-3. Palantir FDEモデルとの違い</h3>
+      <p>Palantirは自社プラットフォーム（Foundry/AIP）を持ち込み、大企業・政府に年数億〜数十億円で常駐する。UNLIDは：</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>比較軸</th><th>Palantir</th><th>UNLID</th></tr></thead>
+          <tbody>
+            <tr><td><strong>対象</strong></td><td>大企業・政府機関</td><td>中小企業（30〜300名）</td></tr>
+            <tr><td><strong>単価</strong></td><td>年数億〜数十億円</td><td>月10〜25万円（週1〜2日）</td></tr>
+            <tr><td><strong>ツール</strong></td><td>自社Foundry/AIP必須</td><td>既存AI（Claude/GPT/Dify等）を組み合わせ</td></tr>
+            <tr><td><strong>副業ワーカー</strong></td><td>なし</td><td>FDE監督下で若手が参加</td></tr>
+            <tr><td><strong>人材紹介連携</strong></td><td>なし</td><td>完遂ログ→スカウト採用へ</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== Section 2 ===== -->
+    <div class="section" id="sec2">
+      <h2><span class="sec-num">02</span> なぜ今か——構造的追い風</h2>
+
+      <h3>2-1. 中小企業のAI実装ニーズが急拡大</h3>
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="m-label">国内生成AI市場（2024年）</div>
+          <div class="m-value">1,016億円</div>
+          <div class="m-sub">初の1,000億円超え — IDC Japan</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">国内生成AI市場（2028年予測）</div>
+          <div class="m-value">8,028億円</div>
+          <div class="m-sub">約8倍成長 — IDC Japan</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">中小企業（300名未満）全社AI導入率</div>
+          <div class="m-value">1.3%</div>
+          <div class="m-sub">大企業（5,000名超）は19.0%</div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <strong>大企業との導入格差：15倍。</strong>「効果的な活用方法がわからない」が最大の障壁（総務省調査）。
+        中小企業のAI方針未策定率は約50%。<strong>「方法を教えてくれる人が現場にいない」</strong>＝ UNLIDのフラクショナルFDEが埋める穴。
+      </div>
+
+      <h3>2-2. 外部CTO・フラクショナル市場の確立</h3>
+      <div class="flow-box">外部CTO・技術顧問の単価相場（2024〜2025年）：
+  副業CTO（週1〜2回稼働）：月30〜50万円
+  社外CTO顧問サービス：月10万〜120万円（最多：月60万円）
+  正社員CTO採用コスト：年2,000万円超（社保込）
+
+→「月60万円の外部CTOは普通に売れている」
+  UNLIDはこれより安い「月10〜25万円」で
+  AI実装に特化したFDEを提供する</div>
+
+      <h3>2-3. 若年層の「賃金デッドロック」と副業需要</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>指標</th><th>数値</th><th>出典</th></tr></thead>
+          <tbody>
+            <tr><td>新卒3年以内離職率（大卒）</td><td><strong>34.9%</strong></td><td>厚生労働省（2021年卒）</td></tr>
+            <tr><td>20代副業実施率</td><td><strong>14.4%（全世代最低）</strong></td><td>パーソルキャリア2024</td></tr>
+            <tr><td>副業市場規模</td><td><strong>20兆円</strong></td><td>ランサーズ「フリーランス実態調査2024」</td></tr>
+            <tr><td>フリーランス人口</td><td><strong>1,303万人</strong></td><td>同上</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="highlight-box-warn">
+        <strong>20代の副業実施率が全世代最低＝開拓余地が最大。</strong>既存副業（ランサーズ等）は単価低・スキルにならない・実績が証明できないという課題がある。
+      </div>
+
+      <h3>2-4. OJT崩壊——育てられない構造的現実</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>指標</th><th>数値</th><th>出典</th></tr></thead>
+          <tbody>
+            <tr><td>計画的OJTを受けた新入社員</td><td><strong>40.9%→30.3%に低下</strong></td><td>パーソル総合研究所「OJTに関する定量調査」2025年1月</td></tr>
+            <tr><td>Off-JTを受けられなかった若手</td><td><strong>約46.5%</strong></td><td>同上</td></tr>
+            <tr><td>OJT担当者が「業務過多」</td><td><strong>37.6%の企業が課題</strong></td><td>同上</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="flow-box">OJT崩壊の構造的理由：
+  ① ハラスメント意識で指導を萎縮
+  ② 業務過多で育成時間が消失
+  ③ OJT担当が入社2〜3年目の若手（ベテラン不在）
+  ④「コストとして見えない」ため削減されやすい
+
+→ 会社に育ててもらえない若者が、
+  外部で実戦経験を積む場を求める構造が加速</div>
+    </div>
+
+    <!-- ===== Section 3 ===== -->
+    <div class="section" id="sec3">
+      <h2><span class="sec-num">03</span> 市場規模（TAM/SAM/SOM）</h2>
+
+      <h3>TAM（理論的最大市場）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>市場</th><th>規模</th><th>根拠</th></tr></thead>
+          <tbody>
+            <tr><td>国内BPO・AI業務委託市場（SME向け推定）</td><td><strong>2,000億〜5,000億円</strong></td><td>BPO市場4〜5兆円の5〜10%をSME×AI関連と推定</td></tr>
+            <tr><td>国内人材紹介市場</td><td><strong>3,000〜4,000億円</strong></td><td>厚生労働省統計</td></tr>
+            <tr style="background:#e8f0fb"><td><strong>TAM合計</strong></td><td><strong>5,000億〜9,000億円</strong></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>SAM（UNLIDが実際にアクセスできる市場）</h3>
+      <div class="flow-box">絞り込み条件：
+  ✓ 従業員30〜300名
+  ✓ IT/コンサル/サービス/金融業（知識労働）
+  ✓ AI活用ニーズあり ＋ 外注予算がある
+
+対象企業数：国内IT/サービス系中小企業 約15〜20万社
+  → AI課題あり＋予算あり：推定10〜15% = 1.5万〜3万社
+  → 年間支出（月15万円×12）= 180万円/社</div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>市場</th><th>SAM</th></tr></thead>
+          <tbody>
+            <tr><td>AI業務支援受託</td><td><strong>1.5万〜3万社 × 180万円 = 270億〜540億円</strong></td></tr>
+            <tr><td>人材紹介（SME×若手）</td><td><strong>3億〜14億円</strong></td></tr>
+            <tr style="background:#e8f0fb"><td><strong>SAM合計</strong></td><td><strong>約280億〜560億円</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>SOM（3〜5年で現実的に獲得できる規模）</h3>
+      <p><strong>ボトルネック：FDE正社員の採用・育成速度</strong></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>フェーズ</th><th>FDE数</th><th>担当社数</th><th>月単価</th><th>年間受託収益</th><th>人材紹介</th><th>年間合計</th></tr></thead>
+          <tbody>
+            <tr><td>Ph1（〜1年）</td><td>2〜3名</td><td>8〜12社</td><td>月15万</td><td>1,800万円</td><td>〜420万円</td><td><strong>〜2,200万円</strong></td></tr>
+            <tr><td>Ph2（1〜3年）</td><td>8〜12名</td><td>40〜60社</td><td>月18万</td><td>8,600万〜1.3億円</td><td>1,400万〜4,200万円</td><td><strong>1.0億〜1.7億円</strong></td></tr>
+            <tr style="background:#e8f0fb"><td>Ph3（3〜5年）</td><td>25〜40名</td><td>120〜200社</td><td>月20万</td><td>2.9億〜4.8億円</td><td>7,000万〜1.4億円</td><td><strong>3.6億〜6.2億円</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="m-label">SOM（フェーズ3）</div>
+          <div class="m-value">4〜6億円</div>
+          <div class="m-sub">FDE正社員モデル</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">上振れシナリオ（認定外部FDE制度）</div>
+          <div class="m-value">8〜12億円</div>
+          <div class="m-sub">100名の認定FDE展開時</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">将来SaaS化（フェーズ4以降）</div>
+          <div class="m-value">15〜30億円</div>
+          <div class="m-sub">完遂ログプラットフォーム</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Section 4 ===== -->
+    <div class="section" id="sec4">
+      <h2><span class="sec-num">04</span> 競合分析——真の競合は誰か</h2>
+
+      <h3>4-1. 日本の主要競合</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>企業</th><th>ビジネスモデル</th><th>単価</th><th>UNLIDとの決定的な違い</th></tr></thead>
+          <tbody>
+            <tr><td><strong>LayerX Ai Workforce</strong></td><td>自社AIエージェント基盤（Ai Workforce）を持ち込み、FDEがエンタープライズに常駐実装</td><td>非公開（エンタープライズ契約）</td><td>中小企業非対応。副業若手なし。自社ツール必須</td></tr>
+            <tr><td><strong>サーキュレーション</strong></td><td>既存プロ人材（15,000名超）を月額25万円〜で企業に派遣。年商88億円</td><td>月額25万円〜（最低6ヶ月）</td><td>「既に完成したプロ人材」が前提。若手育成・完遂ログなし</td></tr>
+            <tr><td><strong>顧問名鑑</strong></td><td>上場企業OB役員・部長（24,000名）を顧問として紹介</td><td>年間契約（要問い合わせ）</td><td>OB中心。AI実装特化ではない。若手育成なし</td></tr>
+            <tr><td><strong>HiPro（パーソル）</strong></td><td>プロ人材のフリーランス紹介・副業マッチング</td><td>月25万円〜</td><td>マーケットプレイス型。品質保証・育成なし</td></tr>
+            <tr><td><strong>技術顧問系各社</strong></td><td>AI/IT分野の外部CTO・技術顧問（個人）</td><td>月10〜120万円</td><td>個人依存。チーム体制なし。副業育成なし</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>4-2. グローバルの類似モデル</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>企業</th><th>内容</th><th>日本展開</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Toptal</strong></td><td>世界のトップ3%のフリーランサーをマッチング</td><td>未進出</td></tr>
+            <tr><td><strong>Expert360（豪）</strong></td><td>プロ人材のフラクショナル活用支援</td><td>未進出</td></tr>
+            <tr><td><strong>Invisible Technologies</strong></td><td>AI+人間のハイブリッドBPO</td><td>未進出</td></tr>
+            <tr><td><strong>Palantir FDE</strong></td><td>大企業・政府向けAI実装常駐</td><td>日本大企業のみ（富士通等）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="highlight-box">
+        <strong>結論：</strong>「SME × AI実装 × フラクショナル × 副業若手育成 × 完遂ログ × スカウト人材紹介」を組み合わせたモデルは、<strong>日本に存在しない。</strong>
+      </div>
+
+      <h3>4-3. ポジショニングマップ</h3>
+      <div class="pos-map">                高品質・AI実装力あり
+                       ↑
+                       |  ● LayerX（エンタープライズ）
+                       |  ● Palantir（超大企業）
+                       |
+                       |       ★ UNLID（狙うポジション）
+個人向け ←─────────────────────────────────── 企業向け（SME）
+                       |
+  コーチング ●          |  ● サーキュレーション
+                       |  ● 顧問名鑑・HiPro
+  Udemy ●              |  ● 技術顧問系
+                       |  ● 研修会社
+                       ↓
+                低品質・知識提供のみ
+
+★ UNLIDのポジション：
+  企業向け × AI実装力あり（FDEが責任）×
+  サーキュレーションより安価（月10〜25万 vs 25万〜）×
+  LayerXより中小企業フレンドリー</div>
+
+      <h3>4-4. サーキュレーションとの決定的な違い</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>比較軸</th><th>サーキュレーション</th><th>UNLID</th></tr></thead>
+          <tbody>
+            <tr><td>人材の段階</td><td>「完成したプロ人材」が前提</td><td>「証明前の若手」を育てる</td></tr>
+            <tr><td>品質担保</td><td>個人のプロ人材に依存</td><td>FDE正社員が責任を持つ</td></tr>
+            <tr><td>提供価値</td><td>アドバイス・知見の提供</td><td>AI実装・業務課題の実際の解決</td></tr>
+            <tr><td>若手育成</td><td>なし</td><td>完遂ログ×FBで育成</td></tr>
+            <tr><td>人材紹介連携</td><td>なし</td><td>完遂ログ→スカウト採用で一体化</td></tr>
+            <tr><td>月額</td><td>25万円〜（最低6ヶ月）</td><td>10〜25万円（スモールスタート可）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== Section 5 ===== -->
+    <div class="section" id="sec5">
+      <h2><span class="sec-num">05</span> 参入障壁——なぜ真似されにくいか</h2>
+
+      <h3>5-1. 構造的参入障壁</h3>
+      <div class="barrier-grid">
+        <div class="barrier-card">
+          <div class="b-title">FDE品質の育成コスト</div>
+          <div class="b-desc">「現場で責任を持てるFDE」を育てるには最低1〜2年。スキルセットが再現困難</div>
+        </div>
+        <div class="barrier-card">
+          <div class="b-title">完遂ログの蓄積</div>
+          <div class="b-desc">1,000件以上のログがないとSaaS化の価値が出ない。先行者が圧倒的有利</div>
+        </div>
+        <div class="barrier-card">
+          <div class="b-title">両面ネットワーク効果</div>
+          <div class="b-desc">B2B（企業）とB2C（若手ワーカー）の両方を同時に持つ必要がある。どちらかだけでは機能しない</div>
+        </div>
+        <div class="barrier-card">
+          <div class="b-title">創業者の信頼資産</div>
+          <div class="b-desc">レバレジーズ出身×麻雀プロというユニークな組み合わせ。「判断プロセスのFB」に不可欠</div>
+        </div>
+        <div class="barrier-card">
+          <div class="b-title">法的設計の複雑さ</div>
+          <div class="b-desc">偽装請負・有料職業紹介・業務委託の3法を同時にクリアする設計が模倣コスト高</div>
+        </div>
+      </div>
+
+      <h3>5-2. なぜ既存プレイヤーが参入しにくいか</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>プレイヤー</th><th>参入できない構造的理由</th></tr></thead>
+          <tbody>
+            <tr><td><strong>サーキュレーション</strong></td><td>「既成プロ人材」が商品なので「若手育成」を入れると単価が下がり収益モデルが崩れる</td></tr>
+            <tr><td><strong>LayerX</strong></td><td>自社ツール（Ai Workforce）がないとサービスが成立しない。SMEは対象外</td></tr>
+            <tr><td><strong>顧問名鑑</strong></td><td>OBのプライドと「若手と同格」のポジションが矛盾。モデル転換不可</td></tr>
+            <tr><td><strong>研修会社</strong></td><td>アウトプット（成果）での課金は事業部コストが膨大。インプット（講義）に戻る構造</td></tr>
+            <tr><td><strong>クラウドソーシング</strong></td><td>品質保証と育成はマーケットプレイス型と構造上矛盾する</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== Section 6 ===== -->
+    <div class="section" id="sec6">
+      <h2><span class="sec-num">06</span> サービス設計（フラクショナルFDE×副業ワーカー）</h2>
+
+      <h3>6-1. フラクショナルFDEの稼働設計</h3>
+      <div class="flow-box">FDE正社員1名が4〜5社を掛け持ち
+  各社：週1.5日（月6日 ≒ 48時間）の関与
+
+【企業側コスト】
+  月10〜25万円
+  ※正社員FDE採用（年収600〜900万円+社保≒年2,000万円超）の
+    1/5〜1/10で「専任に近い」支援が受けられる
+
+【UNLID側収益（FDE1名から）】
+  4社 × 月15万円 = 月60万円
+  - FDE人件費（月35〜45万円）
+  = 粗利20万円/名
+
+【商流の設計（偽装請負対策）】
+  クライアント企業 → UNLID（業務委託契約、元請け）
+                       ↓
+                FDE正社員（管理責任者として現場に在籍）
+                       ↓
+               副業ワーカー（UNLIDから業務委託）
+
+  ✓ クライアントから副業ワーカーへの直接指示を禁止
+  ✓ 指揮命令はUNLID→ワーカー（FDE正社員経由）</div>
+
+      <h3>6-2. 副業ワーカーが担うクエスト</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>クエスト</th><th>難易度</th><th>単価目安</th></tr></thead>
+          <tbody>
+            <tr><td>AI出力の「人間仕上げ」（資料・文章・提案）</td><td>即対応可</td><td>月3〜15万円（月額）</td></tr>
+            <tr><td>新入社員の営業ロールプレイ相手+FB</td><td>即対応可</td><td>半日2〜5万円</td></tr>
+            <tr><td>顧客・ユーザーインタビュー実施・整理</td><td>3〜6ヶ月</td><td>案件30〜100万円</td></tr>
+            <tr><td>採用ブランディング調査・1次取材</td><td>3〜6ヶ月</td><td>案件50〜150万円</td></tr>
+            <tr><td>社内研修・ワークショップのファシリテーション</td><td>3〜6ヶ月</td><td>2〜30万円/回</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>6-3. 完遂ログの設計</h3>
+      <div class="flow-box">【1クエスト完了時に記録する5項目】
+
+1. クエスト種別・業種・規模感（守秘義務Tier1）
+   例：「AI出力仕上げ / IT系 / 従業員50〜100名」
+
+2. 自分の担当役割と時間
+   例：「まとめ役 / 約20時間」
+
+3. 詰まったポイントと突破法（本人記述）
+   例：「インタビュー相手が本音を話してくれなかった。
+        FDEから"相手に断る理由はない"と指摘を受け
+        別角度で聞き直したら話してくれた」
+
+4. FDEによる3軸スコア
+   - 情報の網羅性：★★★★☆（4/5）
+   - 相手への配慮：★★★☆☆（3/5）
+   - 目的への執着：★★★★★（5/5）
+   + 一言コメント
+
+5. 次回改善点（本人記述）
+
+→ これが積み上がると「GitHubの草（Active Contributor）」の
+  ビジネス職版になる</div>
+
+      <h4>守秘義務Tier制</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tier</th><th>公開内容</th><th>条件</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tag tag-low">Tier 1</span></td><td>業種・規模感・課題カテゴリのみ</td><td>全クエストで標準適用</td></tr>
+            <tr><td><span class="tag tag-mid">Tier 2</span></td><td>企業名（匿名化）＋成果の概要</td><td>クライアント承認後</td></tr>
+            <tr><td><span class="tag tag-high">Tier 3</span></td><td>企業名公開＋詳細ケーススタディ</td><td>クライアントの採用ブランディング目的</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== Section 7 ===== -->
+    <div class="section" id="sec7">
+      <h2><span class="sec-num">07</span> 収益モデル</h2>
+
+      <h3>7-1. 全体の資金フロー</h3>
+      <div class="flow-box">【企業（クライアント）】
+  ↓ 業務委託費（月10〜25万円）
+【UNLID】
+  ├─ FDE正社員への給与（月35〜45万円）
+  ├─ 副業ワーカーへの報酬（1,000〜3,000円/時）
+  └─ UNLID運営マージン（受託費の20〜30%）
+
+【採用成立時】
+  企業がワーカーをスカウト採用
+  → 人材紹介フィー（年収×35%＝約140万円/件）→ UNLID</div>
+
+      <h3>7-2. 3つの収益源</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>収益源</th><th>モデル</th><th>単価</th><th>フェーズ3の規模感</th></tr></thead>
+          <tbody>
+            <tr><td><strong>B2B受託（フラクショナルFDE）</strong></td><td>月額継続</td><td>月10〜25万円/社</td><td>150社×月20万円=年3.6億円</td></tr>
+            <tr><td><strong>人材紹介フィー</strong></td><td>採用成立時成功報酬</td><td>年収400万×35%＝<strong>140万円/件</strong></td><td>年50件=7,000万円</td></tr>
+            <tr><td><strong>プロジェクト型</strong></td><td>スポット</td><td>80〜200万円/件</td><td>年30件=2,400万〜6,000万円</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>7-3. 若手ワーカーの収益ロードマップ</h3>
+      <div class="rank-grid">
+        <div class="rank-card r0">
+          <div class="rk-name">Apprentice（見習い）</div>
+          <div class="rk-cond">入会〜完遂3件</div>
+          <div class="rk-pay">1,000円/時</div>
+          <div class="rk-month">月2万円（20h）</div>
+        </div>
+        <div class="rank-card r1">
+          <div class="rk-name">Journeyman（一人前）</div>
+          <div class="rk-cond">完遂5件+FDE認定</div>
+          <div class="rk-pay">2,000円/時</div>
+          <div class="rk-month">月4万円（20h）</div>
+        </div>
+        <div class="rank-card r2">
+          <div class="rk-name">Craftsman（熟練）</div>
+          <div class="rk-cond">完遂15件+採用実績</div>
+          <div class="rk-pay">3,000円/時</div>
+          <div class="rk-month">月6万円（20h）</div>
+        </div>
+        <div class="rank-card r3">
+          <div class="rk-name">Master（師匠）</div>
+          <div class="rk-cond">後輩育成+紹介実績</div>
+          <div class="rk-pay">FB報酬+収益シェア</div>
+          <div class="rk-month">月10〜20万円</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Section 8 ===== -->
+    <div class="section" id="sec8">
+      <h2><span class="sec-num">08</span> 将来構想——完遂ログのSaaS化（GitHubのビジネス職版）</h2>
+
+      <h3>8-1. GitHubの収益モデルから学ぶ</h3>
+      <div class="flow-box">GitHubの収益構造：
+  「個人に無料で使わせて習慣化させ、
+   その人が企業に入ったときに企業から回収する」
+
+  具体的な収益源：
+  ① GitHub Enterprise：月21ドル/ユーザー（メイン収益）
+  ② GitHub Copilot：月19ドル/ユーザー（急成長中）
+  ③ GitHub Actions：従量課金
+  → Microsoftが2018年に約7,500億円で買収</div>
+
+      <h3>8-2. 日本にビジネス職版GitHubは存在しない</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>サービス</th><th>何ができるか</th><th>欠点</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Wantedly</strong></td><td>経験・プロジェクトを書いて採用に繋げる</td><td>全部<strong>自己申告</strong>。第三者検証なし</td></tr>
+            <tr><td><strong>LinkedIn</strong></td><td>スキル・推薦コメント</td><td>Endorsementは形骸化</td></tr>
+            <tr><td><strong>YOUTRUST</strong></td><td>信頼ネットワーク×副業転職</td><td>実績の「中身」は見えない</td></tr>
+            <tr><td><strong>Findy/Lapras</strong></td><td>GitHub活動を集約して採用に活用</td><td><strong>エンジニア専用</strong>。ビジネス職は対象外</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="highlight-box">
+        <strong>→「FDEが3軸スコアをつけた第三者検証付きの実績記録」はどこにも存在しない。</strong>
+      </div>
+
+      <h3>8-3. SaaS化の収益モデル（フェーズ4以降）</h3>
+      <div class="flow-box">前提条件：完遂ログ累計1,000件超
+
+① 採用企業からの閲覧課金（GitHub Enterprise型）
+   「完遂ログDBを検索できる採用担当者アカウント」
+   → 月3〜10万円/社
+
+② スカウト成立時の成功報酬（フェーズ1から機能）
+   完遂ログ経由で採用成立 → 紹介フィー（年収×35%）
+
+③ 企業向けSaaS（自社若手管理）
+   「自社の若手社員の完遂ログを社内で管理したい」
+   → 月5,000〜1万円/ユーザー
+   人事部門の研修効果可視化ニーズに対応</div>
+    </div>
+
+    <!-- ===== Section 9 ===== -->
+    <div class="section" id="sec9">
+      <h2><span class="sec-num">09</span> リスクと対策</h2>
+
+      <h3>9-1. 法的リスク（最重要）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>リスク</th><th>深刻度</th><th>内容</th><th>対策</th></tr></thead>
+          <tbody>
+            <tr class="risk-crit">
+              <td><strong>偽装請負</strong></td>
+              <td><span class="tag tag-high">★★★最重要</span></td>
+              <td>FDE+副業ワーカーが客先で働く場合、クライアントが直接指揮命令を出すと違法</td>
+              <td>FDE正社員が「管理責任者」として現場に在籍。クライアント→副業ワーカーへの直接指示を禁止。契約書に明記</td>
+            </tr>
+            <tr class="risk-crit">
+              <td><strong>有料職業紹介業の未取得</strong></td>
+              <td><span class="tag tag-high">★★★最重要</span></td>
+              <td>人材紹介フィーは職業安定法上の許可が必要</td>
+              <td>フェーズ0〜1で申請。許可取得前はフィーを収益に計上しない</td>
+            </tr>
+            <tr class="risk-high">
+              <td><strong>守秘義務・情報漏洩</strong></td>
+              <td><span class="tag tag-high">★★★</span></td>
+              <td>完遂ログに業務情報を記録するリスク</td>
+              <td>守秘義務Tier制。NDA標準化。情報アクセス権限の設計</td>
+            </tr>
+            <tr class="risk-mid">
+              <td><strong>競業避止義務</strong></td>
+              <td><span class="tag tag-mid">★★</span></td>
+              <td>FDEが複数社掛け持ち時の情報持ち出し</td>
+              <td>同業種2社以上の同時担当禁止。情報アクセス権限の分離</td>
+            </tr>
+            <tr class="risk-mid">
+              <td><strong>副業ワーカーの雇用判定</strong></td>
+              <td><span class="tag tag-mid">★★</span></td>
+              <td>実態が雇用と判定されると労働法が適用</td>
+              <td>指揮命令の明確な排除。成果物で評価。稼働時間の管理はしない</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>9-2. ビジネスリスク</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>リスク</th><th>深刻度</th><th>対策</th></tr></thead>
+          <tbody>
+            <tr><td><strong>FDE採用・育成の難しさ</strong></td><td><span class="tag tag-high">★★★</span></td><td>創業者自身が最初のFDEとして動く。採用はリファラル中心</td></tr>
+            <tr><td><strong>中小企業の認知・信頼獲得</strong></td><td><span class="tag tag-high">★★★</span></td><td>最初の3〜5社は創業者の人脈から。成果をケーススタディ化</td></tr>
+            <tr><td><strong>完遂ログの蓄積スピード</strong></td><td><span class="tag tag-mid">★★</span></td><td>フェーズ1から記録を開始。500件到達をSaaS化検討の条件とする</td></tr>
+            <tr><td><strong>副業ワーカーの品質バラつき</strong></td><td><span class="tag tag-mid">★★</span></td><td>FDE監督下で品質担保。失敗も完遂ログに記録して学習資産化</td></tr>
+            <tr><td><strong>AIの進化で仕事がなくなる</strong></td><td><span class="tag tag-mid">★★</span></td><td>クエスト定義を「AI代替困難」＋「人間の信頼関係が必要」軸で定期見直し</td></tr>
+            <tr><td><strong>スケールのボトルネック</strong></td><td><span class="tag tag-mid">★★</span></td><td>FDE正社員数が上限。認定FDE（外部）制度でスケール解決</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== Section 10 ===== -->
+    <div class="section" id="sec10">
+      <h2><span class="sec-num">10</span> ロードマップ</h2>
+
+      <div class="phase-grid" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="phase-card p0">
+          <div class="ph-name">Phase 0 — 〜3ヶ月</div>
+          <div class="ph-title">法的精査と事業設計</div>
+          <ul>
+            <li>弁護士・社労士による偽装請負リスク精査（最優先）</li>
+            <li>有料職業紹介業の申請スケジュール確認</li>
+            <li>クエスト類型の確定（できること・できないことを整理）</li>
+            <li>完遂ログのフォーマット設計</li>
+            <li>初期クライアント3〜5社のヒアリング</li>
+            <li>初期副業ワーカー6〜10名の選定</li>
+          </ul>
+        </div>
+        <div class="phase-card p1">
+          <div class="ph-name">Phase 1 — 3〜12ヶ月</div>
+          <div class="ph-title">PMF検証</div>
+          <ul>
+            <li>目標：B2B 8〜12社・年収〜2,200万円</li>
+            <li>ワーカー20〜50名</li>
+            <li>創業者自身がFDEとして動く</li>
+            <li>完遂ログの型を固める</li>
+          </ul>
+        </div>
+        <div class="phase-card p2">
+          <div class="ph-name">Phase 2 — 1〜3年</div>
+          <div class="ph-title">スケール証明</div>
+          <ul>
+            <li>目標：B2B 40〜60社・年収1.0〜1.7億円</li>
+            <li>ワーカー200〜500名</li>
+            <li>FDE 2〜5名採用</li>
+            <li>有料職業紹介業の本格運用</li>
+          </ul>
+        </div>
+        <div class="phase-card p3">
+          <div class="ph-name">Phase 3 — 3〜5年</div>
+          <div class="ph-title">エコシステム確立</div>
+          <ul>
+            <li>目標：B2B 120〜200社・年収4〜6億円</li>
+            <li>ワーカー数千名</li>
+            <li>認定外部FDE制度の開始</li>
+            <li>完遂ログ1,000件突破 → SaaS化可否判断</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase-card p4" style="margin-top: 14px;">
+        <div class="ph-name">Phase 4 — 5年〜</div>
+        <div class="ph-title">SaaS化・プラットフォーム確立</div>
+        <ul>
+          <li>完遂ログプラットフォームを採用企業に開放</li>
+          <li>GitHub型の採用プラットフォームとして確立</li>
+          <li>目標売上：15〜30億円圏</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== Section 11 ===== -->
+    <div class="section" id="sec11">
+      <h2><span class="sec-num">11</span> KPI設計</h2>
+
+      <div class="highlight-box" style="margin-bottom:24px;">
+        <strong>North Star Metric：「完遂件数 × 3軸平均スコア」</strong><br>
+        これが上がれば、企業への価値提供・若手の成長・完遂ログの蓄積・人材紹介の種が同時に進む。
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>フェーズ</th><th>KPI</th><th>目標</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="4"><strong>フェーズ1</strong></td><td>月間完遂件数</td><td>月5〜10件</td></tr>
+            <tr><td>B2B継続率（3ヶ月）</td><td>60%以上</td></tr>
+            <tr><td>ワーカー継続率（3ヶ月）</td><td>70%以上</td></tr>
+            <tr><td>3軸平均スコア</td><td>3.5/5.0以上</td></tr>
+            <tr style="background:#f7f9fc"><td rowspan="3"><strong>フェーズ2</strong></td><td>完遂ログ累計</td><td><strong>500件</strong></td></tr>
+            <tr style="background:#f7f9fc"><td>人材紹介成立</td><td>年10件以上</td></tr>
+            <tr style="background:#f7f9fc"><td>FDE採用数</td><td>3〜5名</td></tr>
+            <tr><td rowspan="3"><strong>フェーズ3</strong></td><td>完遂ログ累計</td><td><strong>1,000件（SaaS化判断ライン）</strong></td></tr>
+            <tr><td>人材紹介成立</td><td>年50件以上</td></tr>
+            <tr><td>市場評価</td><td>「UNLIDのログがある人材は採用したい」が定着</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>参考データソース</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>データ</th><th>出典</th></tr></thead>
+          <tbody>
+            <tr><td>国内生成AI市場1,016億円（2024年）</td><td>IDC Japan</td></tr>
+            <tr><td>国内生成AI市場8,028億円（2028年予測）</td><td>IDC Japan</td></tr>
+            <tr><td>中小企業AI方針未策定50%</td><td>総務省 令和7年版情報通信白書</td></tr>
+            <tr><td>中小企業300名未満の全社AI導入率1.3%</td><td>各社統計調査（2025年）</td></tr>
+            <tr><td>外部CTO月額10〜120万円</td><td>各社公開料金（2024〜2025年）</td></tr>
+            <tr><td>サーキュレーション年商88億円</td><td>決算説明資料（2024年7月期）</td></tr>
+            <tr><td>副業市場20兆円</td><td>ランサーズ「フリーランス実態調査2024」</td></tr>
+            <tr><td>20代副業実施率14.4%</td><td>パーソルキャリア2024</td></tr>
+            <tr><td>新卒3年以内離職率34.9%</td><td>厚生労働省（2021年卒）</td></tr>
+            <tr><td>計画的OJT実施率の低下（40.9%→30.3%）</td><td>パーソル総合研究所「OJTに関する定量調査」2025年1月</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /body -->
+
+  <div class="footer">
+    <span>UNLID 事業戦略チーム　｜　2026年3月　｜　事業戦略レポート v3.0</span>
+    <span>Confidential — 本書はv2.0をベースにAI FDE×フラクショナル×SMEに完全刷新した最新版</span>
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>

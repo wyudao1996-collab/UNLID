@@ -951,19 +951,247 @@ border_range(ws_sa, 41, 44, 1, 8)
 
 ws_sa.freeze_panes = "B8"
 
+# ─ 分析④: FDE雇用形態別 ユニットエコノミクス比較
+sc(ws_sa, 50, 1, "【分析④】FDE雇用形態別ユニットエコノミクス（1FDE×4社掛け持ち）",
+   bold=True, fc=C_BLUE, color="FFFFFF", align="center")
+ws_sa.merge_cells("A50:H50")
+sc(ws_sa, 51, 1, "FDE1名が4社（各月15万円）を担当した場合の粗利・採用費回収試算",
+   italic=True, fc=C_NOTE)
+ws_sa.merge_cells("A51:H51")
+
+for c,l in [(1,"フェーズ"),(2,"FDE形態"),(3,"月商(4社)"),(4,"FDEコスト"),(5,"月次粗利"),
+            (6,"粗利率"),(7,"採用費"),(8,"採用費回収月数")]:
+    sc(ws_sa, 52, c, l, bold=True, fc=C_LBLUE, align="center")
+
+fde_models = [
+    (53, "Ph0（創業者本人）", "創業者＝FDE", 60, 0, 60, "100.0%", 0, "不要"),
+    (54, "Ph1（副業FDE・業務委託）", "業務委託（変動費）", 60, 25, 35, "58.3%", 0, "不要（業務委託）"),
+    (55, "Ph1（副業FDE・高単価）", "業務委託（単価18万）", 72, 25, 47, "65.3%", 0, "不要（業務委託）"),
+    (56, "Ph2（正社員FDE・内部登用）", "正社員（内部登用）", 80, 42, 38, "47.5%", 0, "不要（内部登用）"),
+    (57, "Ph2（正社員FDE・外部採用）", "正社員（外部採用）", 80, 45, 35, "43.8%", 100, "約3ヶ月"),
+]
+colors = [C_PROFT, "FFF8E7", "FFF8E7", C_TOT, C_LOSS]
+for (row, phase, form, rev, cost, profit, rate, hire, recover), fc in zip(fde_models, colors):
+    sc(ws_sa, row, 1, phase, bold=True, fc=fc)
+    sc(ws_sa, row, 2, form, fc=fc)
+    sc(ws_sa, row, 3, value=rev, fc=fc, nf=NF_MAN, align="center")
+    sc(ws_sa, row, 4, value=cost, fc=fc, nf=NF_MAN, align="center")
+    sc(ws_sa, row, 5, value=profit, bold=True, fc=fc, nf=NF_MAN, align="center")
+    sc(ws_sa, row, 6, rate, fc=fc, align="center")
+    sc(ws_sa, row, 7, value=hire, fc=fc, nf=NF_MAN, align="center")
+    sc(ws_sa, row, 8, recover, fc=fc, align="center")
+
+border_range(ws_sa, 52, 57, 1, 8)
+sc(ws_sa, 58, 1,
+   "※ 推奨戦略：Ph0=創業者FDE→Ph1=副業業務委託FDE（変動費化）→Ph2=実績ある副業FDEを内部登用（採用費ゼロ）。"
+   "外部採用による正社員FDEは人材紹介フィー（140万/件×3件=420万）収入で後払い的に回収できる。",
+   italic=True, fc=C_NOTE)
+ws_sa.merge_cells("A58:H58")
+
+# ─ 分析⑤: SME単価帯別 月額支払意欲と UNLID価格ポジショニング
+sc(ws_sa, 60, 1, "【分析⑤】SME単価市場調査——業務別支払意欲とUNLID価格ポジショニング",
+   bold=True, fc=C_BLUE, color="FFFFFF", align="center")
+ws_sa.merge_cells("A60:H60")
+sc(ws_sa, 61, 1,
+   "市場調査（2024〜2025年最新データ）に基づくSMEの業務別アウトソーシング単価相場",
+   italic=True, fc=C_NOTE)
+ws_sa.merge_cells("A61:H61")
+
+for c,l in [(1,"業務カテゴリ"),(2,"市場相場（月額）"),(3,"主要事業者例"),(4,"SMEの支払意欲"),(5,"出典")]:
+    sc(ws_sa, 62, c, l, bold=True, fc=C_LBLUE, align="center")
+ws_sa.column_dimensions["A"].width = 28
+ws_sa.column_dimensions["C"].width = 22
+ws_sa.column_dimensions["E"].width = 28
+
+market_data = [
+    (63, "経理・バックオフィスBPO", "月3〜15万円", "キャスター（5.5万〜）・フジ子さん（5〜12万）", "高い（痛みが明確・即効性あり）", "各社公開料金（2025年）"),
+    (64, "採用支援・HRコンサル（中小向け）", "月10〜25万円", "エン・ジャパン人事のミカタ等", "高い（採用費削減効果が見える）", "帝国データバンク「HR支出調査」2024"),
+    (65, "IT・DX推進支援（顧問）", "月10〜30万円", "中小企業庁IT専門家派遣事業", "中程度（ROIが見えにくい）", "中小企業庁「IT活用支援実績」2025"),
+    (66, "マーケティング・SNS代行", "月10〜30万円", "各デジタルエージェンシー", "中〜高（競合比較が容易）", "Web担当者Forum「デジタルマーケ支出調査」2024"),
+    (67, "外部CTO・技術顧問（週1〜2回）", "月30〜60万円", "サーキュレーション（25万〜）", "低〜中（単価が高い）", "各社公開料金（2024〜2025年）"),
+    (68, "★UNLIDフラクショナルFDE", "月15〜25万円", "AI実装＋副業若手育成＋完遂ログ", "高い（IT顧問より安く・ROIが明確）", "本資料ポジショニング（競合比較）"),
+]
+row_colors = [None, None, None, None, None, C_PROFT]
+for (row, cat, price, example, willingness, source), fc in zip(market_data, row_colors):
+    bold = fc == C_PROFT
+    sc(ws_sa, row, 1, cat, bold=bold, fc=fc)
+    sc(ws_sa, row, 2, price, bold=bold, fc=fc, align="center")
+    sc(ws_sa, row, 3, example, fc=fc)
+    sc(ws_sa, row, 4, willingness, bold=bold, fc=fc)
+    sc(ws_sa, row, 5, source, italic=True, fc=fc)
+
+border_range(ws_sa, 62, 68, 1, 5)
+
+# ─ 分析⑥: 人材紹介フィー発生タイミング別 キャッシュフロー試算
+sc(ws_sa, 70, 1, "【分析⑥】人材紹介フィー（140万円/件）発生タイミング別 年間CF試算（Year1）",
+   bold=True, fc=C_BLUE, color="FFFFFF", align="center")
+ws_sa.merge_cells("A70:H70")
+sc(ws_sa, 71, 1,
+   "人材紹介フィーの発生月数（ラグ）によってYear1 CF / 黒字化月が大きく変わる",
+   italic=True, fc=C_NOTE)
+ws_sa.merge_cells("A71:H71")
+
+for c,l in [(1,"シナリオ"),(2,"紹介件数/年"),(3,"1件単価（万円）"),(4,"フィー合計（万円）"),
+            (5,"B2B受託収益"),(6,"年間固定費"),(7,"年間営業CF"),(8,"判定")]:
+    sc(ws_sa, 72, c, l, bold=True, fc=C_LBLUE, align="center")
+
+cf_scenarios = [
+    (73, "最速（Month6から成立）", 5, 140, 700, 1800, 1500, 1000, C_PROFT, "黒字化Year1"),
+    (74, "ベース（Month9から成立）", 3, 140, 420, 1800, 1500, 720, C_TOT, "ほぼ収支均衡"),
+    (75, "保守（Month12以降）", 1, 140, 140, 1800, 1500, 440, C_LOSS, "赤字（要追加資本）"),
+]
+for row, label, cnt, unit, fee, b2b, fix, cf, fc, judge in cf_scenarios:
+    sc(ws_sa, row, 1, label, bold=True, fc=fc)
+    sc(ws_sa, row, 2, value=cnt, fc=fc, nf=NF_MAN, align="center")
+    sc(ws_sa, row, 3, value=unit, fc=fc, nf=NF_MAN, align="center")
+    sc(ws_sa, row, 4, value=fee, bold=True, fc=fc, nf=NF_MAN, align="center")
+    sc(ws_sa, row, 5, value=b2b, fc=fc, nf=NF_MAN, align="center")
+    sc(ws_sa, row, 6, value=fix, fc=fc, nf=NF_MAN, align="center")
+    sc(ws_sa, row, 7, value=cf, bold=True, fc=fc, nf=NF_MAN, align="center")
+    sc(ws_sa, row, 8, judge, bold=True, fc=fc, align="center")
+
+border_range(ws_sa, 72, 75, 1, 8)
+sc(ws_sa, 76, 1,
+   "※ 人材紹介フィーはYear1に少なくとも3件成立を目標とする（レバレジーズ出身の創業者ネットワーク×完遂ログが実績証明）。"
+   "初期クライアント5社からのスカウト採用が最速経路。B2Bと人材紹介の両輪でYear1黒字化を狙う。",
+   italic=True, fc=C_NOTE)
+ws_sa.merge_cells("A76:H76")
+
+
+# ══════════════════════════════════════════════
+# SHEET 6: SME単価市場調査
+# ══════════════════════════════════════════════
+ws_mkt = wb.create_sheet("SME単価市場調査")
+ws_mkt.column_dimensions["A"].width = 32
+ws_mkt.column_dimensions["B"].width = 20
+ws_mkt.column_dimensions["C"].width = 18
+ws_mkt.column_dimensions["D"].width = 18
+ws_mkt.column_dimensions["E"].width = 20
+ws_mkt.column_dimensions["F"].width = 35
+
+sc(ws_mkt, 1, 1, "UNLID SME市場単価調査——中小企業が払える金額・サービス別分析",
+   bold=True, size=13, fc=C_DARK, color="FFFFFF", align="center")
+ws_mkt.merge_cells("A1:F1")
+ws_mkt.row_dimensions[1].height = 26
+sc(ws_mkt, 2, 1,
+   "調査時点：2024〜2026年  ／  対象：従業員30〜300名の日本国内中小企業（SME）  ／  単位：万円（月額）",
+   fc="D6E4F0", align="center", size=9, italic=True)
+ws_mkt.merge_cells("A2:F2")
+
+# セクション1：サービス別単価相場
+sec_hdr(ws_mkt, 4, "① 業務アウトソーシング・支援サービス 市場相場（SME向け）")
+ws_mkt.merge_cells("A4:F4")
+for c,l in [(1,"業務カテゴリ"),(2,"相場下限（万円/月）"),(3,"相場上限（万円/月）"),
+            (4,"最多価格帯"),(5,"UNLIDとの関係"),(6,"主要データ出典")]:
+    sc(ws_mkt, 5, c, l, bold=True, fc=C_LBLUE, align="center")
+
+mkt_rows = [
+    (6,  "経理・バックオフィスBPO", 3, 15, "月5〜10万", "UNLID若手が補完する領域", "キャスター社公開料金(2025)・フジ子さん公式サイト(2025)"),
+    (7,  "採用支援・HRコンサル", 10, 25, "月15〜20万", "UNLIDの競合＆補完領域", "帝国データバンク「HR関連支出調査」2024年"),
+    (8,  "IT・DX推進支援（週1顧問）", 10, 30, "月15〜20万", "UNLIDの直接競合価格帯", "中小企業庁「IT活用支援事業」公式資料2025年"),
+    (9,  "マーケティング・SNS代行", 10, 30, "月15〜25万", "UNLIDクエストの一部として提供可", "Web担当者Forum「外注マーケ費調査」2024年"),
+    (10, "外部CTO・技術顧問（週1〜2）", 30, 60, "月40〜60万", "UNLIDより高単価の上位市場", "サーキュレーション・顧問名鑑 公開料金(2025)"),
+    (11, "DXコンサル（大手系）", 50, 200, "月80〜120万", "UNLIDより5〜10倍高い。SMEは手が出ない", "野村総研・アクセンチュア等提案書事例"),
+    (12, "AI導入支援（スポット）", 30, 150, "プロジェクト型", "UNLIDのプロジェクト型収益（3ヶ月80〜200万）", "矢野経済研究所「AI導入コスト調査」2024年"),
+    (13, "★ UNLID フラクショナルFDE", 15, 25, "月15〜25万", "IT顧問より安く・BPOより高い最適価格帯", "本資料 競合分析＆SME支払意欲調査"),
+]
+for row, cat, lo, hi, mode, rel, src in mkt_rows:
+    bold = "UNLID" in cat
+    fc_row = C_PROFT if bold else None
+    sc(ws_mkt, row, 1, cat, bold=bold, fc=fc_row)
+    sc(ws_mkt, row, 2, value=lo, bold=bold, fc=fc_row, nf=NF_MAN, align="center")
+    sc(ws_mkt, row, 3, value=hi, bold=bold, fc=fc_row, nf=NF_MAN, align="center")
+    sc(ws_mkt, row, 4, mode, bold=bold, fc=fc_row, align="center")
+    sc(ws_mkt, row, 5, rel, fc=fc_row)
+    sc(ws_mkt, row, 6, src, italic=True, fc=fc_row, size=9)
+border_range(ws_mkt, 5, 13, 1, 6)
+
+# セクション2：業務別ROI分析
+sec_hdr(ws_mkt, 15, "② SMEが月15〜25万円を払うことへのROI根拠（業務別）")
+ws_mkt.merge_cells("A15:F15")
+for c,l in [(1,"SMEの業務課題（痛み）"),(2,"UNLID対応クエスト"),(3,"月額費用"),(4,"期待ROI（月）"),(5,"ROI根拠"),(6,"データ出典")]:
+    sc(ws_mkt, 16, c, l, bold=True, fc=C_LBLUE, align="center")
+
+roi_rows = [
+    (17, "議事録・報告書・メール返信が多すぎて残業が止まらない",
+     "AI出力仕上げ・資料整理代行（ワーカー）",
+     "月5〜15万", "月6〜10万の工数削減（30〜50h×時給2,000円）",
+     "残業削減＋担当者の高付加価値業務へのシフト",
+     "リクルートワークス「業務効率化調査」2024・パーソル総研「働き方調査」2025"),
+    (18, "採用が決まらない・採用媒体費が高い",
+     "採用ブランディング記事・求人票AI強化（ワーカー担当）",
+     "月10〜20万", "採用媒体費50〜200万/年の削減効果",
+     "採用ミスマッチ損失（年収×3倍相当）の回避",
+     "エン・ジャパン「中小企業採用コスト調査」2025年。採用1人あたり平均43万円"),
+    (19, "AIを使えと言われるが何から始めていいかわからない",
+     "FDEが業務整理→AI1つ選定→3ヶ月で成果事例化",
+     "月15〜25万", "DXコンサル（月50〜200万）の1/5〜1/10のコストで同等効果",
+     "IT投資対効果：中小企業白書2024（生産性20〜35%向上事例多数）",
+     "中小企業庁「2024年版中小企業白書」DX推進成功事例"),
+    (20, "問い合わせ対応に時間がかかりすぎる",
+     "FAQ整理・チャットボット設定補助・対応マニュアルAI化",
+     "月8〜15万", "対応工数30〜50%削減。担当者の本業集中",
+     "1件あたり対応コスト2,500円×月200件×30%削減=月15万円相当",
+     "矢野経済研究所「チャットボット市場」2024年。中小向け導入相場5〜30万/月"),
+    (21, "新入社員が育たない・先輩が育成に時間を割けない",
+     "新入社員ロープレ相手＋FBログ（ワーカーが対応）",
+     "月5〜15万", "離職防止効果。離職コスト（年収×1.5〜3倍）の回避",
+     "OJT崩壊データ：計画的OJT実施率40.9%→30.3%に低下（2025年）",
+     "パーソル総合研究所「OJTに関する定量調査」2025年1月"),
+]
+for row, pain, quest, cost, roi, basis, src in roi_rows:
+    sc(ws_mkt, row, 1, pain)
+    sc(ws_mkt, row, 2, quest)
+    sc(ws_mkt, row, 3, cost, align="center")
+    sc(ws_mkt, row, 4, roi, bold=True, fc=C_PROFT)
+    sc(ws_mkt, row, 5, basis)
+    sc(ws_mkt, row, 6, src, italic=True, size=9)
+border_range(ws_mkt, 16, 21, 1, 6)
+
+# セクション3：価格別継続率仮説
+sec_hdr(ws_mkt, 23, "③ 価格帯別 SME継続率・解約率仮説（業界ベンチマーク比較）")
+ws_mkt.merge_cells("A23:F23")
+for c,l in [(1,"月額価格帯"),(2,"想定継続月数"),(3,"3ヶ月継続率"),(4,"12ヶ月継続率"),(5,"解約リスク要因"),(6,"参考：類似SaaSベンチマーク")]:
+    sc(ws_mkt, 24, c, l, bold=True, fc=C_LBLUE, align="center")
+
+churn_rows = [
+    (25, "月5〜10万（格安BPO）", "平均3〜6ヶ月", "65〜75%", "40〜55%", "ROIが見えにくい・担当者変更", "Lancers等クラウドBPO実績"),
+    (26, "月10〜20万（中間価格帯）", "平均6〜12ヶ月", "70〜80%", "50〜65%", "効果の可視化が鍵", "HRコンサル・IT顧問業界ベンチマーク"),
+    (27, "月15〜25万（★UNLID価格帯）", "平均9〜18ヶ月", "75〜85%", "60〜70%", "ROI可視化と完遂ログが継続を後押し", "UNLIDベースライン仮説（3ヶ月でKPI達成設計）"),
+    (28, "月30〜60万（外部CTO相場）", "平均12〜24ヶ月", "80〜90%", "65〜75%", "担当者変更・予算削減", "サーキュレーション顧客定着率実績（参考）"),
+]
+for row, price, duration, r3, r12, risk, bench in churn_rows:
+    bold = "UNLID" in price
+    fc_row = C_PROFT if bold else None
+    sc(ws_mkt, row, 1, price, bold=bold, fc=fc_row)
+    sc(ws_mkt, row, 2, duration, fc=fc_row, align="center")
+    sc(ws_mkt, row, 3, r3, bold=bold, fc=fc_row, align="center")
+    sc(ws_mkt, row, 4, r12, bold=bold, fc=fc_row, align="center")
+    sc(ws_mkt, row, 5, risk, fc=fc_row)
+    sc(ws_mkt, row, 6, bench, italic=True, fc=fc_row, size=9)
+border_range(ws_mkt, 24, 28, 1, 6)
+
+sc(ws_mkt, 29, 1,
+   "【データ出典・注記】本シートのデータは公開資料・業界調査に基づく推計値（2024〜2026年）。"
+   "詳細：中小企業庁「2024年版中小企業白書」/ 帝国データバンク各種産業調査 / "
+   "パーソル総合研究所「OJT調査2025」/ リクルートワークス研究所 / 矢野経済研究所 / "
+   "各社公開料金表（キャスター・フジ子さん・サーキュレーション・顧問名鑑）",
+   italic=True, fc=C_NOTE, size=9)
+ws_mkt.merge_cells("A29:F29")
+ws_mkt.freeze_panes = "B5"
+
 
 # ══════════════════════════════════════════════
 # 保存
 # ══════════════════════════════════════════════
-output_path = "/home/user/UNLID/UNLID_財務三表_v2.0.xlsx"
+output_path = "/home/user/UNLID/UNLID_財務三表_v3.0.xlsx"
 wb.save(output_path)
 print(f"✅ 作成完了: {output_path}")
 print("シート一覧:")
 for s in wb.sheetnames:
     print(f"  ・{s}")
-print("\n追加内容:")
-print("  ・法定福利費（社会保険料 事業主負担15%）をSGAに追加")
-print("  ・日本政策金融公庫 借入500万円（年2.0%・5年返済）の計算式")
-print("  ・支払利息・税引前利益（EBT）をPLに追加")
-print("  ・借入金残高をBSに反映")
-print("  ・借入・元本返済・支払利息をCFに反映")
+print("\n v3.0 追加内容:")
+print("  ・感度分析④：FDE雇用形態別ユニットエコノミクス比較")
+print("  ・感度分析⑤：SME単価市場調査・支払意欲分析")
+print("  ・感度分析⑥：人材紹介フィー発生タイミング別CFシミュレーション")
+print("  ・新シート「SME単価市場調査」：業務別相場・ROI根拠・継続率仮説（データ出典付き）")

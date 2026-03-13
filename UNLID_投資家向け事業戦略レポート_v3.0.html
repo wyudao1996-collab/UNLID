@@ -443,7 +443,7 @@
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <ol>
-        <li><a href="#glossary">📖 用語解説——FDE・AI実装・SMEなど、このレポートの言葉を解説</a></li>
+        <li><a href="#glossary">主要用語の定義（FDE・AI実装・SME・TAM/SAM/SOM 他）</a></li>
         <li><a href="#sec0">創業者の問題意識——なぜUNLIDをつくるのか</a></li>
         <li><a href="#sec1">事業の本質と独自性</a></li>
         <li><a href="#sec2">なぜ今か——構造的追い風</a></li>
@@ -461,122 +461,105 @@
 
     <!-- ===== Glossary ===== -->
     <div class="section" id="glossary">
-      <h2><span class="sec-num">用語</span> このレポートを読む前に——わかりにくい用語を解説</h2>
+      <h2><span class="sec-num">用語</span> 本レポートにおける主要用語の定義</h2>
 
-      <div class="highlight-box-warn" style="margin-bottom: 24px;">
-        <strong>このセクションを先に読むことをおすすめします。</strong><br>
-        英語3文字の略語や専門用語が多く出てきますが、すべてここで噛み砕いて説明します。
-      </div>
+      <p style="margin-bottom: 24px; color: #555;">本レポートで頻出する専門用語・略称について、以下に定義を整理します。</p>
 
-      <h3>① FDE（エフ・ディー・イー）とは何か</h3>
+      <h3>FDE（Forward Deployed Engineer）</h3>
       <div class="summary-box">
-        <div class="summary-title">FDE = Forward Deployed Engineer（フォワード・デプロイド・エンジニア）</div>
-        <p><strong>直訳：</strong>「現場に派遣された技術者」</p>
-        <p><strong>一言で言えば：</strong>「クライアント企業の中に入り込んで、AIやITの導入を提案するだけでなく、自分で手を動かして実際に成果を出す専門家」</p>
-        <p><strong>コンサルタントとの違い：</strong>一般的なコンサルタントは「こうすればよいですよ」とアドバイスして終わりです。FDEはそこから一歩踏み込んで、実際にシステムを設定し、使い方を教え、業務に定着させるところまで責任を持ちます。</p>
-        <p><strong>例え：</strong>建築で言えば、「設計士」が図面を描いて終わるのがコンサル。FDEは設計士でありながら「現場監督＋職人」まで兼任するイメージです。</p>
-        <p><small>※ FDEという職種は、米国の大手AIデータ企業「Palantir（パランティア）」が生み出したもので、「現場で成果を出す技術者」として世界的に注目されています。</small></p>
+        <div class="summary-title">Forward Deployed Engineer ／ フォワード・デプロイド・エンジニア</div>
+        <p><strong>定義：</strong>クライアント企業の事業現場に直接参画し、AIおよび業務システムの導入・定着を成果責任のもとで推進する技術専門職。米国Palantir Technologies社が確立したモデルが起源であり、近年では国内においても「AI実装の現場推進者」として認知が広がっている。</p>
+        <p><strong>一般的なコンサルタントとの相違点：</strong>コンサルタントが現状分析・提言の提供を主務とするのに対し、FDEは実装工程そのものを担い、KPI（数値目標）に紐づいた成果の達成まで責任を負う。</p>
+        <p><strong>UNLIDにおける定義：</strong>フラクショナル（複数社兼務）形式で稼働し、クライアント1社あたり週1〜2日の関与のもと、AI業務効率化の設計・ツール選定・現場定着を一貫して担う正社員。副業ワーカーの業務品質管理および完遂ログ評価の責任者も兼任する。</p>
       </div>
 
-      <h3>② フラクショナル（Fractional）とは何か</h3>
+      <h3>フラクショナル（Fractional）雇用・活用</h3>
       <div class="summary-box">
-        <div class="summary-title">フラクショナル = 「一部だけ・分割した」という意味</div>
-        <p><strong>一言で言えば：</strong>「週1〜2日だけ複数の会社を掛け持ちする働き方」</p>
-        <p><strong>例え：</strong>病院の「非常勤医師」が月・水は A病院、火・木は B病院で診察するのと同じです。1人の専門家を複数の会社が時間でシェアする仕組みです。</p>
-        <p><strong>企業にとってのメリット：</strong>AI専門家を正社員で雇うと年収600〜900万円（社保含め年2,000万円超）かかります。フラクショナルFDEなら月15〜25万円、つまり<strong>正社員の約1/5〜1/10のコスト</strong>で専門家を確保できます。</p>
-        <p><strong>UNLIDの設計：</strong>FDE1人が4〜5社を掛け持ちし、各社に週1.5日（月約48時間）関与します。</p>
+        <div class="summary-title">Fractional ／ 分割稼働型の専門人材活用モデル</div>
+        <p><strong>定義：</strong>1名の専門人材が複数の企業と同時に業務委託または雇用契約を締結し、稼働時間を分割して各社に提供する人材活用モデル。欧米では「Fractional CTO」「Fractional CMO」等の形態が定着しており、日本においても外部CTO・副業顧問として普及が進んでいる。</p>
+        <p><strong>企業側の経済合理性：</strong>AI・IT専門人材を正社員として採用した場合、給与に社会保険料・採用コストを加えると年間総額2,000万円超が一般的である。フラクショナルFDEの活用により、企業は月15〜25万円（年間180〜300万円）で同等の専門性へアクセスすることが可能となる。</p>
+        <p><strong>UNLIDにおける運用：</strong>FDE1名が4〜5社を同時担当し、各社に月48時間（週1.5日相当）の稼働を割り当てる。</p>
       </div>
 
-      <h3>③ AI実装とは何か</h3>
+      <h3>AI実装</h3>
       <div class="summary-box">
-        <div class="summary-title">AI実装 = 「AIを実際の業務の中で動くように組み込むこと」</div>
-        <p><strong>プロンプト（AIへの指示文）を作るだけではありません。</strong>AIツールを業務フローに組み込んで、実際に使える状態にするところまでが「実装」です。</p>
-        <p><strong>具体例：</strong></p>
-        <ul>
-          <li>顧客からの問い合わせメールが来たら、ChatGPTが自動で返信文案を作成する仕組みを作る</li>
-          <li>会議の録音を自動で文字起こしし、議事録として整理・要約するフローを作る</li>
-          <li>見積書・請求書をAIが自動生成して担当者がチェックするだけで済む状態にする</li>
-          <li>新入社員がAIを相手に営業トークを練習できる環境を作る</li>
-        </ul>
-        <p><strong>つまり：</strong>「AIを会社の日常業務の一部として定着させる」ことが「AI実装」です。ツールを入れるだけでなく、社員が実際に使いこなせるように教育・定着まで行います。</p>
+        <div class="summary-title">AI Implementation ／ AI業務実装</div>
+        <p><strong>定義：</strong>生成AIをはじめとするAIツールを、企業の既存業務フローへ組み込み、実際の業務効率化・コスト削減として機能させるまでの一連のプロセス。ツールの選定・導入にとどまらず、業務フローの再設計、社員へのオンボーディング、定着後のKPI検証までを含む概念である。</p>
+        <p><strong>「プロンプト作成」との相違：</strong>プロンプト設計はAI実装の構成要素の一部に過ぎない。UNLIDが定義するAI実装とは、「特定の業務課題に対して、AIを含む最適なツールを選定・設定し、担当者が継続的に成果を出せる状態に業務プロセスごと変革すること」を指す。</p>
+        <p><strong>主な対象業務領域：</strong>問い合わせ対応の自動化、議事録・レポートの自動生成、採用・広報コンテンツの効率化、バックオフィス（見積・請求・在庫管理）の省力化、社員教育・ロールプレイ支援など。</p>
       </div>
 
-      <h3>④ SME（エス・エム・イー）とは</h3>
-      <div class="summary-box">
-        <div class="summary-title">SME = Small and Medium Enterprise（スモール・アンド・ミディアム・エンタープライズ）</div>
-        <p><strong>日本語：</strong>中小企業（このレポートでは主に従業員30〜300名規模の会社を指します）</p>
-        <p>日本の企業の99.7%、雇用の約7割を占めます。大企業に比べてAIの導入が大幅に遅れており（大企業19%に対し中小1.3%）、UNLIDが最もサービスを届けたいターゲットです。</p>
-      </div>
-
-      <h3>⑤ 市場規模の3段階（TAM・SAM・SOM）</h3>
-      <div class="summary-box">
-        <div class="summary-title">TAM / SAM / SOM = 市場の大きさを3段階で表したビジネス用語</div>
-        <div class="table-wrap" style="margin-top:12px;">
-          <table>
-            <thead><tr><th>用語</th><th>読み方</th><th>意味</th><th>例え</th></tr></thead>
-            <tbody>
-              <tr>
-                <td><strong>TAM</strong></td>
-                <td>ティーエーエム</td>
-                <td>理論上の最大市場<br>（Total Addressable Market）</td>
-                <td>「日本中のラーメン好きが全員うちのラーメン屋に来たら」の売上</td>
-              </tr>
-              <tr>
-                <td><strong>SAM</strong></td>
-                <td>サム</td>
-                <td>実際に狙える市場<br>（Serviceable Addressable Market）</td>
-                <td>「駅前10km以内のラーメン好き全員が来たら」の売上</td>
-              </tr>
-              <tr>
-                <td><strong>SOM</strong></td>
-                <td>ソム</td>
-                <td>現実的に取れる市場<br>（Serviceable Obtainable Market）</td>
-                <td>「オープン3年でリピーターになってくれるお客さん」の売上</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <h3>⑥ その他の略語・用語</h3>
-      <div class="table-wrap">
+      <h3>市場規模の定義（TAM・SAM・SOM）</h3>
+      <div class="table-wrap" style="margin-top: 8px;">
         <table>
-          <thead><tr><th>用語</th><th>正式名称・読み</th><th>簡単な意味</th></tr></thead>
+          <thead><tr><th>指標</th><th>正式名称</th><th>定義</th><th>本レポートにおける位置づけ</th></tr></thead>
           <tbody>
             <tr>
+              <td><strong>TAM</strong></td>
+              <td>Total Addressable Market<br>（獲得可能な全市場規模）</td>
+              <td>事業が対象とする市場において、あらゆる制約を排除した場合に理論上到達し得る最大の市場規模</td>
+              <td>AI業務支援市場と人材紹介市場の合算：5,000億〜9,000億円</td>
+            </tr>
+            <tr>
+              <td><strong>SAM</strong></td>
+              <td>Serviceable Addressable Market<br>（実際にアプローチ可能な市場規模）</td>
+              <td>TAMのうち、自社のサービス仕様・地理的範囲・ターゲットセグメントの条件を満たす実際にアクセス可能な市場規模</td>
+              <td>AI課題・外注予算を持つIT/サービス系中小企業（1.5万〜3万社）対象：280億〜560億円</td>
+            </tr>
+            <tr>
+              <td><strong>SOM</strong></td>
+              <td>Serviceable Obtainable Market<br>（現実的に獲得可能な市場規模）</td>
+              <td>SAMのうち、自社のリソース・競合状況・成長速度を踏まえて3〜5年以内に現実的に獲得し得る市場規模</td>
+              <td>FDE正社員数をボトルネックとした3〜5年での獲得目標：4〜6億円</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>その他の主要略語一覧</h3>
+      <div class="table-wrap" style="margin-top: 8px;">
+        <table>
+          <thead><tr><th>略語</th><th>正式名称</th><th>定義</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>SME</strong></td>
+              <td>Small and Medium Enterprise</td>
+              <td>中小企業。本レポートでは主に従業員30〜300名規模の企業を指す。日本の企業数の99.7%、雇用の約7割を占めるが、AI導入率は大企業（19.0%）の約1/15である1.3%にとどまる（各社統計調査 2025年）。</td>
+            </tr>
+            <tr>
               <td><strong>BPO</strong></td>
-              <td>ビー・ピー・オー<br>Business Process Outsourcing</td>
-              <td>会社の業務（経理・人事・IT管理など）を外部に委託すること。例：「経理をアウトソーシングする」</td>
+              <td>Business Process Outsourcing</td>
+              <td>企業が自社の特定業務（経理・人事・カスタマーサポート等）を外部事業者に委託すること。UNLIDのAI実装支援受託は、このBPO市場（国内4〜5兆円規模）の一部を構成する。</td>
             </tr>
             <tr>
               <td><strong>OJT</strong></td>
-              <td>オー・ジェー・ティー<br>On-the-Job Training</td>
-              <td>実際の仕事をしながら先輩に教えてもらう現場教育。座学（研修）と対比して使われる</td>
+              <td>On-the-Job Training</td>
+              <td>実務を通じた現場教育。日本では計画的OJTの実施率が低下傾向にあり（40.9%→30.3%：パーソル総合研究所 2025年1月）、若手社員の実戦機会の減少が社会課題となっている。UNLIDのクエスト型実務参加はこの代替機能を担う。</td>
             </tr>
             <tr>
               <td><strong>SaaS</strong></td>
-              <td>サース<br>Software as a Service</td>
-              <td>月額課金で使えるクラウドサービス。例：Slack、Notion、Salesforceなど。UNLIDの将来構想では、完遂ログデータを採用企業に月額課金で提供するプラットフォームを指す</td>
+              <td>Software as a Service</td>
+              <td>インターネット経由で提供されるソフトウェアの月額課金モデル。UNLIDのフェーズ4以降の将来構想として、完遂ログデータベースをSaaS型プラットフォームとして採用企業に提供することを想定している。</td>
             </tr>
             <tr>
               <td><strong>PMF</strong></td>
-              <td>ピーエムエフ<br>Product Market Fit</td>
-              <td>「作ったサービスが市場にしっかりはまった状態」。つまり「お客さんが本当に必要としていて、継続してお金を払ってくれる状態」</td>
+              <td>Product Market Fit</td>
+              <td>製品・サービスが対象市場の需要に合致し、持続的な顧客獲得と継続利用が実現されている状態。スタートアップ投資の文脈では、PMF到達が本格的なスケール投資の判断基準となる。</td>
             </tr>
             <tr>
               <td><strong>KPI</strong></td>
-              <td>ケー・ピー・アイ<br>Key Performance Indicator</td>
-              <td>目標達成度を測る指標。例：「月間の契約社数」「完遂件数」など、進捗を数字で確認するための目印</td>
+              <td>Key Performance Indicator</td>
+              <td>事業目標の達成度を定量的に測定するための重要指標。本レポートでは「完遂件数×3軸平均スコア」をNorth Star Metricとして設定している（第11章参照）。</td>
             </tr>
             <tr>
               <td><strong>ROI</strong></td>
-              <td>アール・オー・アイ<br>Return on Investment</td>
-              <td>投資対効果。「払ったお金に対してどれだけ得をしたか」。例：月15万払って月30万分の工数が削減できれば ROI 200%</td>
+              <td>Return on Investment</td>
+              <td>投下資本に対する利益の比率。本レポートでは、クライアント企業がUNLIDのFDEサービスに支払う月額費用に対して得られる業務効率化・コスト削減効果として定義する。</td>
             </tr>
             <tr>
               <td><strong>Palantir</strong></td>
-              <td>パランティア</td>
-              <td>米国の大手AIデータ企業。FDEというモデルを生み出した元祖で、大企業・政府向けにAI導入を支援する。UNLIDはこのモデルを中小企業向けに再設計している</td>
+              <td>Palantir Technologies</td>
+              <td>米国のAIデータ分析企業（NYSE: PLTR）。FDEモデルの発祥元であり、大企業・政府機関向けにAI実装を常駐型で支援する。年間契約単価は数億〜数十億円規模。UNLIDはこのモデルを中小企業向けにフラクショナル・低価格帯で再設計している。</td>
             </tr>
           </tbody>
         </table>

@@ -1066,11 +1066,485 @@
       </div>
     </div>
 
+    <!-- Case 09 -->
+    <div class="case-card" id="c09">
+      <div class="case-header cat2">
+        <div class="case-num">09</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">売上・営業支援</div>
+          <div class="case-title">競合・市場動向のAIリサーチ自動化</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Claude API + Perplexity</span>
+            <span class="meta-chip time">工数 3〜5h（設定〜初回レポート）</span>
+            <span class="meta-chip roi">月次リサーチコスト 80%削減</span>
+            <span class="meta-chip diff">難易度 ★★☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>「競合が何を始めたか」「業界のトレンドがどう変わったか」を毎月手動で調べる作業をAIで自動化。Perplexityを使えば最新Webの情報を引用付きで収集でき、Claudeでフォーマット整形して経営陣に配布できる「月次マーケットインテリジェンスレポート」を構築。リサーチに使っていた半日を30分に短縮。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat2-dot">1</div>
+            <div class="step-content">
+              <strong>モニタリングするトピック・競合を定義</strong>
+              <span>「毎月チェックしたい情報」を10〜15項目に整理。例：①競合A社の新サービス ②業界の採用動向 ③主要顧客業種の景況感 ④関連法改正の動き。具体的に決めるほどプロンプトの精度が上がる。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">2</div>
+            <div class="step-content">
+              <strong>Perplexityのプロンプト設計（競合・業界別）</strong>
+              <span>競合ごと・トピックごとに検索プロンプトを設計。「過去30日以内」「日本語のみ」「信頼できる情報源」の条件を入れると精度が上がる。Perplexity Proは月20ドルで深い検索が可能。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">3</div>
+            <div class="step-content">
+              <strong>Claudeでの統合レポート生成</strong>
+              <span>Perplexityで収集した各トピックの情報をClaudeに渡し、「経営陣が5分で読める月次レポート」フォーマットに整形。インパクトの大きい情報を先頭に、アクション提案を末尾に。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">4</div>
+            <div class="step-content">
+              <strong>月次ルーティン化（カレンダー設定）</strong>
+              <span>毎月第1月曜日に「リサーチ→レポート生成→Slack配布」の30分ルーティンを設定。担当者がツールを使えるよう操作マニュアルをNotionに保管する。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（月次マーケットレポート生成）</div>
+          <pre class="prompt"><span class="cm"># 月次マーケットインテリジェンスレポート生成プロンプト</span>
+あなたは業界アナリストです。
+以下の情報（Perplexityで収集）をもとに、経営者向けの月次レポートを作成してください。
+
+<span class="ph">【競合情報】</span>
+[競合A社：最近の動向を貼り付け]
+[競合B社：最近の動向を貼り付け]
+
+<span class="ph">【業界トレンド】</span>
+[収集した業界ニュースを貼り付け]
+
+<span class="ph">【レポート構成】</span>
+## 今月のビッグニュース（1〜3件・最重要のみ）
+## 競合動向サマリー（各社1〜2行）
+## 業界全体のトレンド（3点）
+## 自社への影響とアクション提案（具体的に2〜3点）
+
+<span class="cm"># 制約：全体で500字以内。経営者が5分で読めるボリューム</span>
+<span class="cm"># 重要度：「即対応必要」「来月以降検討」「情報収集継続」の3段階でラベル付け</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>Perplexityの情報も誤情報が混じる——重要情報は一次ソース確認</li>
+              <li>競合の「公式発表以外」の噂情報は扱わない</li>
+              <li>レポートが「情報の羅列」にならないよう「So What（だから何？）」の視点を必ず入れる</li>
+              <li>Perplexityは月20ドル（Pro）でないと深い検索ができない</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後2ヶ月）</h5>
+            <ul>
+              <li>月次レポートが毎月第1週に配布されている</li>
+              <li>経営判断にレポートの情報が活用された実績が1件以上</li>
+              <li>リサーチにかける時間が毎月30分以内に収まっている</li>
+              <li>「競合に先を越された」という事態が減少</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================
+         カテゴリ③ システム統合・業務フロー改善
+    ======================================== -->
+    <div class="section-header">
+      <div class="sh-num sh-cat3">③</div>
+      <div>
+        <div class="sh-title">システム統合・業務フロー改善</div>
+        <div class="sh-sub">Phase 2〜3（3〜12ヶ月）。バラバラなツールとデータを統合し、「情報が一か所に集まる」経営基盤を作る。難易度が高いため副業ワーカーとの協働が有効。</div>
+      </div>
+    </div>
+
+    <!-- Case 10 -->
+    <div class="case-card" id="c10">
+      <div class="case-header cat3">
+        <div class="case-num">10</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">システム統合・業務フロー改善</div>
+          <div class="case-title">バラバラなSaaS × ExcelシートのAPI連携・一元化</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Zapier / Make + Claude</span>
+            <span class="meta-chip time">工数 8〜15h（設計〜稼働）</span>
+            <span class="meta-chip roi">手動転記ゼロ化・システム断裂の解消</span>
+            <span class="meta-chip diff">難易度 ★★★</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>「会計ソフトのデータをExcelに手打ちして、そのExcelをさらに別のツールに転記する」——SMEでは日常的なこの作業をZapier/Makeで自動化。200名規模のSMEでも「在庫・受注・顧客・経理」が4つの別々のExcelで管理されているケースは頻発する。API連携で手動転記をゼロにし、「常に最新データが1か所にある」状態を作る。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat3-dot">1</div>
+            <div class="step-content">
+              <strong>現行フロー図の作成（どこからどこへデータが流れているか）</strong>
+              <span>「何のデータが、どこから、どこへ、誰が手動で移しているか」を紙に書き出す。FDEが1時間のヒアリングで作成。これが設計の全ての起点になる。A4×1枚に収まるレベルで可。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">2</div>
+            <div class="step-content">
+              <strong>優先度の高い「1つの転記フロー」を特定</strong>
+              <span>全部を一気に自動化しようとしない。「最も頻繁に・最も手間がかかる転記」を1つ選ぶ。例：「請求書SaaS（Misoca）→会計ソフト（MF）への入力」「受注メール→Excelへの入力」など。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">3</div>
+            <div class="step-content">
+              <strong>Zapierのシナリオ設計・テスト（ノーコード）</strong>
+              <span>ZapierはGUI操作のみで2つのツールをつなぐことができる（コード不要）。「トリガー（何が起きたら）→アクション（何をする）」の2ステップで設計。無料プランで5つのZapまで作成可。</span>
+              <span class="step-time">3〜5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">4</div>
+            <div class="step-content">
+              <strong>1週間の本番稼働テスト → エラー修正</strong>
+              <span>実際のデータで1週間動かし、エラーが出た場合はZapierのログで原因を確認して修正。「99%動く」状態になったら正式稼働とし、手動転記を廃止する。</span>
+              <span class="step-time">2〜3h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">5</div>
+            <div class="step-content">
+              <strong>第2・第3の転記フローへ順次展開</strong>
+              <span>1本目が安定したら2本目の自動化に着手。最終的には「全ての手動転記をゼロにする」ゴールに向けて段階的に進める。月1〜2本のペースで展開するのが現実的。</span>
+              <span class="step-time">継続</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（Zapierシナリオ設計の壁打ち用）</div>
+          <pre class="prompt"><span class="cm"># Zapierシナリオ設計の壁打ちプロンプト</span>
+あなたはノーコード自動化の専門家です。
+以下の手動作業をZapierで自動化するシナリオを設計してください。
+
+<span class="ph">【現在の手動フロー】</span>
+例：受注メールが届く → Excelに顧客名・金額・商品名を手入力する → Slackで担当者に通知する
+
+<span class="ph">【使用中のツール】</span>
+[連携させたいSaaSの名前を列挙]
+
+以下を設計してください：
+1. Zapierのトリガー設定（何が起きたら動くか）
+2. アクションの順序（何をするか）
+3. データのマッピング（どのフィールドをどこに送るか）
+4. エラー時の対処（失敗した場合のアラート設定）
+
+<span class="cm"># 注意：ZapierでAPI連携できないツールがある場合は代替案も提示</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>Zapierの無料プランはタスク数制限あり（月100タスク）——有料プランの費用対効果を先に確認</li>
+              <li>連携するSaaSが古い場合はAPIを持っていない場合がある</li>
+              <li>自動化後に「エラーに誰も気づかない」問題——必ずエラー通知をSlackに設定</li>
+              <li>最初から複雑なフローを作ると管理できなくなる——シンプルに始める</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>対象の手動転記作業が完全になくなった</li>
+              <li>Zapierのエラー率が5%未満で安定稼働</li>
+              <li>転記ミスによるデータ不整合が発生していない</li>
+              <li>担当者が「Zapierを管理できる」状態になっている</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 11 -->
+    <div class="case-card" id="c11">
+      <div class="case-header cat3">
+        <div class="case-num">11</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">システム統合・業務フロー改善</div>
+          <div class="case-title">KPIダッシュボード構築（売上・在庫・顧客）</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Looker Studio / Notion + API</span>
+            <span class="meta-chip time">工数 8〜12h（設計〜稼働）</span>
+            <span class="meta-chip roi">「勘経営」→ データ経営への転換</span>
+            <span class="meta-chip diff">難易度 ★★★</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>「今月の売上がいくらかを確認するのに30分かかる」「在庫が何個残っているか担当者に聞かないとわからない」——こうしたSMEにLooker Studio（無料）でリアルタイムダッシュボードを構築。経営者が「スマホで今日の状況が3秒でわかる」状態を作る。データ接続さえできれば構築自体は1日で完成する。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat3-dot">1</div>
+            <div class="step-content">
+              <strong>「経営者が毎朝見たい数字」をヒアリングで特定（KPI定義）</strong>
+              <span>「もし毎朝1枚のレポートが届くとしたら、何が書いてあれば満足ですか？」という質問から始める。多くの場合：①本日売上 ②今月累計 ③在庫アラート ④未対応顧客問い合わせ数 の4つが出る。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">2</div>
+            <div class="step-content">
+              <strong>データソースの確認・Googleスプレッドシートへの集約</strong>
+              <span>Looker Studioは多くのSaaSと直接連携できるが、最も確実なのは「Googleスプレッドシートを中間ハブにする」方法。各ツールからCSVをエクスポートしてGスプレに貼るだけでもOK。</span>
+              <span class="step-time">2〜3h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">3</div>
+            <div class="step-content">
+              <strong>Looker Studioでダッシュボード設計（無料）</strong>
+              <span>Googleアカウントがあれば無料で利用可。Googleスプレッドシートをデータソースとして接続し、グラフ・表・KPIカードを配置する。テンプレートギャラリーから「売上ダッシュボード」を選べば30分で完成。</span>
+              <span class="step-time">3〜4h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">4</div>
+            <div class="step-content">
+              <strong>共有URLを経営者に送付・スマホで確認できるか検証</strong>
+              <span>Looker StudioのダッシュボードはURLで共有可能。経営者がスマホで閲覧し「これで見たい数字が全部わかる」ことを確認。修正点は初週にフィードバックをもらって即対応する。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">5</div>
+            <div class="step-content">
+              <strong>データ更新の自動化（Zapierまたは定期エクスポート）</strong>
+              <span>スプレッドシートへのデータ更新を自動化するか、週1回の手動更新ルーティンを決める。完全自動化はCase 10と組み合わせると最も効果的。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（KPI設計の壁打ち・Looker Studio設計補助）</div>
+          <pre class="prompt"><span class="cm"># KPIダッシュボード設計プロンプト</span>
+あなたは中小企業の経営管理の専門家です。
+以下のビジネス情報をもとに、経営ダッシュボードに載せるべきKPIを設計してください。
+
+<span class="ph">【会社概要】</span>
+業種：[例：飲食業・小売業・サービス業]
+従業員数：[例：30名]
+主な収益源：[例：月次会費・商品販売・サービス提供料]
+
+<span class="ph">【現在把握できていないこと】</span>
+[例：「どの商品が今月一番売れているか」「リピーター比率」「月中の売上ペース」等]
+
+以下を設計してください：
+1. 日次ダッシュボードに載せるべきKPI（5個まで）
+2. 週次レポートで確認すべき指標（3個）
+3. 月次経営会議で見るべき数字（5個）
+4. 各KPIのデータソース（何のツールから取得するか）
+
+<span class="cm"># 制約：「データが取得できること」を前提に設計すること</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>KPIを詰め込みすぎると「何も見なくなる」——5指標以内に絞る</li>
+              <li>データが正確でないと間違った経営判断につながる——データ品質の確認が最優先</li>
+              <li>Looker Studioは一部機能でGoogleアカウントへのデータ送信が発生——機密データの扱いに注意</li>
+              <li>ダッシュボードは「作って終わり」ではなく定期的な見直しが必要</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>経営者が毎朝ダッシュボードを確認する習慣ができた</li>
+              <li>「売上状況の確認」が30分→3分以内に短縮</li>
+              <li>データをもとにした意思決定が1件以上発生</li>
+              <li>「今月どこで売上が落ちたか」を即座に特定できる</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 12 -->
+    <div class="case-card" id="c12">
+      <div class="case-header cat3">
+        <div class="case-num">12</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">システム統合・業務フロー改善</div>
+          <div class="case-title">Claude Codeによる内部ツール・スクリプト開発</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Claude Code / Python</span>
+            <span class="meta-chip time">工数 10〜20h（要件定義〜納品）</span>
+            <span class="meta-chip roi">外注費月10〜30万節約・業務自動化</span>
+            <span class="meta-chip diff">難易度 ★★★</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>「外注したいが高すぎる」「IT会社に頼むほどでもない」ちょっとした自動化・ツール開発をClaude Codeで内製化。例：PDFデータの一括変換・Excelの自動集計マクロ・メール一斉送信ツール・在庫管理スプレッドシートの自動化など。FDEがClaude Codeを使って要件定義→開発→テストまで対応し、外注費用を月10〜30万削減する。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat3-dot">1</div>
+            <div class="step-content">
+              <strong>「本当は自動化したいが放置している作業」の発掘</strong>
+              <span>「毎月同じ作業を繰り返していて『これ自動化できたらなあ』と思っていることは？」とヒアリング。特に月次・週次で発生する定型作業をリストアップする。コスト目安：1作業の自動化で月5〜30時間が削減できる。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">2</div>
+            <div class="step-content">
+              <strong>要件定義：「何が入力されて何が出力されるか」を決める</strong>
+              <span>開発の前に必ず「Input（何のデータが来るか）→Processing（どんな処理か）→Output（何が出てくるか）」を1枚の図にまとめる。これが曖昧だとClaude Codeでも正しいものは作れない。</span>
+              <span class="step-time">2〜3h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">3</div>
+            <div class="step-content">
+              <strong>Claude Codeで実装（FDEが操作）</strong>
+              <span>要件定義書をClaude Codeに渡してコードを生成。Pythonスクリプトがほとんどのケースに対応できる。Claude Codeは途中で「ここが曖昧です」と質問してくるため、FDEが判断・回答しながら進める。</span>
+              <span class="step-time">5〜10h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">4</div>
+            <div class="step-content">
+              <strong>テストデータでの動作確認・バグ修正</strong>
+              <span>実際のデータのサンプルで動作確認。エラーが出たらエラーメッセージをClaude Codeに貼り付けて「このエラーを直してください」で修正可能。通常2〜3回のやり取りで安定動作する。</span>
+              <span class="step-time">2〜3h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">5</div>
+            <div class="step-content">
+              <strong>操作マニュアル作成・引き渡し</strong>
+              <span>「誰がどう使うか」の操作手順をClaudeに書かせてNotionに保管。FDEがいなくなっても担当者が自力で使えるようにする。ツールのソースコードもNotionまたはGitHubで管理。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（Claude Codeへの要件指示）</div>
+          <pre class="prompt"><span class="cm"># Claude Codeへの開発依頼プロンプト</span>
+以下の要件でPythonスクリプトを作成してください。
+
+<span class="ph">【目的】</span>
+[例：毎月のExcel売上データから、顧客別・商品別の集計レポートを自動生成する]
+
+<span class="ph">【入力データ】</span>
+ファイル形式：[例：Excel(.xlsx)]
+データ構造：[例：列A=日付、列B=顧客名、列C=商品名、列D=金額]
+データ量：[例：月500〜1,000行]
+
+<span class="ph">【出力】</span>
+[例：顧客別の月間売上合計・TOP10顧客リスト・前月比グラフ付きのPDFレポート]
+
+<span class="ph">【制約・注意事項】</span>
+[例：Python 3.10以上で動作すること。外部ライブラリはpandas・openpyxlのみ使用可]
+
+<span class="cm"># 追加要件：スクリプトにはコメント（日本語）を入れること</span>
+<span class="cm"># 操作マニュアルも一緒に作成すること</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>要件定義が曖昧だと何度作り直しても完成しない——最初の1〜2hを惜しまない</li>
+              <li>Pythonの実行環境（PC環境設定）が担当者にとってハードルになる場合がある</li>
+              <li>本番データには直接触れさせない——テスト環境で十分に確認してから</li>
+              <li>Claude Codeは月20ドル（Proプラン）が必要</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（納品後）</h5>
+            <ul>
+              <li>目的の作業が自動化されており、手作業が不要になった</li>
+              <li>担当者が操作マニュアルを見ながら自力で実行できる</li>
+              <li>外注に比べて開発コストが50%以下に抑えられた</li>
+              <li>ソースコードと操作マニュアルが保管されており、引き継ぎ可能な状態</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 全ケースまとめ表 ===== -->
+    <div style="margin: 36px 0 12px; padding-top: 24px; border-top: 2px solid #e2e8f0;">
+      <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 14px;">📊 12ケース一覧：工数・難易度・ROI サマリー</h3>
+      <div style="overflow-x: auto;">
+        <table style="width:100%; border-collapse:collapse; font-size:12px;">
+          <thead>
+            <tr style="background:#1e293b; color:#fff;">
+              <th style="padding:8px 10px; text-align:left;">#</th>
+              <th style="padding:8px 10px; text-align:left;">ケース名</th>
+              <th style="padding:8px 10px; text-align:center;">難易度</th>
+              <th style="padding:8px 10px; text-align:center;">工数目安</th>
+              <th style="padding:8px 10px; text-align:left;">主な期待効果</th>
+              <th style="padding:8px 10px; text-align:center;">推奨Phase</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:#f0fdf4;"><td style="padding:7px 10px;">01</td><td style="padding:7px 10px;">議事録自動生成</td><td style="padding:7px 10px; text-align:center;">★☆☆</td><td style="padding:7px 10px; text-align:center;">3〜5h</td><td style="padding:7px 10px;">作業時間40%削減</td><td style="padding:7px 10px; text-align:center;">Phase 1</td></tr>
+            <tr style="background:#f0fdf4;"><td style="padding:7px 10px;">02</td><td style="padding:7px 10px;">メール・提案書下書き</td><td style="padding:7px 10px; text-align:center;">★☆☆</td><td style="padding:7px 10px; text-align:center;">2〜4h</td><td style="padding:7px 10px;">文書作成70%時短</td><td style="padding:7px 10px; text-align:center;">Phase 1</td></tr>
+            <tr style="background:#f0fdf4;"><td style="padding:7px 10px;">03</td><td style="padding:7px 10px;">経費精算・OCR</td><td style="padding:7px 10px; text-align:center;">★★☆</td><td style="padding:7px 10px; text-align:center;">4〜6h</td><td style="padding:7px 10px;">経理作業 月20h→3h</td><td style="padding:7px 10px; text-align:center;">Phase 1</td></tr>
+            <tr style="background:#f0fdf4;"><td style="padding:7px 10px;">04</td><td style="padding:7px 10px;">契約書AIレビュー</td><td style="padding:7px 10px; text-align:center;">★★☆</td><td style="padding:7px 10px; text-align:center;">3〜5h</td><td style="padding:7px 10px;">弁護士相談コスト70%削減</td><td style="padding:7px 10px; text-align:center;">Phase 1</td></tr>
+            <tr style="background:#f0fdf4;"><td style="padding:7px 10px;">05</td><td style="padding:7px 10px;">社内FAQチャットボット</td><td style="padding:7px 10px; text-align:center;">★★★</td><td style="padding:7px 10px; text-align:center;">5〜8h</td><td style="padding:7px 10px;">社内質問対応40〜60%削減</td><td style="padding:7px 10px; text-align:center;">Phase 1〜2</td></tr>
+            <tr style="background:#eff6ff;"><td style="padding:7px 10px;">06</td><td style="padding:7px 10px;">顧客リサーチ→提案書</td><td style="padding:7px 10px; text-align:center;">★★☆</td><td style="padding:7px 10px; text-align:center;">3〜5h</td><td style="padding:7px 10px;">営業リサーチ 半日→30分</td><td style="padding:7px 10px; text-align:center;">Phase 2</td></tr>
+            <tr style="background:#eff6ff;"><td style="padding:7px 10px;">07</td><td style="padding:7px 10px;">既存顧客データ分析</td><td style="padding:7px 10px; text-align:center;">★★★</td><td style="padding:7px 10px; text-align:center;">5〜8h</td><td style="padding:7px 10px;">アップセルによる売上増8〜15%</td><td style="padding:7px 10px; text-align:center;">Phase 2</td></tr>
+            <tr style="background:#eff6ff;"><td style="padding:7px 10px;">08</td><td style="padding:7px 10px;">CRM代替設計</td><td style="padding:7px 10px; text-align:center;">★★★</td><td style="padding:7px 10px; text-align:center;">6〜10h</td><td style="padding:7px 10px;">属人営業の解消・失注減</td><td style="padding:7px 10px; text-align:center;">Phase 2</td></tr>
+            <tr style="background:#eff6ff;"><td style="padding:7px 10px;">09</td><td style="padding:7px 10px;">競合・市場リサーチ</td><td style="padding:7px 10px; text-align:center;">★★☆</td><td style="padding:7px 10px; text-align:center;">3〜5h</td><td style="padding:7px 10px;">リサーチコスト80%削減</td><td style="padding:7px 10px; text-align:center;">Phase 2〜3</td></tr>
+            <tr style="background:#faf5ff;"><td style="padding:7px 10px;">10</td><td style="padding:7px 10px;">SaaS×Excel API連携</td><td style="padding:7px 10px; text-align:center;">★★★</td><td style="padding:7px 10px; text-align:center;">8〜15h</td><td style="padding:7px 10px;">手動転記ゼロ化</td><td style="padding:7px 10px; text-align:center;">Phase 2〜3</td></tr>
+            <tr style="background:#faf5ff;"><td style="padding:7px 10px;">11</td><td style="padding:7px 10px;">KPIダッシュボード</td><td style="padding:7px 10px; text-align:center;">★★★</td><td style="padding:7px 10px; text-align:center;">8〜12h</td><td style="padding:7px 10px;">データ経営への転換</td><td style="padding:7px 10px; text-align:center;">Phase 2〜3</td></tr>
+            <tr style="background:#faf5ff;"><td style="padding:7px 10px;">12</td><td style="padding:7px 10px;">内部ツール開発</td><td style="padding:7px 10px; text-align:center;">★★★</td><td style="padding:7px 10px; text-align:center;">10〜20h</td><td style="padding:7px 10px;">外注費月10〜30万削減</td><td style="padding:7px 10px; text-align:center;">Phase 3</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
 </div><!-- /body -->
 
 <div class="footer">
-  <span>UNLID AI実装ユースケース集 v1.0　｜　2026年3月</span>
-  <span>※ Step 2/3 — Cases 05〜08 追記済み</span>
+  <span>UNLID AI実装ユースケース集 v1.0　｜　2026年3月　｜　Confidential</span>
+  <span>12ケース完成版</span>
 </div>
 
 </div><!-- /page -->

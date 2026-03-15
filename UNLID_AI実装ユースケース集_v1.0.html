@@ -642,11 +642,435 @@
       </div>
     </div>
 
+    <!-- Case 05 -->
+    <div class="case-card" id="c05">
+      <div class="case-header cat1">
+        <div class="case-num">05</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">バックオフィス効率化</div>
+          <div class="case-title">社内FAQ・マニュアルのAIチャットボット化</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Notion AI / Claude API</span>
+            <span class="meta-chip time">工数 5〜8h（設計〜公開）</span>
+            <span class="meta-chip roi">社内質問対応 40〜60%削減</span>
+            <span class="meta-chip diff">難易度 ★★★</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>「〇〇の申請方法は？」「この書類はどこ？」等、毎日繰り返される社内質問をAIが自動回答する仕組みを構築。Notionにマニュアルを集約しNotion AIで検索できる形にするのが最も低コスト（月1,650円〜）。新人の立ち上がり期間の短縮と、先輩社員の割り込み対応コストを大幅削減。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat1-dot">1</div>
+            <div class="step-content">
+              <strong>よく来る質問TOP20をリストアップ</strong>
+              <span>「先週何回同じ質問に答えましたか？」とヒアリング。Slackのログを検索して繰り返し質問を抽出。まず20問のFAQリストを作る。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">2</div>
+            <div class="step-content">
+              <strong>Notionにマニュアル・ルールを集約</strong>
+              <span>バラバラになっている「Word・Excel・口頭ルール」をNotionの1つのDBに集める。既存マニュアルをそのままコピペでOK。構造化より「まず全部入れること」を優先する。</span>
+              <span class="step-time">2〜3h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">3</div>
+            <div class="step-content">
+              <strong>Notion AI Q&A機能の有効化・テスト</strong>
+              <span>Notion AIの「Q&A」機能を有効化（プラスプラン以上で利用可）。登録した20問を実際に質問してみて、正確に回答できるか確認。精度が低い場合はマニュアルの記述を具体化する。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">4</div>
+            <div class="step-content">
+              <strong>Slackに「botに聞く」文化を定着させる</strong>
+              <span>SlackのNotionアプリ連携を設定し、「まずNotionで検索してから人に聞く」ルールをチームに周知。最初の1週間は「その質問Notionに入ってるよ」とリマインドする。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">5</div>
+            <div class="step-content">
+              <strong>マニュアルの更新ルール策定</strong>
+              <span>「新しいルールができたらNotionに追記する担当者」を決める。月1回のマニュアル棚卸し（30分）をカレンダーに入れる。更新されないFAQは意味がない。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（社内FAQ回答生成 — Notion AI使えない場合）</div>
+          <pre class="prompt"><span class="cm"># 社内FAQ回答生成プロンプト（マニュアルテキストをコンテキストに使用）</span>
+あなたは社内のルール・マニュアルに詳しいアシスタントです。
+以下の社内マニュアルをもとに、社員の質問に答えてください。
+
+<span class="ph">【社内マニュアル】</span>
+[該当するマニュアルのテキストを貼り付け]
+
+<span class="ph">【社員からの質問】</span>
+[質問内容を入力]
+
+<span class="cm"># 制約：
+# - マニュアルに記載のない内容は「マニュアルに記載がありません」と回答
+# - 推測で答えない
+# - 回答は3〜5行以内でわかりやすく
+# - 必要なら「○○ページを参照してください」と誘導する</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>マニュアルが古いと誤回答する（更新ルールが最重要）</li>
+              <li>Notion AIはマニュアルの外の情報には回答しない（仕様）</li>
+              <li>難しい判断が必要な質問はAIでなく人間へエスカレーション設計</li>
+              <li>Notion有料プランが必要（月1,650円〜）——費用対効果の説明を先に</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>繰り返し質問の件数：週10件→3件以下</li>
+              <li>新人の「質問しなければわからないこと」が半減</li>
+              <li>マニュアルDBにFAQ30問以上が整備されている</li>
+              <li>更新担当者が決まり月1回の棚卸しが実施されている</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================
+         カテゴリ② 売上・営業支援
+    ======================================== -->
+    <div class="section-header">
+      <div class="sh-num sh-cat2">②</div>
+      <div>
+        <div class="sh-title">売上・営業支援</div>
+        <div class="sh-sub">Phase 2〜3（3〜12ヶ月）。バックオフィスで削減した時間を売上に転換する段階。定量的なROIより「売上増」を目指す。</div>
+      </div>
+    </div>
+
+    <!-- Case 06 -->
+    <div class="case-card" id="c06">
+      <div class="case-header cat2">
+        <div class="case-num">06</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">売上・営業支援</div>
+          <div class="case-title">顧客企業リサーチの自動化 → 提案書生成</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Perplexity + Claude / Notion</span>
+            <span class="meta-chip time">工数 3〜5h（フロー設計〜定着）</span>
+            <span class="meta-chip roi">営業リサーチ：半日 → 30分</span>
+            <span class="meta-chip diff">難易度 ★★☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>商談前のリサーチ（企業情報・競合・課題）と提案書の下書きをAIで自動化。PerplexityでリアルタイムWeb情報を収集し、ClaudeでSMEに響く提案書にまとめる。営業リサーチが「半日かかっていた作業」から「30分+人間レビュー」に短縮。提案書の品質・一貫性も向上する。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat2-dot">1</div>
+            <div class="step-content">
+              <strong>提案書のテンプレート構造を決める</strong>
+              <span>現在の提案書の「必須要素」を5〜7項目に整理。例：①会社概要理解 ②課題の仮説 ③UNLIDの解決策 ④事例・実績 ⑤費用・スケジュール ⑥次のアクション。この構造がプロンプトのベースになる。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">2</div>
+            <div class="step-content">
+              <strong>Perplexityでのリサーチプロンプト設計</strong>
+              <span>「企業名＋業種」を入力すると①事業概要②最近のニュース③競合との比較④課題が予測される点 を取得するプロンプトを設計。Perplexityは出典URL付きで回答するため、信頼性確認が容易。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">3</div>
+            <div class="step-content">
+              <strong>Claudeでの提案書下書き生成フロー</strong>
+              <span>Perplexityで収集した情報をClaudeに渡し、提案書の文章を自動生成。「このSMEに刺さる価値提案のフレーム」「懸念されそうな反論への対処」も含めて出力させる。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">4</div>
+            <div class="step-content">
+              <strong>Notionのテンプレートページに組み込む</strong>
+              <span>Notionに「提案書作成テンプレート」ページを作成。①Perplexityプロンプト ②Claudeプロンプト ③完成後のスライド構成 を一つのページにまとめて、誰でも30分で提案書が作れる状態にする。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（提案書下書き生成）</div>
+          <pre class="prompt"><span class="cm"># 提案書下書き生成プロンプト</span>
+あなたは優秀な営業コンサルタントです。
+以下の情報をもとに、SMEへの提案書の下書きを作成してください。
+
+<span class="ph">【企業情報（Perplexityで収集したもの）】</span>
+[企業概要・最近のニュース・課題仮説を貼り付け]
+
+<span class="ph">【提案するサービス】</span>
+[自社サービス名と解決できる課題]
+
+<span class="ph">【提案書の構成（各セクションを200字以内で）】</span>
+1. 貴社の現状認識（課題の言語化）
+2. このまま放置した場合のリスク
+3. UNLIDが提供する解決策（具体的に）
+4. 類似課題での成果事例（仮想でOK）
+5. 費用・期間・次のステップ
+
+<span class="cm"># 制約：
+# - 相手が「うちのことをわかってる」と感じる表現にする
+# - 根拠なき数値は入れない（「●●%改善」等は事例ベースのみ）
+# - 最後に「一番刺さる提案の一言」を太字で締める</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>Perplexityの情報は最新でない場合がある→決算情報等は公式確認</li>
+              <li>AIが作った提案書を無修正で送らない（相手に伝わらない表現が残る）</li>
+              <li>機密情報（内部資料）はClaudeに入力しない</li>
+              <li>業種特有の言葉・慣習はプロンプトに追加学習させる</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>提案書作成時間：半日→1時間以内</li>
+              <li>商談前のリサーチメモが30分で完成している</li>
+              <li>提案書の採用率（商談→受注転換）が上がっている</li>
+              <li>営業担当が自力でテンプレを使えている</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 07 -->
+    <div class="case-card" id="c07">
+      <div class="case-header cat2">
+        <div class="case-num">07</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">売上・営業支援</div>
+          <div class="case-title">既存顧客データ分析 → アップセル機会の特定</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Python + Claude / Spreadsheet</span>
+            <span class="meta-chip time">工数 5〜8h（設計〜分析完成）</span>
+            <span class="meta-chip roi">既存顧客深耕による売上増 8〜15%</span>
+            <span class="meta-chip diff">難易度 ★★★</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>SMEの売上は既存顧客に70〜80%依存しているにもかかわらず、「どの顧客に何を提案すべきか」をデータで把握できていない。過去の受注データ・取引頻度・顧客属性をClaudeに読み込ませ「アップセル機会のある顧客TOP10」を自動特定する。データが存在すれば1日で分析完了。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat2-dot">1</div>
+            <div class="step-content">
+              <strong>顧客データの棚卸し・エクスポート</strong>
+              <span>会計ソフト・Excelから「顧客別売上」「購入頻度」「最終購入日」「購入商品カテゴリ」をCSVでエクスポート。存在するデータを全部出す（完璧でなくてOK）。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">2</div>
+            <div class="step-content">
+              <strong>RFM分析の設計（Recency・Frequency・Monetary）</strong>
+              <span>①最終購入日（Recency）②購入頻度（Frequency）③購入金額（Monetary）の3軸で顧客をスコアリング。ExcelまたはPythonで集計し、「高価値・要アクション顧客」を特定する。</span>
+              <span class="step-time">2〜3h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">3</div>
+            <div class="step-content">
+              <strong>ClaudeへのCSV読み込み → アップセル仮説生成</strong>
+              <span>RFM分析結果CSVをClaudeに貼り付け、「このデータから考えられるアップセル提案を顧客ごとに出せ」とプロンプト。購入パターンから次の提案を自動生成する。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">4</div>
+            <div class="step-content">
+              <strong>営業アクションリストの作成・優先度設定</strong>
+              <span>AI分析結果をもとに「今月コンタクトすべき顧客TOP10」とアクション内容（電話・DM・訪問）を決定。Notionのプロジェクトボードに落とし込む。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（顧客アップセル機会分析）</div>
+          <pre class="prompt"><span class="cm"># 顧客アップセル機会分析プロンプト</span>
+あなたは営業分析の専門家です。
+以下の顧客データを分析し、アップセル・クロスセルの機会を特定してください。
+
+<span class="ph">【顧客データ（CSVまたは表形式）】</span>
+[顧客名、最終購入日、購入頻度、累計金額、購入カテゴリを貼り付け]
+
+<span class="ph">【分析依頼】</span>
+1. 「最近購入がなく、以前は高頻度だった顧客」をリストアップ（掘り起こし対象）
+2. 「1カテゴリしか購入していない顧客」のクロスセル候補を提案
+3. 「購入金額が突然増えた顧客」の理由仮説と次のアクション
+4. 総合的に「今月アプローチすべき顧客TOP5」とその理由
+
+<span class="cm"># 出力：顧客名・アクション内容・理由 の3列テーブルで出力</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>データが少ない（10社以下）と分析精度が低い→まずデータ整備</li>
+              <li>AIの提案は「仮説」。必ず営業担当の感覚でフィルターをかける</li>
+              <li>個人情報を含むデータは社外サービスへの入力に注意（Claude APIを推奨）</li>
+              <li>分析は月1回の定例化が重要（単発で終わらせない）</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後2ヶ月）</h5>
+            <ul>
+              <li>「アプローチすべき顧客リスト」が毎月作成されている</li>
+              <li>掘り起こしアプローチから受注が1件以上発生</li>
+              <li>クロスセル提案の打率が従来比で向上</li>
+              <li>データ分析が属人化せず誰でも実行できる</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 08 -->
+    <div class="case-card" id="c08">
+      <div class="case-header cat2">
+        <div class="case-num">08</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">売上・営業支援</div>
+          <div class="case-title">CRM代替：顧客管理・案件進捗のAI設計</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Airtable / Notion + Claude</span>
+            <span class="meta-chip time">工数 6〜10h（設計〜運用開始）</span>
+            <span class="meta-chip roi">商談ロスト要因の可視化・属人営業解消</span>
+            <span class="meta-chip diff">難易度 ★★★</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>「顧客情報が担当者の頭の中にしかない」「どの商談がどの段階か誰も把握していない」問題を解消。SalesforceのようなCRMは高価すぎるSMEに対し、Notionまたは Airtableで月0〜3,000円で「SME版CRM」を構築。ClaudeとAPI連携することで自動レポート・フォローアップ提案が可能になる。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat2-dot">1</div>
+            <div class="step-content">
+              <strong>現状の顧客管理方法のヒアリング</strong>
+              <span>「今どこに顧客情報を管理していますか？」からスタート。Excel・名刺アプリ・担当者の記憶など散在している情報源を全て洗い出す。移行に必要なデータ量も確認する。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">2</div>
+            <div class="step-content">
+              <strong>Notionのデータベース設計（CRMの骨格）</strong>
+              <span>必須フィールド：①顧客名 ②業種 ③担当者 ④商談ステータス（見込み/提案中/交渉中/受注/失注） ⑤金額 ⑥最終接触日 ⑦次のアクション ⑧メモ。Notionのボードビューで「カンバン型」にすると進捗が一目でわかる。</span>
+              <span class="step-time">2〜3h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">3</div>
+            <div class="step-content">
+              <strong>既存顧客データの移行・初期登録</strong>
+              <span>ExcelデータをNotionにCSVインポート（NotionはCSV一括取り込み可能）。データが少ない場合は手入力でも30分で完了。最初は完璧でなくていい——「動かしながら整備」が原則。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">4</div>
+            <div class="step-content">
+              <strong>週次レポートの自動生成（Claude連携）</strong>
+              <span>月曜朝にNotionからデータをエクスポートし、Claudeに渡して「今週フォローアップが必要な案件TOP5」「失注しそうなリスク案件」「今月の受注見込み」を自動生成。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">5</div>
+            <div class="step-content">
+              <strong>入力ルール・更新文化の定着</strong>
+              <span>「商談後24時間以内にNotionを更新する」ルールを決める。最初の2週間は毎朝5分の「更新チェック」ミーティングを設定し、習慣化させる。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（週次営業レポート自動生成）</div>
+          <pre class="prompt"><span class="cm"># 週次営業レポート生成プロンプト</span>
+あなたは営業マネージャーのアシスタントです。
+以下の案件リストを分析し、週次営業レポートを作成してください。
+
+<span class="ph">【案件データ（NotionのエクスポートCSV）】</span>
+[顧客名・ステータス・金額・最終接触日・次のアクションを貼り付け]
+
+<span class="ph">【レポート要件】</span>
+1. 今週フォローアップが必要な案件（最終接触から14日以上経過）
+2. 今月受注見込み額の合計と内訳
+3. 「停滞している案件」（ステータスが2週間以上変化なし）
+4. 今週中に取るべきアクションTOP3
+
+<span class="cm"># 出力：箇条書き + 重要案件は表形式
+# 締めくくりに「今週の一言アドバイス」を追加</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>誰も更新しなくなるのが最大のリスク——入力コストを最小化する設計が必須</li>
+              <li>フィールドを増やしすぎると入力負担が増え使われなくなる</li>
+              <li>Notionは無料版でも十分だが、5名以上のチームは有料プラン推奨</li>
+              <li>Airtableは高機能だが学習コストが高い——Notionの方が導入しやすい</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>全商談のステータスがNotion上で把握できている</li>
+              <li>週次レポートが自動生成されている</li>
+              <li>「フォローアップ忘れ」による失注が減少</li>
+              <li>担当者交代時の引き継ぎが30分以内に完了できる</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
 </div><!-- /body -->
 
 <div class="footer">
   <span>UNLID AI実装ユースケース集 v1.0　｜　2026年3月</span>
-  <span>※ Step 1/3 — Cases 01〜04 掲載</span>
+  <span>※ Step 2/3 — Cases 05〜08 追記済み</span>
 </div>
 
 </div><!-- /page -->

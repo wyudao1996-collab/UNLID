@@ -636,6 +636,7 @@
       </div>
 
       <h3>問題② OJT崩壊——若手が「育てられない・試せない・証明できない」三重苦</h3>
+      <p style="margin-bottom:12px; color:#374151; font-size:0.9rem; line-height:1.7;"><strong>OJT崩壊は中小企業だけの問題ではない。</strong>大企業でも「計画的OJT実施率」は10年間で右肩下がりだ。ただし崩壊の原因は規模によって異なる——大企業は「業務過多・ハラスメント萎縮・育て損感覚」、中小企業は「そもそも教えられる先輩がいない・人手不足で教える余裕がない」。どちらも若手が<strong>実務実績を積む場所を失っている</strong>点は同じだ。</p>
       <div class="metric-grid">
         <div class="metric-card">
           <div class="m-label">計画的OJT実施率（大手企業）</div>
@@ -732,11 +733,10 @@
         </table>
       </div>
 
-      <h3>SIer × SESとの決定的な違い</h3>
-      <p>「FDEが現場に入り、ワーカーが実務を担う」という構造を聞くと「SIerがSESでエンジニアを派遣するのと何が違うのか」という疑問が生まれる。これは本質的な問いだ。</p>
+      <h3>SIer × SESとの構造的な違い</h3>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>比較軸</th><th>SIer × SES</th><th>UNLID</th></tr></thead>
+          <thead><tr><th>比較軸</th><th>SIer × SES（旧来型）</th><th>UNLID</th></tr></thead>
           <tbody>
             <tr><td><strong>指揮命令</strong></td><td>客先が直接技術者に指示（実態は客先の社員と同様）</td><td>UNLIDのFDE正社員のみ。クライアント→ワーカーへの直接指示を契約上禁止</td></tr>
             <tr><td><strong>成果責任</strong></td><td>「人月」単位の売り切り。成果が出なくても報酬発生</td><td>FDEがKPI付きの成果責任を負う。達成できなければ更新しない契約設計</td></tr>
@@ -748,7 +748,7 @@
       </div>
 
       <h3>FDEの採用基準と現場での役割</h3>
-      <p>FDEは「安いSE」ではなく、<strong>AI実装を成果責任付きで推進するプロデューサー兼ストラテジスト</strong>だ。</p>
+      <p>FDEの役割は<strong>AI実装を成果責任付きで推進するプロデューサー兼ストラテジスト</strong>だ。技術力より「SMEの現場で成果を出す力」を優先する。</p>
       <div class="table-wrap">
         <table>
           <thead><tr><th>必須要件（全員）</th><th>判定方法</th></tr></thead>
@@ -776,17 +776,99 @@ Phase 3（6ヶ月〜）：売上側の改善に踏み込む
   → 営業データの可視化・顧客管理（CRM代替）のAI設計
   → 「コスト削減係」ではなく「経営改善の実行パートナー」として機能</div>
 
-      <h3>完遂ログの設計——「嘘のつけない」仕組み</h3>
+      <h3>UNLIDが具体的に何をやるのか——SME向けAI実装ユースケース集</h3>
+      <p class="lead"><strong>「なんでもAI化します」では依頼できない。UNLIDが実際に手掛ける業務は3カテゴリに整理される。Phase 1で即効性の高い「バックオフィス効率化」から着手し、削減した時間を売上に転換するPhase 2・3へ展開する。</strong></p>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>層</th><th>評価者</th><th>評価内容</th><th>客観性の担保</th></tr></thead>
+          <thead><tr><th style="width:20%">カテゴリ</th><th style="width:35%">具体的なタスク例</th><th style="width:25%">使用ツール</th><th style="width:20%">期待効果</th></tr></thead>
           <tbody>
-            <tr><td><strong>層① 本人記述</strong></td><td>ワーカー本人</td><td>詰まったポイント・突破法・次回改善点</td><td>後から照合可能な具体的事実の記述を必須化</td></tr>
-            <tr><td><strong>層② FDE評価</strong></td><td>担当FDE正社員</td><td>4軸スコア（情報網羅性・相手への配慮・目的への執着・継続責任感）+ コメント</td><td>評価基準のドキュメント化。スコア大幅乖離時に要因確認</td></tr>
-            <tr><td><strong>層③ クライアント確認</strong></td><td>クライアント企業担当者</td><td>成果物の実用性・ビジネスインパクトのYes/No評価（任意）</td><td>「クライアントが実際に使ったか」という第三者事実確認</td></tr>
+            <tr style="background:#f0fdf4">
+              <td rowspan="5"><strong>① バックオフィス効率化</strong><br><span style="font-size:0.78rem; color:#166534;">Phase 1（即効性）</span></td>
+              <td>経費精算・請求書処理の自動化（OCR+AI）</td><td>Claude / Gemini + Google Drive</td><td>処理工数60〜80%削減</td>
+            </tr>
+            <tr style="background:#f0fdf4">
+              <td>議事録の自動生成・要点抽出・共有</td><td>Whisper + Claude / Gemini</td><td>会議後作業90%削減</td>
+            </tr>
+            <tr style="background:#f0fdf4">
+              <td>メール返信の下書き自動生成・テンプレ化</td><td>Claude API / Gmail連携</td><td>1日30〜60分の返信コスト削減</td>
+            </tr>
+            <tr style="background:#f0fdf4">
+              <td>契約書・法務書類の初期AIレビュー</td><td>Claude / GPT-4o</td><td>弁護士確認前の精査コスト70%削減</td>
+            </tr>
+            <tr style="background:#f0fdf4">
+              <td>社内FAQ・マニュアルのAIチャットボット化</td><td>Notion AI / Claude API</td><td>社内質問対応工数40〜60%削減</td>
+            </tr>
+            <tr style="background:#eff6ff">
+              <td rowspan="4"><strong>② 売上・営業支援</strong><br><span style="font-size:0.78rem; color:#1e3a8a;">Phase 2〜3（売上転換）</span></td>
+              <td>既存顧客データ分析 → 追加提案機会の特定</td><td>Python + Claude / BigQuery</td><td>既存顧客アップセル率向上</td>
+            </tr>
+            <tr style="background:#eff6ff">
+              <td>提案書・見積書の自動生成テンプレ構築</td><td>Claude + Notion / Slides</td><td>提案書作成時間70%削減</td>
+            </tr>
+            <tr style="background:#eff6ff">
+              <td>CRM代替：顧客管理・案件進捗のAI設計</td><td>Airtable / Notion + Claude</td><td>商談ロスト率15〜25%改善</td>
+            </tr>
+            <tr style="background:#eff6ff">
+              <td>競合・市場動向のAIリサーチ自動化</td><td>Claude API + Web検索連携</td><td>月次調査コスト80%削減</td>
+            </tr>
+            <tr style="background:#faf5ff">
+              <td rowspan="3"><strong>③ システム統合・業務フロー改善</strong><br><span style="font-size:0.78rem; color:#6b21a8;">Phase 2〜3（構造改善）</span></td>
+              <td>バラバラなSaaSとExcelシートのAPI連携・一元化</td><td>Zapier / Make + Claude</td><td>手動転記ゼロ化・エラー率激減</td>
+            </tr>
+            <tr style="background:#faf5ff">
+              <td>KPIダッシュボード構築（売上・在庫・顧客）</td><td>Looker Studio / Notion + API</td><td>経営判断スピード向上</td>
+            </tr>
+            <tr style="background:#faf5ff">
+              <td>Claude Codeによる内部ツール・スクリプト開発</td><td>Claude Code / Python</td><td>外注費用の内製化（月10〜30万節約）</td>
+            </tr>
           </tbody>
         </table>
       </div>
+      <div class="highlight-box">
+        <strong>0.2人月（約20時間）でできること：</strong>Phase 1の着手として、業務フロー現状分析（2〜4時間）→ 最高インパクトの業務特定（2時間）→ PoC実装＋効果測定（10〜14時間）→ オーナーへROI報告（2時間）が現実的。
+        初月は「1つの業務を劇的に変える」ことに集中し、<strong>可視化した成果がそのまま継続契約の根拠</strong>になる。
+      </div>
+
+      <h3>完遂ログの設計——「嘘のつけない」3層評価</h3>
+      <p class="lead"><strong>自己申告だけのログは意味がない。UNLIDは「本人 ＋ 第三者FDE ＋ クライアント」の3者確認構造で、偽装・誇張を構造的に排除する。</strong></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>層</th><th>評価者</th><th>評価内容</th><th>客観性の担保メカニズム</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>層① 本人記述</strong></td>
+              <td>ワーカー本人</td>
+              <td>詰まったポイント・突破法・次回改善点（具体的な事実記述必須）</td>
+              <td>後からFDEが成果物と照合して整合性を確認。抽象的な記述は差し戻し</td>
+            </tr>
+            <tr>
+              <td><strong>層② FDE評価</strong></td>
+              <td>担当FDE正社員</td>
+              <td>4軸スコア（情報網羅性・相手への配慮・目的への執着・継続責任感）1〜5点＋行動根拠コメント</td>
+              <td>各スコアに「1点・3点・5点」の行動定義アンカーを設定し恣意性を排除。同一FDEが複数案件で一貫したスコア付けをしているかを月次で確認</td>
+            </tr>
+            <tr>
+              <td><strong>層③ クライアント確認</strong></td>
+              <td>クライアント企業担当者</td>
+              <td>「成果物を実際に使いましたか？」「ビジネスへの貢献はありましたか？」Yes/No（任意）</td>
+              <td>クライアントが確認した事実は偽装不可能。この記録がワーカーの採用材料として最も信頼される</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="flow-box">【客観性をさらに高める追加設計】
+
+① スコアのパーセンタイル表示
+  → 全ワーカー内での相対位置を表示（例：「情報網羅性：上位15%」）
+  → 絶対値より信頼性が高く、採用企業にとってわかりやすい比較指標になる
+
+② Claudeによる記述一貫性チェック（自動）
+  → 「本人記述の事実」と「FDE評価の根拠コメント」を AI が突合
+  → 矛盾・誇張・抽象表現を自動フラグ → FDEによる再確認を促す
+
+③ 継続参加による信頼度蓄積
+  → 同一クライアントからの2回目以降の確認は「継続採用事実」として重み付け
+  → 1回で終わった案件より、3回継続した案件のログの方が採用市場での評価が高い</div>
     </div>
 
     <!-- ===== Section 5: Business & Revenue Model ===== -->
@@ -1028,6 +1110,44 @@ Step 4：正社員FDEへの内部登用
 ③ 企業向けSaaS（自社若手管理）
    「自社若手社員の完遂ログを社内で管理したい」
    → 月5,000〜1万円/ユーザー（人事部門の研修効果可視化ニーズ）</div>
+
+      <h3>FDEツールエコシステム戦略——Palantir・LayerXの代理店ポジション</h3>
+      <p class="lead"><strong>UNLIDのFDEは「AI実装の汎用人材」だが、ツールパートナーと組むことで単価・信頼性・参入障壁を同時に引き上げる。Palantirのような「ハイエンドAI×現場実装」のビジネスモデルを、SMEが手の届く価格帯で届けるのがUNLIDの立ち位置だ。</strong></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>パートナー</th><th>ポジション</th><th>UNLIDとの連携</th><th>FDEへの恩恵</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Claude / Anthropic</strong><br>（現状メインツール）</td>
+              <td>汎用AI・高品質テキスト生成</td>
+              <td>バックオフィス自動化・法務レビュー・営業文書生成・Claude Codeによる内部ツール開発</td>
+              <td>最もコスパ高い実装ツール。FDEのデフォルト武器</td>
+            </tr>
+            <tr>
+              <td><strong>Google Gemini / Workspace</strong></td>
+              <td>データ分析・Google連携</td>
+              <td>Sheets/Drive/Gmail連携による業務フロー自動化。大容量ファイル処理・マルチモーダル分析</td>
+              <td>SMEのGoogle環境（高普及率）に直接刺さる</td>
+            </tr>
+            <tr style="background:#fef9e7">
+              <td><strong>LayerX（将来）</strong><br>バクラク等SaaS</td>
+              <td>経費・請求書・契約書管理SaaS</td>
+              <td>LayerX製品の導入・定着支援をFDEが担うことで、UNLIDがLayerXの実装パートナーに</td>
+              <td>「LayerX認定パートナー」ブランドで差別化。紹介フィー収入も可能</td>
+            </tr>
+            <tr style="background:#f0fdf4">
+              <td><strong>Palantir型ポジション（志向）</strong></td>
+              <td>現場密着型AIコンサル</td>
+              <td>Palantirが大企業・政府機関に行うことを、SME向けに価格1/10〜1/20で提供する「SME版FDE」</td>
+              <td>FDEは「Palantirのような問い方」を学ぶ。実装だけでなく「意思決定の構造化」も担う</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="highlight-box">
+        <strong>戦略的方向性：</strong>Phase 2以降、FDEが使えるツールを「Claude/Geminiだけ」に留めない。特定SaaSの<strong>認定実装パートナー</strong>になることで、SaaSベンダー側からの案件紹介・収益シェアも獲得できる。<br>
+        「誰のツールを使うかより、<strong>どの現場でどんな成果を出すかで選ばれる</strong>」——これがUNLIDのFDEブランド設計だ。
+      </div>
     </div>
 
     <!-- ===== Section 8: Target Market ===== -->

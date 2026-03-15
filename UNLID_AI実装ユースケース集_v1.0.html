@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNLID AI実装ユースケース集 v1.0 — 導入手順モックアップ</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #1a1a1a;
+      background: #f0f2f5;
+    }
+    .page {
+      max-width: 1000px;
+      margin: 36px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+    /* ===== Cover ===== */
+    .cover {
+      background: linear-gradient(135deg, #0d1f3c 0%, #1a3560 55%, #1e4d8c 100%);
+      color: #fff;
+      padding: 52px 60px 44px;
+    }
+    .cover .label { font-size:11px; letter-spacing:4px; text-transform:uppercase; color:#7ab0e0; margin-bottom:16px; }
+    .cover h1 { font-size:28px; font-weight:700; line-height:1.3; margin-bottom:8px; }
+    .cover .subtitle { font-size:14px; color:#a0c4e8; margin-bottom:18px; }
+    .cover .badges { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px; }
+    .cover .badge {
+      display:inline-block; background:rgba(255,255,255,0.15);
+      border:1px solid rgba(255,255,255,0.25); border-radius:20px;
+      padding:3px 12px; font-size:11px; color:#c0d8f0;
+    }
+    .cover-meta { display:flex; gap:40px; font-size:12px; color:#7ab0e0; border-top:1px solid rgba(255,255,255,0.15); padding-top:16px; }
+    /* ===== Body ===== */
+    .body { padding: 0 48px 60px; }
+    /* ===== TOC ===== */
+    .toc { background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:24px 28px; margin:32px 0; }
+    .toc-title { font-size:13px; font-weight:700; color:#1e293b; letter-spacing:2px; margin-bottom:14px; }
+    .toc-cats { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+    .toc-cat h4 { font-size:11px; font-weight:700; color:#64748b; letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid #e2e8f0; }
+    .toc-cat ol { padding-left:16px; }
+    .toc-cat li { margin-bottom:4px; font-size:12px; }
+    .toc-cat a { color:#2563eb; text-decoration:none; }
+    .toc-cat a:hover { text-decoration:underline; }
+    /* ===== Case Card ===== */
+    .case-card {
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      margin: 32px 0;
+      overflow: hidden;
+    }
+    .case-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px 22px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .case-header.cat1 { background: #f0fdf4; border-bottom-color: #bbf7d0; }
+    .case-header.cat2 { background: #eff6ff; border-bottom-color: #bfdbfe; }
+    .case-header.cat3 { background: #faf5ff; border-bottom-color: #e9d5ff; }
+    .case-num {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 16px; color: #fff;
+    }
+    .cat1 .case-num { background: #16a34a; }
+    .cat2 .case-num { background: #2563eb; }
+    .cat3 .case-num { background: #7c3aed; }
+    .case-title-block { flex: 1; }
+    .case-cat-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 3px; }
+    .cat1 .case-cat-label { color: #15803d; }
+    .cat2 .case-cat-label { color: #1d4ed8; }
+    .cat3 .case-cat-label { color: #6d28d9; }
+    .case-title { font-size: 17px; font-weight: 700; color: #0f172a; line-height: 1.3; }
+    .case-meta {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;
+    }
+    .meta-chip {
+      font-size: 11px; padding: 2px 10px; border-radius: 12px; border: 1px solid;
+    }
+    .meta-chip.tool  { background: #f1f5f9; border-color: #94a3b8; color: #475569; }
+    .meta-chip.time  { background: #fef9c3; border-color: #ca8a04; color: #854d0e; }
+    .meta-chip.roi   { background: #dcfce7; border-color: #16a34a; color: #14532d; }
+    .meta-chip.diff  { background: #fee2e2; border-color: #ef4444; color: #7f1d1d; }
+    .case-body { padding: 20px 22px; }
+    /* ===== Overview ===== */
+    .overview-box {
+      background: #f8fafc; border-left: 4px solid #3b82f6;
+      border-radius: 0 6px 6px 0; padding: 12px 16px; margin-bottom: 18px;
+      font-size: 0.9rem; color: #334155;
+    }
+    /* ===== Steps ===== */
+    .steps-title { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 10px; letter-spacing: 1px; }
+    .step-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .step-item { display: flex; gap: 12px; align-items: flex-start; }
+    .step-dot {
+      flex-shrink: 0; width: 24px; height: 24px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: #fff; margin-top: 2px;
+    }
+    .cat1-dot { background: #16a34a; }
+    .cat2-dot { background: #2563eb; }
+    .cat3-dot { background: #7c3aed; }
+    .step-content { flex: 1; }
+    .step-content strong { display: block; font-size: 13px; color: #0f172a; margin-bottom: 2px; }
+    .step-content span { font-size: 12px; color: #475569; line-height: 1.6; }
+    .step-time { font-size: 11px; color: #6b7280; background: #f1f5f9; border-radius: 4px; padding: 1px 7px; display: inline-block; margin-top: 2px; }
+    /* ===== Prompt ===== */
+    .prompt-block { margin-bottom: 18px; }
+    .prompt-label { font-size: 12px; font-weight: 700; color: #7c3aed; margin-bottom: 6px; }
+    pre.prompt {
+      background: #1e293b; color: #e2e8f0;
+      border-radius: 8px; padding: 14px 16px;
+      font-size: 12px; line-height: 1.7;
+      white-space: pre-wrap; word-break: break-all;
+      overflow-x: auto;
+    }
+    pre.prompt .ph { color: #fbbf24; }  /* placeholder highlight */
+    pre.prompt .cm { color: #64748b; }  /* comment */
+    /* ===== Notes + Success ===== */
+    .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
+    .note-box { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 6px; padding: 12px 14px; }
+    .note-box h5 { font-size: 12px; color: #c2410c; margin-bottom: 6px; }
+    .note-box ul { padding-left: 14px; font-size: 12px; color: #431407; line-height: 1.8; }
+    .ok-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 12px 14px; }
+    .ok-box h5 { font-size: 12px; color: #15803d; margin-bottom: 6px; }
+    .ok-box ul { padding-left: 14px; font-size: 12px; color: #14532d; line-height: 1.8; }
+    /* ===== Section header ===== */
+    .section-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 24px 0 8px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 4px;
+    }
+    .sh-num {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 15px; color: #fff;
+    }
+    .sh-cat1 { background: #16a34a; }
+    .sh-cat2 { background: #2563eb; }
+    .sh-cat3 { background: #7c3aed; }
+    .sh-title { font-size: 17px; font-weight: 700; color: #0f172a; }
+    .sh-sub { font-size: 12px; color: #64748b; }
+    /* ===== Footer ===== */
+    .footer { background:#0d1f3c; color:#7ab0e0; text-align:center; padding:18px; font-size:12px; display:flex; justify-content:space-between; }
+    /* ===== Disclaimer ===== */
+    .disclaimer {
+      background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px;
+      padding: 14px 18px; margin: 24px 0 0; font-size: 12px; color: #92400e;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ===== Cover ===== -->
+  <div class="cover">
+    <div class="label">UNLID Internal Document</div>
+    <h1>AI実装ユースケース集<br>導入手順モックアップ</h1>
+    <p class="subtitle">SME向け AI実装 12ケース — バックオフィス・営業・システム統合の実践手順書</p>
+    <div class="badges">
+      <span class="badge">バックオフィス効率化 × 5</span>
+      <span class="badge">売上・営業支援 × 4</span>
+      <span class="badge">システム統合 × 3</span>
+      <span class="badge">プロンプトテンプレート付き</span>
+    </div>
+    <div class="cover-meta">
+      <span>UNLID 事業戦略チーム</span>
+      <span>2026年3月</span>
+      <span>v1.0</span>
+      <span>Confidential — 社内参照用</span>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="disclaimer">
+      ⚠️ <strong>本資料について：</strong>掲載のケースは業界事例・公開情報をもとに作成した「導入シナリオモックアップ」です。UNLIDは現在スタートアップのため自社実績はまだなく、効果・数値は目標・参考値として記載しています。クライアントへの提案前に各事例の根拠・出典を必ず確認してください。
+    </div>
+
+    <!-- ===== TOC ===== -->
+    <div class="toc">
+      <div class="toc-title">目次</div>
+      <div class="toc-cats">
+        <div class="toc-cat">
+          <h4>① バックオフィス効率化</h4>
+          <ol>
+            <li><a href="#c01">議事録の自動生成・共有</a></li>
+            <li><a href="#c02">メール返信・提案書の下書き</a></li>
+            <li><a href="#c03">経費精算・請求書OCR</a></li>
+            <li><a href="#c04">契約書・法務AIレビュー</a></li>
+            <li><a href="#c05">社内FAQチャットボット</a></li>
+          </ol>
+        </div>
+        <div class="toc-cat">
+          <h4>② 売上・営業支援</h4>
+          <ol start="6">
+            <li><a href="#c06">顧客リサーチ→提案書自動生成</a></li>
+            <li><a href="#c07">既存顧客データ分析→アップセル</a></li>
+            <li><a href="#c08">CRM代替：顧客管理AI設計</a></li>
+            <li><a href="#c09">競合・市場動向リサーチ自動化</a></li>
+          </ol>
+        </div>
+        <div class="toc-cat">
+          <h4>③ システム統合・業務フロー</h4>
+          <ol start="10">
+            <li><a href="#c10">SaaS×Excel API連携・一元化</a></li>
+            <li><a href="#c11">KPIダッシュボード構築</a></li>
+            <li><a href="#c12">内部ツール・スクリプト開発</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================
+         カテゴリ① バックオフィス効率化
+    ======================================== -->
+    <div class="section-header">
+      <div class="sh-num sh-cat1">①</div>
+      <div>
+        <div class="sh-title">バックオフィス効率化</div>
+        <div class="sh-sub">Phase 1（導入初月）で即効性を出す最優先カテゴリ。定型業務の削減時間を数値化してROIを証明する。</div>
+      </div>
+    </div>
+
+    <!-- Case 01 -->
+    <div class="case-card" id="c01">
+      <div class="case-header cat1">
+        <div class="case-num">01</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">バックオフィス効率化</div>
+          <div class="case-title">議事録の自動生成・要点抽出・共有</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Notta / Whisper + Claude</span>
+            <span class="meta-chip time">工数 3〜5h（導入〜定着）</span>
+            <span class="meta-chip roi">作業時間 40%削減</span>
+            <span class="meta-chip diff">難易度 ★☆☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>週1〜2回の会議を録音→文字起こし→AI要約→Slackへ自動投稿するフローを構築。60分の会議後作業が6分に短縮（青森県自治体・不動産会社等での導入事例をベースに設計）。経営会議・週次MTG・クライアント商談など幅広く適用可能。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat1-dot">1</div>
+            <div class="step-content">
+              <strong>録音ツールの選定・試験（Notta / otter.ai / Whisper）</strong>
+              <span>Nottaは日本語精度が高く月1,800円〜。無料版で3会議を試し精度を確認する。Whisperはオープンソース版（ローカル実行可）で機密性が高い場合に利用。<br>判断軸：①日本語精度 ②機密情報の取り扱い ③Slack/Notion連携有無</span>
+              <span class="step-time">0.5〜1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">2</div>
+            <div class="step-content">
+              <strong>参加者への録音告知・同意取得</strong>
+              <span>社内会議は口頭告知でOK。クライアント商談は事前書面または冒頭告知が必須（個人情報保護法への配慮）。「議事録作成のため録音します」の一言で足りる。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">3</div>
+            <div class="step-content">
+              <strong>要約プロンプトの設計・テスト（Claudeで実施）</strong>
+              <span>文字起こしテキストをClaudeに貼り付け、下記プロンプトで①決定事項②アクションアイテム③懸案事項を抽出。3〜5回の試行で精度を確認し、プロンプトを微調整する。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">4</div>
+            <div class="step-content">
+              <strong>Slackへの自動投稿設定（Zapier / Notta連携）</strong>
+              <span>NottaのSlack連携（有料プラン）またはZapierで「会議終了→要約テキスト生成→Slackポスト」を自動化。初期設定30分。手動でも良い（議事録をコピペしてSlack投稿）。</span>
+              <span class="step-time">0.5〜1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">5</div>
+            <div class="step-content">
+              <strong>テンプレートの固定化・マニュアル化</strong>
+              <span>使用するプロンプトをNotionに保管し「誰でも使えるテンプレート」として共有。担当者が自走できる状態にする。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（Claudeに貼り付けて使用）</div>
+          <pre class="prompt"><span class="cm"># 議事録要約プロンプト</span>
+あなたは会議の内容を整理する専門家です。
+以下の会議録を読んで、指定のフォーマットで要約してください。
+
+<span class="ph">【会議録】</span>
+[ここに文字起こしテキストを貼り付ける]
+
+<span class="ph">【出力フォーマット】</span>
+## ✅ 決定事項（箇条書き・3点以内）
+## 📋 アクションアイテム（担当者｜期限｜タスク の表形式）
+## ⚠️ 懸案事項・要確認事項（あれば）
+## 📅 次回アジェンダ候補（あれば）
+
+<span class="cm"># 制約：推測や解釈は書かず、発言内容に忠実に要約すること</span>
+<span class="cm"># 担当者名が不明な場合は「未定」と記載</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>録音ファイルは機密扱い（クラウド保存先の確認必須）</li>
+              <li>Notta無料版は録音時間に月60分制限あり</li>
+              <li>専門用語・社名は誤認識されやすい→辞書登録が必要</li>
+              <li>「決定」と「検討中」の混同に注意。プロンプトで明示する</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>議事録作成時間：60分→10分以下</li>
+              <li>要約精度：参加者が「OK」と言える正確さ</li>
+              <li>Slack投稿：会議終了から1時間以内に共有</li>
+              <li>担当者が自力でツールを使える</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 02 -->
+    <div class="case-card" id="c02">
+      <div class="case-header cat1">
+        <div class="case-num">02</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">バックオフィス効率化</div>
+          <div class="case-title">メール返信・提案書の下書き自動生成</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Claude / ChatGPT</span>
+            <span class="meta-chip time">工数 2〜4h（導入〜定着）</span>
+            <span class="meta-chip roi">文書作成 60〜70%時短</span>
+            <span class="meta-chip diff">難易度 ★☆☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>定型メール・営業提案書・お礼状・クレーム対応文など、毎日発生する文書作成を半自動化。「状況説明→下書き生成→人間がレビュー・送信」の流れを定着させる。不動産会社での導入事例では文書作成時間が70%削減。即日導入可能。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat1-dot">1</div>
+            <div class="step-content">
+              <strong>「よく書くメール」の棚卸し（ヒアリング）</strong>
+              <span>FDEがオーナー・担当者にヒアリング。「週に何通、どんなメールを書きますか？」月次で繰り返す定型文を10〜15種類リストアップ。優先度：量×時間コストの大きいものから着手。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">2</div>
+            <div class="step-content">
+              <strong>トーン・文体の設定（ペルソナ設計）</strong>
+              <span>その会社らしい文体をプロンプトに定義。「丁寧だが堅苦しくない」「短く簡潔に」など実際の過去メールをClaudeに読ませて文体を学習させる。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">3</div>
+            <div class="step-content">
+              <strong>メール種別ごとのプロンプトテンプレート作成</strong>
+              <span>「お礼メール」「問い合わせ対応」「見積もり提出」「クレーム対応」各タイプ別に変数（相手名・用件・金額等）を含むテンプレートを作成。Notionに一覧化。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">4</div>
+            <div class="step-content">
+              <strong>実際のメールで10通テスト→品質確認</strong>
+              <span>担当者に実際のメールシチュエーションで試してもらい、修正点を記録。「これはそのまま使える」「ここは毎回直す」を把握してプロンプトを改善。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（メール下書き用）</div>
+          <pre class="prompt"><span class="cm"># 営業メール下書きプロンプト</span>
+あなたは私の代わりにビジネスメールを書く優秀なアシスタントです。
+以下の情報をもとに、メールの下書きを作成してください。
+
+<span class="ph">【メールの目的】</span>：[例：先日の商談のお礼と次回アポ打診]
+<span class="ph">【相手】</span>：[例：株式会社○○ 営業部 田中様]
+<span class="ph">【伝えたい内容】</span>：[例：先日ご提示いただいた要件を踏まえ、来週月〜水に打ち合わせをお願いしたい]
+<span class="ph">【トーン】</span>：丁寧・簡潔・親しみやすい（堅すぎない）
+
+<span class="cm"># 制約：
+# - 200〜300字程度
+# - 過剰な敬語は不要（「ご査収ください」等は使わない）
+# - 件名も一緒に提案すること</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>AIの文章は必ず人間がレビュー・送信（無承認送信は絶対NG）</li>
+              <li>固有名詞の間違いが出やすい（社名・担当者名を毎回確認）</li>
+              <li>クレーム対応は感情的配慮が必要→AIは下書きまで</li>
+              <li>社外秘情報をプロンプトに入れない（機密管理）</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>1通あたり作成時間：15分→4分以下</li>
+              <li>AI下書きをそのまま使える割合：60%以上</li>
+              <li>プロンプト集がNotionに10種類以上整備済み</li>
+              <li>担当者が自分でプロンプトを改変できる</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 03 -->
+    <div class="case-card" id="c03">
+      <div class="case-header cat1">
+        <div class="case-num">03</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">バックオフィス効率化</div>
+          <div class="case-title">経費精算・請求書OCR処理の自動化</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">AI-OCR（マネーフォワード）+ Claude</span>
+            <span class="meta-chip time">工数 4〜6h（設定〜運用開始）</span>
+            <span class="meta-chip roi">月20〜30h → 3〜5h（入力ミスほぼゼロ）</span>
+            <span class="meta-chip diff">難易度 ★★☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>領収書・請求書の手入力を AI-OCR で自動読み取りし、仕訳・承認フローまでを半自動化。マネーフォワードのスマート経費機能（月1,000円〜）が最も導入しやすい。月末の経理作業を月20〜30時間から3〜5時間へ削減。電子帳簿保存法の対応も同時に達成できる。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat1-dot">1</div>
+            <div class="step-content">
+              <strong>現行の経費処理フロー確認（ヒアリング）</strong>
+              <span>現状の「領収書をどう集めてどう入力しているか」を把握。Excelで集計している場合は列構造を確認し、移行の設計をする。月に何枚の領収書・請求書があるか数える。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">2</div>
+            <div class="step-content">
+              <strong>マネーフォワードのスマート経費を試験導入</strong>
+              <span>30日無料トライアル開始。スマホアプリで領収書を撮影→OCR読み取り→自動仕訳提案の流れをテスト。最初の10枚で精度を確認。勘定科目の自動分類精度は約85〜90%。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">3</div>
+            <div class="step-content">
+              <strong>仕訳ルールの設定・よく使う科目の登録</strong>
+              <span>「交通費は旅費交通費」「○○社への支払いは仕入高」等、会社固有のルールをMFに学習させる。設定後は繰り返し請求書を自動分類するようになる。税理士に確認を推奨。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">4</div>
+            <div class="step-content">
+              <strong>Claude との連携：異常値・不備チェックの自動化</strong>
+              <span>月次でMFからCSVエクスポート→Claudeに読み込ませて「金額が異常に高い項目」「未承認のまま残っている項目」「科目が怪しい項目」を自動チェック。下記プロンプトを使用。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">5</div>
+            <div class="step-content">
+              <strong>承認フローのルール化（Slack通知設定）</strong>
+              <span>MFのSlack連携で「申請が来たらSlackで承認者に通知」を設定。承認をSlack上で完結させ、月末の確認作業をなくす。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（経費CSV異常値チェック）</div>
+          <pre class="prompt"><span class="cm"># 経費データ異常値チェックプロンプト</span>
+以下は今月の経費データCSVです。会計担当者として以下をチェックしてください。
+
+<span class="ph">[CSVデータをここに貼り付け]</span>
+
+以下の観点で問題がある行をピックアップしてください：
+
+1. 【高額アラート】1件3万円以上の支出（接待・備品など）
+2. 【科目疑義】勘定科目と内容が不一致に見えるもの
+3. 【承認なし】承認者欄が空白のもの
+4. 【重複疑い】同日・同金額・同店舗の重複申請
+
+<span class="cm"># 出力：問題行の一覧表（行番号・金額・問題内容の3列）</span>
+<span class="cm"># 問題なければ「問題なし」と出力</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>手書き領収書はOCR精度が低い→手書きは別途入力</li>
+              <li>電帳法：スキャン解像度200dpi以上が必要</li>
+              <li>税理士との連携確認が必須（科目設定・会計ソフトの互換性）</li>
+              <li>MF無料版は機能制限あり→月1,000円の有料プランが実用的</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>月末経理作業時間が半分以下に削減</li>
+              <li>OCR読み取り後の手修正が20%以下</li>
+              <li>月次の科目分類ミス：導入前比50%以上減少</li>
+              <li>承認フローがSlack上で完結している</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 04 -->
+    <div class="case-card" id="c04">
+      <div class="case-header cat1">
+        <div class="case-num">04</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">バックオフィス効率化</div>
+          <div class="case-title">契約書・法務書類の初期AIレビュー</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Claude（長文処理に強み）</span>
+            <span class="meta-chip time">工数 3〜5h（フロー設計〜定着）</span>
+            <span class="meta-chip roi">弁護士確認前コスト 70%削減</span>
+            <span class="meta-chip diff">難易度 ★★☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>毎月発生する業務委託契約書・NDA・賃貸借契約などをClaudeに読ませ、「見落としやすいリスク条項」「不利な条件」「確認すべき箇所」を自動抽出。弁護士への相談前の下調べコストを削減。Claudeは長文処理が特に優れており、30ページの契約書も一括処理可能。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat1-dot">1</div>
+            <div class="step-content">
+              <strong>よく締結する契約書の種類をリストアップ</strong>
+              <span>NDA・業務委託・サービス利用規約・賃貸借・雇用契約など。各タイプ別に「特にチェックしたい条項」を整理する（例：NDA→情報範囲・期間・罰則規定）。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">2</div>
+            <div class="step-content">
+              <strong>契約書タイプ別チェックリストの設計</strong>
+              <span>各種別で「AIに何をチェックさせるか」のリストを作る。例：業務委託契約なら①瑕疵担保責任②知的財産の帰属③報酬の支払い条件④解除条件⑤競業避止義務。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">3</div>
+            <div class="step-content">
+              <strong>Claudeでの試験レビュー（実際の契約書で3件テスト）</strong>
+              <span>過去に締結した契約書（機密でない部分）でテスト。Claudeの出力と「実際に気になっていた条項」を比較して、プロンプトの精度を調整する。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">4</div>
+            <div class="step-content">
+              <strong>「AI初期チェック→人間確認→弁護士相談」フローの確立</strong>
+              <span>AIのチェック結果を「問題なし・要確認・要弁護士相談」の3段階で分類するルールを決める。「要弁護士相談」以外はAI判断で処理できる体制を構築。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（業務委託契約書レビュー）</div>
+          <pre class="prompt"><span class="cm"># 契約書リスクチェックプロンプト</span>
+あなたは法務の知識を持つビジネスアドバイザーです。
+以下の業務委託契約書を読み、依頼者（受託側）の立場から
+リスクのある条項を指摘してください。
+
+<span class="ph">【契約書本文】</span>
+[ここに契約書テキストを貼り付け]
+
+<span class="ph">【チェック項目】</span>
+1. 知的財産権の帰属（受託者に不利な条件はあるか）
+2. 瑕疵担保・損害賠償の範囲（過大な責任負担はないか）
+3. 報酬の支払い条件と遅延時の対応
+4. 解除条件（一方的に不利な解除条項はないか）
+5. 競業避止・秘密保持の範囲（過度に広くないか）
+
+<span class="cm"># 出力フォーマット：
+# 各項目を「問題なし / 要確認 / 要弁護士相談」で評価
+# 「要確認」以上は該当条文を引用して問題点を説明
+# 最後に総合リスク評価（低・中・高）を出力</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li><strong>AIは法律の専門家ではない</strong>。最終判断は必ず人間・弁護士が行う</li>
+              <li>機密性の高い契約書はClaude.aiではなくAPIで処理（データ学習に使われない設定）</li>
+              <li>法改正への追随が必要（フリーランス保護新法・電帳法等）</li>
+              <li>AIの出力を「そのまま法的根拠」として使わない</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>契約書の初期確認時間：1件30分→5分以下</li>
+              <li>弁護士相談件数：重要案件のみに絞り込めている</li>
+              <li>過去に見落としていたリスク条項を1件以上発見</li>
+              <li>チェックリストが契約種別ごとに整備済み</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div><!-- /body -->
+
+<div class="footer">
+  <span>UNLID AI実装ユースケース集 v1.0　｜　2026年3月</span>
+  <span>※ Step 1/3 — Cases 01〜04 掲載</span>
+</div>
+
+</div><!-- /page -->
+</body>
+</html>

@@ -657,13 +657,38 @@
 
       <div class="table-wrap">
         <table>
-          <thead><tr><th>OJT崩壊の原因</th><th>具体的な実態</th></tr></thead>
+          <thead><tr><th style="width:25%">OJT崩壊の原因</th><th style="width:35%">具体的な実態</th><th style="width:20%">定量データ</th><th style="width:20%">大企業 vs SMEの違い</th></tr></thead>
           <tbody>
-            <tr><td><strong>① 業務過多</strong></td><td>指導者が自業務で手一杯。OJT担当が入社2〜3年目の若手になる「担当者ガチャ」化。大企業でも37.6%が「OJTトレーナーが業務過多」と回答</td></tr>
-            <tr><td><strong>② OJTガチャ化</strong></td><td>担当者の力量に完全依存。50%の企業が「トレーナーの指導にばらつき」を課題視。同期でも育成格差が拡大</td></tr>
-            <tr><td><strong>③ ハラスメント萎縮</strong></td><td>厳しく指導→パワハラリスクを恐れ放置するケースが増加。68%のOJT担当者が意識変化を感じている（大企業の方が法務圧力が強く萎縮しやすい）</td></tr>
-            <tr><td><strong>④ 「育て損」問題</strong></td><td>転職市場活性化（2025年転職者数337万人・比率5.0%）で育成コストが回収できないと判断した管理職が育成モチベーションを失う</td></tr>
-            <tr><td><strong>⑤ デジタル化による先輩優位の逆転</strong></td><td>AIやDXで「後輩の方がツールに詳しい」場面が増加。先輩が教える正当性が失われ、何を教えていいかわからなくなる</td></tr>
+            <tr>
+              <td><strong>① 指導人材の不足</strong></td>
+              <td>OJT担当が入社2〜3年目の若手になる「担当者ガチャ」化。プレイングマネージャーが増え、自業務で手一杯で教える余裕がない</td>
+              <td><strong>59.5%</strong>が「指導する人材が不足」と回答<br>（厚労省「能力開発基本調査」令和6年度）</td>
+              <td>大企業: 組織規模はあるが後継育成がボトルネック<br>SME: そもそも教えられる先輩が2〜3人しかいない</td>
+            </tr>
+            <tr>
+              <td><strong>② 「育て損」感覚の蔓延</strong></td>
+              <td>転職市場の活性化で「3年以内に辞める可能性が高い若手を育てても損」という意識が管理職に広がり、育成モチベーションが組織的に低下</td>
+              <td><strong>54.7%</strong>が「育成しても辞めてしまう」を課題視。大卒3年以内離職率：<strong>34.9%</strong>（2005年以来の高水準）、若手転職意向：<strong>63.9%</strong></td>
+              <td>大企業: 育成コストが大きいため打撃が深刻<br>SME: 育成コスト自体が少ないため回収も早いが人数が少ない</td>
+            </tr>
+            <tr>
+              <td><strong>③ 育成時間の物理的消滅</strong></td>
+              <td>業務過多・2024年問題（時間外規制）・リモートワーク化が重なり、隣に座って教える時間・環境が物理的に存在しない</td>
+              <td><strong>47.4%</strong>が「育成する時間がない」。OJTトレーナーが業務過多：<strong>37.6%</strong></td>
+              <td>大企業: 2024年問題の直撃（建設・運輸等）<br>SME: 人手不足で全員が現場業務に追われる構造</td>
+            </tr>
+            <tr>
+              <td><strong>④ OJTガチャ化</strong></td>
+              <td>担当者の力量に完全依存。同じ企業でも担当によって育成の質が天と地ほど違う。標準化する仕組みがない</td>
+              <td>「トレーナーの指導にばらつき」：<strong>約50%</strong>の企業が課題視</td>
+              <td>大企業: 研修制度はあるが形骸化<br>SME: そもそもOJT設計が存在しない</td>
+            </tr>
+            <tr>
+              <td><strong>⑤ デジタル化による逆転</strong></td>
+              <td>AIやDXで「後輩の方がツールに詳しい」場面が急増。先輩が教える正当性が崩れ、何を教えていいかわからなくなる</td>
+              <td>AI知識は大企業・SME問わず若手優位。先輩の「経験値」の価値が相対的に低下</td>
+              <td>大企業: DX推進部が別にあるため一般部門の混乱が大きい<br>SME: 対応する余裕がなく放置</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -734,15 +759,30 @@
       </div>
 
       <h3>SIer × SESとの構造的な違い</h3>
+      <div class="flow-box" style="margin-bottom:16px;">【SIer多重下請け構造の実態（公正取引委員会・業界データ）】
+
+エンドクライアント（支払い：月100%）
+   ↓ 15〜20%マージン控除
+ 元請けSIer（NTTデータ・富士通等）
+   ↓ さらに10〜20%中抜き
+  2次請け中堅SIer
+   ↓ さらに10〜20%中抜き
+   3次請けSES企業
+   ↓ エンジニア還元率：50〜63%（業界平均）
+    SESエンジニア（実働者）手取り：月30〜48万円
+
+── ソフトウェア業の約7割が再委託（公正取引委員会、令和4年調査）
+── 2024年のソフトウェア業倒産223件中209件が多重下請け型（東京商工リサーチ）
+── 日経クロステック：「人売りITベンダーの倒産は良い知らせ」（旧来型モデルの限界）</div>
       <div class="table-wrap">
         <table>
           <thead><tr><th>比較軸</th><th>SIer × SES（旧来型）</th><th>UNLID</th></tr></thead>
           <tbody>
-            <tr><td><strong>指揮命令</strong></td><td>客先が直接技術者に指示（実態は客先の社員と同様）</td><td>UNLIDのFDE正社員のみ。クライアント→ワーカーへの直接指示を契約上禁止</td></tr>
+            <tr><td><strong>指揮命令</strong></td><td>客先が直接技術者に指示（実態は客先の社員と同様＝偽装請負リスク）</td><td>UNLIDのFDE正社員のみ。クライアント→ワーカーへの直接指示を契約上禁止</td></tr>
             <tr><td><strong>成果責任</strong></td><td>「人月」単位の売り切り。成果が出なくても報酬発生</td><td>FDEがKPI付きの成果責任を負う。達成できなければ更新しない契約設計</td></tr>
+            <tr><td><strong>コスト構造</strong></td><td>多重下請けで中間マージンが積み上がる。SMEには高すぎる（月80〜120万〜）</td><td>中間業者なし・直接契約。FDE6社×月15〜25万の薄利・多担当モデルでSMEに届く</td></tr>
             <tr><td><strong>ワーカーの立場</strong></td><td>コストカットのための人月。実績は技術者本人に残らない</td><td>自分のキャリア資産（完遂ログ）を積むために働く当事者。ログはワーカー本人のもの</td></tr>
-            <tr><td><strong>客先常駐</strong></td><td>原則常駐。労働時間も客先管理</td><td>副業ワーカーは客先に一切常駐しない。リモート専業・成果物ベース評価</td></tr>
-            <tr><td><strong>対象</strong></td><td>エンジニア職中心</td><td>ビジネス職の若手こそメインターゲット。「ビジネス職版GitHub」を実現</td></tr>
+            <tr><td><strong>対象</strong></td><td>大企業・エンジニア職中心。SMEは相手にされない</td><td>SME×ビジネス職若手がメインターゲット。既存プレイヤーが入れないポジション</td></tr>
           </tbody>
         </table>
       </div>
@@ -783,50 +823,52 @@ Phase 3（6ヶ月〜）：売上側の改善に踏み込む
           <thead><tr><th style="width:20%">カテゴリ</th><th style="width:35%">具体的なタスク例</th><th style="width:25%">使用ツール</th><th style="width:20%">期待効果</th></tr></thead>
           <tbody>
             <tr style="background:#f0fdf4">
-              <td rowspan="5"><strong>① バックオフィス効率化</strong><br><span style="font-size:0.78rem; color:#166534;">Phase 1（即効性）</span></td>
-              <td>経費精算・請求書処理の自動化（OCR+AI）</td><td>Claude / Gemini + Google Drive</td><td>処理工数60〜80%削減</td>
+              <td rowspan="5"><strong>① バックオフィス効率化</strong><br><span style="font-size:0.78rem; color:#166534;">Phase 1（即効性・最優先）</span></td>
+              <td>議事録の自動生成・要点抽出・共有</td><td>Notta / Whisper + Claude</td><td>作業時間<strong>40%削減</strong>（自治体事例）。週1回の会議×60分→6分に</td>
             </tr>
             <tr style="background:#f0fdf4">
-              <td>議事録の自動生成・要点抽出・共有</td><td>Whisper + Claude / Gemini</td><td>会議後作業90%削減</td>
+              <td>メール返信・提案書の下書き自動生成</td><td>Claude / ChatGPT</td><td>文書作成<strong>60〜70%時短</strong>（不動産会社事例）。即日導入可</td>
             </tr>
             <tr style="background:#f0fdf4">
-              <td>メール返信の下書き自動生成・テンプレ化</td><td>Claude API / Gmail連携</td><td>1日30〜60分の返信コスト削減</td>
+              <td>経費精算・請求書OCR処理の自動化</td><td>AI-OCR（マネーフォワード等）+ Claude</td><td>入力ミスほぼゼロ化。月20〜30時間→3〜5時間へ</td>
             </tr>
             <tr style="background:#f0fdf4">
-              <td>契約書・法務書類の初期AIレビュー</td><td>Claude / GPT-4o</td><td>弁護士確認前の精査コスト70%削減</td>
+              <td>契約書・法務書類の初期AIレビュー</td><td>Claude（長文処理に強み）</td><td>弁護士確認前の精査コスト70%削減。社内確認工数を大幅短縮</td>
             </tr>
             <tr style="background:#f0fdf4">
-              <td>社内FAQ・マニュアルのAIチャットボット化</td><td>Notion AI / Claude API</td><td>社内質問対応工数40〜60%削減</td>
+              <td>社内FAQ・マニュアルのAIチャットボット化</td><td>Notion AI / Claude API</td><td>社内質問対応工数40〜60%削減。新人立ち上がり期間短縮</td>
             </tr>
             <tr style="background:#eff6ff">
               <td rowspan="4"><strong>② 売上・営業支援</strong><br><span style="font-size:0.78rem; color:#1e3a8a;">Phase 2〜3（売上転換）</span></td>
-              <td>既存顧客データ分析 → 追加提案機会の特定</td><td>Python + Claude / BigQuery</td><td>既存顧客アップセル率向上</td>
+              <td>顧客企業リサーチの自動化→提案書生成</td><td>Perplexity + Claude / Notion</td><td>営業リサーチ：<strong>半日→30分</strong>に短縮。提案書品質も向上</td>
             </tr>
             <tr style="background:#eff6ff">
-              <td>提案書・見積書の自動生成テンプレ構築</td><td>Claude + Notion / Slides</td><td>提案書作成時間70%削減</td>
+              <td>既存顧客データ分析 → アップセル機会特定</td><td>Python + Claude / Spreadsheet</td><td>既存顧客依存（売上70〜80%）をデータで能動的な深耕営業へ転換</td>
             </tr>
             <tr style="background:#eff6ff">
-              <td>CRM代替：顧客管理・案件進捗のAI設計</td><td>Airtable / Notion + Claude</td><td>商談ロスト率15〜25%改善</td>
+              <td>CRM代替：顧客管理・案件進捗のAI設計</td><td>Airtable / Notion + Claude</td><td>属人的営業管理をデータ化。商談ロスト要因を可視化</td>
             </tr>
             <tr style="background:#eff6ff">
-              <td>競合・市場動向のAIリサーチ自動化</td><td>Claude API + Web検索連携</td><td>月次調査コスト80%削減</td>
+              <td>競合・市場動向のAIリサーチ自動化</td><td>Claude API + Web検索連携</td><td>月次リサーチコスト80%削減。経営判断のスピード向上</td>
             </tr>
             <tr style="background:#faf5ff">
               <td rowspan="3"><strong>③ システム統合・業務フロー改善</strong><br><span style="font-size:0.78rem; color:#6b21a8;">Phase 2〜3（構造改善）</span></td>
-              <td>バラバラなSaaSとExcelシートのAPI連携・一元化</td><td>Zapier / Make + Claude</td><td>手動転記ゼロ化・エラー率激減</td>
+              <td>バラバラなSaaSとExcelシートのAPI連携・一元化</td><td>Zapier / Make + Claude</td><td>手動転記ゼロ化。システム断裂（200名規模SMEで頻発）を解消</td>
             </tr>
             <tr style="background:#faf5ff">
-              <td>KPIダッシュボード構築（売上・在庫・顧客）</td><td>Looker Studio / Notion + API</td><td>経営判断スピード向上</td>
+              <td>KPIダッシュボード構築（売上・在庫・顧客）</td><td>Looker Studio / Notion + API</td><td>経営数値をリアルタイム可視化。社長の「勘経営」からデータ経営へ</td>
             </tr>
             <tr style="background:#faf5ff">
-              <td>Claude Codeによる内部ツール・スクリプト開発</td><td>Claude Code / Python</td><td>外注費用の内製化（月10〜30万節約）</td>
+              <td>Claude Codeによる内部ツール・スクリプト開発</td><td>Claude Code / Python</td><td>外注費の内製化（月10〜30万節約）。法務・経理の手作業を直接AI代替</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="highlight-box">
-        <strong>0.2人月（約20時間）でできること：</strong>Phase 1の着手として、業務フロー現状分析（2〜4時間）→ 最高インパクトの業務特定（2時間）→ PoC実装＋効果測定（10〜14時間）→ オーナーへROI報告（2時間）が現実的。
-        初月は「1つの業務を劇的に変える」ことに集中し、<strong>可視化した成果がそのまま継続契約の根拠</strong>になる。
+        <strong>0.2人月（約20時間）でできること：</strong><br>
+        ヒアリング・業務棚卸し（3〜4h）→ 優先課題選定（1〜2h）→ ツール選定・試験導入（3〜5h）→ プロンプト設計（2〜4h）→ PDCA・改善（4〜5h）→ 仕組み化・引き渡し（2〜3h）<br>
+        計：<strong>15〜23時間でPoCが1件完了する設計</strong>。最難易度★1タスク（議事録自動化 or メールテンプレ整備）なら5〜8時間で完結。<br>
+        初月は「1業務を劇的に変える」ことに集中し、可視化したROIが<strong>そのまま継続契約の根拠</strong>になる。副業ワーカー1名の20時間は補助的な実務タスクに充当可。
       </div>
 
       <h3>完遂ログの設計——「嘘のつけない」3層評価</h3>
@@ -1416,6 +1458,15 @@ Step 4：正社員FDEへの内部登用
           <tr><td>フリーランス保護新法施行</td><td>2024年11月施行</td><td>内閣官房「特定受託事業者に係る取引の適正化等に関する法律」</td></tr>
           <tr><td>AI市場成長率（日本）</td><td>2024〜2030年：CAGR約28%</td><td>IDC Japan「国内AI市場予測」2024年</td></tr>
           <tr><td>中小企業のDX投資意向</td><td>約67%が「AI活用を検討・予定」</td><td>日本商工会議所「中小企業のDXに関する調査」2024年</td></tr>
+          <tr><td>OJT崩壊：指導人材不足</td><td>59.5%が「指導する人材が不足」</td><td>厚生労働省「能力開発基本調査」令和6年度（2025年6月27日公表）</td></tr>
+          <tr><td>OJT崩壊：育て損感覚</td><td>54.7%が「育成しても辞めてしまう」</td><td>厚生労働省「能力開発基本調査」令和6年度</td></tr>
+          <tr><td>転職意向（若手35歳以下）</td><td>約63.9%が常に転職意向を保有</td><td>日本総研「若手人材の早期離職調査」2024年（N=2,000）</td></tr>
+          <tr><td>SES多重下請け：再委託率</td><td>ソフトウェア業の約7割が再委託</td><td>公正取引委員会「ソフトウェア業における取引慣行調査」令和4年</td></tr>
+          <tr><td>SES企業の還元率</td><td>50〜63%（業界平均）。高還元型は70〜80%</td><td>SES総合研究所「SES単価相場調査」2024年</td></tr>
+          <tr><td>ソフトウェア業倒産（多重下請け型）</td><td>2024年：223件中209件が多重下請け型</td><td>東京商工リサーチ「ソフトウェア業倒産動向調査」2024年</td></tr>
+          <tr><td>議事録AI自動化の効果</td><td>作業時間40%削減</td><td>青森県自治体・Nottoツール導入事例（2024年）</td></tr>
+          <tr><td>SNS投稿・文書作成AI化の効果</td><td>60〜70%の時短</td><td>不動産会社（Claude/ChatGPT導入）事例（2024年）</td></tr>
+          <tr><td>製造業AI画像検査の効果</td><td>検査時間40%短縮</td><td>ヨシズミプレス（中小製造業）AI導入事例</td></tr>
         </tbody>
       </table>
 

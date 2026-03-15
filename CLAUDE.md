@@ -101,6 +101,18 @@ SMEがFDEを採用 → 副業ワーカーが実務参加 → 完遂ログ蓄積 
 
 ---
 
+## GitHub Pages 公開URL
+GitHub Pagesは設定済み。ファイルのリンクを求められた場合は以下の形式で返すこと：
+
+```
+https://wyudao1996-collab.github.io/UNLID/<ファイル名>
+```
+
+例：
+- `UNLID_投資家向け事業戦略レポート_v4.0.html` → `https://wyudao1996-collab.github.io/UNLID/UNLID_投資家向け事業戦略レポート_v4.0.html`
+
+---
+
 ## Git運用ルール
 - ブランチ：`claude/unlid-business-strategy-o8ZUN`
 - プッシュ：`git push -u origin claude/unlid-business-strategy-o8ZUN`

@@ -385,6 +385,55 @@
       line-height: 1.6;
     }
 
+    /* ===== Flywheel Visual ===== */
+    .fw-visual { margin: 20px 0; }
+    .fw-row { display: flex; align-items: stretch; gap: 0; }
+    .fw-row-rev { display: flex; align-items: stretch; gap: 0; flex-direction: row-reverse; }
+    .fw-step {
+      flex: 1;
+      background: #e8f0fb;
+      border: 2px solid #3b6dbf;
+      border-radius: 10px;
+      padding: 12px 10px;
+      text-align: center;
+      font-size: 0.83rem;
+      line-height: 1.5;
+    }
+    .fw-step.sme { background: #dbeafe; border-color: #2563eb; }
+    .fw-step.fde { background: #dcfce7; border-color: #16a34a; }
+    .fw-step.log { background: #fef9c3; border-color: #ca8a04; }
+    .fw-step.hire{ background: #fce7f3; border-color: #be185d; }
+    .fw-step.fee { background: #fff7ed; border-color: #ea580c; }
+    .fw-step.up  { background: #f0fdf4; border-color: #15803d; }
+    .fw-step.new { background: #dbeafe; border-color: #1d4ed8; }
+    .fw-arr {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: #64748b;
+      padding: 0 4px;
+      font-weight: bold;
+    }
+    .fw-bridge {
+      display: flex;
+      justify-content: space-between;
+      padding: 2px 16px;
+      font-size: 1.2rem;
+      color: #64748b;
+    }
+    .fw-center-label {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #6b7280;
+      padding: 4px 8px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 6px;
+      margin: 2px auto;
+      max-width: 320px;
+    }
+
     /* ===== Founder Story ===== */
     .founder-box {
       background: linear-gradient(135deg, #fffbf0 0%, #fff8e8 100%);
@@ -454,25 +503,25 @@
 
     <!-- ===== TOC ===== -->
     <div class="toc">
-      <div class="toc-title">Table of Contents</div>
+      <div class="toc-title">目次</div>
       <ol>
-        <li><a href="#sec1">Executive Summary — 1分でわかるUNLIDのすべて</a></li>
-        <li><a href="#sec2">Glossary — 主要用語の定義</a></li>
-        <li><a href="#sec3">The Problem &amp; Why Now — SMEのAI格差と若手実務機会の喪失</a></li>
-        <li><a href="#sec4">The Solution — フラクショナルFDE × 副業若手ワーカーのエコシステム</a></li>
-        <li><a href="#sec5">Business &amp; Revenue Model — 月15〜25万でどう利益を出すか</a></li>
-        <li><a href="#sec6">Moat &amp; Competitors — 競合分析と真似されない参入障壁</a></li>
-        <li><a href="#sec7">Growth Strategy &amp; Future Vision — 成長戦略と将来SaaS構想</a></li>
-        <li><a href="#sec8">Target Market — TAM / SAM / SOM</a></li>
-        <li><a href="#sec9">Roadmap &amp; KPIs — マイルストーンとNorth Star Metric</a></li>
-        <li><a href="#sec10">Founder's Story — なぜ私がこれをやるのか</a></li>
-        <li><a href="#sec11">Appendix — 法的リスクと対策</a></li>
+        <li><a href="#sec1">エグゼクティブサマリー — 1分でわかるUNLIDのすべて</a></li>
+        <li><a href="#sec2">用語集 — 主要用語の定義</a></li>
+        <li><a href="#sec3">課題と「なぜ今か」 — SMEのAI格差・若手実務機会の喪失・採用市場の変化</a></li>
+        <li><a href="#sec4">解決策 — フラクショナルFDE × 副業若手ワーカーのエコシステム</a></li>
+        <li><a href="#sec5">収益モデルとコスト構造 — 月20〜30万でどう利益を出すか</a></li>
+        <li><a href="#sec6">参入障壁と競合分析 — 真似されない理由</a></li>
+        <li><a href="#sec7">成長戦略と将来構想</a></li>
+        <li><a href="#sec8">市場規模 — TAM / SAM / SOM</a></li>
+        <li><a href="#sec9">ロードマップとKPI — マイルストーンとNorth Star Metric</a></li>
+        <li><a href="#sec10">創業者の原体験 — なぜ私がこれをやるのか</a></li>
+        <li><a href="#sec11">補足資料 — 法的リスクと対策</a></li>
       </ol>
     </div>
 
     <!-- ===== Section 1: Executive Summary ===== -->
     <div class="section" id="sec1">
-      <h2><span class="sec-num">01</span> Executive Summary</h2>
+      <h2><span class="sec-num">01</span> エグゼクティブサマリー</h2>
       <p class="lead">UNLIDは「SMEのAI実装」「若手の実戦育成」「スカウト人材紹介」の3市場を1つのエコシステムで統合する。既存プレイヤーはそれぞれ1市場しか見ていない。この組み合わせは日本に存在しない。</p>
 
       <div class="table-wrap">
@@ -493,7 +542,7 @@
             </tr>
             <tr>
               <td><strong>収益モデル</strong></td>
-              <td>①B2B受託：月15〜25万円/社（継続）②人材紹介フィー：140万円/件（成功報酬）③プロジェクト型：80〜200万円/件</td>
+              <td>①B2B受託：月20〜30万円/社（継続）②人材紹介フィー：140万円/件（成功報酬）③プロジェクト型：80〜200万円/件</td>
             </tr>
             <tr>
               <td><strong>ユニットエコノミクス</strong></td>
@@ -524,7 +573,7 @@
 
     <!-- ===== Section 2: Glossary ===== -->
     <div class="section" id="sec2">
-      <h2><span class="sec-num">02</span> Glossary — 主要用語の定義</h2>
+      <h2><span class="sec-num">02</span> 用語集 — 主要用語の定義</h2>
       <p class="lead">このレポートを読む前提として、以下5用語を確認されたい。特に「FDE」と「フラクショナル」はUNLIDのビジネスモデルの根幹となる。</p>
 
       <div class="table-wrap">
@@ -576,8 +625,8 @@
     </div>
     <!-- ===== Section 3: The Problem & Why Now ===== -->
     <div class="section" id="sec3">
-      <h2><span class="sec-num">03</span> The Problem &amp; Why Now</h2>
-      <p class="lead">2つの構造的危機が同時進行している。「中小企業のAI実装を誰も担えない」と「若手が実戦経験を積む場所も証明する手段もない」——この2つは独立した問題ではなく、UNLIDが解く同一の課題の表裏だ。</p>
+      <h2><span class="sec-num">03</span> 課題と「なぜ今か」</h2>
+      <p class="lead">3つの構造的課題が同時進行している。<strong>① 中小企業のAI実装を担う役割が構造的に不在だ。② 若手が実戦経験を積む場所も証明する手段もない。③ 採用市場はデータによる人材評価への移行を迫られている。</strong>この3つは独立した問題ではなく、UNLIDが解く同一の課題の断面だ。</p>
 
       <h3>問題① SMEのAI格差——大企業との差が15倍に拡大中</h3>
       <div class="metric-grid">
@@ -698,15 +747,58 @@
         「育ててもらえない」×「外で試す場もない」×「成し遂げても職務経歴書は100%自己申告」——この三重の問題が、外部での実務参加と客観的な完遂記録への構造的な需要を生んでいる。
       </div>
 
-      <h3>なぜ今か——4つの構造的追い風</h3>
+      <h3>問題③ 採用市場のデータ化需要——「面接」「学歴」だけでは人材が選べなくなった</h3>
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="m-label">中途採用のミスマッチ率</div>
+          <div class="m-value">約30%</div>
+          <div class="m-sub">入社1年以内の期待外れ — マイナビ転職調査2024</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">スキルベース採用に関心を持つ企業</div>
+          <div class="m-value">79%</div>
+          <div class="m-sub">「職務経歴書より実績で選ぶ」方針に転換意向 — LinkedIn人材動向調査2024</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">大卒3年以内離職率（2024年）</div>
+          <div class="m-value">34.9%</div>
+          <div class="m-sub">過去16年で最高水準。採用ミスマッチが直撃 — 厚労省雇用動向調査</div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th style="width:28%">採用側の課題</th><th style="width:37%">実態</th><th style="width:35%">定量データ</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>① 職務経歴書が自己申告のみ</strong></td>
+              <td>ビジネス職には「実績を客観証明する手段」が存在しない。エンジニアのGitHubに相当するものが、営業・マーケ・企画職には世界に存在しない</td>
+              <td>採用担当者の<strong>62%</strong>が「職務経歴書の信頼性に疑問」（en Japan調査2023）。スキルの証明方法がなく面接頼みになる</td>
+            </tr>
+            <tr>
+              <td><strong>② 面接で実力が測れない</strong></td>
+              <td>「話し方がうまい人が受かる」構造。AIを実際に業務で使った経験があるかどうかを、面接で判別する方法がない</td>
+              <td>中途採用コスト平均：<strong>93.6万円/人</strong>（パーソル調査2024）。採用ミスで毎年膨大な損失が発生</td>
+            </tr>
+            <tr>
+              <td><strong>③ AI人材の急速な需要増</strong></td>
+              <td>生成AI人材の求人数が2年で急増。しかし採用側は「本当にAIが使える人材かどうか」を判定する評価軸を持っていない</td>
+              <td>AI関連求人：2022年比で<strong>3.5倍</strong>増（doda調査2024）。「とりあえずAIが使える人を採用したい」企業が殺到</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="highlight-box">
+        <strong>課題の核心：</strong>ビジネス職には「実務実績を客観的に証明する手段」が世界に存在しない。完遂ログはこのギャップを埋める——SMEのAI実装という実戦の場で積み上げた記録が、そのまま<strong>採用市場で機能する実績証明書</strong>になる。
+      </div>
+
+      <h3>なぜ今か——3つの構造的追い風</h3>
       <div class="table-wrap">
         <table>
           <thead><tr><th>追い風</th><th>内容</th></tr></thead>
           <tbody>
             <tr><td><strong>① 生成AI市場の爆発的成長</strong></td><td>国内生成AI市場：2024年1,016億円 → 2028年8,028億円（約8倍）。SMEにも「使わなければ」という圧力が急速に高まっている</td></tr>
-            <tr><td><strong>② フラクショナル市場の確立</strong></td><td>外部CTO・技術顧問の市場相場：月30〜60万円が普通に成立。「月15〜25万円のAI実装FDE」は比較優位が明確</td></tr>
+            <tr><td><strong>② フラクショナル市場の確立</strong></td><td>外部CTO・技術顧問の市場相場：月30〜60万円が普通に成立。「月20〜30万円のAI実装FDE」は比較優位が明確</td></tr>
             <tr><td><strong>③ 副業市場の拡大</strong></td><td>副業市場規模20兆円・フリーランス人口1,303万人。20代の副業実施率が全世代最低（14.4%）＝開拓余地が最大</td></tr>
-            <tr><td><strong>④ 採用市場のデータ化需要</strong></td><td>「面接だけでは人材を見抜けない」という企業側の認識が拡大。客観的な実績記録への需要が高まっている</td></tr>
           </tbody>
         </table>
       </div>
@@ -714,25 +806,39 @@
 
     <!-- ===== Section 4: The Solution ===== -->
     <div class="section" id="sec4">
-      <h2><span class="sec-num">04</span> The Solution — エコシステムの全体像</h2>
+      <h2><span class="sec-num">04</span> 解決策 — エコシステムの全体像</h2>
       <p class="lead">UNLIDの解は「3つの問題を個別に解決するサービス」ではなく、「3市場を1つのフライホイールで回すエコシステム」だ。各要素が互いを強化し合うことで、単一サービスでは到達できない参入障壁を形成する。</p>
 
       <h3>フライホイール構造</h3>
-      <div class="flywheel-box">                    ┌─────────────────────────────────────────┐
-                    │           UNLIDのフライホイール              │
-                    └─────────────────────────────────────────┘
-
-  ① SMEがFDEを採用                    ⑦ 新規SMEが獲得できる
-     月15〜25万円で                  ↗      ↑
-     AI実装を依頼         ←──────────────    信頼・実績が蓄積
-         ↓                                   ↑
-  ② FDE監督下で                            ⑥ FDEの担当社数が増加
-     副業ワーカーが実務参加                  ↑
-         ↓                                   │
-  ③ クエスト完遂で                    ⑤ 採用フィーが発生
-     完遂ログが蓄積                    （年収×35%=140万円/件）
-         ↓                              ↑
-  ④ ログが採用材料になる ──────────────→ クライアントがワーカーを採用</div>
+      <!-- フライホイール：上段(①→②→③)・中段(④)・下段(⑦←⑥←⑤) で循環を表現 -->
+      <div class="fw-visual">
+        <!-- 上段：左から右へ -->
+        <div class="fw-row">
+          <div class="fw-step sme"><strong>① SMEが契約</strong><br>月20〜30万円でAI実装を依頼</div>
+          <div class="fw-arr">→</div>
+          <div class="fw-step fde"><strong>② FDE監督下で</strong><br>副業ワーカーが実務参加</div>
+          <div class="fw-arr">→</div>
+          <div class="fw-step log"><strong>③ クエスト完遂</strong><br>完遂ログが第三者評価付きで蓄積</div>
+        </div>
+        <!-- 橋渡し矢印：左下→④→右下 -->
+        <div class="fw-bridge">
+          <span style="font-size:1.2rem; color:#2563eb;">↙</span>
+          <div class="fw-center-label">④ ログが採用材料に → クライアントがワーカーをスカウト採用</div>
+          <span style="font-size:1.2rem; color:#ea580c;">↘</span>
+        </div>
+        <!-- 下段：右から左へ（逆方向） -->
+        <div class="fw-row-rev">
+          <div class="fw-step new"><strong>⑦ 新規SME獲得</strong><br>信頼・実績が次の顧客を呼ぶ</div>
+          <div class="fw-arr">←</div>
+          <div class="fw-step up"><strong>⑥ FDE担当社数増加</strong><br>実績でFDEの評価が上がる</div>
+          <div class="fw-arr">←</div>
+          <div class="fw-step fee"><strong>⑤ 採用フィー発生</strong><br>年収400万×35%＝<strong>140万円/件</strong></div>
+        </div>
+        <!-- 還流矢印 -->
+        <div style="text-align:center; font-size:0.78rem; color:#6b7280; margin-top:6px;">
+          ⑦ → ① へ循環。ログが積まれるほど紹介が増え、フライホイールが加速する
+        </div>
+      </div>
 
       <h3>3つの役割と関係性</h3>
       <div class="table-wrap">
@@ -741,7 +847,7 @@
           <tbody>
             <tr>
               <td><strong>SME（クライアント企業）</strong><br>従業員30〜300名</td>
-              <td>月15〜25万円を支払い、AI実装の推進をFDEに依頼。副業ワーカーの実務も活用</td>
+              <td>月20〜30万円を支払い、AI実装の推進をFDEに依頼。副業ワーカーの実務も活用</td>
               <td>正社員採用（年2,000万超）の1/10コストでAI実装が進む。優秀な若手をスカウト採用する選択肢も得る</td>
             </tr>
             <tr>
@@ -816,8 +922,31 @@ Phase 3（6ヶ月〜）：売上側の改善に踏み込む
   → 営業データの可視化・顧客管理（CRM代替）のAI設計
   → 「コスト削減係」ではなく「経営改善の実行パートナー」として機能</div>
 
+      <h3>初月の現実的なスコープ——0.2人月（約20時間）でできること</h3>
+      <p style="margin-bottom:10px; color:#374151; font-size:0.88rem;"><strong>「月20〜30万円で何をやってくれるのか」</strong>——SMEが最初に持つ疑問への答えだ。初月は「1業務を劇的に変える」ことに集中し、可視化したROIがそのまま継続契約の根拠になる。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th style="width:30%">ステップ</th><th style="width:20%">工数目安</th><th style="width:50%">内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>① 業務棚卸し・ヒアリング</strong></td><td>3〜4時間</td><td>オーナー・現場担当者インタビュー。手作業・繰り返し業務・ボトルネックを洗い出す</td></tr>
+            <tr><td><strong>② 優先課題の選定</strong></td><td>1〜2時間</td><td>「定型性が高い × 効果が定量化できる × 関係者が少ない」条件でPoC対象業務を1つ選ぶ</td></tr>
+            <tr><td><strong>③ ツール選定・試験導入</strong></td><td>3〜5時間</td><td>Claude / ChatGPT / Notta 等から最適ツールを選定。初期PoC実施</td></tr>
+            <tr><td><strong>④ プロンプト設計・調整</strong></td><td>2〜4時間</td><td>RCTFC（Role・Context・Task・Format・Constraint）フレームワークで精度を高める</td></tr>
+            <tr><td><strong>⑤ PDCA・改善</strong></td><td>4〜5時間</td><td>出力品質を確認し、プロンプトを修正・再実行。1〜2週間で一定精度を達成</td></tr>
+            <tr><td><strong>⑥ 仕組み化・引き渡し</strong></td><td>2〜3時間</td><td>テンプレート化・操作マニュアル作成。担当者が自走できる状態まで仕上げる</td></tr>
+            <tr style="background:#e8f0fb"><td><strong>合計</strong></td><td><strong>15〜23時間</strong></td><td>PoC 1件完了。最難易度★1（議事録自動化 or メールテンプレ整備）なら5〜8時間で完結</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="highlight-box">
+        <strong>初月の成果目標：</strong>対象業務の効率化<strong>20〜30%削減</strong>（PoC段階での達成可能ライン）。この数値をROI試算としてオーナーに提示し、「続けない理由がない」状態を作る。副業ワーカー1名の20時間は補助的な実務タスク（データ整理・マニュアル作成等）に充当。
+      </div>
+
       <h3>UNLIDが具体的に何をやるのか——SME向けAI実装ユースケース集</h3>
-      <p class="lead"><strong>「なんでもAI化します」では依頼できない。UNLIDが実際に手掛ける業務は3カテゴリに整理される。Phase 1で即効性の高い「バックオフィス効率化」から着手し、削減した時間を売上に転換するPhase 2・3へ展開する。</strong></p>
+      <p class="lead"><strong>「なんでもAI化します」では依頼できない。UNLIDが手掛ける業務は3カテゴリに整理される。Phase 1で即効性の高い「バックオフィス効率化」から着手し、削減した時間を売上に転換するPhase 2・3へ展開する。</strong></p>
+      <p style="font-size:0.82rem; color:#6b7280; margin-bottom:10px; padding:8px 12px; background:#f8fafc; border-left:3px solid #94a3b8; border-radius:4px;">
+        ※ 下表の「期待効果」は、各ツールを活用した国内外の公開事例・導入実績（青森県自治体議事録AI化、船井総研グループ生成AI導入等）から算出した業界標準値です。UNLIDはスタートアップのため自社実績はまだなく、これらは目標・参考値として記載しています。各事例の詳細手順は別途モックアップ資料を参照。
+      </p>
       <div class="table-wrap">
         <table>
           <thead><tr><th style="width:20%">カテゴリ</th><th style="width:35%">具体的なタスク例</th><th style="width:25%">使用ツール</th><th style="width:20%">期待効果</th></tr></thead>
@@ -864,13 +993,6 @@ Phase 3（6ヶ月〜）：売上側の改善に踏み込む
           </tbody>
         </table>
       </div>
-      <div class="highlight-box">
-        <strong>0.2人月（約20時間）でできること：</strong><br>
-        ヒアリング・業務棚卸し（3〜4h）→ 優先課題選定（1〜2h）→ ツール選定・試験導入（3〜5h）→ プロンプト設計（2〜4h）→ PDCA・改善（4〜5h）→ 仕組み化・引き渡し（2〜3h）<br>
-        計：<strong>15〜23時間でPoCが1件完了する設計</strong>。最難易度★1タスク（議事録自動化 or メールテンプレ整備）なら5〜8時間で完結。<br>
-        初月は「1業務を劇的に変える」ことに集中し、可視化したROIが<strong>そのまま継続契約の根拠</strong>になる。副業ワーカー1名の20時間は補助的な実務タスクに充当可。
-      </div>
-
       <h3>完遂ログの設計——「嘘のつけない」3層評価</h3>
       <p class="lead"><strong>自己申告だけのログは意味がない。UNLIDは「本人 ＋ 第三者FDE ＋ クライアント」の3者確認構造で、偽装・誇張を構造的に排除する。</strong></p>
       <div class="table-wrap">
@@ -915,15 +1037,15 @@ Phase 3（6ヶ月〜）：売上側の改善に踏み込む
 
     <!-- ===== Section 5: Business & Revenue Model ===== -->
     <div class="section" id="sec5">
-      <h2><span class="sec-num">05</span> Business &amp; Revenue Model</h2>
-      <p class="lead">「月15〜25万円で本当に事業として成立するのか」という問いに、コスト内訳と担当社数別損益を透明化して答える。損益分岐点は明確だ：FDE1名あたり6社担当または単価18万円以上。</p>
+      <h2><span class="sec-num">05</span> 収益モデルとコスト構造</h2>
+      <p class="lead">「月20〜30万円で本当に事業として成立するのか」という問いに、コスト内訳と担当社数別損益を透明化して答える。損益分岐点は明確だ：FDE1名あたり6社担当かつ単価20万円以上。</p>
 
       <h3>3つの収益源</h3>
       <div class="table-wrap">
         <table>
           <thead><tr><th>収益源</th><th>モデル</th><th>単価</th><th>フェーズ3の規模感</th></tr></thead>
           <tbody>
-            <tr><td><strong>① B2B受託（フラクショナルFDE）</strong></td><td>月額継続</td><td>月15〜25万円/社</td><td>150社×月20万円＝年3.6億円</td></tr>
+            <tr><td><strong>① B2B受託（フラクショナルFDE）</strong></td><td>月額継続</td><td>月20〜30万円/社</td><td>150社×月23万円＝年4.1億円</td></tr>
             <tr><td><strong>② 人材紹介フィー</strong></td><td>採用成立時・成功報酬</td><td>年収400万×35%＝<strong>140万円/件</strong></td><td>年50件＝7,000万円</td></tr>
             <tr><td><strong>③ プロジェクト型</strong></td><td>スポット</td><td>80〜200万円/件</td><td>年30件＝2,400万〜6,000万円</td></tr>
           </tbody>
@@ -933,12 +1055,12 @@ Phase 3（6ヶ月〜）：売上側の改善に踏み込む
       <h3>コスト構造——1社あたりの収支内訳（月額）</h3>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>項目</th><th>月15万円プラン</th><th>月20万円プラン</th><th>補足</th></tr></thead>
+          <thead><tr><th>項目</th><th>月20万円プラン（標準）</th><th>月25万円プラン（上位）</th><th>月30万円プラン（成熟期）</th><th>補足</th></tr></thead>
           <tbody>
-            <tr><td><strong>クライアント支払い</strong></td><td>150,000円</td><td>200,000円</td><td>UNLID受取</td></tr>
-            <tr><td><strong>△ 副業ワーカー報酬</strong></td><td>30,000〜50,000円</td><td>40,000〜60,000円</td><td>時給1,000〜2,000円 × 月20〜30時間</td></tr>
-            <tr><td><strong>△ FDE稼働費（按分）</strong></td><td>70,000〜80,000円</td><td>70,000〜80,000円</td><td>FDE月給40万円 ÷ 担当5〜6社</td></tr>
-            <tr style="background:#e8f0fb"><td><strong>UNLID粗利</strong></td><td><strong>20,000〜50,000円（13〜33%）</strong></td><td><strong>60,000〜90,000円（30〜45%）</strong></td><td></td></tr>
+            <tr><td><strong>クライアント支払い</strong></td><td>200,000円</td><td>250,000円</td><td>300,000円</td><td>UNLID受取</td></tr>
+            <tr><td><strong>△ 副業ワーカー報酬</strong></td><td>40,000〜60,000円</td><td>50,000〜70,000円</td><td>60,000〜80,000円</td><td>時給1,000〜2,000円 × 月20〜40時間</td></tr>
+            <tr><td><strong>△ FDE稼働費（按分）</strong></td><td>70,000〜80,000円</td><td>70,000〜80,000円</td><td>70,000〜80,000円</td><td>FDE月給40万円 ÷ 担当5〜6社</td></tr>
+            <tr style="background:#e8f0fb"><td><strong>UNLID粗利</strong></td><td><strong>60,000〜90,000円（30〜45%）</strong></td><td><strong>100,000〜130,000円（40〜52%）</strong></td><td><strong>140,000〜170,000円（47〜57%）</strong></td><td></td></tr>
           </tbody>
         </table>
       </div>
@@ -948,17 +1070,17 @@ Phase 3（6ヶ月〜）：売上側の改善に踏み込む
         <table>
           <thead><tr><th>パターン</th><th>月商</th><th>ワーカー費合計</th><th>FDE給与</th><th>月次粗利</th><th>粗利率</th></tr></thead>
           <tbody>
-            <tr style="background:#fff3cd"><td>4社 × 月15万円</td><td>60万円</td><td>△12〜20万円</td><td>△40万円</td><td><strong>0〜8万円</strong></td><td>0〜13%（危険水域）</td></tr>
-            <tr><td>6社 × 月15万円</td><td>90万円</td><td>△18〜30万円</td><td>△40万円</td><td><strong>20〜32万円</strong></td><td>22〜36%</td></tr>
-            <tr><td>4社 × 月20万円</td><td>80万円</td><td>△16〜24万円</td><td>△40万円</td><td><strong>16〜24万円</strong></td><td>20〜30%</td></tr>
+            <tr style="background:#fff3cd"><td>4社 × 月20万円</td><td>80万円</td><td>△16〜24万円</td><td>△40万円</td><td><strong>16〜24万円</strong></td><td>20〜30%（要改善）</td></tr>
+            <tr><td>5社 × 月20万円</td><td>100万円</td><td>△20〜30万円</td><td>△40万円</td><td><strong>30〜40万円</strong></td><td>30〜40%</td></tr>
             <tr style="background:#e8f0fb"><td><strong>6社 × 月20万円</strong></td><td><strong>120万円</strong></td><td>△24〜36万円</td><td>△40万円</td><td><strong>44〜56万円</strong></td><td><strong>37〜47%（目標）</strong></td></tr>
+            <tr style="background:#f0fdf4"><td><strong>6社 × 月25万円</strong></td><td><strong>150万円</strong></td><td>△30〜42万円</td><td>△40万円</td><td><strong>68〜80万円</strong></td><td><strong>45〜53%（理想）</strong></td></tr>
           </tbody>
         </table>
       </div>
       <div class="highlight-box">
-        <strong>結論：</strong>月15万円×4社は事業として成立しない。<strong>最低6社担当または単価18万円以上</strong>が収支均衡ラインだ。<br>
+        <strong>結論：</strong>単価20万円 × 6社担当が最低限の収支均衡ライン。<strong>月20万円以下での契約は受けない</strong>設計とする。<br>
         フェーズ0（創業者本人がFDE・固定費ゼロ）→ フェーズ1（副業FDEで変動費化）→ フェーズ2（単価向上＋担当社数増加）という段階的な確立が計画の前提となる。<br>
-        なお人材紹介フィー（140万円/件）が1件入るだけで、FDE1名の月次粗利不足を大幅に補完できる。
+        なお人材紹介フィー（140万円/件）が1件入るだけで、FDE1名の3ヶ月分の粗利不足を一気に補完できる。
       </div>
 
       <h3>LTV設計とチャーン対策</h3>
@@ -966,7 +1088,7 @@ Phase 3（6ヶ月〜）：売上側の改善に踏み込む
         <table>
           <thead><tr><th>ステージ</th><th>期間</th><th>内容</th><th>月額</th></tr></thead>
           <tbody>
-            <tr><td><strong>Stage 1：AI実装フェーズ</strong></td><td>〜3ヶ月</td><td>1業務課題にAI導入・ROI可視化。「月30時間削減」を3ヶ月以内に証明</td><td>15〜18万円</td></tr>
+            <tr><td><strong>Stage 1：AI実装フェーズ</strong></td><td>〜3ヶ月</td><td>1業務課題にAI導入・ROI可視化。「月30時間削減」を3ヶ月以内に証明</td><td>20万円（標準）</td></tr>
             <tr><td><strong>Stage 2：定着・改善フェーズ</strong></td><td>3〜12ヶ月</td><td>AI活用率の向上・業務フロー最適化。ワーカーが社内AI推進役として機能</td><td>18〜22万円</td></tr>
             <tr><td><strong>Stage 3：第2テーマ着手</strong></td><td>12ヶ月〜</td><td>「次に手を付けるべき業務」をFDEが先回り提案。連鎖的なAI化が続く</td><td>20〜25万円</td></tr>
           </tbody>
@@ -986,7 +1108,7 @@ Phase 3（6ヶ月〜）：売上側の改善に踏み込む
             <tr><td>採用支援・HRコンサル</td><td>月10〜25万円</td><td>UNLIDは同価格帯でAI実装＋採用連携まで対応</td></tr>
             <tr><td>外部CTO・技術顧問（週1〜2回）</td><td>月30〜60万円</td><td>UNLIDはこれより安い月15〜25万円で同等の専門性</td></tr>
             <tr><td>DXコンサルタント</td><td>月80〜200万円</td><td>UNLIDは1/5〜1/10のコストで成果責任付き</td></tr>
-            <tr style="background:#e8f0fb"><td><strong>★ UNLIDフラクショナルFDE</strong></td><td><strong>月15〜25万円</strong></td><td>IT顧問より安く・BPOより高付加価値の「中間価格帯」に位置</td></tr>
+            <tr style="background:#e8f0fb"><td><strong>★ UNLIDフラクショナルFDE</strong></td><td><strong>月20〜30万円</strong></td><td>IT顧問より安く・BPOより高付加価値の「中間価格帯」に位置。成果責任付きで単価は正当化される</td></tr>
           </tbody>
         </table>
       </div>
@@ -1021,7 +1143,7 @@ Phase 3（6ヶ月〜）：売上側の改善に踏み込む
     </div>
     <!-- ===== Section 6: Moat & Competitors ===== -->
     <div class="section" id="sec6">
-      <h2><span class="sec-num">06</span> Moat &amp; Competitors</h2>
+      <h2><span class="sec-num">06</span> 参入障壁と競合分析</h2>
       <p class="lead">既存プレイヤーはどれも「SME × AI実装 × フラクショナル × 副業若手育成 × 完遂ログ × 人材紹介」の組み合わせを持たない。そして参入しようとしても、構造的に「できない理由」がある。</p>
 
       <h3>競合比較——なぜ誰もこのポジションにいないか</h3>
@@ -1065,11 +1187,11 @@ Phase 3（6ヶ月〜）：売上側の改善に踏み込む
       <div class="barrier-grid">
         <div class="barrier-card">
           <div class="b-title">① 完遂ログの先行者優位</div>
-          <div class="b-desc">1,000件以上のログがないとSaaS化の価値が出ない。今から参入しても追いつくのに最低3〜5年かかる。先行者が圧倒的有利な「時間の壁」</div>
+          <div class="b-desc">ログは「実務現場でしか積めない」。1,000件のログ資産は採用企業への説得力・スカウト精度・FDE評価基準の高度化に直結する。今から参入しても追いつくのに最低3〜5年かかる「時間の壁」</div>
         </div>
         <div class="barrier-card">
           <div class="b-title">② FDE育成の再現困難性</div>
-          <div class="b-desc">「AI実装×PM×泥臭い調整力」を同時に持つFDEを育てるには最低1〜2年。外部から採用では賄えない。内部育成ファネルの設計自体が参入障壁</div>
+          <div class="b-desc">「AI実装×PM×SME現場での泥臭い調整力」を同時に持つFDEを育てるには最低1〜2年。UNLID内部で創業者が直接育成する。AI技術力は採用選抜で担保し、UNLIDが教えるのはクライアント管理・KPI設計・副業ワーカーマネジメント・現場調整力</div>
         </div>
         <div class="barrier-card">
           <div class="b-title">③ 両面ネットワーク効果</div>
@@ -1088,7 +1210,7 @@ Phase 3（6ヶ月〜）：売上側の改善に踏み込む
 
     <!-- ===== Section 7: Growth Strategy & Future Vision ===== -->
     <div class="section" id="sec7">
-      <h2><span class="sec-num">07</span> Growth Strategy &amp; Future Vision</h2>
+      <h2><span class="sec-num">07</span> 成長戦略と将来構想</h2>
       <p class="lead">成長戦略は3段階だ。①人材紹介で収益柱を追加し②FDE育成ファネルでスケールし③完遂ログをSaaS化して採用プラットフォームへ。各フェーズが次のフェーズの燃料になる設計になっている。</p>
 
       <h3>フェーズ別成長戦略</h3>
@@ -1105,18 +1227,26 @@ Phase 3（6ヶ月〜）：売上側の改善に踏み込む
       </div>
 
       <h3>FDE高速育成ファネル——「採用」ではなく「内部育成」でスケールする</h3>
-      <div class="flow-box">【FDE育成ファネル（内部登用型）】
+      <div class="flow-box">【FDE育成ファネル（内部登用型）——誰が何を教えるか】
+
+─────────────────────────────────────────────────────────
+【前提条件：FDE候補者は「AI実装経験3件以上」が採用選抜条件】
+ → AIを使って業務課題を解決した実績はUNLIDが教えるのではなく「選抜で担保」する
+ → UNLIDが育成で教えるのは「PMとしての現場力」であり「技術開発力」ではない
+─────────────────────────────────────────────────────────
 
 Step 1：副業ワーカーとして入会（Apprentice〜Journeyman）
-  クエストを繰り返しながら「現場感覚」と「完遂習慣」を身につける
-  FDEから直接フィードバックを受け、思考プロセスをトレーニング
+  クエストを担当しながら「クライアントの課題感の掴み方」「完遂の習慣」を身につける
+  ▶ 教える人：創業者本人（クライアント管理・KPI設計・報告スタイル）
 
 Step 2：シニアワーカーとして後輩指導（Craftsman〜Master）
-  後輩ワーカーへのフィードバックを担当 → これがFDEの核心スキル（他者を評価・改善指示する力）
+  後輩ワーカーへのフィードバックを担当 → 「他者を評価・改善指示する力」がFDEの核心スキル
+  ▶ 教える人：先輩ワーカー → これ自体がFDE的能力の予行練習になる
 
 Step 3：副業FDEとして試用稼働（副業・業務委託）
   1〜2社のクライアントを担当。月商60〜80万円の変動費ポジション
-  失敗しても固定費リスクなし。創業者が密着してトレーニング
+  失敗しても固定費リスクなし。創業者が密着してOJT（営業・交渉・報連相）
+  ▶ 教える人：創業者本人（SME社長との折衝術・PoC設計・副業ワーカーのマネジメント）
 
 Step 4：正社員FDEへの内部登用
   副業FDE期間中の完遂ログ・クライアント満足度で評価
@@ -1130,14 +1260,40 @@ Step 4：正社員FDEへの内部登用
             <tr><td><strong>実績の記録単位</strong></td><td>コードのコミット履歴</td><td>クエスト完遂ログ（本人記述＋FDE3軸スコア＋クライアント確認）</td></tr>
             <tr><td><strong>客観性の担保</strong></td><td>コード自体がデータ（改ざん不可）</td><td>FDE第三者評価＋クライアント確認の3層構造</td></tr>
             <tr><td><strong>採用での活用</strong></td><td>GitHub Enterprise（月21ドル/ユーザー）</td><td>完遂ログDB閲覧課金（月3〜10万円/採用企業）</td></tr>
-            <tr><td><strong>既存の代替品</strong></td><td>なし（エンジニアにはGitHubしかない）</td><td><strong>世界にも存在しない</strong>（Polywork・Fueler等は収益化の壁を越えられていない）</td></tr>
+            <tr><td><strong>既存の代替品</strong></td><td>なし（エンジニアにはGitHubしかない）</td><td><strong>世界にも存在しない</strong>（Polywork・Fueler等が挑戦したが収益化できず）</td></tr>
           </tbody>
         </table>
       </div>
 
+      <h4 style="font-size:0.95rem; color:#1e293b; margin:16px 0 8px;">Polywork・Fueler が収益化できなかった理由——UNLIDが超えるべき壁</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th style="width:22%">企業</th><th style="width:30%">何をやっていたか</th><th style="width:48%">なぜ収益化の壁を越えられなかったか</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Polywork</strong><br><span style="font-size:0.78rem; color:#6b7280;">米国・2020年創業。2023年に事実上の機能停止</span></td>
+              <td>LinkedInに代わる「複数の肩書き・副業実績を表示するプロフィールSNS」。自己申告でポートフォリオを登録</td>
+              <td>
+                <strong>① 記録が自己申告のみ</strong>：誰でも何でも書けるため、採用企業に信頼されなかった<br>
+                <strong>② 収益モデルが弱い</strong>：採用企業への課金設計が後付けで、LinkedIn型の転職サービスと差別化できなかった<br>
+                <strong>③ 副業案件の供給がない</strong>：「記録する場所」だけで「実績を積む場所」ではなかった。プラットフォームに人が来る理由がない
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Fueler</strong><br><span style="font-size:0.78rem; color:#6b7280;">インド・2021年創業。現在も存続するが規模が小さい</span></td>
+              <td>フリーランサー・副業人材のポートフォリオ管理ツール。案件完遂記録を可視化するSaaS</td>
+              <td>
+                <strong>① 第三者評価がない</strong>：クライアントの「認証」機能が弱く、採用企業側の信頼を得られない<br>
+                <strong>② 収益源がログ管理SaaSのみ</strong>：ログが積まれても採用フィーを得る仕組みがなく、マネタイズが単一で弱い<br>
+                <strong>③ 実務の場の提供がない</strong>：あくまで記録ツールであり、ユーザーが「どこでログを積むか」の問題が解決されていない
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div class="highlight-box">
-        <strong>なぜ海外でも解決できていないのか：</strong>コードと異なり、ビジネス職の成果は機密性が高く外部公開できない。貢献の定量化が難しく「誰が何をしたか」を自動記録できない。<br>
-        UNLIDの<strong>FDE3軸スコア付き完遂ログ</strong>は、この構造的課題を正面から解決する世界初のアプローチだ。フェーズ3でログ1,000件に到達した時点で、採用企業向けSaaSとして外販できる。
+        <strong>UNLIDが超える方法：</strong>Polywork・Fuelerの失敗は「記録の場だけ作って実務の場がない」「自己申告で第三者評価がない」「採用フィーへの転換設計がない」という3点に集約される。<br>
+        UNLIDはこの逆を行く——<strong>① SMEへのAI実装という「実務の場」を先に持つ</strong>② FDE3軸スコア＋クライアント確認で「第三者評価」を組み込む ③ 採用成立時のフィー（140万円/件）を収益の柱にする。ログはSaaSになる前から「採用フィーを生む資産」として機能している。
       </div>
 
       <div class="flow-box">【SaaS化後の収益モデル（フェーズ4以降）】
@@ -1194,7 +1350,7 @@ Step 4：正社員FDEへの内部登用
 
     <!-- ===== Section 8: Target Market ===== -->
     <div class="section" id="sec8">
-      <h2><span class="sec-num">08</span> Target Market — TAM / SAM / SOM</h2>
+      <h2><span class="sec-num">08</span> 市場規模 — TAM / SAM / SOM</h2>
       <p class="lead">市場規模はFDE数がボトルネックになる。3〜5年のSOMはFDE正社員数で上限が決まるが、認定FDE（外部）制度の導入で2倍以上のスケールが可能になる。</p>
 
       <div class="highlight-box" style="margin-bottom:20px;">
@@ -1245,7 +1401,7 @@ Step 4：正社員FDEへの内部登用
 
     <!-- ===== Section 9: Roadmap & KPIs ===== -->
     <div class="section" id="sec9">
-      <h2><span class="sec-num">09</span> Roadmap &amp; KPIs</h2>
+      <h2><span class="sec-num">09</span> ロードマップとKPI</h2>
       <p class="lead">North Star Metricは「完遂件数 × 3軸平均スコア」だ。これが上がれば、企業への価値提供・若手の成長・完遂ログの蓄積・人材紹介の種が同時に進む。</p>
 
       <div class="highlight-box">
@@ -1335,8 +1491,8 @@ Step 4：正社員FDEへの内部登用
       <div class="section-title">
         <div class="section-number">10</div>
         <div>
-          <div class="section-label">Founder's Story</div>
-          <div class="section-sub">創業者の原体験と確信</div>
+          <div class="section-label">創業者の原体験</div>
+          <div class="section-sub">なぜ私がこれをやるのか</div>
         </div>
       </div>
 
@@ -1401,7 +1557,7 @@ Step 4：正社員FDEへの内部登用
       <div class="section-title">
         <div class="section-number">11</div>
         <div>
-          <div class="section-label">Appendix</div>
+          <div class="section-label">補足資料</div>
           <div class="section-sub">法的リスクと補足データ</div>
         </div>
       </div>

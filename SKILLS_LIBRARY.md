@@ -1,46 +1,51 @@
 # SKILLS_LIBRARY.md — Anthropic公式スキル保管庫
 
-このファイルはAnthropicが提供する公式スキルの日本語リファレンス集。
+Anthropicが提供する公式スキルの日本語リファレンス集。
 SKILL.mdとは別管理。エージェントが特定の能力を必要とするときにここを参照する。
+
+**最終更新：2026-03-20 ／ 公式スキル17種 + バンドル4種 + パートナー7種 = 全28種収録**
 
 ---
 
 ## 参照ルール
 
-- **SKILL.md**：UNLIDプロジェクト専用の常時ロードスキル（エージェント定義・ブランドカラー等）
-- **SKILLS_LIBRARY.md（このファイル）**：Anthropic公式スキルの保管庫。以下の状況で参照すること：
-  - ユーザーがドキュメント生成（PDF・Word・Excel・PowerPoint）を依頼したとき
-  - コードのテスト・品質改善を依頼されたとき
-  - デザイン・ビジュアル系の出力を求められたとき
-  - 上記以外でも「このタスクに適したスキルが保管庫にあるかも」と判断したとき
+以下の状況では必ずこのファイルを確認すること：
+
+- PDF・Word・Excel・PowerPointの生成・操作を依頼されたとき
+- コードのテスト・品質改善を依頼されたとき
+- デザイン・ビジュアル系の出力を求められたとき
+- Notion・Jira・Figmaなど外部サービスとの連携を求められたとき
+- 「このタスクに適したスキルが保管庫にあるか確認したい」と判断したとき
 
 ---
 
-## 1. バンドルスキル（Claude Code標準搭載）
+## 1. バンドルスキル（Claude Code標準搭載・インストール不要）
 
-スラッシュコマンドで直接呼び出し可能。インストール不要。
+スラッシュコマンドで直接呼び出し可能。
 
 | スキル | コマンド | 概要 | 主な用途 |
 |---|---|---|---|
-| batch | `/batch <指示>` | コードベース全体への大規模変更を並列実行。最大30タスクに分解し各タスクを独立エージェントが担当 | 大規模リファクタリング・一括変換 |
-| claude-api | `/claude-api` | Claude APIリファレンスをロード（Python・TS・Go等）。ツール使用・ストリーミング・バッチ処理をカバー | Claude API実装時 |
-| debug | `/debug [説明]` | 現在のセッションのデバッグログを解析し問題を診断 | セッション不具合の調査 |
-| loop | `/loop [間隔] <プロンプト>` | 指定間隔でプロンプトを繰り返し実行 | デプロイ監視・PR定期確認 |
-| simplify | `/simplify [フォーカス]` | 変更コードを3並列エージェントがレビューし品質・効率・再利用性の問題を修正 | コードレビュー・品質改善 |
+| **batch** | `/batch <指示>` | コードベース全体への大規模変更を最大30タスクに分解し各タスクを独立エージェントが並列実行 | 大規模リファクタリング・一括変換 |
+| **debug** | `/debug [説明]` | 現在のセッションのデバッグログを解析し問題を診断 | セッション不具合の調査 |
+| **loop** | `/loop [間隔] <プロンプト>` | 指定間隔でプロンプトを繰り返し実行 | デプロイ監視・PR定期確認 |
+| **simplify** | `/simplify [フォーカス]` | 変更コードを3並列エージェントがレビューし品質・効率・再利用性の問題を修正 | コードレビュー・品質改善 |
 
 ---
 
-## 2. ドキュメント処理スキル
+## 2. ドキュメント処理スキル（4種）
+
+> ⚠️ これら4スキルは source-available（非OSSライセンス）。参照用として公開。
 
 ### pdf — PDFドキュメント操作
 
 **インストール：** `npx skills add anthropics/claude-code --skill pdf`
 
 **できること：**
-- PDFからテキスト・表を抽出
-- 新規PDF作成
+- PDFからテキスト・表を抽出（OCR対応）
+- 新規PDF作成・既存PDF編集
 - 複数PDFの結合・分割
 - フォームの読み取り・記入
+- 透かし・暗号化
 
 **使い方の例：**
 ```
@@ -93,7 +98,7 @@ Markdownをdocx形式に変換して
 
 **できること：**
 - Excelファイルの作成・編集
-- データ解析・集計
+- 数式の動的管理・データ解析・集計
 - グラフ生成
 - 複数シートの管理
 
@@ -105,15 +110,16 @@ Markdownをdocx形式に変換して
 
 ---
 
-## 3. 開発・技術スキル
+## 3. 開発・技術スキル（4種）
 
 ### webapp-testing — Webアプリテスト自動化
 
 **インストール：** `npx skills add anthropics/claude-code --skill webapp-testing`
 
 **できること：**
-- Playwrightを使ったE2Eテスト作成
+- PlaywrightによるE2Eテスト自動化
 - UIのスクリーンショット取得・比較
+- DOMインスペクション・ブラウザログ確認
 - フォーム操作・ナビゲーションテスト
 
 **使い方の例：**
@@ -130,6 +136,7 @@ Markdownをdocx形式に変換して
 **できること：**
 - Model Context Protocol（MCP）サーバーのスキャフォールド生成
 - ツール定義・プロンプト設計の支援
+- Python（FastMCP）・TypeScript（MCP SDK）両対応
 - 既存APIのMCPラッパー作成
 
 **使い方の例：**
@@ -139,18 +146,38 @@ Markdownをdocx形式に変換して
 
 ---
 
-### claude-api（スキル版） — Claude API統合
+### claude-api — Claude API統合
 
-**インストール：** コード内で`anthropic`をimportすると自動発動
+**インストール：** `npx skills add anthropics/claude-code --skill claude-api`
 
 **できること：**
 - Claude APIの実装支援（Python・TypeScript・Go・Ruby・C#・PHP・Java）
 - ツール使用・ストリーミング・バッチ処理のコード生成
 - Agent SDKの使い方ガイド
 
+**自動発動条件：** コードが `anthropic` / `@anthropic-ai/sdk` / `claude_agent_sdk` をインポートするとき
+
 ---
 
-## 4. デザイン・クリエイティブスキル
+### skill-creator — 新スキル作成ツール
+
+**インストール：** `npx skills add anthropics/claude-code --skill skill-creator`
+
+**できること：**
+- 対話形式で新しいスキルを設計
+- SKILL.mdのテンプレート生成
+- スキルの説明・frontmatterの最適化
+- ベンチマーク評価ツール付き
+
+**使い方の例：**
+```
+/skill-creator
+→ 対話形式でスキルの目的・動作・制約を定義 → SKILL.mdが自動生成される
+```
+
+---
+
+## 4. デザイン・クリエイティブスキル（5種）
 
 ### frontend-design — フロントエンドデザイン
 
@@ -158,14 +185,31 @@ Markdownをdocx形式に変換して
 **（277K+インストール、最多人気スキル）**
 
 **できること：**
-- UIコンポーネントのデザインパターン適用
-- レスポンシブレイアウト設計
-- アクセシビリティ対応
-- CSSアーキテクチャの最適化
+- 「AIスロップ（汎用的で凡庸なUI）」を避ける高品質デザイン
+- React + Tailwind + shadcn/ui による実装
+- レスポンシブ・アクセシビリティ対応
+- ジェネリックな配色（Ariel系・紫グラデ等）を禁止した品質基準
 
 **使い方の例：**
 ```
 このコンポーネントをより洗練されたデザインにして
+ダッシュボードのUIを作って
+```
+
+---
+
+### web-artifacts-builder — インタラクティブWebアーティファクト
+
+**インストール：** `npx skills add anthropics/claude-code --skill web-artifacts-builder`
+
+**できること：**
+- React 18 + TypeScript + Tailwind + shadcn/ui によるインタラクティブなWebアーティファクト作成
+- 複合コンポーネントの設計・実装
+- プロトタイプの高速生成
+
+**使い方の例：**
+```
+インタラクティブなデータ可視化コンポーネントを作って
 ```
 
 ---
@@ -175,9 +219,9 @@ Markdownをdocx形式に変換して
 **インストール：** `npx skills add anthropics/claude-code --skill canvas-design`
 
 **できること：**
-- HTML5 Canvasを使ったビジュアル生成
-- チャート・グラフの描画
-- アニメーション作成
+- PNG・PDF形式のビジュアルアセット生成
+- デザイン哲学に基づく構図設計
+- グラフィック要素の作成
 
 ---
 
@@ -186,7 +230,8 @@ Markdownをdocx形式に変換して
 **インストール：** `npx skills add anthropics/claude-code --skill algorithmic-art`
 
 **できること：**
-- ジェネレーティブアートの生成
+- p5.jsによるジェネレーティブアート生成
+- シードランダム性・フローフィールド・パーティクルシステム
 - パターン・フラクタル・数理的ビジュアルの作成
 
 ---
@@ -196,23 +241,22 @@ Markdownをdocx形式に変換して
 **インストール：** `npx skills add anthropics/claude-code --skill theme-factory`
 
 **できること：**
-- 配色・タイポグラフィの一貫したテーマ生成
+- 10種のプリセットテーマを適用
+- カスタムテーマの生成
 - CSS変数・デザイントークンの出力
-- ブランドカラーからテーマ展開
+- ブランドカラーからのテーマ展開
 
 ---
 
-## 5. ビジネス・コミュニケーションスキル
+## 5. ビジネス・コミュニケーションスキル（3種）
 
 ### internal-comms — 社内コミュニケーション文書
 
 **インストール：** `npx skills add anthropics/claude-code --skill internal-comms`
 
 **できること：**
-- ステータスレポートの作成
-- 社内ニュースレターの執筆
-- FAQ・マニュアルの作成
-- アナウンスメントの構造化
+- 3Pアップデート・社内ニュースレター・FAQレスポンス
+- ステータスレポート・インシデントレポートの標準フォーマット生成
 
 **使い方の例：**
 ```
@@ -226,9 +270,8 @@ Markdownをdocx形式に変換して
 **インストール：** `npx skills add anthropics/claude-code --skill brand-guidelines`
 
 **できること：**
-- ブランドカラー・フォントの一貫適用
+- Anthropicブランドカラー・タイポグラフィ（Poppins/Lora）をアーティファクトに自動適用
 - スタイルガイドに沿ったコンテンツ生成
-- ブランドチェックリストの確認
 
 ---
 
@@ -238,57 +281,59 @@ Markdownをdocx形式に変換して
 
 **できること：**
 - 共同編集ワークフローの管理
-- ドキュメントのレビュー・改善サイクル支援
+- 3イテレーション後に変更なければ削除確認という品質ゲート付き
+- ドキュメントの反復改善サポート
 
 ---
 
-## 6. ユーティリティスキル
-
-### skill-creator — 新スキル作成ツール
-
-**インストール：** `npx skills add anthropics/claude-code --skill skill-creator`
-
-**できること：**
-- 対話形式で新しいスキルを設計
-- SKILL.mdのテンプレート生成
-- スキルの説明・frontmatterの最適化
-
-**使い方の例：**
-```
-/skill-creator
-→ 対話形式でスキルの目的・動作・制約を定義→ SKILL.mdが自動生成される
-```
-
----
+## 6. ユーティリティスキル（1種）
 
 ### slack-gif-creator — Slack用GIF作成
 
 **インストール：** `npx skills add anthropics/claude-code --skill slack-gif-creator`
 
 **できること：**
-- Slack投稿用のGIFアニメ生成
+- Slackのサイズ制限に最適化されたGIFアニメーション生成
 - テキストアニメーション・リアクションGIF作成
 
 ---
 
-## 7. スキルのインストール方法
+## 7. パートナー公式スキル（7種）
 
-```bash
-# 個別インストール
-npx skills add anthropics/claude-code --skill <スキル名>
+Anthropic認定パートナーが提供する公式スキル。
 
-# 例：PDFスキルをインストール
-npx skills add anthropics/claude-code --skill pdf
-
-# グローバル（全プロジェクト共通）にインストール
-npx skills add anthropics/claude-code --skill pdf --global
-```
-
-インストール後は `/pdf` または「このPDFを〜して」と話しかけると自動発動。
+| パートナー | スキル概要 | インストール |
+|---|---|---|
+| **Notion** | ページ作成・データベース操作・コンテンツ管理の自動化 | `/plugin install notion@anthropic-agent-skills` |
+| **Asana** | タスク・プロジェクト管理・担当割り当て・進捗追跡の自動化 | `/plugin install asana@anthropic-agent-skills` |
+| **Atlassian** | Jira（課題管理）・Confluence（ドキュメント）との統合 | `/plugin install atlassian@anthropic-agent-skills` |
+| **Canva** | デザインテンプレート操作・ビジュアルコンテンツ作成連携 | `/plugin install canva@anthropic-agent-skills` |
+| **Figma** | UIデザインファイルの読み取り・コンポーネント情報取得 | `/plugin install figma@anthropic-agent-skills` |
+| **Sentry** | エラー監視・バグトラッキング・インシデント管理の自動化 | `/plugin install sentry@anthropic-agent-skills` |
+| **Zapier** | 5,000+アプリとのワークフロー自動化・トリガー設計 | `/plugin install zapier@anthropic-agent-skills` |
 
 ---
 
-## 8. カスタムスキルの作り方（簡易リファレンス）
+## 8. スキルのインストール方法まとめ
+
+```bash
+# 個別インストール（プロジェクト専用）
+npx skills add anthropics/claude-code --skill <スキル名>
+
+# グローバルインストール（全プロジェクト共通）
+npx skills add anthropics/claude-code --skill <スキル名> --global
+
+# パートナースキル（プラグイン経由）
+/plugin install <パートナー名>@anthropic-agent-skills
+
+# 例
+npx skills add anthropics/claude-code --skill pdf
+npx skills add anthropics/claude-code --skill frontend-design --global
+```
+
+---
+
+## 9. カスタムスキルの作り方（簡易リファレンス）
 
 ```yaml
 # ~/.claude/skills/<skill-name>/SKILL.md の構造
@@ -313,3 +358,10 @@ $ARGUMENTS で呼び出し時の引数を参照できる
 | 個人（全プロジェクト共通） | `~/.claude/skills/<name>/SKILL.md` | 自分の全プロジェクト |
 | プロジェクト専用 | `.claude/skills/<name>/SKILL.md` | そのプロジェクトのみ |
 | エンタープライズ | 管理者設定ファイル | 組織全員 |
+
+---
+
+## 参照元
+
+- [github.com/anthropics/skills](https://github.com/anthropics/skills) — 公式リポジトリ
+- [github.com/anthropics/skills/tree/main/skills](https://github.com/anthropics/skills/tree/main/skills) — スキル一覧

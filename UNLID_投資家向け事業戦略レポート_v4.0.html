@@ -1218,6 +1218,85 @@ Phase 3（6ヶ月〜）：売上側の改善に踏み込む
 ③ 継続参加による信頼度蓄積
   → 同一クライアントからの2回目以降の確認は「継続採用事実」として重み付け
   → 1回で終わった案件より、3回継続した案件のログの方が採用市場での評価が高い</div>
+      <h3>完遂ログの運用設計——記録コスト・フォーマット・モチベーション</h3>
+      <p class="lead"><strong>3層評価は設計として正しい。しかし「FDEの記録負担が大きい」「ワーカーのモチベーションが設計しにくい」という運用上の問いに、具体的な答えを持って初めて機能する。</strong></p>
+
+      <h4 style="margin-top:24px; margin-bottom:8px; font-size:0.95rem; color:#1e40af;">① ログ記録コストの最小化——「書く」から「確認する」へ</h4>
+      <p style="margin-bottom:10px; font-size:0.88rem;">FDEが新しい記録作業をするのではなく、<strong>既存の業務フローからログが自動的に生まれる構造</strong>にする。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>レイヤー</th><th>ツール</th><th>役割</th></tr></thead>
+          <tbody>
+            <tr><td><strong>タスク管理</strong></td><td>Notion / Linear</td><td>ワーカーのタスク完了が記録される源泉。ここのデータを起点にする</td></tr>
+            <tr><td><strong>コミュニケーション</strong></td><td>Slack</td><td>FDEがワーカーの成果を承認したメッセージを自動キャプチャ</td></tr>
+            <tr><td><strong>AI初稿生成</strong></td><td>Claude API（自社組み込み）</td><td>タスク完了情報＋Slackコメントを読み取り、ログ初稿を自動生成。FDEは編集・承認するだけ</td></tr>
+            <tr><td><strong>ログ管理</strong></td><td>UNLID独自DB</td><td>標準フォーマットで完遂ログを蓄積・管理</td></tr>
+            <tr><td><strong>採用担当者向け公開</strong></td><td>UNLIDポータル</td><td>ワーカーの完遂ログを閲覧できるインターフェース</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="flow-box">【FDEの実際の作業フロー】
+
+① ワーカーがNotionのタスクを「完了」にする
+② ワーカーがフォームに初稿を記入（「何をしたか」「何が変わったか」「数字で言うと？」）
+③ Claude APIがタスク詳細＋Slack文脈を読み、初稿を整形
+④ FDEがスマホで確認 → 承認ボタン（所要時間：1〜2分）
+
+→ FDEの作業は「書く」ではなく「確認する」。追加の記録コストはほぼゼロ</div>
+
+      <h4 style="margin-top:24px; margin-bottom:8px; font-size:0.95rem; color:#1e40af;">② 完遂ログフォーマット——採用担当者が3秒で判断できる4要素</h4>
+      <p style="margin-bottom:10px; font-size:0.88rem;"><strong>「証明に使える最小単位」かつ「採用担当者が3秒で意味を理解できる単位」が正解。</strong>粗すぎても細かすぎても証明力を失う。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>要素</th><th>内容</th><th>採用担当者が読むポイント</th></tr></thead>
+          <tbody>
+            <tr><td><strong>① 動詞＋対象</strong></td><td>何をしたか（例：「顧客データ分類モデルのデータクレンジングを担当」）</td><td>スキル領域の確認</td></tr>
+            <tr><td><strong>② 成果（数値）</strong></td><td>何が変わったか（例：「重複率18%→3%に削減、精度+12%改善」）</td><td>アウトプットの実在確認</td></tr>
+            <tr><td><strong>③ 自律度</strong></td><td>一人でやったか補助があったか（例：「FDE監督下・単独実行」）</td><td>実力レベルの判定</td></tr>
+            <tr><td><strong>④ FDE確認済みフラグ</strong></td><td>FDE正社員が承認した事実の記録</td><td>信頼性の担保</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="flow-box">【良い粒度の例】
+「顧客データ1.2万件のクレンジングを担当。重複率を18%→3%に削減し、
+ モデル学習精度を+12%改善。FDE監督下・単独実行（確認済み）」
+
+【悪い粒度：粗すぎ】「AIプロジェクトに参加した」
+【悪い粒度：細かすぎ】「2024/4/5 14:00 dropduplicates()を実行した」</div>
+
+      <h4 style="margin-top:24px; margin-bottom:8px; font-size:0.95rem; color:#1e40af;">③ モチベーション設計と評価の透明性——「方向性は公開、詳細は非公開」の二層構造</h4>
+      <p style="margin-bottom:10px; font-size:0.88rem;">「ゲーミングを防ぐには評価基準を隠したい」「モチベーションを上げるには基準を見せたい」という矛盾を、二層構造で解く。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th></th><th>公開する（メタ基準）</th><th>非公開にする（詳細基準）</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>内容</strong></td>
+              <td>「完遂したか」「FDEが確認できる形でアウトプットが出たか」「数値で語れる変化があったか」「一人でできたか」</td>
+              <td>タスクの点数化ロジック・採点細則・「優秀」判定の閾値</td>
+            </tr>
+            <tr>
+              <td><strong>ワーカーへのメッセージ</strong></td>
+              <td colspan="2">「FDEと合意したタスクを完遂し、成果を数字で言えれば、良いログが積まれる。それだけに集中してください」</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-wrap" style="margin-top:16px;">
+        <table>
+          <thead><tr><th>リスク</th><th>対策</th></tr></thead>
+          <tbody>
+            <tr><td><strong>「FDEに気に入られるかどうか」という属人的判断になるリスク</strong></td><td>FDEが却下する場合は却下理由をフォーム入力必須にする。「気に入らない」では却下できない仕組み。ワーカーからシニアFDEへの異議申し立て窓口も設置</td></tr>
+            <tr><td><strong>FDEが「身内評価」になり甘くなるリスク</strong></td><td>採用後のワーカーのパフォーマンスを追跡し、FDEにフィードバック。採用後定着率・評価をFDEのボーナス基準に組み込む</td></tr>
+            <tr><td><strong>ワーカーのモチベーション維持</strong></td><td>ワーカーが自分のログ一覧・採用担当者の閲覧回数をダッシュボードで確認できる。「ログが市場に直接見られている」実感が動機になる</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="flow-box">【評価者の移動によるモチベーション設計】
+
+Fueler型の問題：「FDEに評価される」が動機 → 属人的・不透明
+UNLIDの設計：「完遂すれば採用担当者（市場）に直接見られる」が動機
+  → FDEへの依存ではなく、市場への直接接続感がワーカーを動かす</div>
     </div>
 
     <!-- ===== Section 5: Business & Revenue Model ===== -->

@@ -597,11 +597,11 @@
             </tr>
             <tr>
               <td><strong>完遂ログ</strong></td>
-              <td>クエスト（実務課題）完了時に記録する「本人記述＋FDE3軸スコア＋クライアント確認」の3層評価記録</td>
+              <td>実装タスク（実務課題）完了時に記録する「本人記述＋FDE3軸スコア＋クライアント確認」の3層評価記録</td>
               <td>「嘘のつけないビジネス職の実績DB」として蓄積。将来SaaS化し採用プラットフォームへ展開</td>
             </tr>
             <tr>
-              <td><strong>クエスト</strong></td>
+              <td><strong>実装タスク</strong></td>
               <td>1〜2週間で完遂できるよう設計された実務タスク単位</td>
               <td>副業ワーカーが担う実務の最小単位。「AI出力仕上げ」「採用取材」「インタビュー整理」など</td>
             </tr>
@@ -626,9 +626,9 @@
     <!-- ===== Section 3: The Problem & Why Now ===== -->
     <div class="section" id="sec3">
       <h2><span class="sec-num">03</span> 課題と「なぜ今か」</h2>
-      <p class="lead">3つの構造的課題が同時進行している。<strong>① 中小企業のAI実装を担う役割が構造的に不在だ。② 若手が実戦経験を積む場所も証明する手段もない。③ 採用市場はデータによる人材評価への移行を迫られている。</strong>この3つは独立した問題ではなく、UNLIDが解く同一の課題の断面だ。</p>
+      <p class="lead">3つの構造的課題が同時進行している。<strong>① 中小企業のAI実装を担う役割が構造的に不在だ（ToB課題）。② 若手が実戦経験を積む場所も、それを証明する手段もない（ToC課題）。③ 採用市場はデータによる人材評価への移行を迫られている（ToB課題）。</strong>①③は企業・採用側の構造問題、②は若手個人側の構造問題だ。この3つは独立した問題ではなく、UNLIDが1つのエコシステムで同時に解く、同一の課題の断面だ。</p>
 
-      <h3>問題① SMEのAI格差——大企業との差が15倍に拡大中</h3>
+      <h3>問題① SMEのAI格差——大企業との差が15倍に拡大中<span style="font-size:0.72rem; font-weight:400; background:#fce7f3; color:#9d174d; padding:2px 8px; border-radius:4px; margin-left:10px; vertical-align:middle;">ToB（SME）側の課題</span></h3>
       <div class="metric-grid">
         <div class="metric-card">
           <div class="m-label">中小企業のAI全社導入率</div>
@@ -685,8 +685,16 @@
         UNLIDのFDEはこの連鎖を<strong>バックオフィス効率化から売上改善まで一気通貫</strong>で断ち切る。「効率化しました」で終わらず、削減した時間を売上に転換する戦略提言まで踏み込む。
       </div>
 
-      <h3>問題② OJT崩壊——若手が「育てられない・試せない・証明できない」三重苦</h3>
-      <p style="margin-bottom:12px; color:#374151; font-size:0.9rem; line-height:1.7;"><strong>OJT崩壊は中小企業だけの問題ではない。</strong>大企業でも「計画的OJT実施率」は10年間で右肩下がりだ。ただし崩壊の原因は規模によって異なる——大企業は「業務過多・ハラスメント萎縮・育て損感覚」、中小企業は「そもそも教えられる先輩がいない・人手不足で教える余裕がない」。どちらも若手が<strong>実務実績を積む場所を失っている</strong>点は同じだ。</p>
+      <h3>問題② 若手の実戦機会消滅——「育てられない × 試せない × 証明できない」三重苦<span style="font-size:0.72rem; font-weight:400; background:#dbeafe; color:#1e40af; padding:2px 8px; border-radius:4px; margin-left:10px; vertical-align:middle;">ToC（若手個人）側の課題</span></h3>
+      <div style="margin-bottom:14px; padding:14px 18px; background:#fef9c3; border-left:4px solid #ca8a04; border-radius:6px; font-size:0.88rem; color:#713f12; line-height:1.8;">
+        <strong>【問題の構造】</strong><br>
+        <strong>① 現象：OJT崩壊</strong>——職場での人材育成機能が全国的に崩壊している（計画的OJT実施率：10年で40.9%→30.3%）。<br>
+        <strong>↓ 結果として何が起きるか</strong><br>
+        <strong>② 結果：実戦の場が消滅</strong>——OJTがなくなると、若手が「実務でAIを使い、課題を解決し、完遂する」経験を積む場所そのものが消える。社内で試せないが、外部の実務プロジェクトに参加する仕組みもない。<br>
+        <strong>↓ さらに何が深刻か</strong><br>
+        <strong>③ 深刻化：証明手段もない</strong>——仮に独学・副業で経験を積んでも、それを客観的に証明する手段が存在しない。エンジニアにはGitHubがあるが、ビジネス職（営業・マーケ・企画）には世界に「実績を第三者が証明できる仕組み」がない。
+      </div>
+      <p style="margin-bottom:12px; color:#374151; font-size:0.9rem; line-height:1.7;"><strong>OJT崩壊は若手にとって「出発点の喪失」だ。</strong>大企業でも中小企業でも「計画的OJT実施率」は10年間で右肩下がりだ。崩壊の原因は規模によって異なる——大企業は「業務過多・育て損感覚」、中小企業は「そもそも教えられる先輩がいない」。しかし結末は同じだ。若手が<strong>実務実績を積む場所そのものを失っている。</strong></p>
       <div class="metric-grid">
         <div class="metric-card">
           <div class="m-label">計画的OJT実施率（大手企業）</div>
@@ -744,11 +752,11 @@
       </div>
 
       <div class="highlight-box">
-        <strong>結論：</strong>OJT崩壊は単なる「育成機能の低下」ではない。<strong>若手が実務実績を積む場所そのものが消滅</strong>していることを意味する。<br>
-        「育ててもらえない」×「外で試す場もない」×「成し遂げても職務経歴書は100%自己申告」——この三重の問題が、外部での実務参加と客観的な完遂記録への構造的な需要を生んでいる。
+        <strong>問題②の核心：</strong>OJT崩壊 → 実戦の場の消滅 → 証明手段の不在、という3段階の連鎖が若手に深刻な構造的不利をもたらしている。<br>
+        <strong>「育ててもらえない」</strong>（OJT崩壊）×<strong>「外で試す場もない」</strong>（副業・外部実務参加の仕組みがない）×<strong>「成し遂げても100%自己申告」</strong>（客観的証明手段なし）——この三重苦が、外部での実務参加と客観的な完遂記録への構造的な需要を生んでいる。UNLIDの完遂ログがこの需要を直接満たす。
       </div>
 
-      <h3>問題③ 採用市場のデータ化需要——「面接」「学歴」だけでは人材が選べなくなった</h3>
+      <h3>問題③ 採用市場のデータ化需要——「面接」「学歴」だけでは人材が選べなくなった<span style="font-size:0.72rem; font-weight:400; background:#fce7f3; color:#9d174d; padding:2px 8px; border-radius:4px; margin-left:10px; vertical-align:middle;">ToB（採用企業）側の課題</span></h3>
       <div class="metric-grid">
         <div class="metric-card">
           <div class="m-label">中途採用のミスマッチ率</div>
@@ -819,7 +827,7 @@
           <div class="fw-arr">→</div>
           <div class="fw-step fde"><strong>② FDE監督下で</strong><br>副業ワーカーが実務参加</div>
           <div class="fw-arr">→</div>
-          <div class="fw-step log"><strong>③ クエスト完遂</strong><br>完遂ログが第三者評価付きで蓄積</div>
+          <div class="fw-step log"><strong>③ 実装タスク完遂</strong><br>完遂ログが第三者評価付きで蓄積</div>
         </div>
         <!-- 橋渡し矢印：左下→④→右下 -->
         <div class="fw-bridge">
@@ -858,7 +866,7 @@
             </tr>
             <tr>
               <td><strong>副業若手ワーカー</strong><br>20代・本業持ち</td>
-              <td>FDE監督下でクエスト（1〜2週間の実務タスク）を担当。AI出力仕上げ・取材・ファシリテーションなど</td>
+              <td>FDE監督下で実装タスク（1〜2週間単位）を担当。AI出力仕上げ・取材・ファシリテーションなど</td>
               <td>時給1,000〜3,000円の報酬＋第三者評価付き完遂ログ。ログが転職・採用に繋がる実績証明になる</td>
             </tr>
           </tbody>
@@ -1243,7 +1251,7 @@ Phase 3（6ヶ月〜）：売上側の改善に踏み込む
 ─────────────────────────────────────────────────────────
 
 Step 1：副業ワーカーとして入会（Apprentice〜Journeyman）
-  クエストを担当しながら「クライアントの課題感の掴み方」「完遂の習慣」を身につける
+  実装タスクを担当しながら「クライアントの課題感の掴み方」「完遂の習慣」を身につける
   ▶ 教える人：創業者本人（クライアント管理・KPI設計・報告スタイル）
 
 Step 2：シニアワーカーとして後輩指導（Craftsman〜Master）
@@ -1264,7 +1272,7 @@ Step 4：正社員FDEへの内部登用
         <table>
           <thead><tr><th>比較</th><th>GitHub（エンジニア版）</th><th>UNLID（ビジネス職版）</th></tr></thead>
           <tbody>
-            <tr><td><strong>実績の記録単位</strong></td><td>コードのコミット履歴</td><td>クエスト完遂ログ（本人記述＋FDE3軸スコア＋クライアント確認）</td></tr>
+            <tr><td><strong>実績の記録単位</strong></td><td>コードのコミット履歴</td><td>実装タスク完遂ログ（本人記述＋FDE3軸スコア＋クライアント確認）</td></tr>
             <tr><td><strong>客観性の担保</strong></td><td>コード自体がデータ（改ざん不可）</td><td>FDE第三者評価＋クライアント確認の3層構造</td></tr>
             <tr><td><strong>採用での活用</strong></td><td>GitHub Enterprise（月21ドル/ユーザー）</td><td>完遂ログDB閲覧課金（月3〜10万円/採用企業）</td></tr>
             <tr><td><strong>既存の代替品</strong></td><td>なし（エンジニアにはGitHubしかない）</td><td><strong>世界にも存在しない</strong>（Polywork・Fueler等が挑戦したが収益化できず）</td></tr>

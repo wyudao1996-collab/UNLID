@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /home/user/UNLID && git add PROGRESS.md && git diff --cached --quiet || git commit -m \"chore: PROGRESS.md 更新（セッション終了時自動コミット）\" && git push -u origin claude/unlid-business-strategy-o8ZUN",
+            "timeout": 60,
+            "statusMessage": "PROGRESS.md をコミット・プッシュ中..."
+          }
+        ]
+      }
+    ]
+  }
+}

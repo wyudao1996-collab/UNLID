@@ -1,0 +1,2453 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNLID AI実装ユースケース集 v1.0 — 導入手順モックアップ</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #1a1a1a;
+      background: #f0f2f5;
+    }
+    .page {
+      max-width: 1000px;
+      margin: 36px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+    /* ===== Cover ===== */
+    .cover {
+      background: linear-gradient(135deg, #0d1f3c 0%, #1a3560 55%, #1e4d8c 100%);
+      color: #fff;
+      padding: 52px 60px 44px;
+    }
+    .cover .label { font-size:11px; letter-spacing:4px; text-transform:uppercase; color:#7ab0e0; margin-bottom:16px; }
+    .cover h1 { font-size:28px; font-weight:700; line-height:1.3; margin-bottom:8px; }
+    .cover .subtitle { font-size:14px; color:#a0c4e8; margin-bottom:18px; }
+    .cover .badges { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px; }
+    .cover .badge {
+      display:inline-block; background:rgba(255,255,255,0.15);
+      border:1px solid rgba(255,255,255,0.25); border-radius:20px;
+      padding:3px 12px; font-size:11px; color:#c0d8f0;
+    }
+    .cover-meta { display:flex; gap:40px; font-size:12px; color:#7ab0e0; border-top:1px solid rgba(255,255,255,0.15); padding-top:16px; }
+    /* ===== Body ===== */
+    .body { padding: 0 48px 60px; }
+    /* ===== TOC ===== */
+    .toc { background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:24px 28px; margin:32px 0; }
+    .toc-title { font-size:13px; font-weight:700; color:#1e293b; letter-spacing:2px; margin-bottom:14px; }
+    .toc-cats { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+    .toc-cats-row2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:12px; }
+    .toc-cat h4 { font-size:11px; font-weight:700; color:#64748b; letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid #e2e8f0; }
+    .toc-cat ol { padding-left:16px; }
+    .toc-cat li { margin-bottom:4px; font-size:12px; }
+    .toc-cat a { color:#2563eb; text-decoration:none; }
+    .toc-cat a:hover { text-decoration:underline; }
+    /* ===== Case Card ===== */
+    .case-card {
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      margin: 32px 0;
+      overflow: hidden;
+    }
+    .case-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px 22px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .case-header.cat1 { background: #f0fdf4; border-bottom-color: #bbf7d0; }
+    .case-header.cat2 { background: #eff6ff; border-bottom-color: #bfdbfe; }
+    .case-header.cat3 { background: #faf5ff; border-bottom-color: #e9d5ff; }
+    .case-header.cat4 { background: #fffbeb; border-bottom-color: #fde68a; }
+    .case-header.cat5 { background: #fff1f2; border-bottom-color: #fecdd3; }
+    .case-num {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 16px; color: #fff;
+    }
+    .cat1 .case-num { background: #16a34a; }
+    .cat2 .case-num { background: #2563eb; }
+    .cat3 .case-num { background: #7c3aed; }
+    .cat4 .case-num { background: #d97706; }
+    .cat5 .case-num { background: #db2777; }
+    .case-title-block { flex: 1; }
+    .case-cat-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 3px; }
+    .cat1 .case-cat-label { color: #15803d; }
+    .cat2 .case-cat-label { color: #1d4ed8; }
+    .cat3 .case-cat-label { color: #6d28d9; }
+    .cat4 .case-cat-label { color: #b45309; }
+    .cat5 .case-cat-label { color: #be185d; }
+    .case-title { font-size: 17px; font-weight: 700; color: #0f172a; line-height: 1.3; }
+    .case-meta {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;
+    }
+    .meta-chip {
+      font-size: 11px; padding: 2px 10px; border-radius: 12px; border: 1px solid;
+    }
+    .meta-chip.tool  { background: #f1f5f9; border-color: #94a3b8; color: #475569; }
+    .meta-chip.time  { background: #fef9c3; border-color: #ca8a04; color: #854d0e; }
+    .meta-chip.roi   { background: #dcfce7; border-color: #16a34a; color: #14532d; }
+    .meta-chip.diff  { background: #fee2e2; border-color: #ef4444; color: #7f1d1d; }
+    .case-body { padding: 20px 22px; }
+    /* ===== Overview ===== */
+    .overview-box {
+      background: #f8fafc; border-left: 4px solid #3b82f6;
+      border-radius: 0 6px 6px 0; padding: 12px 16px; margin-bottom: 18px;
+      font-size: 0.9rem; color: #334155;
+    }
+    /* ===== Steps ===== */
+    .steps-title { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 10px; letter-spacing: 1px; }
+    .step-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .step-item { display: flex; gap: 12px; align-items: flex-start; }
+    .step-dot {
+      flex-shrink: 0; width: 24px; height: 24px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: #fff; margin-top: 2px;
+    }
+    .cat1-dot { background: #16a34a; }
+    .cat2-dot { background: #2563eb; }
+    .cat3-dot { background: #7c3aed; }
+    .cat4-dot { background: #d97706; }
+    .cat5-dot { background: #db2777; }
+    .step-content { flex: 1; }
+    .step-content strong { display: block; font-size: 13px; color: #0f172a; margin-bottom: 2px; }
+    .step-content span { font-size: 12px; color: #475569; line-height: 1.6; }
+    .step-time { font-size: 11px; color: #6b7280; background: #f1f5f9; border-radius: 4px; padding: 1px 7px; display: inline-block; margin-top: 2px; }
+    /* ===== Prompt ===== */
+    .prompt-block { margin-bottom: 18px; }
+    .prompt-label { font-size: 12px; font-weight: 700; color: #7c3aed; margin-bottom: 6px; }
+    pre.prompt {
+      background: #1e293b; color: #e2e8f0;
+      border-radius: 8px; padding: 14px 16px;
+      font-size: 12px; line-height: 1.7;
+      white-space: pre-wrap; word-break: break-all;
+      overflow-x: auto;
+    }
+    pre.prompt .ph { color: #fbbf24; }  /* placeholder highlight */
+    pre.prompt .cm { color: #64748b; }  /* comment */
+    /* ===== Notes + Success ===== */
+    .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
+    .note-box { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 6px; padding: 12px 14px; }
+    .note-box h5 { font-size: 12px; color: #c2410c; margin-bottom: 6px; }
+    .note-box ul { padding-left: 14px; font-size: 12px; color: #431407; line-height: 1.8; }
+    .ok-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 12px 14px; }
+    .ok-box h5 { font-size: 12px; color: #15803d; margin-bottom: 6px; }
+    .ok-box ul { padding-left: 14px; font-size: 12px; color: #14532d; line-height: 1.8; }
+    /* ===== Section header ===== */
+    .section-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 24px 0 8px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 4px;
+    }
+    .sh-num {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 15px; color: #fff;
+    }
+    .sh-cat1 { background: #16a34a; }
+    .sh-cat2 { background: #2563eb; }
+    .sh-cat3 { background: #7c3aed; }
+    .sh-cat4 { background: #d97706; }
+    .sh-cat5 { background: #db2777; }
+    .sh-title { font-size: 17px; font-weight: 700; color: #0f172a; }
+    .sh-sub { font-size: 12px; color: #64748b; }
+    /* ===== Footer ===== */
+    .footer { background:#0d1f3c; color:#7ab0e0; text-align:center; padding:18px; font-size:12px; display:flex; justify-content:space-between; }
+    /* ===== Disclaimer ===== */
+    .disclaimer {
+      background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px;
+      padding: 14px 18px; margin: 24px 0 0; font-size: 12px; color: #92400e;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ===== Cover ===== -->
+  <div class="cover">
+    <div class="label">UNLID Internal Document</div>
+    <h1>AI実装ユースケース集<br>導入手順モックアップ</h1>
+    <p class="subtitle">SME向け AI実装 20ケース — バックオフィス・営業・システム統合・マーケ・人事の実践手順書</p>
+    <div class="badges">
+      <span class="badge">バックオフィス効率化 × 5</span>
+      <span class="badge">売上・営業支援 × 4</span>
+      <span class="badge">システム統合 × 3</span>
+      <span class="badge">マーケティング × 4</span>
+      <span class="badge">人事・採用 × 4</span>
+      <span class="badge">プロンプトテンプレート付き</span>
+    </div>
+    <div class="cover-meta">
+      <span>UNLID 事業戦略チーム</span>
+      <span>2026年3月</span>
+      <span>v1.0</span>
+      <span>Confidential — 社内参照用</span>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="disclaimer">
+      ⚠️ <strong>本資料について：</strong>掲載のケースは業界事例・公開情報をもとに作成した「導入シナリオモックアップ」です。UNLIDは現在スタートアップのため自社実績はまだなく、効果・数値は目標・参考値として記載しています。クライアントへの提案前に各事例の根拠・出典を必ず確認してください。
+    </div>
+
+    <!-- ===== TOC ===== -->
+    <div class="toc">
+      <div class="toc-title">目次</div>
+      <div class="toc-cats">
+        <div class="toc-cat">
+          <h4>① バックオフィス効率化</h4>
+          <ol>
+            <li><a href="#c01">議事録の自動生成・共有</a></li>
+            <li><a href="#c02">メール返信・提案書の下書き</a></li>
+            <li><a href="#c03">経費精算・請求書OCR</a></li>
+            <li><a href="#c04">契約書・法務AIレビュー</a></li>
+            <li><a href="#c05">社内FAQチャットボット</a></li>
+          </ol>
+        </div>
+        <div class="toc-cat">
+          <h4>② 売上・営業支援</h4>
+          <ol start="6">
+            <li><a href="#c06">顧客リサーチ→提案書自動生成</a></li>
+            <li><a href="#c07">既存顧客データ分析→アップセル</a></li>
+            <li><a href="#c08">CRM代替：顧客管理AI設計</a></li>
+            <li><a href="#c09">競合・市場動向リサーチ自動化</a></li>
+          </ol>
+        </div>
+        <div class="toc-cat">
+          <h4>③ システム統合・業務フロー</h4>
+          <ol start="10">
+            <li><a href="#c10">SaaS×Excel API連携・一元化</a></li>
+            <li><a href="#c11">KPIダッシュボード構築</a></li>
+            <li><a href="#c12">内部ツール・スクリプト開発</a></li>
+          </ol>
+        </div>
+      </div>
+      <div class="toc-cats-row2">
+        <div class="toc-cat">
+          <h4 style="color:#b45309;">④ マーケティング・コンテンツ制作</h4>
+          <ol start="13">
+            <li><a href="#c13">SNS投稿・ブログ記事の自動生成</a></li>
+            <li><a href="#c14">商品説明文・LP文章のAI最適化</a></li>
+            <li><a href="#c15">顧客インタビュー分析→インサイト抽出</a></li>
+            <li><a href="#c16">AI画像生成による広告クリエイティブ</a></li>
+          </ol>
+        </div>
+        <div class="toc-cat">
+          <h4 style="color:#be185d;">⑤ 人事・採用・研修</h4>
+          <ol start="17">
+            <li><a href="#c17">求人票自動生成・応募者スクリーニング</a></li>
+            <li><a href="#c18">社員研修コンテンツのAI自動生成</a></li>
+            <li><a href="#c19">社内ナレッジ・マニュアルのRAG化</a></li>
+            <li><a href="#c20">採用面接設計・評価シート生成</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================
+         カテゴリ① バックオフィス効率化
+    ======================================== -->
+    <div class="section-header">
+      <div class="sh-num sh-cat1">①</div>
+      <div>
+        <div class="sh-title">バックオフィス効率化</div>
+        <div class="sh-sub">Phase 1（導入初月）で即効性を出す最優先カテゴリ。定型業務の削減時間を数値化してROIを証明する。</div>
+      </div>
+    </div>
+
+    <!-- Case 01 -->
+    <div class="case-card" id="c01">
+      <div class="case-header cat1">
+        <div class="case-num">01</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">バックオフィス効率化</div>
+          <div class="case-title">議事録の自動生成・要点抽出・共有</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Notta / Whisper + Claude</span>
+            <span class="meta-chip time">工数 3〜5h（導入〜定着）</span>
+            <span class="meta-chip roi">作業時間 40%削減</span>
+            <span class="meta-chip diff">難易度 ★☆☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>週1〜2回の会議を録音→文字起こし→AI要約→Slackへ自動投稿するフローを構築。60分の会議後作業が6分に短縮（青森県自治体・不動産会社等での導入事例をベースに設計）。経営会議・週次MTG・クライアント商談など幅広く適用可能。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat1-dot">1</div>
+            <div class="step-content">
+              <strong>録音ツールの選定・試験（Notta / otter.ai / Whisper）</strong>
+              <span>Nottaは日本語精度が高く月1,800円〜。無料版で3会議を試し精度を確認する。Whisperはオープンソース版（ローカル実行可）で機密性が高い場合に利用。<br>判断軸：①日本語精度 ②機密情報の取り扱い ③Slack/Notion連携有無</span>
+              <span class="step-time">0.5〜1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">2</div>
+            <div class="step-content">
+              <strong>参加者への録音告知・同意取得</strong>
+              <span>社内会議は口頭告知でOK。クライアント商談は事前書面または冒頭告知が必須（個人情報保護法への配慮）。「議事録作成のため録音します」の一言で足りる。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">3</div>
+            <div class="step-content">
+              <strong>要約プロンプトの設計・テスト（Claudeで実施）</strong>
+              <span>文字起こしテキストをClaudeに貼り付け、下記プロンプトで①決定事項②アクションアイテム③懸案事項を抽出。3〜5回の試行で精度を確認し、プロンプトを微調整する。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">4</div>
+            <div class="step-content">
+              <strong>Slackへの自動投稿設定（Zapier / Notta連携）</strong>
+              <span>NottaのSlack連携（有料プラン）またはZapierで「会議終了→要約テキスト生成→Slackポスト」を自動化。初期設定30分。手動でも良い（議事録をコピペしてSlack投稿）。</span>
+              <span class="step-time">0.5〜1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">5</div>
+            <div class="step-content">
+              <strong>テンプレートの固定化・マニュアル化</strong>
+              <span>使用するプロンプトをNotionに保管し「誰でも使えるテンプレート」として共有。担当者が自走できる状態にする。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（Claudeに貼り付けて使用）</div>
+          <pre class="prompt"><span class="cm"># 議事録要約プロンプト</span>
+あなたは会議の内容を整理する専門家です。
+以下の会議録を読んで、指定のフォーマットで要約してください。
+
+<span class="ph">【会議録】</span>
+[ここに文字起こしテキストを貼り付ける]
+
+<span class="ph">【出力フォーマット】</span>
+## ✅ 決定事項（箇条書き・3点以内）
+## 📋 アクションアイテム（担当者｜期限｜タスク の表形式）
+## ⚠️ 懸案事項・要確認事項（あれば）
+## 📅 次回アジェンダ候補（あれば）
+
+<span class="cm"># 制約：推測や解釈は書かず、発言内容に忠実に要約すること</span>
+<span class="cm"># 担当者名が不明な場合は「未定」と記載</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>録音ファイルは機密扱い（クラウド保存先の確認必須）</li>
+              <li>Notta無料版は録音時間に月60分制限あり</li>
+              <li>専門用語・社名は誤認識されやすい→辞書登録が必要</li>
+              <li>「決定」と「検討中」の混同に注意。プロンプトで明示する</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>議事録作成時間：60分→10分以下</li>
+              <li>要約精度：参加者が「OK」と言える正確さ</li>
+              <li>Slack投稿：会議終了から1時間以内に共有</li>
+              <li>担当者が自力でツールを使える</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 02 -->
+    <div class="case-card" id="c02">
+      <div class="case-header cat1">
+        <div class="case-num">02</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">バックオフィス効率化</div>
+          <div class="case-title">メール返信・提案書の下書き自動生成</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Claude / ChatGPT</span>
+            <span class="meta-chip time">工数 2〜4h（導入〜定着）</span>
+            <span class="meta-chip roi">文書作成 60〜70%時短</span>
+            <span class="meta-chip diff">難易度 ★☆☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>定型メール・営業提案書・お礼状・クレーム対応文など、毎日発生する文書作成を半自動化。「状況説明→下書き生成→人間がレビュー・送信」の流れを定着させる。不動産会社での導入事例では文書作成時間が70%削減。即日導入可能。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat1-dot">1</div>
+            <div class="step-content">
+              <strong>「よく書くメール」の棚卸し（ヒアリング）</strong>
+              <span>FDEがオーナー・担当者にヒアリング。「週に何通、どんなメールを書きますか？」月次で繰り返す定型文を10〜15種類リストアップ。優先度：量×時間コストの大きいものから着手。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">2</div>
+            <div class="step-content">
+              <strong>トーン・文体の設定（ペルソナ設計）</strong>
+              <span>その会社らしい文体をプロンプトに定義。「丁寧だが堅苦しくない」「短く簡潔に」など実際の過去メールをClaudeに読ませて文体を学習させる。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">3</div>
+            <div class="step-content">
+              <strong>メール種別ごとのプロンプトテンプレート作成</strong>
+              <span>「お礼メール」「問い合わせ対応」「見積もり提出」「クレーム対応」各タイプ別に変数（相手名・用件・金額等）を含むテンプレートを作成。Notionに一覧化。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">4</div>
+            <div class="step-content">
+              <strong>実際のメールで10通テスト→品質確認</strong>
+              <span>担当者に実際のメールシチュエーションで試してもらい、修正点を記録。「これはそのまま使える」「ここは毎回直す」を把握してプロンプトを改善。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（メール下書き用）</div>
+          <pre class="prompt"><span class="cm"># 営業メール下書きプロンプト</span>
+あなたは私の代わりにビジネスメールを書く優秀なアシスタントです。
+以下の情報をもとに、メールの下書きを作成してください。
+
+<span class="ph">【メールの目的】</span>：[例：先日の商談のお礼と次回アポ打診]
+<span class="ph">【相手】</span>：[例：株式会社○○ 営業部 田中様]
+<span class="ph">【伝えたい内容】</span>：[例：先日ご提示いただいた要件を踏まえ、来週月〜水に打ち合わせをお願いしたい]
+<span class="ph">【トーン】</span>：丁寧・簡潔・親しみやすい（堅すぎない）
+
+<span class="cm"># 制約：
+# - 200〜300字程度
+# - 過剰な敬語は不要（「ご査収ください」等は使わない）
+# - 件名も一緒に提案すること</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>AIの文章は必ず人間がレビュー・送信（無承認送信は絶対NG）</li>
+              <li>固有名詞の間違いが出やすい（社名・担当者名を毎回確認）</li>
+              <li>クレーム対応は感情的配慮が必要→AIは下書きまで</li>
+              <li>社外秘情報をプロンプトに入れない（機密管理）</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>1通あたり作成時間：15分→4分以下</li>
+              <li>AI下書きをそのまま使える割合：60%以上</li>
+              <li>プロンプト集がNotionに10種類以上整備済み</li>
+              <li>担当者が自分でプロンプトを改変できる</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 03 -->
+    <div class="case-card" id="c03">
+      <div class="case-header cat1">
+        <div class="case-num">03</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">バックオフィス効率化</div>
+          <div class="case-title">経費精算・請求書OCR処理の自動化</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">AI-OCR（マネーフォワード）+ Claude</span>
+            <span class="meta-chip time">工数 4〜6h（設定〜運用開始）</span>
+            <span class="meta-chip roi">月20〜30h → 3〜5h（入力ミスほぼゼロ）</span>
+            <span class="meta-chip diff">難易度 ★★☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>領収書・請求書の手入力を AI-OCR で自動読み取りし、仕訳・承認フローまでを半自動化。マネーフォワードのスマート経費機能（月1,000円〜）が最も導入しやすい。月末の経理作業を月20〜30時間から3〜5時間へ削減。電子帳簿保存法の対応も同時に達成できる。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat1-dot">1</div>
+            <div class="step-content">
+              <strong>現行の経費処理フロー確認（ヒアリング）</strong>
+              <span>現状の「領収書をどう集めてどう入力しているか」を把握。Excelで集計している場合は列構造を確認し、移行の設計をする。月に何枚の領収書・請求書があるか数える。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">2</div>
+            <div class="step-content">
+              <strong>マネーフォワードのスマート経費を試験導入</strong>
+              <span>30日無料トライアル開始。スマホアプリで領収書を撮影→OCR読み取り→自動仕訳提案の流れをテスト。最初の10枚で精度を確認。勘定科目の自動分類精度は約85〜90%。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">3</div>
+            <div class="step-content">
+              <strong>仕訳ルールの設定・よく使う科目の登録</strong>
+              <span>「交通費は旅費交通費」「○○社への支払いは仕入高」等、会社固有のルールをMFに学習させる。設定後は繰り返し請求書を自動分類するようになる。税理士に確認を推奨。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">4</div>
+            <div class="step-content">
+              <strong>Claude との連携：異常値・不備チェックの自動化</strong>
+              <span>月次でMFからCSVエクスポート→Claudeに読み込ませて「金額が異常に高い項目」「未承認のまま残っている項目」「科目が怪しい項目」を自動チェック。下記プロンプトを使用。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">5</div>
+            <div class="step-content">
+              <strong>承認フローのルール化（Slack通知設定）</strong>
+              <span>MFのSlack連携で「申請が来たらSlackで承認者に通知」を設定。承認をSlack上で完結させ、月末の確認作業をなくす。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（経費CSV異常値チェック）</div>
+          <pre class="prompt"><span class="cm"># 経費データ異常値チェックプロンプト</span>
+以下は今月の経費データCSVです。会計担当者として以下をチェックしてください。
+
+<span class="ph">[CSVデータをここに貼り付け]</span>
+
+以下の観点で問題がある行をピックアップしてください：
+
+1. 【高額アラート】1件3万円以上の支出（接待・備品など）
+2. 【科目疑義】勘定科目と内容が不一致に見えるもの
+3. 【承認なし】承認者欄が空白のもの
+4. 【重複疑い】同日・同金額・同店舗の重複申請
+
+<span class="cm"># 出力：問題行の一覧表（行番号・金額・問題内容の3列）</span>
+<span class="cm"># 問題なければ「問題なし」と出力</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>手書き領収書はOCR精度が低い→手書きは別途入力</li>
+              <li>電帳法：スキャン解像度200dpi以上が必要</li>
+              <li>税理士との連携確認が必須（科目設定・会計ソフトの互換性）</li>
+              <li>MF無料版は機能制限あり→月1,000円の有料プランが実用的</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>月末経理作業時間が半分以下に削減</li>
+              <li>OCR読み取り後の手修正が20%以下</li>
+              <li>月次の科目分類ミス：導入前比50%以上減少</li>
+              <li>承認フローがSlack上で完結している</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 04 -->
+    <div class="case-card" id="c04">
+      <div class="case-header cat1">
+        <div class="case-num">04</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">バックオフィス効率化</div>
+          <div class="case-title">契約書・法務書類の初期AIレビュー</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Claude（長文処理に強み）</span>
+            <span class="meta-chip time">工数 3〜5h（フロー設計〜定着）</span>
+            <span class="meta-chip roi">弁護士確認前コスト 70%削減</span>
+            <span class="meta-chip diff">難易度 ★★☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>毎月発生する業務委託契約書・NDA・賃貸借契約などをClaudeに読ませ、「見落としやすいリスク条項」「不利な条件」「確認すべき箇所」を自動抽出。弁護士への相談前の下調べコストを削減。Claudeは長文処理が特に優れており、30ページの契約書も一括処理可能。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat1-dot">1</div>
+            <div class="step-content">
+              <strong>よく締結する契約書の種類をリストアップ</strong>
+              <span>NDA・業務委託・サービス利用規約・賃貸借・雇用契約など。各タイプ別に「特にチェックしたい条項」を整理する（例：NDA→情報範囲・期間・罰則規定）。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">2</div>
+            <div class="step-content">
+              <strong>契約書タイプ別チェックリストの設計</strong>
+              <span>各種別で「AIに何をチェックさせるか」のリストを作る。例：業務委託契約なら①瑕疵担保責任②知的財産の帰属③報酬の支払い条件④解除条件⑤競業避止義務。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">3</div>
+            <div class="step-content">
+              <strong>Claudeでの試験レビュー（実際の契約書で3件テスト）</strong>
+              <span>過去に締結した契約書（機密でない部分）でテスト。Claudeの出力と「実際に気になっていた条項」を比較して、プロンプトの精度を調整する。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">4</div>
+            <div class="step-content">
+              <strong>「AI初期チェック→人間確認→弁護士相談」フローの確立</strong>
+              <span>AIのチェック結果を「問題なし・要確認・要弁護士相談」の3段階で分類するルールを決める。「要弁護士相談」以外はAI判断で処理できる体制を構築。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（業務委託契約書レビュー）</div>
+          <pre class="prompt"><span class="cm"># 契約書リスクチェックプロンプト</span>
+あなたは法務の知識を持つビジネスアドバイザーです。
+以下の業務委託契約書を読み、依頼者（受託側）の立場から
+リスクのある条項を指摘してください。
+
+<span class="ph">【契約書本文】</span>
+[ここに契約書テキストを貼り付け]
+
+<span class="ph">【チェック項目】</span>
+1. 知的財産権の帰属（受託者に不利な条件はあるか）
+2. 瑕疵担保・損害賠償の範囲（過大な責任負担はないか）
+3. 報酬の支払い条件と遅延時の対応
+4. 解除条件（一方的に不利な解除条項はないか）
+5. 競業避止・秘密保持の範囲（過度に広くないか）
+
+<span class="cm"># 出力フォーマット：
+# 各項目を「問題なし / 要確認 / 要弁護士相談」で評価
+# 「要確認」以上は該当条文を引用して問題点を説明
+# 最後に総合リスク評価（低・中・高）を出力</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li><strong>AIは法律の専門家ではない</strong>。最終判断は必ず人間・弁護士が行う</li>
+              <li>機密性の高い契約書はClaude.aiではなくAPIで処理（データ学習に使われない設定）</li>
+              <li>法改正への追随が必要（フリーランス保護新法・電帳法等）</li>
+              <li>AIの出力を「そのまま法的根拠」として使わない</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>契約書の初期確認時間：1件30分→5分以下</li>
+              <li>弁護士相談件数：重要案件のみに絞り込めている</li>
+              <li>過去に見落としていたリスク条項を1件以上発見</li>
+              <li>チェックリストが契約種別ごとに整備済み</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 05 -->
+    <div class="case-card" id="c05">
+      <div class="case-header cat1">
+        <div class="case-num">05</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">バックオフィス効率化</div>
+          <div class="case-title">社内FAQ・マニュアルのAIチャットボット化</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Notion AI / Claude API</span>
+            <span class="meta-chip time">工数 5〜8h（設計〜公開）</span>
+            <span class="meta-chip roi">社内質問対応 40〜60%削減</span>
+            <span class="meta-chip diff">難易度 ★★★</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>「〇〇の申請方法は？」「この書類はどこ？」等、毎日繰り返される社内質問をAIが自動回答する仕組みを構築。Notionにマニュアルを集約しNotion AIで検索できる形にするのが最も低コスト（月1,650円〜）。新人の立ち上がり期間の短縮と、先輩社員の割り込み対応コストを大幅削減。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat1-dot">1</div>
+            <div class="step-content">
+              <strong>よく来る質問TOP20をリストアップ</strong>
+              <span>「先週何回同じ質問に答えましたか？」とヒアリング。Slackのログを検索して繰り返し質問を抽出。まず20問のFAQリストを作る。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">2</div>
+            <div class="step-content">
+              <strong>Notionにマニュアル・ルールを集約</strong>
+              <span>バラバラになっている「Word・Excel・口頭ルール」をNotionの1つのDBに集める。既存マニュアルをそのままコピペでOK。構造化より「まず全部入れること」を優先する。</span>
+              <span class="step-time">2〜3h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">3</div>
+            <div class="step-content">
+              <strong>Notion AI Q&A機能の有効化・テスト</strong>
+              <span>Notion AIの「Q&A」機能を有効化（プラスプラン以上で利用可）。登録した20問を実際に質問してみて、正確に回答できるか確認。精度が低い場合はマニュアルの記述を具体化する。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">4</div>
+            <div class="step-content">
+              <strong>Slackに「botに聞く」文化を定着させる</strong>
+              <span>SlackのNotionアプリ連携を設定し、「まずNotionで検索してから人に聞く」ルールをチームに周知。最初の1週間は「その質問Notionに入ってるよ」とリマインドする。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat1-dot">5</div>
+            <div class="step-content">
+              <strong>マニュアルの更新ルール策定</strong>
+              <span>「新しいルールができたらNotionに追記する担当者」を決める。月1回のマニュアル棚卸し（30分）をカレンダーに入れる。更新されないFAQは意味がない。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（社内FAQ回答生成 — Notion AI使えない場合）</div>
+          <pre class="prompt"><span class="cm"># 社内FAQ回答生成プロンプト（マニュアルテキストをコンテキストに使用）</span>
+あなたは社内のルール・マニュアルに詳しいアシスタントです。
+以下の社内マニュアルをもとに、社員の質問に答えてください。
+
+<span class="ph">【社内マニュアル】</span>
+[該当するマニュアルのテキストを貼り付け]
+
+<span class="ph">【社員からの質問】</span>
+[質問内容を入力]
+
+<span class="cm"># 制約：
+# - マニュアルに記載のない内容は「マニュアルに記載がありません」と回答
+# - 推測で答えない
+# - 回答は3〜5行以内でわかりやすく
+# - 必要なら「○○ページを参照してください」と誘導する</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>マニュアルが古いと誤回答する（更新ルールが最重要）</li>
+              <li>Notion AIはマニュアルの外の情報には回答しない（仕様）</li>
+              <li>難しい判断が必要な質問はAIでなく人間へエスカレーション設計</li>
+              <li>Notion有料プランが必要（月1,650円〜）——費用対効果の説明を先に</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>繰り返し質問の件数：週10件→3件以下</li>
+              <li>新人の「質問しなければわからないこと」が半減</li>
+              <li>マニュアルDBにFAQ30問以上が整備されている</li>
+              <li>更新担当者が決まり月1回の棚卸しが実施されている</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================
+         カテゴリ② 売上・営業支援
+    ======================================== -->
+    <div class="section-header">
+      <div class="sh-num sh-cat2">②</div>
+      <div>
+        <div class="sh-title">売上・営業支援</div>
+        <div class="sh-sub">Phase 2〜3（3〜12ヶ月）。バックオフィスで削減した時間を売上に転換する段階。定量的なROIより「売上増」を目指す。</div>
+      </div>
+    </div>
+
+    <!-- Case 06 -->
+    <div class="case-card" id="c06">
+      <div class="case-header cat2">
+        <div class="case-num">06</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">売上・営業支援</div>
+          <div class="case-title">顧客企業リサーチの自動化 → 提案書生成</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Perplexity + Claude / Notion</span>
+            <span class="meta-chip time">工数 3〜5h（フロー設計〜定着）</span>
+            <span class="meta-chip roi">営業リサーチ：半日 → 30分</span>
+            <span class="meta-chip diff">難易度 ★★☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>商談前のリサーチ（企業情報・競合・課題）と提案書の下書きをAIで自動化。PerplexityでリアルタイムWeb情報を収集し、ClaudeでSMEに響く提案書にまとめる。営業リサーチが「半日かかっていた作業」から「30分+人間レビュー」に短縮。提案書の品質・一貫性も向上する。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat2-dot">1</div>
+            <div class="step-content">
+              <strong>提案書のテンプレート構造を決める</strong>
+              <span>現在の提案書の「必須要素」を5〜7項目に整理。例：①会社概要理解 ②課題の仮説 ③UNLIDの解決策 ④事例・実績 ⑤費用・スケジュール ⑥次のアクション。この構造がプロンプトのベースになる。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">2</div>
+            <div class="step-content">
+              <strong>Perplexityでのリサーチプロンプト設計</strong>
+              <span>「企業名＋業種」を入力すると①事業概要②最近のニュース③競合との比較④課題が予測される点 を取得するプロンプトを設計。Perplexityは出典URL付きで回答するため、信頼性確認が容易。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">3</div>
+            <div class="step-content">
+              <strong>Claudeでの提案書下書き生成フロー</strong>
+              <span>Perplexityで収集した情報をClaudeに渡し、提案書の文章を自動生成。「このSMEに刺さる価値提案のフレーム」「懸念されそうな反論への対処」も含めて出力させる。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">4</div>
+            <div class="step-content">
+              <strong>Notionのテンプレートページに組み込む</strong>
+              <span>Notionに「提案書作成テンプレート」ページを作成。①Perplexityプロンプト ②Claudeプロンプト ③完成後のスライド構成 を一つのページにまとめて、誰でも30分で提案書が作れる状態にする。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（提案書下書き生成）</div>
+          <pre class="prompt"><span class="cm"># 提案書下書き生成プロンプト</span>
+あなたは優秀な営業コンサルタントです。
+以下の情報をもとに、SMEへの提案書の下書きを作成してください。
+
+<span class="ph">【企業情報（Perplexityで収集したもの）】</span>
+[企業概要・最近のニュース・課題仮説を貼り付け]
+
+<span class="ph">【提案するサービス】</span>
+[自社サービス名と解決できる課題]
+
+<span class="ph">【提案書の構成（各セクションを200字以内で）】</span>
+1. 貴社の現状認識（課題の言語化）
+2. このまま放置した場合のリスク
+3. UNLIDが提供する解決策（具体的に）
+4. 類似課題での成果事例（仮想でOK）
+5. 費用・期間・次のステップ
+
+<span class="cm"># 制約：
+# - 相手が「うちのことをわかってる」と感じる表現にする
+# - 根拠なき数値は入れない（「●●%改善」等は事例ベースのみ）
+# - 最後に「一番刺さる提案の一言」を太字で締める</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>Perplexityの情報は最新でない場合がある→決算情報等は公式確認</li>
+              <li>AIが作った提案書を無修正で送らない（相手に伝わらない表現が残る）</li>
+              <li>機密情報（内部資料）はClaudeに入力しない</li>
+              <li>業種特有の言葉・慣習はプロンプトに追加学習させる</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>提案書作成時間：半日→1時間以内</li>
+              <li>商談前のリサーチメモが30分で完成している</li>
+              <li>提案書の採用率（商談→受注転換）が上がっている</li>
+              <li>営業担当が自力でテンプレを使えている</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 07 -->
+    <div class="case-card" id="c07">
+      <div class="case-header cat2">
+        <div class="case-num">07</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">売上・営業支援</div>
+          <div class="case-title">既存顧客データ分析 → アップセル機会の特定</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Python + Claude / Spreadsheet</span>
+            <span class="meta-chip time">工数 5〜8h（設計〜分析完成）</span>
+            <span class="meta-chip roi">既存顧客深耕による売上増 8〜15%</span>
+            <span class="meta-chip diff">難易度 ★★★</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>SMEの売上は既存顧客に70〜80%依存しているにもかかわらず、「どの顧客に何を提案すべきか」をデータで把握できていない。過去の受注データ・取引頻度・顧客属性をClaudeに読み込ませ「アップセル機会のある顧客TOP10」を自動特定する。データが存在すれば1日で分析完了。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat2-dot">1</div>
+            <div class="step-content">
+              <strong>顧客データの棚卸し・エクスポート</strong>
+              <span>会計ソフト・Excelから「顧客別売上」「購入頻度」「最終購入日」「購入商品カテゴリ」をCSVでエクスポート。存在するデータを全部出す（完璧でなくてOK）。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">2</div>
+            <div class="step-content">
+              <strong>RFM分析の設計（Recency・Frequency・Monetary）</strong>
+              <span>①最終購入日（Recency）②購入頻度（Frequency）③購入金額（Monetary）の3軸で顧客をスコアリング。ExcelまたはPythonで集計し、「高価値・要アクション顧客」を特定する。</span>
+              <span class="step-time">2〜3h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">3</div>
+            <div class="step-content">
+              <strong>ClaudeへのCSV読み込み → アップセル仮説生成</strong>
+              <span>RFM分析結果CSVをClaudeに貼り付け、「このデータから考えられるアップセル提案を顧客ごとに出せ」とプロンプト。購入パターンから次の提案を自動生成する。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">4</div>
+            <div class="step-content">
+              <strong>営業アクションリストの作成・優先度設定</strong>
+              <span>AI分析結果をもとに「今月コンタクトすべき顧客TOP10」とアクション内容（電話・DM・訪問）を決定。Notionのプロジェクトボードに落とし込む。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（顧客アップセル機会分析）</div>
+          <pre class="prompt"><span class="cm"># 顧客アップセル機会分析プロンプト</span>
+あなたは営業分析の専門家です。
+以下の顧客データを分析し、アップセル・クロスセルの機会を特定してください。
+
+<span class="ph">【顧客データ（CSVまたは表形式）】</span>
+[顧客名、最終購入日、購入頻度、累計金額、購入カテゴリを貼り付け]
+
+<span class="ph">【分析依頼】</span>
+1. 「最近購入がなく、以前は高頻度だった顧客」をリストアップ（掘り起こし対象）
+2. 「1カテゴリしか購入していない顧客」のクロスセル候補を提案
+3. 「購入金額が突然増えた顧客」の理由仮説と次のアクション
+4. 総合的に「今月アプローチすべき顧客TOP5」とその理由
+
+<span class="cm"># 出力：顧客名・アクション内容・理由 の3列テーブルで出力</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>データが少ない（10社以下）と分析精度が低い→まずデータ整備</li>
+              <li>AIの提案は「仮説」。必ず営業担当の感覚でフィルターをかける</li>
+              <li>個人情報を含むデータは社外サービスへの入力に注意（Claude APIを推奨）</li>
+              <li>分析は月1回の定例化が重要（単発で終わらせない）</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後2ヶ月）</h5>
+            <ul>
+              <li>「アプローチすべき顧客リスト」が毎月作成されている</li>
+              <li>掘り起こしアプローチから受注が1件以上発生</li>
+              <li>クロスセル提案の打率が従来比で向上</li>
+              <li>データ分析が属人化せず誰でも実行できる</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 08 -->
+    <div class="case-card" id="c08">
+      <div class="case-header cat2">
+        <div class="case-num">08</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">売上・営業支援</div>
+          <div class="case-title">CRM代替：顧客管理・案件進捗のAI設計</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Airtable / Notion + Claude</span>
+            <span class="meta-chip time">工数 6〜10h（設計〜運用開始）</span>
+            <span class="meta-chip roi">商談ロスト要因の可視化・属人営業解消</span>
+            <span class="meta-chip diff">難易度 ★★★</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>「顧客情報が担当者の頭の中にしかない」「どの商談がどの段階か誰も把握していない」問題を解消。SalesforceのようなCRMは高価すぎるSMEに対し、Notionまたは Airtableで月0〜3,000円で「SME版CRM」を構築。ClaudeとAPI連携することで自動レポート・フォローアップ提案が可能になる。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat2-dot">1</div>
+            <div class="step-content">
+              <strong>現状の顧客管理方法のヒアリング</strong>
+              <span>「今どこに顧客情報を管理していますか？」からスタート。Excel・名刺アプリ・担当者の記憶など散在している情報源を全て洗い出す。移行に必要なデータ量も確認する。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">2</div>
+            <div class="step-content">
+              <strong>Notionのデータベース設計（CRMの骨格）</strong>
+              <span>必須フィールド：①顧客名 ②業種 ③担当者 ④商談ステータス（見込み/提案中/交渉中/受注/失注） ⑤金額 ⑥最終接触日 ⑦次のアクション ⑧メモ。Notionのボードビューで「カンバン型」にすると進捗が一目でわかる。</span>
+              <span class="step-time">2〜3h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">3</div>
+            <div class="step-content">
+              <strong>既存顧客データの移行・初期登録</strong>
+              <span>ExcelデータをNotionにCSVインポート（NotionはCSV一括取り込み可能）。データが少ない場合は手入力でも30分で完了。最初は完璧でなくていい——「動かしながら整備」が原則。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">4</div>
+            <div class="step-content">
+              <strong>週次レポートの自動生成（Claude連携）</strong>
+              <span>月曜朝にNotionからデータをエクスポートし、Claudeに渡して「今週フォローアップが必要な案件TOP5」「失注しそうなリスク案件」「今月の受注見込み」を自動生成。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">5</div>
+            <div class="step-content">
+              <strong>入力ルール・更新文化の定着</strong>
+              <span>「商談後24時間以内にNotionを更新する」ルールを決める。最初の2週間は毎朝5分の「更新チェック」ミーティングを設定し、習慣化させる。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（週次営業レポート自動生成）</div>
+          <pre class="prompt"><span class="cm"># 週次営業レポート生成プロンプト</span>
+あなたは営業マネージャーのアシスタントです。
+以下の案件リストを分析し、週次営業レポートを作成してください。
+
+<span class="ph">【案件データ（NotionのエクスポートCSV）】</span>
+[顧客名・ステータス・金額・最終接触日・次のアクションを貼り付け]
+
+<span class="ph">【レポート要件】</span>
+1. 今週フォローアップが必要な案件（最終接触から14日以上経過）
+2. 今月受注見込み額の合計と内訳
+3. 「停滞している案件」（ステータスが2週間以上変化なし）
+4. 今週中に取るべきアクションTOP3
+
+<span class="cm"># 出力：箇条書き + 重要案件は表形式
+# 締めくくりに「今週の一言アドバイス」を追加</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>誰も更新しなくなるのが最大のリスク——入力コストを最小化する設計が必須</li>
+              <li>フィールドを増やしすぎると入力負担が増え使われなくなる</li>
+              <li>Notionは無料版でも十分だが、5名以上のチームは有料プラン推奨</li>
+              <li>Airtableは高機能だが学習コストが高い——Notionの方が導入しやすい</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>全商談のステータスがNotion上で把握できている</li>
+              <li>週次レポートが自動生成されている</li>
+              <li>「フォローアップ忘れ」による失注が減少</li>
+              <li>担当者交代時の引き継ぎが30分以内に完了できる</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 09 -->
+    <div class="case-card" id="c09">
+      <div class="case-header cat2">
+        <div class="case-num">09</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">売上・営業支援</div>
+          <div class="case-title">競合・市場動向のAIリサーチ自動化</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Claude API + Perplexity</span>
+            <span class="meta-chip time">工数 3〜5h（設定〜初回レポート）</span>
+            <span class="meta-chip roi">月次リサーチコスト 80%削減</span>
+            <span class="meta-chip diff">難易度 ★★☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>「競合が何を始めたか」「業界のトレンドがどう変わったか」を毎月手動で調べる作業をAIで自動化。Perplexityを使えば最新Webの情報を引用付きで収集でき、Claudeでフォーマット整形して経営陣に配布できる「月次マーケットインテリジェンスレポート」を構築。リサーチに使っていた半日を30分に短縮。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat2-dot">1</div>
+            <div class="step-content">
+              <strong>モニタリングするトピック・競合を定義</strong>
+              <span>「毎月チェックしたい情報」を10〜15項目に整理。例：①競合A社の新サービス ②業界の採用動向 ③主要顧客業種の景況感 ④関連法改正の動き。具体的に決めるほどプロンプトの精度が上がる。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">2</div>
+            <div class="step-content">
+              <strong>Perplexityのプロンプト設計（競合・業界別）</strong>
+              <span>競合ごと・トピックごとに検索プロンプトを設計。「過去30日以内」「日本語のみ」「信頼できる情報源」の条件を入れると精度が上がる。Perplexity Proは月20ドルで深い検索が可能。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">3</div>
+            <div class="step-content">
+              <strong>Claudeでの統合レポート生成</strong>
+              <span>Perplexityで収集した各トピックの情報をClaudeに渡し、「経営陣が5分で読める月次レポート」フォーマットに整形。インパクトの大きい情報を先頭に、アクション提案を末尾に。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat2-dot">4</div>
+            <div class="step-content">
+              <strong>月次ルーティン化（カレンダー設定）</strong>
+              <span>毎月第1月曜日に「リサーチ→レポート生成→Slack配布」の30分ルーティンを設定。担当者がツールを使えるよう操作マニュアルをNotionに保管する。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（月次マーケットレポート生成）</div>
+          <pre class="prompt"><span class="cm"># 月次マーケットインテリジェンスレポート生成プロンプト</span>
+あなたは業界アナリストです。
+以下の情報（Perplexityで収集）をもとに、経営者向けの月次レポートを作成してください。
+
+<span class="ph">【競合情報】</span>
+[競合A社：最近の動向を貼り付け]
+[競合B社：最近の動向を貼り付け]
+
+<span class="ph">【業界トレンド】</span>
+[収集した業界ニュースを貼り付け]
+
+<span class="ph">【レポート構成】</span>
+## 今月のビッグニュース（1〜3件・最重要のみ）
+## 競合動向サマリー（各社1〜2行）
+## 業界全体のトレンド（3点）
+## 自社への影響とアクション提案（具体的に2〜3点）
+
+<span class="cm"># 制約：全体で500字以内。経営者が5分で読めるボリューム</span>
+<span class="cm"># 重要度：「即対応必要」「来月以降検討」「情報収集継続」の3段階でラベル付け</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>Perplexityの情報も誤情報が混じる——重要情報は一次ソース確認</li>
+              <li>競合の「公式発表以外」の噂情報は扱わない</li>
+              <li>レポートが「情報の羅列」にならないよう「So What（だから何？）」の視点を必ず入れる</li>
+              <li>Perplexityは月20ドル（Pro）でないと深い検索ができない</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後2ヶ月）</h5>
+            <ul>
+              <li>月次レポートが毎月第1週に配布されている</li>
+              <li>経営判断にレポートの情報が活用された実績が1件以上</li>
+              <li>リサーチにかける時間が毎月30分以内に収まっている</li>
+              <li>「競合に先を越された」という事態が減少</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================
+         カテゴリ③ システム統合・業務フロー改善
+    ======================================== -->
+    <div class="section-header">
+      <div class="sh-num sh-cat3">③</div>
+      <div>
+        <div class="sh-title">システム統合・業務フロー改善</div>
+        <div class="sh-sub">Phase 2〜3（3〜12ヶ月）。バラバラなツールとデータを統合し、「情報が一か所に集まる」経営基盤を作る。難易度が高いため副業ワーカーとの協働が有効。</div>
+      </div>
+    </div>
+
+    <!-- Case 10 -->
+    <div class="case-card" id="c10">
+      <div class="case-header cat3">
+        <div class="case-num">10</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">システム統合・業務フロー改善</div>
+          <div class="case-title">バラバラなSaaS × ExcelシートのAPI連携・一元化</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Zapier / Make + Claude</span>
+            <span class="meta-chip time">工数 8〜15h（設計〜稼働）</span>
+            <span class="meta-chip roi">手動転記ゼロ化・システム断裂の解消</span>
+            <span class="meta-chip diff">難易度 ★★★</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>「会計ソフトのデータをExcelに手打ちして、そのExcelをさらに別のツールに転記する」——SMEでは日常的なこの作業をZapier/Makeで自動化。200名規模のSMEでも「在庫・受注・顧客・経理」が4つの別々のExcelで管理されているケースは頻発する。API連携で手動転記をゼロにし、「常に最新データが1か所にある」状態を作る。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat3-dot">1</div>
+            <div class="step-content">
+              <strong>現行フロー図の作成（どこからどこへデータが流れているか）</strong>
+              <span>「何のデータが、どこから、どこへ、誰が手動で移しているか」を紙に書き出す。FDEが1時間のヒアリングで作成。これが設計の全ての起点になる。A4×1枚に収まるレベルで可。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">2</div>
+            <div class="step-content">
+              <strong>優先度の高い「1つの転記フロー」を特定</strong>
+              <span>全部を一気に自動化しようとしない。「最も頻繁に・最も手間がかかる転記」を1つ選ぶ。例：「請求書SaaS（Misoca）→会計ソフト（MF）への入力」「受注メール→Excelへの入力」など。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">3</div>
+            <div class="step-content">
+              <strong>Zapierのシナリオ設計・テスト（ノーコード）</strong>
+              <span>ZapierはGUI操作のみで2つのツールをつなぐことができる（コード不要）。「トリガー（何が起きたら）→アクション（何をする）」の2ステップで設計。無料プランで5つのZapまで作成可。</span>
+              <span class="step-time">3〜5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">4</div>
+            <div class="step-content">
+              <strong>1週間の本番稼働テスト → エラー修正</strong>
+              <span>実際のデータで1週間動かし、エラーが出た場合はZapierのログで原因を確認して修正。「99%動く」状態になったら正式稼働とし、手動転記を廃止する。</span>
+              <span class="step-time">2〜3h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">5</div>
+            <div class="step-content">
+              <strong>第2・第3の転記フローへ順次展開</strong>
+              <span>1本目が安定したら2本目の自動化に着手。最終的には「全ての手動転記をゼロにする」ゴールに向けて段階的に進める。月1〜2本のペースで展開するのが現実的。</span>
+              <span class="step-time">継続</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（Zapierシナリオ設計の壁打ち用）</div>
+          <pre class="prompt"><span class="cm"># Zapierシナリオ設計の壁打ちプロンプト</span>
+あなたはノーコード自動化の専門家です。
+以下の手動作業をZapierで自動化するシナリオを設計してください。
+
+<span class="ph">【現在の手動フロー】</span>
+例：受注メールが届く → Excelに顧客名・金額・商品名を手入力する → Slackで担当者に通知する
+
+<span class="ph">【使用中のツール】</span>
+[連携させたいSaaSの名前を列挙]
+
+以下を設計してください：
+1. Zapierのトリガー設定（何が起きたら動くか）
+2. アクションの順序（何をするか）
+3. データのマッピング（どのフィールドをどこに送るか）
+4. エラー時の対処（失敗した場合のアラート設定）
+
+<span class="cm"># 注意：ZapierでAPI連携できないツールがある場合は代替案も提示</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>Zapierの無料プランはタスク数制限あり（月100タスク）——有料プランの費用対効果を先に確認</li>
+              <li>連携するSaaSが古い場合はAPIを持っていない場合がある</li>
+              <li>自動化後に「エラーに誰も気づかない」問題——必ずエラー通知をSlackに設定</li>
+              <li>最初から複雑なフローを作ると管理できなくなる——シンプルに始める</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>対象の手動転記作業が完全になくなった</li>
+              <li>Zapierのエラー率が5%未満で安定稼働</li>
+              <li>転記ミスによるデータ不整合が発生していない</li>
+              <li>担当者が「Zapierを管理できる」状態になっている</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 11 -->
+    <div class="case-card" id="c11">
+      <div class="case-header cat3">
+        <div class="case-num">11</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">システム統合・業務フロー改善</div>
+          <div class="case-title">KPIダッシュボード構築（売上・在庫・顧客）</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Looker Studio / Notion + API</span>
+            <span class="meta-chip time">工数 8〜12h（設計〜稼働）</span>
+            <span class="meta-chip roi">「勘経営」→ データ経営への転換</span>
+            <span class="meta-chip diff">難易度 ★★★</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>「今月の売上がいくらかを確認するのに30分かかる」「在庫が何個残っているか担当者に聞かないとわからない」——こうしたSMEにLooker Studio（無料）でリアルタイムダッシュボードを構築。経営者が「スマホで今日の状況が3秒でわかる」状態を作る。データ接続さえできれば構築自体は1日で完成する。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat3-dot">1</div>
+            <div class="step-content">
+              <strong>「経営者が毎朝見たい数字」をヒアリングで特定（KPI定義）</strong>
+              <span>「もし毎朝1枚のレポートが届くとしたら、何が書いてあれば満足ですか？」という質問から始める。多くの場合：①本日売上 ②今月累計 ③在庫アラート ④未対応顧客問い合わせ数 の4つが出る。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">2</div>
+            <div class="step-content">
+              <strong>データソースの確認・Googleスプレッドシートへの集約</strong>
+              <span>Looker Studioは多くのSaaSと直接連携できるが、最も確実なのは「Googleスプレッドシートを中間ハブにする」方法。各ツールからCSVをエクスポートしてGスプレに貼るだけでもOK。</span>
+              <span class="step-time">2〜3h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">3</div>
+            <div class="step-content">
+              <strong>Looker Studioでダッシュボード設計（無料）</strong>
+              <span>Googleアカウントがあれば無料で利用可。Googleスプレッドシートをデータソースとして接続し、グラフ・表・KPIカードを配置する。テンプレートギャラリーから「売上ダッシュボード」を選べば30分で完成。</span>
+              <span class="step-time">3〜4h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">4</div>
+            <div class="step-content">
+              <strong>共有URLを経営者に送付・スマホで確認できるか検証</strong>
+              <span>Looker StudioのダッシュボードはURLで共有可能。経営者がスマホで閲覧し「これで見たい数字が全部わかる」ことを確認。修正点は初週にフィードバックをもらって即対応する。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">5</div>
+            <div class="step-content">
+              <strong>データ更新の自動化（Zapierまたは定期エクスポート）</strong>
+              <span>スプレッドシートへのデータ更新を自動化するか、週1回の手動更新ルーティンを決める。完全自動化はCase 10と組み合わせると最も効果的。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（KPI設計の壁打ち・Looker Studio設計補助）</div>
+          <pre class="prompt"><span class="cm"># KPIダッシュボード設計プロンプト</span>
+あなたは中小企業の経営管理の専門家です。
+以下のビジネス情報をもとに、経営ダッシュボードに載せるべきKPIを設計してください。
+
+<span class="ph">【会社概要】</span>
+業種：[例：飲食業・小売業・サービス業]
+従業員数：[例：30名]
+主な収益源：[例：月次会費・商品販売・サービス提供料]
+
+<span class="ph">【現在把握できていないこと】</span>
+[例：「どの商品が今月一番売れているか」「リピーター比率」「月中の売上ペース」等]
+
+以下を設計してください：
+1. 日次ダッシュボードに載せるべきKPI（5個まで）
+2. 週次レポートで確認すべき指標（3個）
+3. 月次経営会議で見るべき数字（5個）
+4. 各KPIのデータソース（何のツールから取得するか）
+
+<span class="cm"># 制約：「データが取得できること」を前提に設計すること</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>KPIを詰め込みすぎると「何も見なくなる」——5指標以内に絞る</li>
+              <li>データが正確でないと間違った経営判断につながる——データ品質の確認が最優先</li>
+              <li>Looker Studioは一部機能でGoogleアカウントへのデータ送信が発生——機密データの扱いに注意</li>
+              <li>ダッシュボードは「作って終わり」ではなく定期的な見直しが必要</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>経営者が毎朝ダッシュボードを確認する習慣ができた</li>
+              <li>「売上状況の確認」が30分→3分以内に短縮</li>
+              <li>データをもとにした意思決定が1件以上発生</li>
+              <li>「今月どこで売上が落ちたか」を即座に特定できる</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 12 -->
+    <div class="case-card" id="c12">
+      <div class="case-header cat3">
+        <div class="case-num">12</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">システム統合・業務フロー改善</div>
+          <div class="case-title">Claude Codeによる内部ツール・スクリプト開発</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Claude Code / Python</span>
+            <span class="meta-chip time">工数 10〜20h（要件定義〜納品）</span>
+            <span class="meta-chip roi">外注費月10〜30万節約・業務自動化</span>
+            <span class="meta-chip diff">難易度 ★★★</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>「外注したいが高すぎる」「IT会社に頼むほどでもない」ちょっとした自動化・ツール開発をClaude Codeで内製化。例：PDFデータの一括変換・Excelの自動集計マクロ・メール一斉送信ツール・在庫管理スプレッドシートの自動化など。FDEがClaude Codeを使って要件定義→開発→テストまで対応し、外注費用を月10〜30万削減する。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat3-dot">1</div>
+            <div class="step-content">
+              <strong>「本当は自動化したいが放置している作業」の発掘</strong>
+              <span>「毎月同じ作業を繰り返していて『これ自動化できたらなあ』と思っていることは？」とヒアリング。特に月次・週次で発生する定型作業をリストアップする。コスト目安：1作業の自動化で月5〜30時間が削減できる。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">2</div>
+            <div class="step-content">
+              <strong>要件定義：「何が入力されて何が出力されるか」を決める</strong>
+              <span>開発の前に必ず「Input（何のデータが来るか）→Processing（どんな処理か）→Output（何が出てくるか）」を1枚の図にまとめる。これが曖昧だとClaude Codeでも正しいものは作れない。</span>
+              <span class="step-time">2〜3h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">3</div>
+            <div class="step-content">
+              <strong>Claude Codeで実装（FDEが操作）</strong>
+              <span>要件定義書をClaude Codeに渡してコードを生成。Pythonスクリプトがほとんどのケースに対応できる。Claude Codeは途中で「ここが曖昧です」と質問してくるため、FDEが判断・回答しながら進める。</span>
+              <span class="step-time">5〜10h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">4</div>
+            <div class="step-content">
+              <strong>テストデータでの動作確認・バグ修正</strong>
+              <span>実際のデータのサンプルで動作確認。エラーが出たらエラーメッセージをClaude Codeに貼り付けて「このエラーを直してください」で修正可能。通常2〜3回のやり取りで安定動作する。</span>
+              <span class="step-time">2〜3h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat3-dot">5</div>
+            <div class="step-content">
+              <strong>操作マニュアル作成・引き渡し</strong>
+              <span>「誰がどう使うか」の操作手順をClaudeに書かせてNotionに保管。FDEがいなくなっても担当者が自力で使えるようにする。ツールのソースコードもNotionまたはGitHubで管理。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（Claude Codeへの要件指示）</div>
+          <pre class="prompt"><span class="cm"># Claude Codeへの開発依頼プロンプト</span>
+以下の要件でPythonスクリプトを作成してください。
+
+<span class="ph">【目的】</span>
+[例：毎月のExcel売上データから、顧客別・商品別の集計レポートを自動生成する]
+
+<span class="ph">【入力データ】</span>
+ファイル形式：[例：Excel(.xlsx)]
+データ構造：[例：列A=日付、列B=顧客名、列C=商品名、列D=金額]
+データ量：[例：月500〜1,000行]
+
+<span class="ph">【出力】</span>
+[例：顧客別の月間売上合計・TOP10顧客リスト・前月比グラフ付きのPDFレポート]
+
+<span class="ph">【制約・注意事項】</span>
+[例：Python 3.10以上で動作すること。外部ライブラリはpandas・openpyxlのみ使用可]
+
+<span class="cm"># 追加要件：スクリプトにはコメント（日本語）を入れること</span>
+<span class="cm"># 操作マニュアルも一緒に作成すること</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>要件定義が曖昧だと何度作り直しても完成しない——最初の1〜2hを惜しまない</li>
+              <li>Pythonの実行環境（PC環境設定）が担当者にとってハードルになる場合がある</li>
+              <li>本番データには直接触れさせない——テスト環境で十分に確認してから</li>
+              <li>Claude Codeは月20ドル（Proプラン）が必要</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（納品後）</h5>
+            <ul>
+              <li>目的の作業が自動化されており、手作業が不要になった</li>
+              <li>担当者が操作マニュアルを見ながら自力で実行できる</li>
+              <li>外注に比べて開発コストが50%以下に抑えられた</li>
+              <li>ソースコードと操作マニュアルが保管されており、引き継ぎ可能な状態</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================
+         カテゴリ④ マーケティング・コンテンツ制作
+    ======================================== -->
+    <div class="section-header">
+      <div class="sh-num sh-cat4">④</div>
+      <div>
+        <div class="sh-title">マーケティング・コンテンツ制作</div>
+        <div class="sh-sub">Phase 1〜2（即日〜3ヶ月）。LP・SNS・広告コピーの制作コストを削減し、コンテンツ量を10倍にする。非エンジニアでも即実践可能。</div>
+      </div>
+    </div>
+
+    <!-- Case 13 -->
+    <div class="case-card" id="c13">
+      <div class="case-header cat4">
+        <div class="case-num">13</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">マーケティング・コンテンツ制作</div>
+          <div class="case-title">SNS投稿・ブログ記事の自動生成（量産体制の構築）</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Claude / ChatGPT + Notion</span>
+            <span class="meta-chip time">工数 2〜4h（初期設定）</span>
+            <span class="meta-chip roi">コンテンツ制作 月5本→30本</span>
+            <span class="meta-chip diff">難易度 ★☆☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>1つのテーマから「LinkedIn投稿×3本・X（Twitter）×5本・ブログ記事×1本」を一気に生成するコンテンツ量産フローを構築。DeNA事例では非エンジニアのビジネス職がSNS投稿アイデア出し・下書き生成に活用し、コンテンツ作成時間を約70%短縮。Notion AIと組み合わせることで全社で再現可能な仕組みにする。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat4-dot">1</div>
+            <div class="step-content">
+              <strong>コンテンツカレンダーとトピックリストをNotionで整備</strong>
+              <span>月間のテーマ（例：AI活用、採用、業界動向など）を12〜20件リスト化。各テーマに「ターゲット読者」「メッセージの核心」「参考URL」を付記する。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat4-dot">2</div>
+            <div class="step-content">
+              <strong>トーン・スタイルガイドをプロンプトに落とし込む</strong>
+              <span>「当社の発信スタイル：データ重視・自信ある断定調・絵文字なし」などの制約をシステムプロンプトに記載。最初の5投稿でトーン調整を行い、プロンプトを固定する。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat4-dot">3</div>
+            <div class="step-content">
+              <strong>1テーマ→複数フォーマット展開プロンプトの作成・テスト</strong>
+              <span>下記プロンプトを使い、1テーマからLinkedIn・X・ブログを同時生成。3テーマで試して品質確認。担当者が微調整できるようマニュアル化する。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat4-dot">4</div>
+            <div class="step-content">
+              <strong>週次コンテンツ生成バッチの定例化</strong>
+              <span>毎週月曜に「今週のテーマ→AI生成→担当者確認・微調整→スケジュール投稿」のルーティンを確立。Buffer・Hootsuiteと連携すれば予約投稿まで自動化可能。</span>
+              <span class="step-time">0.5h/週（定着後）</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（1テーマ→3フォーマット展開）</div>
+          <pre class="prompt"><span class="cm"># コンテンツ量産プロンプト</span>
+以下のテーマで3種類のコンテンツを作成してください。
+
+<span class="ph">【テーマ】</span>[例：SMEにおけるAI導入で最も効果的な業務は議事録自動化だ]
+<span class="ph">【ターゲット】</span>[例：従業員30〜100名の中小企業の経営者・事業責任者]
+<span class="ph">【トーン】</span>データ重視・断定調・信頼できる専門家として
+
+<span class="ph">【出力1】LinkedIn投稿（250〜400字）</span>
+- 冒頭1行でスクロールを止める「フック」を書く
+- データまたは具体例を1つ必ず含める
+- 末尾に問いかけを1つ入れる（「あなたはどう思いますか？」等）
+
+<span class="ph">【出力2】X（旧Twitter）投稿 × 3本（各140字以内）</span>
+- それぞれ異なるアングルで（問いかけ型・データ型・行動促進型）
+
+<span class="ph">【出力3】ブログ記事の構成案＋冒頭リード文（400字）</span>
+- H2見出し × 3つの構成案
+- 冒頭400字（読者の課題提起→解決策の予告）
+
+<span class="cm"># 各出力はラベルを付けて明確に区別すること</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>AI生成のまま投稿しない——必ず人が読んで「自社の言葉」になっているか確認</li>
+              <li>量産に走るとブランドが希薄化——月20本が上限の目安</li>
+              <li>競合と同じトピック・アングルになりやすい——差別化視点を必ずプロンプトに追加</li>
+              <li>画像・ビジュアルはAI生成だけでは不十分な場合も</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>月間コンテンツ本数：5本→20本以上</li>
+              <li>1コンテンツ当たりの作成時間：2h→30分以内</li>
+              <li>SNSフォロワー増加率：前月比10%以上</li>
+              <li>担当者1人で週次バッチが自走できる</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 14 -->
+    <div class="case-card" id="c14">
+      <div class="case-header cat4">
+        <div class="case-num">14</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">マーケティング・コンテンツ制作</div>
+          <div class="case-title">商品説明文・LP文章のAI最適化（CVR改善）</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Claude + Google Optimize / Shopify</span>
+            <span class="meta-chip time">工数 3〜5h（初期）</span>
+            <span class="meta-chip roi">CVR 1.2%→2.0%（業種平均比較）</span>
+            <span class="meta-chip diff">難易度 ★★☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>ECサイト・サービスLPの商品説明文・キャッチコピーをAIで大量生成し、ABテストで最適バリアントを特定する。note社がAIによるコンテンツ推薦でCTR 20%改善を達成した手法を参考に、中小EC事業者でも実践可能なプロセスを構築。Shopify・BASE・独自LPに対応。1商品50バリアントを1時間で生成し、最良版を選定する。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat4-dot">1</div>
+            <div class="step-content">
+              <strong>現行の商品説明文・CVRデータを整理（ベースライン確認）</strong>
+              <span>Google Analytics / Shopify Analyticsで現状のCVR・直帰率・滞在時間を計測。改善対象ページを3〜5ページに絞り込む。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat4-dot">2</div>
+            <div class="step-content">
+              <strong>顧客の「言葉」をインプット（レビュー・インタビューから抽出）</strong>
+              <span>Amazonレビュー・自社レビュー・SNSのクチコミをClaudeに貼り付け、「この商品を買った理由トップ5」「不満トップ3」を抽出させる。顧客の言葉をそのままコピーに転用するのが最も効果的。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat4-dot">3</div>
+            <div class="step-content">
+              <strong>AIで10バリアントの説明文・キャッチコピーを生成</strong>
+              <span>下記プロンプトで「機能訴求型・感情訴求型・問題解決型・社会証明型・希少性訴求型」など10パターンを生成。社内で3名が読んで上位3バリアントを選ぶ。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat4-dot">4</div>
+            <div class="step-content">
+              <strong>ABテスト実施（2週間）→最良版を採用</strong>
+              <span>Shopifyなら内蔵ABテスト機能、独自LPはGoogle Optimizeを使用。2週間・最低200セッション以上でデータを取り最良版を採用。以降は月1回のサイクルで継続改善する。</span>
+              <span class="step-time">設定1h＋2週間計測</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（商品説明文 10バリアント生成）</div>
+          <pre class="prompt"><span class="cm"># 商品説明文バリアント生成プロンプト</span>
+以下の商品について、10種類の異なるアプローチで説明文を作成してください。
+
+<span class="ph">【商品名】</span>[商品名を入力]
+<span class="ph">【商品の特徴】</span>[機能・スペック・価格帯を箇条書きで]
+<span class="ph">【ターゲット顧客】</span>[例：30代女性・共働き・時短ニーズあり]
+<span class="ph">【顧客の言葉（レビューから）】</span>[実際のレビューを3〜5件貼り付ける]
+<span class="ph">【競合との違い】</span>[差別化ポイントを2〜3行で]
+
+各バリアントは以下のアプローチで作成（各200字以内）：
+① 機能訴求型（スペック・数値を前に出す）
+② 問題解決型（ターゲットの悩みから入る）
+③ 感情訴求型（使用後の理想像を描く）
+④ 社会証明型（「〇〇人が選んだ」等）
+⑤ Before/After型（変化を明示する）
+⑥ 希少性・限定型
+⑦ ストーリー型（開発背景から）
+⑧ Q&A型（「〜でお困りですか？」）
+⑨ 比較型（競合との違いを前に出す）
+⑩ 専門家型（データ・実績で信頼構築）
+
+<span class="cm"># 各バリアントに「訴求タイプ」のラベルを付けること</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>ABテストはサンプルサイズが小さいと誤判定——最低200セッション以上</li>
+              <li>複数要素を同時に変えると何が効いたか不明——1回1変数を原則に</li>
+              <li>「良い文章」ではなく「CVRが上がる文章」が目的——感想で選ばない</li>
+              <li>季節・キャンペーン時期は結果が歪む——通常期に計測する</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（ABテスト後）</h5>
+            <ul>
+              <li>CVR：現状比10%以上の改善</li>
+              <li>説明文作成時間：2h/商品→20分/商品</li>
+              <li>月次改善サイクルが回っている（月1回以上のABテスト実施）</li>
+              <li>担当者が自走でバリアント生成できる</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 15 -->
+    <div class="case-card" id="c15">
+      <div class="case-header cat4">
+        <div class="case-num">15</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">マーケティング・コンテンツ制作</div>
+          <div class="case-title">顧客インタビュー音声 → インサイト抽出・ペルソナ設計</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Notta + Claude + Notion</span>
+            <span class="meta-chip time">工数 4〜6h（5件分析）</span>
+            <span class="meta-chip roi">マーケ戦略立案 3週間→3日</span>
+            <span class="meta-chip diff">難易度 ★★☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>顧客インタビュー・既存レビュー・問い合わせログをAIに通し、「顧客が本当に求めていること」を構造化する。従来は3名の分析担当者が3週間かけていたインサイト抽出を3日に短縮。ペルソナ・ジャーニーマップ・USP（独自の強み）の設計まで一気通貫で行う。UNLIDのFDEが最初の1ヶ月で実施するマーケ診断の核心手法。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat4-dot">1</div>
+            <div class="step-content">
+              <strong>インタビュー音声の文字起こし（Notta使用）</strong>
+              <span>既存顧客5〜10件のインタビュー音声をNottaで文字起こし。音声がない場合はアンケート自由回答・問い合わせメールのログで代替可能。最低5件あればパターンが見える。</span>
+              <span class="step-time">1h（5件分）</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat4-dot">2</div>
+            <div class="step-content">
+              <strong>ClaudeのNotebook機能（またはプロジェクト機能）でまとめてアップロード</strong>
+              <span>文字起こしテキスト5件をまとめてClaudeのプロジェクトにアップロード。「これら全件を横断して分析してください」と指示することで、件数に依存せずインサイトを抽出できる。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat4-dot">3</div>
+            <div class="step-content">
+              <strong>インサイト抽出・ペルソナ草案の生成</strong>
+              <span>下記プロンプトで「購買動機・課題・言葉のパターン・競合との比較基準・感情的な引き金」を抽出。ペルソナ3タイプを草案として生成させる。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat4-dot">4</div>
+            <div class="step-content">
+              <strong>Notionでペルソナ・ジャーニーマップを整備し社内共有</strong>
+              <span>AI生成の草案を担当者が30分でレビュー・補正し、NotionのテンプレートにまとめてマーケチームとFDEで共有。以降の施策立案はペルソナを参照して行う。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（インサイト抽出）</div>
+          <pre class="prompt"><span class="cm"># 顧客インタビュー分析プロンプト</span>
+以下の顧客インタビューテキスト（複数件）を横断的に分析し、
+マーケティング戦略に使えるインサイトを抽出してください。
+
+<span class="ph">【インタビューテキスト】</span>
+[文字起こしテキスト×5件を順番に貼り付ける]
+
+<span class="ph">【出力形式】</span>
+
+## 1. 購買・契約の主な動機（Top 5、頻出順）
+各動機に「発言引用」を1件付けること
+
+## 2. 購買前の最大の不安・障壁（Top 3）
+各障壁に「解消するためのメッセージング案」を併記
+
+## 3. 競合比較の基準（顧客が何を軸に比較しているか）
+
+## 4. 感情的な引き金（購買を決断させた瞬間のエピソード）
+
+## 5. ペルソナ草案（3タイプ）
+各タイプ：名前・年齢・職業・課題・価値観・口癖
+
+## 6. USP候補（この顧客群に最も刺さる強みTop 3）
+
+<span class="cm"># 推測は最小化し、必ず発言内容から根拠を示すこと</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>5件未満では偏りが大きい——最低5件、理想は10件以上</li>
+              <li>「属性が偏ったインタビュー」だと偏ったペルソナができる——サンプルの多様性を確認</li>
+              <li>AI生成のペルソナは仮説——社内でのレビューと現場感覚での補正が必須</li>
+              <li>個人情報（氏名・連絡先）はAIに入力しない——匿名化して使用</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（分析後）</h5>
+            <ul>
+              <li>ペルソナ3タイプが社内で共通言語化されている</li>
+              <li>新しい施策をペルソナに基づいて判断できる</li>
+              <li>コピー・LP改修で「顧客の言葉」が使われている</li>
+              <li>インタビュー→ペルソナ完成まで3日以内</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 16 -->
+    <div class="case-card" id="c16">
+      <div class="case-header cat4">
+        <div class="case-num">16</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">マーケティング・コンテンツ制作</div>
+          <div class="case-title">AI画像生成による広告クリエイティブ制作コストの削減</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Midjourney / DALL-E 3 / Adobe Firefly</span>
+            <span class="meta-chip time">工数 2〜4h（初期習得）</span>
+            <span class="meta-chip roi">バナー制作費 5〜10万/月→1万/月</span>
+            <span class="meta-chip diff">難易度 ★★☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>SNS広告バナー・メルマガヘッダー・LP差し込み画像をAI画像生成ツールで内製化する。伊藤園がAIタレント起用でCM制作コスト削減を実現、パルコが広告動画をAIで全自動制作した事例に倣い、SMEでも実践できる範囲（静止画・バナー）に特化して導入する。外注費の月5〜10万円を1万円以下に圧縮し、制作スピードを3週間→1日に短縮する。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat4-dot">1</div>
+            <div class="step-content">
+              <strong>現在の広告画像の外注コストと制作リードタイムを確認</strong>
+              <span>月間バナー制作費・外注先の制作日数・修正回数を記録。AI導入後のROI計算のベースラインにする。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat4-dot">2</div>
+            <div class="step-content">
+              <strong>ツール選定と試用（Midjourney / DALL-E 3 / Adobe Firefly）</strong>
+              <span>Midjourney（月$10〜）：クオリティ最高・学習コスト高め。DALL-E 3（ChatGPT Plus内蔵）：最も簡単・日本語プロンプトで即生成。Adobe Firefly（Creative Cloud）：商用利用安全・既存デザインとの相性◎。用途で使い分ける。</span>
+              <span class="step-time">1〜2h（試用）</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat4-dot">3</div>
+            <div class="step-content">
+              <strong>ブランドガイドラインをプロンプト化（カラー・スタイル・NGパターンの定義）</strong>
+              <span>「自社ブランドらしさ」を「明るい・ミニマル・白背景・ビジネスカジュアルな人物・コーポレートカラー#1E40AF」などテキストで定義。毎回のプロンプトに追加することでブランド統一を維持する。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat4-dot">4</div>
+            <div class="step-content">
+              <strong>Canvaと組み合わせて最終仕上げ・テキスト合成</strong>
+              <span>AI画像をベースにCanvaでテキスト・ロゴ・CTAボタンを合成。Canva AI（Magic Media）も活用することで、プロンプト→バナー完成まで30分以内を実現する。</span>
+              <span class="step-time">0.5h/バナー（定着後）</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（DALL-E 3 / Midjourney共通）</div>
+          <pre class="prompt"><span class="cm"># 広告バナー用画像生成プロンプト（英語が推奨）</span>
+[シーン説明], [スタイル], [カラートーン], [構図], [用途]
+
+<span class="ph">例1（DALL-E 3）：</span>
+A professional Japanese businesswoman working on laptop
+in a bright minimalist office, looking confident and
+focused. Clean white background, corporate blue tones
+(#1E40AF), modern flat illustration style.
+For B2B SaaS advertising banner, 16:9 ratio.
+
+<span class="ph">例2（Midjourney）：</span>
+/imagine professional team collaboration in modern
+Japanese office, diverse team, warm natural lighting,
+photorealistic, --ar 16:9 --style raw --v 6
+
+<span class="cm"># 人物を含む場合は架空の人物で生成し肖像権問題を回避</span>
+<span class="cm"># Adobe Firefeyは商用利用安全のため本番運用に推奨</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>著作権・商用利用の確認必須——ツールごとに商用利用条件が異なる（Adobe Firefflyは最も安全）</li>
+              <li>人物画像の指・手は不自然になりやすい——確認して再生成</li>
+              <li>ロゴ・テキストはAI画像に直接入れない——Canvaで後から合成する</li>
+              <li>ブランドの一貫性はプロンプトだけでは限界——デザイナーへの相談は継続する</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1ヶ月）</h5>
+            <ul>
+              <li>バナー制作リードタイム：3週間→2日以内</li>
+              <li>月間制作コスト：現状比50%以上削減</li>
+              <li>担当者1名がプロンプトだけでバナー完成まで自走</li>
+              <li>ブランドガイドラインに沿った出力が8割以上</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================
+         カテゴリ⑤ 人事・採用・研修
+    ======================================== -->
+    <div class="section-header">
+      <div class="sh-num sh-cat5">⑤</div>
+      <div>
+        <div class="sh-title">人事・採用・研修</div>
+        <div class="sh-sub">Phase 1〜3（即日〜12ヶ月）。採用コスト削減・育成効率化・ナレッジ継承の3課題を同時に解決。人材紹介フィーとの連動でUNLIDのLTV最大化にも直結する。</div>
+      </div>
+    </div>
+
+    <!-- Case 17 -->
+    <div class="case-card" id="c17">
+      <div class="case-header cat5">
+        <div class="case-num">17</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">人事・採用・研修</div>
+          <div class="case-title">求人票の自動生成・応募者スクリーニング自動化</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Claude + Google Sheets + Notion</span>
+            <span class="meta-chip time">工数 3〜5h（初期設定）</span>
+            <span class="meta-chip roi">採用スクリーニング工数 70%削減</span>
+            <span class="meta-chip diff">難易度 ★★☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>AIツールを採用活動に活用した企業の81.4%が採用目標数を達成（非活用企業は47.7%）というデータに基づき、求人票の自動生成とスクリーニングを実装する。マッキンゼー予測では2030年までに採用コストが最大70%削減可能。中小企業でも月数時間の工数削減と採用品質向上の両立が可能。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat5-dot">1</div>
+            <div class="step-content">
+              <strong>採用要件の言語化（ジョブディスクリプション草案をAIに生成させる）</strong>
+              <span>「こんな人に来てほしい」を箇条書きでAIに伝え、JD草案を生成。5つの求人媒体向けに文体・文字数を変えた最適版を一括生成する。作成時間を半日→30分に短縮。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat5-dot">2</div>
+            <div class="step-content">
+              <strong>スクリーニング基準をAIに定義させ、評価シートを作成</strong>
+              <span>「必須条件・歓迎条件・NG条件」をAIに整理させ、Google Formsの一次スクリーニング設問を自動生成。応募者の回答をCSVでエクスポートし、Claudeに貼り付けてスコアリングする。</span>
+              <span class="step-time">1〜2h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat5-dot">3</div>
+            <div class="step-content">
+              <strong>応募書類（履歴書・職務経歴書）のAI一次評価</strong>
+              <span>応募書類のテキストをClaudeに貼り付け、採用基準との適合度を5段階でスコアリング。担当者は「4〜5点の候補者」のみ精読し、面接実施の有無を判断する。スクリーニング時間を候補者1名あたり20分→5分に短縮。</span>
+              <span class="step-time">0.5h/10名</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat5-dot">4</div>
+            <div class="step-content">
+              <strong>面接日程調整・合否連絡テンプレートの自動化</strong>
+              <span>Calendly（無料版）で面接日程調整を自動化。合否連絡メールはClaudeで候補者別にパーソナライズした文章を生成し、コピペで送付。返信率向上と候補者体験の改善を両立する。</span>
+              <span class="step-time">1h（設定）</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（応募者スクリーニング）</div>
+          <pre class="prompt"><span class="cm"># 採用スクリーニングプロンプト</span>
+以下の採用要件に対して、応募者の書類を評価してください。
+
+<span class="ph">【採用要件】</span>
+必須：[例：営業経験3年以上・法人向け無形商材・KPI管理経験]
+歓迎：[例：SaaS業界経験・マネジメント経験・英語ビジネスレベル]
+NG：[例：転職回数5回以上・直近の在籍期間1年未満が2回以上]
+
+<span class="ph">【応募書類テキスト】</span>
+[履歴書・職務経歴書のテキストを貼り付ける]
+
+<span class="ph">【出力形式】</span>
+## 総合評価：[1〜5点]
+
+## 必須条件の充足度
+| 条件 | 充足 | 根拠（書類の記載） |
+|------|------|-----------------|
+| ... | ○/✕/△ | ... |
+
+## 注目すべき強み（Top 3）
+## 懸念点・確認すべき事項（Top 2）
+## 面接で深掘りすべき質問 × 3
+
+<span class="cm"># 個人情報保護のため氏名・連絡先は入力不要</span>
+<span class="cm"># 評価はあくまで補助ツール。最終判断は人間が行うこと</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>AIスコアに過信は禁物——一次スクリーニングの補助ツールとして使用</li>
+              <li>個人情報（氏名・住所・連絡先）はAIに入力しない——必ず匿名化</li>
+              <li>採用基準が曖昧だと評価がブレる——JDと評価軸の言語化が先決</li>
+              <li>優秀な候補者を落とすリスク——スコア3点も人が読んで最終確認</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後1採用サイクル）</h5>
+            <ul>
+              <li>スクリーニング時間：候補者1名20分→5分以内</li>
+              <li>面接通過率の向上（スクリーニング精度の改善）</li>
+              <li>JD作成時間：半日→1時間以内</li>
+              <li>採用担当者が自走でスクリーニングを実行できる</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 18 -->
+    <div class="case-card" id="c18">
+      <div class="case-header cat5">
+        <div class="case-num">18</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">人事・採用・研修</div>
+          <div class="case-title">社員研修コンテンツのAI自動生成（OJT崩壊への対応）</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Claude + Notion / Google Slides</span>
+            <span class="meta-chip time">工数 5〜8h（初期作成）</span>
+            <span class="meta-chip roi">研修コンテンツ作成 2ヶ月→2週間</span>
+            <span class="meta-chip diff">難易度 ★★☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>厚労省令和6年度調査「OJT体制が崩壊している企業の5つの原因」の1位は「教えられる人材の不在」。AIを使って「その場にいなくても学べる研修コンテンツ」を内製化する。DeNA事例ではChatGPTを活用した研修教材作成が社内事例に採用済み。新入社員向け・役職別・スキルアップ別の3パターンを3つのフェーズで整備する。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat5-dot">1</div>
+            <div class="step-content">
+              <strong>「暗黙知」の洗い出し（ベテランへのヒアリング30分×3名）</strong>
+              <span>「なぜあなたが必要か」「自分しかできない業務は何か」「新人がよくミスするポイントは」の3問でヒアリング。回答をClaudeに入力し、「研修化すべき暗黙知Top 10」を抽出させる。</span>
+              <span class="step-time">1.5h（ヒアリング）＋0.5h（抽出）</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat5-dot">2</div>
+            <div class="step-content">
+              <strong>研修コンテンツのAI生成（スライド構成＋本文）</strong>
+              <span>1テーマあたり「①学習目標 ②背景・なぜ重要か ③具体的な手順 ④よくある失敗事例 ⑤チェックリスト」の5章構成でClaudeが自動生成。30分で1研修モジュールの初稿が完成する。</span>
+              <span class="step-time">0.5h/モジュール</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat5-dot">3</div>
+            <div class="step-content">
+              <strong>Google Slides / Notionへの転記と動画撮影（Loom）</strong>
+              <span>AI生成の原稿をSlides/Notionに展開し、担当者がLoomで10〜15分の説明動画を撮影。テキスト＋動画の組み合わせにより、対面研修なしで習得できるコンテンツが完成する。</span>
+              <span class="step-time">1〜2h/モジュール</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat5-dot">4</div>
+            <div class="step-content">
+              <strong>受講後テストのAI生成と習熟度確認</strong>
+              <span>各モジュールの内容に基づく確認テスト（5〜10問）をClaudeが自動生成。Google FormsでQ&Aを設定し、8割以上正解で「修了証」をメール送付するフローを構築する。</span>
+              <span class="step-time">0.5h/モジュール</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（研修コンテンツ生成）</div>
+          <pre class="prompt"><span class="cm"># 研修コンテンツ生成プロンプト</span>
+以下のテーマで社員研修コンテンツを作成してください。
+
+<span class="ph">【研修テーマ】</span>[例：新規顧客への初回提案で成功率を上げる方法]
+<span class="ph">【対象者】</span>[例：入社3ヶ月以内の営業担当（業界未経験者も含む）]
+<span class="ph">【前提知識】</span>[例：商品知識は習得済み。商談経験は2〜3件程度]
+<span class="ph">【会社固有のポイント（ヒアリング内容）】</span>
+[ベテランへのヒアリング結果を箇条書きで貼り付ける]
+
+<span class="ph">【出力形式】</span>
+## 研修モジュール：[タイトル]
+**学習目標：** この研修を終えると[具体的に何ができるようになるか]
+
+### Chapter 1：なぜこれが重要か（背景・データ）
+### Chapter 2：基本的な手順（ステップ式で）
+### Chapter 3：よくある失敗パターン × 3（失敗→原因→改善策）
+### Chapter 4：実践チェックリスト（10項目以内）
+### Chapter 5：確認テスト問題 × 5問（正解＋解説付き）
+
+<span class="cm"># 専門用語は初回登場時に括弧で説明を付けること</span>
+<span class="cm"># Chapter 2の各ステップには「所要時間の目安」を付けること</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>ベテランへのヒアリングなしにAIだけで作ると「当たり前のことしか書いていない」研修になる</li>
+              <li>コンテンツ量が多すぎると受講完了率が低下——1モジュール15〜20分が上限</li>
+              <li>一度作って終わりにしない——半年に1回、業務の変化に合わせて更新する</li>
+              <li>強制受講の仕組みなしに公開しても誰も見ない——修了条件と紐づける</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（3ヶ月後）</h5>
+            <ul>
+              <li>研修モジュール：10本以上の整備完了</li>
+              <li>新入社員の習熟スピード：従来比30%以上短縮</li>
+              <li>「同じことを2度教える」ケースの減少</li>
+              <li>受講完了率：80%以上</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 19 -->
+    <div class="case-card" id="c19">
+      <div class="case-header cat5">
+        <div class="case-num">19</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">人事・採用・研修</div>
+          <div class="case-title">社内ナレッジ・マニュアルのRAG化（AIに「社内に詳しい人」を作る）</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">NotebookLM / Notion AI / Dify</span>
+            <span class="meta-chip time">工数 6〜10h（初期構築）</span>
+            <span class="meta-chip roi">社内問い合わせ 40〜60%削減</span>
+            <span class="meta-chip diff">難易度 ★★★</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>江崎グリコが社外問い合わせを31%削減、帝人がイントラで情報が見つけられない社員への問い合わせ対応をAI化した手法をSMEに転用。既存のマニュアル・議事録・規程類をNotebookLMまたはNotion AIに読み込ませ、「社員が質問できるAI」を構築する。DeNA事例でもNotebookLMのナレッジシェア活用が報告されている。ノーコードで最短1日で構築可能。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat5-dot">1</div>
+            <div class="step-content">
+              <strong>ソースドキュメントの整理（Google Drive / Notion）</strong>
+              <span>業務マニュアル・規程・FAQ・過去の議事録を一か所に集約。バラバラなファイルをNotionページに統合するか、Google Driveのフォルダを整理する。最低10〜20ドキュメントが揃えば効果が出る。</span>
+              <span class="step-time">2〜3h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat5-dot">2</div>
+            <div class="step-content">
+              <strong>NotebookLMへのドキュメント読み込みと動作確認</strong>
+              <span>Google NotebookLM（無料）にドキュメントをアップロード。「有給申請の手順は？」「〇〇の規程を教えて」などの質問を10件以上テストし、回答精度を確認。ソースが引用されることで「でたらめな回答」を防げる。</span>
+              <span class="step-time">2〜3h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat5-dot">3</div>
+            <div class="step-content">
+              <strong>全社員への共有とFAQ集の更新フローの構築</strong>
+              <span>NotebookLMのリンクをSlackに固定。「まずNotebookLMに聞いてから担当者に質問する」ルールを設ける。月1回、よく聞かれた質問を元にドキュメントの不足箇所を補完し、ナレッジベースを継続改善する。</span>
+              <span class="step-time">1h（周知）＋月1h（更新）</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat5-dot">4</div>
+            <div class="step-content">
+              <strong>【発展】Difyでカスタムチャットボット化（社外にも展開可能）</strong>
+              <span>ノーコードAIフロービルダー「Dify」（無料OSS）を使い、社内向けチャットボットのUIを構築。SlackやLINE WORKSと連携すれば、既存ツール内でAI問い合わせ対応が完結する。</span>
+              <span class="step-time">4〜6h（発展版）</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 NotebookLM活用のコツ（プロンプトではなく運用のポイント）</div>
+          <pre class="prompt"><span class="cm"># NotebookLM 効果的な活用パターン</span>
+
+<span class="ph">【推奨するソースドキュメント（優先度順）】</span>
+1. 業務マニュアル・手順書（最重要）
+2. 就業規則・社内規程
+3. よくある問い合わせへの回答集（過去メール等）
+4. 過去の重要な議事録
+5. 製品・サービス説明資料
+
+<span class="ph">【使える質問パターン例】</span>
+✅「有給申請の手順を教えて」（手順系）
+✅「〇〇システムのエラーが出た。原因と対処法は」（トラブル系）
+✅「接待交際費の上限と申請方法は」（規程系）
+✅「新規顧客への提案時のチェックリストを出して」（業務支援系）
+
+<span class="ph">【NGな質問パターン（ソースに情報がない場合）】</span>
+✕「競合のA社について教えて」（外部情報は持っていない）
+✕「この決断は正しいか」（判断・意見は求めない）
+
+<span class="cm"># NotebookLMは学習データとして使用しない（プライバシー安全）</span>
+<span class="cm"># ソース引用機能で「どこに書いてあるか」を必ず確認する</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>ドキュメントが整理されていない状態で読み込んでも精度が出ない——整理が先</li>
+              <li>古い情報が混在すると誤回答が増える——バージョン管理を徹底する</li>
+              <li>NotebookLM無料版はドキュメント数・サイズに制限あり——大規模化はNotion AIまたはDifyへ</li>
+              <li>「AIが答えた」という盲信——重要な決定は必ず元のドキュメントで確認</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（導入後2ヶ月）</h5>
+            <ul>
+              <li>「同じ質問を担当者にする」頻度が40%以上減少</li>
+              <li>新入社員が業務マニュアルを自分で調べられる</li>
+              <li>NotebookLMへの月間質問数が50件以上</li>
+              <li>ドキュメント更新が月1回以上継続している</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 20 -->
+    <div class="case-card" id="c20">
+      <div class="case-header cat5">
+        <div class="case-num">20</div>
+        <div class="case-title-block">
+          <div class="case-cat-label">人事・採用・研修</div>
+          <div class="case-title">採用面接の設計・評価シート自動生成（面接品質の標準化）</div>
+          <div class="case-meta">
+            <span class="meta-chip tool">Claude + Google Sheets + Notion</span>
+            <span class="meta-chip time">工数 2〜3h（初期設計）</span>
+            <span class="meta-chip roi">面接準備工数 2h→20分・評価の属人化解消</span>
+            <span class="meta-chip diff">難易度 ★☆☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="overview-box">
+          <strong>概要：</strong>属人的な面接は「面接官の好み」で採用が決まるリスクがある。AIで職種別・経験レベル別の面接質問セットと評価ルーブリックを標準化する。面接準備工数を2時間→20分に短縮し、複数面接官が一貫した基準で評価できる体制を作る。SALES ROBOTICSなどGenAI HR Awards受賞企業の手法をSME向けに簡略化。
+        </div>
+
+        <div class="steps-title">🔧 導入ステップ</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot cat5-dot">1</div>
+            <div class="step-content">
+              <strong>採用ポジション別の「見るべき能力・資質」を定義する</strong>
+              <span>JD（Job Description）と過去の採用成功・失敗事例をClaudeに入力し、「このポジションで成功する人の特徴Top 5」「失敗パターンTop 3」を抽出させる。これが評価基準の土台になる。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat5-dot">2</div>
+            <div class="step-content">
+              <strong>面接質問セットの自動生成（STARメソッド形式）</strong>
+              <span>「Situation（状況）・Task（課題）・Action（行動）・Result（結果）」を引き出すSTAR形式の行動面接質問を20問生成。各質問に「なぜ聞くか」「良い回答のポイント」を付記させる。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat5-dot">3</div>
+            <div class="step-content">
+              <strong>評価ルーブリックをGoogle Sheetsで整備</strong>
+              <span>「コミュニケーション力・論理思考・主体性・業界理解・カルチャーフィット」の5軸を1〜5段階で評価するシートをAIが設計。各スコアの定義（「3点＝〜な回答が出た場合」）まで自動生成する。</span>
+              <span class="step-time">1h</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot cat5-dot">4</div>
+            <div class="step-content">
+              <strong>面接後のフィードバックと合否判断の標準化</strong>
+              <span>面接後に評価シートを記入→スコア集計→「推薦・保留・不推薦」の判断を複数面接官で共有するフローをNotionで整備。採用の「なんとなく感」をデータで置き換える。</span>
+              <span class="step-time">0.5h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-label">💡 プロンプトテンプレート（面接質問セット生成）</div>
+          <pre class="prompt"><span class="cm"># 面接質問・評価シート生成プロンプト</span>
+以下のポジションの面接設計を行ってください。
+
+<span class="ph">【採用ポジション】</span>[例：中小企業向けAI実装コンサルタント（未経験可）]
+<span class="ph">【重視する能力・資質】</span>
+[例：①課題発見力 ②自走できる主体性 ③SMEへの共感 ④学習速度 ⑤コミュニケーション力]
+<span class="ph">【避けたいNG人材の特徴】</span>
+[例：指示待ち・完璧主義で動けない・顧客より自分の専門性を優先する]
+
+<span class="ph">【出力1】STAR形式の行動面接質問 × 10問</span>
+各質問に以下を付けること：
+- 質問の意図（何の能力・資質を見るか）
+- 「良い回答の特徴」（3点〜5点の回答パターン）
+- 「警戒すべき回答の特徴」
+
+<span class="ph">【出力2】評価ルーブリック（5軸×5段階）</span>
+各軸の各スコア（1〜5点）に「この回答・行動が見られたら何点」の定義を書くこと
+
+<span class="ph">【出力3】面接後の合否判断基準</span>
+総合スコア（5軸合計/25点）の推奨・保留・不推薦の閾値と理由
+
+<span class="cm"># 質問は「はい/いいえ」で答えられないオープン質問にすること</span>
+<span class="cm"># 法的にNGな質問（出身地・家族構成・宗教等）は含めないこと</span></pre>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="note-box">
+            <h5>⚠️ 注意点・よくある落とし穴</h5>
+            <ul>
+              <li>法律上NGな質問（出身地・家族構成・宗教・妊娠の予定等）は絶対に使わない</li>
+              <li>評価シートがあっても記入が任意だと形骸化——記入を面接後30分以内のルールにする</li>
+              <li>スコアだけで決める「数字の過信」——最後は人の総合判断が必要</li>
+              <li>質問リストを読み上げるだけだと「取調べ」になる——会話の流れを大切に</li>
+            </ul>
+          </div>
+          <div class="ok-box">
+            <h5>✅ 成功の判断基準（3ヶ月後）</h5>
+            <ul>
+              <li>面接準備工数：2時間→20分以内</li>
+              <li>複数面接官の評価の乖離：±1点以内に収まる</li>
+              <li>「なぜ採用したか・しなかったか」を言語化できる</li>
+              <li>採用後の早期離職率の低下（入社6ヶ月以内の離職ゼロ）</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 全ケースまとめ表 ===== -->
+    <div style="margin: 36px 0 12px; padding-top: 24px; border-top: 2px solid #e2e8f0;">
+      <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 14px;">📊 20ケース一覧：工数・難易度・ROI サマリー</h3>
+      <div style="overflow-x: auto;">
+        <table style="width:100%; border-collapse:collapse; font-size:12px;">
+          <thead>
+            <tr style="background:#1e293b; color:#fff;">
+              <th style="padding:8px 10px; text-align:left;">#</th>
+              <th style="padding:8px 10px; text-align:left;">ケース名</th>
+              <th style="padding:8px 10px; text-align:center;">難易度</th>
+              <th style="padding:8px 10px; text-align:center;">工数目安</th>
+              <th style="padding:8px 10px; text-align:left;">主な期待効果</th>
+              <th style="padding:8px 10px; text-align:center;">推奨Phase</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:#f0fdf4;"><td style="padding:7px 10px;">01</td><td style="padding:7px 10px;">議事録自動生成</td><td style="padding:7px 10px; text-align:center;">★☆☆</td><td style="padding:7px 10px; text-align:center;">3〜5h</td><td style="padding:7px 10px;">作業時間40%削減</td><td style="padding:7px 10px; text-align:center;">Phase 1</td></tr>
+            <tr style="background:#f0fdf4;"><td style="padding:7px 10px;">02</td><td style="padding:7px 10px;">メール・提案書下書き</td><td style="padding:7px 10px; text-align:center;">★☆☆</td><td style="padding:7px 10px; text-align:center;">2〜4h</td><td style="padding:7px 10px;">文書作成70%時短</td><td style="padding:7px 10px; text-align:center;">Phase 1</td></tr>
+            <tr style="background:#f0fdf4;"><td style="padding:7px 10px;">03</td><td style="padding:7px 10px;">経費精算・OCR</td><td style="padding:7px 10px; text-align:center;">★★☆</td><td style="padding:7px 10px; text-align:center;">4〜6h</td><td style="padding:7px 10px;">経理作業 月20h→3h</td><td style="padding:7px 10px; text-align:center;">Phase 1</td></tr>
+            <tr style="background:#f0fdf4;"><td style="padding:7px 10px;">04</td><td style="padding:7px 10px;">契約書AIレビュー</td><td style="padding:7px 10px; text-align:center;">★★☆</td><td style="padding:7px 10px; text-align:center;">3〜5h</td><td style="padding:7px 10px;">弁護士相談コスト70%削減</td><td style="padding:7px 10px; text-align:center;">Phase 1</td></tr>
+            <tr style="background:#f0fdf4;"><td style="padding:7px 10px;">05</td><td style="padding:7px 10px;">社内FAQチャットボット</td><td style="padding:7px 10px; text-align:center;">★★★</td><td style="padding:7px 10px; text-align:center;">5〜8h</td><td style="padding:7px 10px;">社内質問対応40〜60%削減</td><td style="padding:7px 10px; text-align:center;">Phase 1〜2</td></tr>
+            <tr style="background:#eff6ff;"><td style="padding:7px 10px;">06</td><td style="padding:7px 10px;">顧客リサーチ→提案書</td><td style="padding:7px 10px; text-align:center;">★★☆</td><td style="padding:7px 10px; text-align:center;">3〜5h</td><td style="padding:7px 10px;">営業リサーチ 半日→30分</td><td style="padding:7px 10px; text-align:center;">Phase 2</td></tr>
+            <tr style="background:#eff6ff;"><td style="padding:7px 10px;">07</td><td style="padding:7px 10px;">既存顧客データ分析</td><td style="padding:7px 10px; text-align:center;">★★★</td><td style="padding:7px 10px; text-align:center;">5〜8h</td><td style="padding:7px 10px;">アップセルによる売上増8〜15%</td><td style="padding:7px 10px; text-align:center;">Phase 2</td></tr>
+            <tr style="background:#eff6ff;"><td style="padding:7px 10px;">08</td><td style="padding:7px 10px;">CRM代替設計</td><td style="padding:7px 10px; text-align:center;">★★★</td><td style="padding:7px 10px; text-align:center;">6〜10h</td><td style="padding:7px 10px;">属人営業の解消・失注減</td><td style="padding:7px 10px; text-align:center;">Phase 2</td></tr>
+            <tr style="background:#eff6ff;"><td style="padding:7px 10px;">09</td><td style="padding:7px 10px;">競合・市場リサーチ</td><td style="padding:7px 10px; text-align:center;">★★☆</td><td style="padding:7px 10px; text-align:center;">3〜5h</td><td style="padding:7px 10px;">リサーチコスト80%削減</td><td style="padding:7px 10px; text-align:center;">Phase 2〜3</td></tr>
+            <tr style="background:#faf5ff;"><td style="padding:7px 10px;">10</td><td style="padding:7px 10px;">SaaS×Excel API連携</td><td style="padding:7px 10px; text-align:center;">★★★</td><td style="padding:7px 10px; text-align:center;">8〜15h</td><td style="padding:7px 10px;">手動転記ゼロ化</td><td style="padding:7px 10px; text-align:center;">Phase 2〜3</td></tr>
+            <tr style="background:#faf5ff;"><td style="padding:7px 10px;">11</td><td style="padding:7px 10px;">KPIダッシュボード</td><td style="padding:7px 10px; text-align:center;">★★★</td><td style="padding:7px 10px; text-align:center;">8〜12h</td><td style="padding:7px 10px;">データ経営への転換</td><td style="padding:7px 10px; text-align:center;">Phase 2〜3</td></tr>
+            <tr style="background:#faf5ff;"><td style="padding:7px 10px;">12</td><td style="padding:7px 10px;">内部ツール開発</td><td style="padding:7px 10px; text-align:center;">★★★</td><td style="padding:7px 10px; text-align:center;">10〜20h</td><td style="padding:7px 10px;">外注費月10〜30万削減</td><td style="padding:7px 10px; text-align:center;">Phase 3</td></tr>
+            <tr style="background:#fffbeb;"><td style="padding:7px 10px;">13</td><td style="padding:7px 10px;">SNS・ブログ記事量産</td><td style="padding:7px 10px; text-align:center;">★☆☆</td><td style="padding:7px 10px; text-align:center;">2〜4h</td><td style="padding:7px 10px;">コンテンツ月5→30本</td><td style="padding:7px 10px; text-align:center;">Phase 1</td></tr>
+            <tr style="background:#fffbeb;"><td style="padding:7px 10px;">14</td><td style="padding:7px 10px;">LP・商品説明文ABテスト</td><td style="padding:7px 10px; text-align:center;">★★☆</td><td style="padding:7px 10px; text-align:center;">3〜5h</td><td style="padding:7px 10px;">CVR 現状比10%以上改善</td><td style="padding:7px 10px; text-align:center;">Phase 1〜2</td></tr>
+            <tr style="background:#fffbeb;"><td style="padding:7px 10px;">15</td><td style="padding:7px 10px;">顧客インタビュー→インサイト</td><td style="padding:7px 10px; text-align:center;">★★☆</td><td style="padding:7px 10px; text-align:center;">4〜6h</td><td style="padding:7px 10px;">マーケ戦略立案 3週間→3日</td><td style="padding:7px 10px; text-align:center;">Phase 1〜2</td></tr>
+            <tr style="background:#fffbeb;"><td style="padding:7px 10px;">16</td><td style="padding:7px 10px;">AI画像生成・広告クリエイティブ</td><td style="padding:7px 10px; text-align:center;">★★☆</td><td style="padding:7px 10px; text-align:center;">2〜4h</td><td style="padding:7px 10px;">バナー制作費 月10万→1万</td><td style="padding:7px 10px; text-align:center;">Phase 1〜2</td></tr>
+            <tr style="background:#fff1f2;"><td style="padding:7px 10px;">17</td><td style="padding:7px 10px;">求人票・スクリーニング自動化</td><td style="padding:7px 10px; text-align:center;">★★☆</td><td style="padding:7px 10px; text-align:center;">3〜5h</td><td style="padding:7px 10px;">スクリーニング工数70%削減</td><td style="padding:7px 10px; text-align:center;">Phase 1</td></tr>
+            <tr style="background:#fff1f2;"><td style="padding:7px 10px;">18</td><td style="padding:7px 10px;">研修コンテンツAI生成</td><td style="padding:7px 10px; text-align:center;">★★☆</td><td style="padding:7px 10px; text-align:center;">5〜8h</td><td style="padding:7px 10px;">研修作成 2ヶ月→2週間</td><td style="padding:7px 10px; text-align:center;">Phase 1〜2</td></tr>
+            <tr style="background:#fff1f2;"><td style="padding:7px 10px;">19</td><td style="padding:7px 10px;">社内ナレッジRAG化</td><td style="padding:7px 10px; text-align:center;">★★★</td><td style="padding:7px 10px; text-align:center;">6〜10h</td><td style="padding:7px 10px;">社内問い合わせ40〜60%削減</td><td style="padding:7px 10px; text-align:center;">Phase 2〜3</td></tr>
+            <tr style="background:#fff1f2;"><td style="padding:7px 10px;">20</td><td style="padding:7px 10px;">面接設計・評価シート標準化</td><td style="padding:7px 10px; text-align:center;">★☆☆</td><td style="padding:7px 10px; text-align:center;">2〜3h</td><td style="padding:7px 10px;">面接準備 2h→20分</td><td style="padding:7px 10px; text-align:center;">Phase 1</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+</div><!-- /body -->
+
+<div class="footer">
+  <span>UNLID AI実装ユースケース集 v1.0　｜　2026年3月　｜　Confidential</span>
+  <span>20ケース完成版</span>
+</div>
+
+</div><!-- /page -->
+</body>
+</html>

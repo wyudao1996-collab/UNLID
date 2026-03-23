@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNLID 投資家向け事業戦略レポート v2.0</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      color: #1a1a1a;
+      background: #f0f2f5;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+
+    /* ===== Cover ===== */
+    .cover {
+      background: linear-gradient(135deg, #0d1f3c 0%, #1a3560 55%, #1e4d8c 100%);
+      color: #fff;
+      padding: 64px 64px 52px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      right: -80px; top: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .cover::after {
+      content: '';
+      position: absolute;
+      right: 60px; bottom: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+    }
+    .cover .label {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7ab0e0;
+      margin-bottom: 18px;
+    }
+    .cover h1 {
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+    .cover .subtitle {
+      font-size: 16px;
+      color: #a0c4e8;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+    .cover .version-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 12px;
+      color: #c0d8f0;
+      margin-bottom: 36px;
+    }
+    .cover-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 24px;
+      font-size: 13px;
+      color: #7ab0e0;
+    }
+    .cover-meta span strong { color: #fff; }
+
+    /* ===== Body ===== */
+    .body { padding: 0 64px 64px; }
+
+    /* ===== Summary Box ===== */
+    .summary-box {
+      background: linear-gradient(135deg, #f0f6ff 0%, #e8f2ff 100%);
+      border-left: 5px solid #1a3560;
+      border-radius: 0 8px 8px 0;
+      padding: 28px 32px;
+      margin: 40px 0;
+    }
+    .summary-box .summary-title {
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #1a3560;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .summary-box p { margin-bottom: 10px; font-size: 15px; }
+
+    /* ===== Highlight Box ===== */
+    .highlight-box {
+      background: #0d1f3c;
+      color: #fff;
+      border-radius: 8px;
+      padding: 22px 28px;
+      margin: 20px 0;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .highlight-box strong { color: #7ac8ff; }
+
+    .highlight-box-warn {
+      background: linear-gradient(135deg, #fff8e0, #fff3cc);
+      border-left: 5px solid #f0a500;
+      border-radius: 0 8px 8px 0;
+      padding: 18px 24px;
+      margin: 18px 0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .highlight-box-warn strong { color: #b07000; }
+
+    /* ===== TOC ===== */
+    .toc {
+      background: #fafbfc;
+      border: 1px solid #e0e8f0;
+      border-radius: 8px;
+      padding: 26px 32px;
+      margin: 36px 0;
+    }
+    .toc-title {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #999;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .toc ol { padding-left: 20px; }
+    .toc li { padding: 4px 0; font-size: 14px; }
+    .toc a { color: #1a3560; text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+
+    /* ===== Section ===== */
+    .section {
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 2px solid #edf0f4;
+    }
+    .section:first-of-type { border-top: none; margin-top: 40px; }
+
+    h2 {
+      font-size: 22px;
+      color: #0d1f3c;
+      margin-bottom: 26px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid #1a3560;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    h2 .sec-num {
+      font-size: 13px;
+      color: #1a3560;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    h3 {
+      font-size: 17px;
+      color: #1a3560;
+      margin: 32px 0 14px;
+      padding-left: 12px;
+      border-left: 3px solid #4a90d9;
+    }
+    h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+      margin: 22px 0 10px;
+    }
+    p { margin-bottom: 12px; }
+
+    /* ===== Tables ===== */
+    .table-wrap { overflow-x: auto; margin: 16px 0 24px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    thead tr { background: #0d1f3c; color: #fff; }
+    thead th { padding: 11px 16px; text-align: left; font-weight: 600; }
+    tbody tr:nth-child(even) { background: #f7f9fc; }
+    tbody tr:hover { background: #edf4ff; transition: background 0.15s; }
+    tbody td {
+      padding: 10px 16px;
+      border-bottom: 1px solid #e8edf4;
+      vertical-align: top;
+    }
+
+    /* ===== Pre / Code ===== */
+    pre {
+      background: #f2f4f8;
+      border: 1px solid #dde3ec;
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin: 14px 0 20px;
+      font-size: 13px;
+      line-height: 1.65;
+      overflow-x: auto;
+      font-family: 'Courier New', 'Consolas', monospace;
+      white-space: pre;
+    }
+
+    /* ===== Blockquote ===== */
+    blockquote {
+      background: #fffbf0;
+      border-left: 4px solid #f0a500;
+      padding: 14px 20px;
+      margin: 16px 0 20px;
+      border-radius: 0 6px 6px 0;
+      font-size: 14px;
+    }
+    blockquote strong { color: #c07800; }
+
+    /* ===== Lists ===== */
+    ul, ol { padding-left: 24px; margin: 10px 0 14px; }
+    li { margin-bottom: 6px; }
+
+    strong { color: #0d1f3c; }
+
+    /* ===== Tags ===== */
+    .tag {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .tag-high { background: #ffe0e0; color: #c00; }
+    .tag-mid  { background: #fff0d0; color: #a06000; }
+    .tag-low  { background: #e0f0e0; color: #006020; }
+    .tag-crit { background: #1a3560; color: #fff; }
+
+    /* ===== Metric Grid ===== */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0 28px;
+    }
+    .metric-card {
+      border: 1px solid #d8e4f0;
+      border-radius: 10px;
+      padding: 20px 16px;
+      text-align: center;
+      background: linear-gradient(135deg, #fff 0%, #f5f9ff 100%);
+    }
+    .metric-card .m-label { font-size: 12px; color: #888; margin-bottom: 8px; line-height: 1.4; }
+    .metric-card .m-value { font-size: 24px; font-weight: 700; color: #0d1f3c; }
+    .metric-card .m-sub   { font-size: 12px; color: #aaa; margin-top: 5px; }
+
+    /* ===== Phase Cards ===== */
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0 28px;
+    }
+    .phase-card {
+      border-radius: 10px;
+      padding: 20px 18px;
+      border: 1px solid #d8e4f0;
+    }
+    .phase-card.p0 { border-top: 4px solid #888; }
+    .phase-card.p1 { border-top: 4px solid #4a90d9; }
+    .phase-card.p2 { border-top: 4px solid #1a7040; }
+    .phase-card.p3 { border-top: 4px solid #0d1f3c; }
+    .phase-card .ph-name { font-size: 12px; font-weight: 700; color: #888; margin-bottom: 6px; }
+    .phase-card .ph-title { font-size: 15px; font-weight: 700; color: #0d1f3c; margin-bottom: 12px; }
+    .phase-card ul { padding-left: 16px; font-size: 13px; }
+    .phase-card li { margin-bottom: 5px; color: #444; }
+
+    /* ===== Flow Box ===== */
+    .flow-box {
+      background: #f7f9fc;
+      border: 1px solid #dde3ec;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 14px 0 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    /* ===== Risk Table ===== */
+    .risk-crit td:first-child { border-left: 4px solid #c00; }
+    .risk-high td:first-child { border-left: 4px solid #f0a500; }
+    .risk-mid  td:first-child { border-left: 4px solid #4a90d9; }
+
+    /* ===== Rank Cards ===== */
+    .rank-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 16px 0 24px;
+    }
+    .rank-card {
+      border-radius: 8px;
+      padding: 16px 14px;
+      text-align: center;
+      border: 1px solid #dde3ec;
+    }
+    .rank-card.r0 { background: #f8f8f8; border-top: 3px solid #aaa; }
+    .rank-card.r1 { background: #f0f7ff; border-top: 3px solid #4a90d9; }
+    .rank-card.r2 { background: #f0fff4; border-top: 3px solid #1a9050; }
+    .rank-card.r3 { background: #fffbf0; border-top: 3px solid #d4a017; }
+    .rank-card .rk-name  { font-size: 13px; font-weight: 700; color: #0d1f3c; margin-bottom: 4px; }
+    .rank-card .rk-cond  { font-size: 11px; color: #888; margin-bottom: 10px; line-height: 1.4; }
+    .rank-card .rk-pay   { font-size: 16px; font-weight: 700; color: #0d1f3c; }
+    .rank-card .rk-month { font-size: 11px; color: #888; margin-top: 4px; }
+
+    /* ===== Footer ===== */
+    .footer {
+      background: #0d1f3c;
+      color: #6080a0;
+      font-size: 12px;
+      padding: 20px 64px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* ===== Print ===== */
+    @media print {
+      body { background: #fff; }
+      .page { box-shadow: none; border-radius: 0; margin: 0; }
+      .section { page-break-inside: avoid; }
+      h2 { page-break-after: avoid; }
+    }
+
+    @media (max-width: 720px) {
+      .cover, .body { padding: 24px; }
+      .cover h1 { font-size: 22px; }
+      .metric-grid, .phase-grid, .rank-grid { grid-template-columns: 1fr; }
+      .footer { padding: 16px 24px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ===== Cover ===== -->
+  <div class="cover">
+    <div class="label">Investor Strategy Report</div>
+    <h1>UNLID 投資家向け事業戦略レポート</h1>
+    <div class="subtitle">「AI時代に生き残るための実戦ギルド」<br>事業機会・市場検証・収益モデルの統合分析</div>
+    <div class="version-badge">Version 2.0 — 全文書統合・矛盾解消済み</div>
+    <div class="cover-meta">
+      <span><strong>作成日</strong>：2026年3月</span>
+      <span><strong>対象読者</strong>：投資家・事業パートナー・経営幹部</span>
+      <span><strong>機密区分</strong>：Confidential</span>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- ===== Executive Summary ===== -->
+    <div class="summary-box">
+      <div class="summary-title">Executive Summary</div>
+      <p>UNLIDは、<strong>「AI時代に価値が急騰する人間スキル」を実戦で鍛える実戦ギルド</strong>だ。研修会社でも、クラウドソーシングでも、人材紹介でもない。3市場の構造的空白に位置する新カテゴリーを作る。</p>
+      <div class="table-wrap" style="margin-top:16px;">
+        <table>
+          <thead><tr><th>論点</th><th>結論</th></tr></thead>
+          <tbody>
+            <tr><td><strong>何をやるのか</strong></td><td>企業の「判断が必要な摩擦業務」を、3〜4人の若手チームが師匠監修のもとで完遂する</td></tr>
+            <tr><td><strong>誰が払うのか</strong></td><td>企業（クライアント）が業務委託費として月3〜20万円 または 案件単位50〜300万円</td></tr>
+            <tr><td><strong>誰がもらうのか</strong></td><td>若手は副業報酬（1,000〜5,000円/時）をもらいながら、転職市場で価値ある実績ログを積む</td></tr>
+            <tr><td><strong>なぜ今か</strong></td><td>AI代替が急進し「知識インプット」の価値が暴落。「判断・完遂・信頼」の価値が逆に急騰している</td></tr>
+            <tr><td><strong>市場規模</strong></td><td>BPO市場4〜5兆円 × 副業市場20兆円 × 人材紹介市場3,000〜4,000億円の交差点</td></tr>
+            <tr><td><strong>3〜5年SOM</strong></td><td><strong>約15〜40億円</strong>（B2B受託メイン＋人材紹介フィー）</td></tr>
+            <tr><td><strong>創業者優位性</strong></td><td>レバレジーズ×リクルート出身×麻雀プロ。Day 1から両面のパイプライン保有</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="highlight-box">
+        <strong>3〜5年での現実的SOM目標：15〜40億円</strong>　—　BPO×副業×人材紹介の3市場を1つのエコシステムで統合する、既存プレイヤーが構造上入れない空白地帯
+      </div>
+    </div>
+
+    <!-- ===== TOC ===== -->
+    <div class="toc">
+      <div class="toc-title">目次</div>
+      <ol>
+        <li><a href="#sec1">事業の本質——「研修会社」ではない新カテゴリー</a></li>
+        <li><a href="#sec2">なぜ今か——AI時代と日本若年層の構造的危機</a></li>
+        <li><a href="#sec3">顧客定義——B2B・B2C両面の解像度</a></li>
+        <li><a href="#sec4">市場規模——3市場の交差点</a></li>
+        <li><a href="#sec5">競合分析——真の競合は誰か</a></li>
+        <li><a href="#sec6">サービス設計——クエストとチーム制</a></li>
+        <li><a href="#sec7">収益モデル——数値の根拠</a></li>
+        <li><a href="#sec8">オペレーション設計——ギルドOS</a></li>
+        <li><a href="#sec9">創業者のアンフェアアドバンテージ</a></li>
+        <li><a href="#sec10">ロードマップ</a></li>
+        <li><a href="#sec11">リスクと対策</a></li>
+        <li><a href="#sec12">KPI設計</a></li>
+      </ol>
+    </div>
+
+    <!-- ===== Section 1 ===== -->
+    <div class="section" id="sec1">
+      <h2><span class="sec-num">01</span>事業の本質——「研修会社」ではない新カテゴリー</h2>
+
+      <div class="highlight-box-warn">
+        <strong>一言で言えば：</strong>　企業が抱える「誰かがやらないといけないが、手が回っていない仕事」を、若手プロフェッショナルが3〜4人のチームで完遂する。その過程で生まれる「逃げなかった実績」が、AI時代に最も価値のある信頼の証明書になる。
+      </div>
+
+      <h3>既存の3市場が解決できていないこと</h3>
+      <div class="flow-box">【現在の構造と限界】
+
+  企業 →「調査・資料・対応」→ ランサーズ/BPO
+            作業は代替できる。文脈・判断・感情は代替できない
+
+  企業 →「優秀な人材が欲しい」→ 人材紹介
+            採用「前」に一緒に働く仕組みがない
+
+  若者 →「スキル×副収入」→ ランサーズ
+            単価低い・スキルにならない・実績が証明できない
+
+【UNLIDが3市場の交差点になると】
+
+  企業 → UNLIDに「業務委託費」として月3〜20万円を支払う
+       → 副産物として「優秀な若手と実戦で相性確認」ができる
+
+  若者 → UNLIDで「副業報酬（1,000〜5,000円/時）」を得ながら
+       → 「AI時代に価値ある実績ログ」を積む
+
+  採用成立時 → UNLIDが人材紹介フィー（年収×35%）を受け取る</div>
+
+      <h3>研修会社との決定的な違い</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>比較軸</th><th>研修会社</th><th>UNLID</th></tr></thead>
+          <tbody>
+            <tr><td>提供するもの</td><td>コンテンツ・講義・eラーニング</td><td>生の実務（クエスト）＋師匠FB</td></tr>
+            <tr><td>育成の方法</td><td>Input（知識を入れる）</td><td>Output（実務を完遂させる）</td></tr>
+            <tr><td>評価の対象</td><td>受講完了・テスト点数</td><td>完遂ログ：網羅性・配慮・執着</td></tr>
+            <tr><td>若手にとっての意味</td><td>「やらされた研修」</td><td>「自分の市場価値を証明する実績」</td></tr>
+            <tr><td>企業にとっての意味</td><td>社員スキルアップ（抽象的）</td><td>現場課題の解消（具体的）＋採用前検証</td></tr>
+            <tr><td>AI時代の耐性</td><td>AIが代替可能なスキルを教えている</td><td><strong>AIが代替できない力を鍛えている</strong></td></tr>
+            <tr><td>予算の名目</td><td>研修費（人事部予算・年度縛り）</td><td><strong>業務委託費（事業部予算・案件単位）</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>「業務委託費」で入ることが重要だ。研修費は年度予算内での稟議が必要で動きが鈍い。業務委託費は事業部が案件単位で判断でき、意思決定が速く、成果が見えやすい。</p>
+    </div>
+
+    <!-- ===== Section 2 ===== -->
+    <div class="section" id="sec2">
+      <h2><span class="sec-num">02</span>なぜ今か——AI時代と日本若年層の構造的危機</h2>
+
+      <h3>AIによる「知識の無価値化」</h3>
+      <div class="flow-box">2020年以前：知識 × 経験 = 市場価値 → 研修に金を払う意味があった
+2026年現在：知識はAIが無料提供 → 知識インプットへの投資価値が薄れた
+          → 「判断し、完遂し、相手の感情を配慮できる人間」の価値が逆に急騰</div>
+
+      <h4>AI代替可能性の境界線</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>タスク</th><th>AI代替可能性</th></tr></thead>
+          <tbody>
+            <tr><td>情報の整理・要約</td><td><span class="tag tag-high">高（すでに進行中）</span></td></tr>
+            <tr><td>論理的分析・数値処理</td><td><span class="tag tag-high">高</span></td></tr>
+            <tr><td>定型コミュニケーション</td><td><span class="tag tag-mid">中</span></td></tr>
+            <tr><td><strong>利害調整・合意形成</strong></td><td><span class="tag tag-low">低</span></td></tr>
+            <tr><td><strong>感情を伴う対応</strong></td><td><span class="tag tag-low">低</span></td></tr>
+            <tr><td><strong>不確実な中での判断</strong></td><td><span class="tag tag-low">低</span></td></tr>
+            <tr><td><strong>人前に立つ・場を作る</strong></td><td><span class="tag tag-low">ほぼ不可能</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>UNLIDが鍛えるのはすべて「低・ほぼ不可能」の領域だ。</strong></p>
+
+      <h3>日本若年層の「賃金デッドロック」——数字が示す現状</h3>
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="m-label">新卒3年以内離職率（大卒）</div>
+          <div class="m-value">34.9%</div>
+          <div class="m-sub">厚生労働省（2021年卒）</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">企業の能力開発費（GDP比）</div>
+          <div class="m-value">0.1%</div>
+          <div class="m-sub">米国2.0%の20分の1（JILPT）</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">20代の副業実施率</div>
+          <div class="m-value">14.4%</div>
+          <div class="m-sub">全世代最低＝伸びしろ最大（パーソルキャリア2024）</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">20代男性の転職率</div>
+          <div class="m-value">13.4%</div>
+          <div class="m-sub">全世代最高（マイナビ2025）</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">労働生産性（時間あたり）</div>
+          <div class="m-value">OECD 28位</div>
+          <div class="m-sub">G7最下位（日本生産性本部2024）</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">副業市場規模</div>
+          <div class="m-value">20兆円</div>
+          <div class="m-sub">フリーランス人口1,303万人（ランサーズ2024）</div>
+        </div>
+      </div>
+
+      <div class="flow-box">【賃金デッドロックの構造】
+
+スキルが積まれない会社に居続ける
+  → 市場価値上がらない
+    → 賃金上がらない
+      → 焦って転職するが履歴書が薄い
+        → また同じ環境  ← ループ</div>
+
+      <h3>OJT崩壊——育てられない構造的理由</h3>
+      <div class="flow-box">日本型雇用の前提：「終身雇用 × 年功序列」→ 先輩が長くいるから徒弟制が成立
+        ↓ 前提が崩壊
+① シニア社員が自分の業務で手一杯（教える余裕がない）
+② 人員削減で「教える人」自体がいなくなった
+③ 暗黙知伝承は、複雑化した業務には機能しない
+④ OJTは「コストとして見えない」ため、削減しても気づかれにくい
+        ↓
+「OJTやってます」と言いながら実態は放置
+＝ 若手は「成長できない」と感じて早期離職</div>
+    </div>
+
+    <!-- ===== Section 3 ===== -->
+    <div class="section" id="sec3">
+      <h2><span class="sec-num">03</span>顧客定義——B2B・B2C両面の解像度</h2>
+
+      <h3>B2B：「研修を買う企業」ではなく「課題を外注したい企業」</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>属性</th><th>詳細</th></tr></thead>
+          <tbody>
+            <tr><td>規模</td><td>従業員 <strong>30〜500名</strong>の中小・中堅企業、スタートアップ（Sweet Spot：100〜300名）</td></tr>
+            <tr><td>業種</td><td>IT・コンサル・金融・サービス業（知識労働中心）</td></tr>
+            <tr><td>意思決定者</td><td><strong>経営者または事業部長</strong>（人事部ではなく現場の責任者）</td></tr>
+            <tr><td>予算の名目</td><td>業務委託費・外注費（研修費ではない）</td></tr>
+            <tr><td>予算感</td><td>月3〜20万円（継続型）または案件単位50〜150万円</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>企業が感じている3つの痛み</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>痛み</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>痛み①</strong>「汚れ仕事を誰もやりたがらない」</td><td>部署間調整の下準備・クレーム後の対応設計・泥臭いリサーチは社内で「損な役回り」とされ放置される</td></tr>
+            <tr><td><strong>痛み②</strong>「外注したいが文脈が伝わらない」</td><td>BPO・ランサーズは「作業」は請け負えるが「判断が必要な仕事」はできない。諦めがある</td></tr>
+            <tr><td><strong>痛み③</strong>「AIを活用したいが社内に1〜2人しかいない」</td><td>その人間が全社AI活用の窓口になって消耗。「AI出力を人間らしく仕上げる」作業が大量発生</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>B2C：「学びたい若手」ではなく「証明が欲しい若手」</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>属性</th><th>詳細</th></tr></thead>
+          <tbody>
+            <tr><td>年齢</td><td><strong>22〜32歳</strong></td></tr>
+            <tr><td>状況</td><td>入社1〜6年目。日々の業務はこなせるが「市場価値になっているか」の実感がない</td></tr>
+            <tr><td>心理</td><td>「AIに仕事を奪われるのでは」「今の会社でしか通用しないのでは」という漠然とした不安</td></tr>
+            <tr><td>本当に欲しいもの</td><td><strong>「自分が修羅場をくぐった」という、他者が検証可能な実績</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>マズローの全層を同時に刺激する設計</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>欲求階層</th><th>UNLIDが提供するもの</th></tr></thead>
+          <tbody>
+            <tr><td>安全欲求（どこでも生きられる）</td><td>スキルが積まれるから市場価値が上がる</td></tr>
+            <tr><td>生理的欲求（今すぐお金が必要）</td><td>副業報酬（ランクに応じて1,000〜5,000円/時）</td></tr>
+            <tr><td>帰属欲求（仲間が欲しい）</td><td>コホート（3〜4人チーム）での共闘体験</td></tr>
+            <tr><td>承認欲求（認められたい）</td><td>師匠から「お前はここが良かった」とFBされる</td></tr>
+            <tr><td>自己実現欲求</td><td>「不確実な状況で判断して、やり遂げた」という体験</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <blockquote>なぜ「払う」ではなく「もらう」モデルにするか：「賃金デッドロック」に陥っている若者に「月1万円払ってください」は刺さらない。<strong>「副業報酬をもらえて、実績も積める」が正しい答えだ。</strong></blockquote>
+    </div>
+
+    <!-- ===== Section 4 ===== -->
+    <div class="section" id="sec4">
+      <h2><span class="sec-num">04</span>市場規模——3市場の交差点</h2>
+
+      <div class="flow-box">┌──────────────────────────────────────────────────────────┐
+│                                                          │
+│  市場①：BPO・業務委託市場    TAM：4〜5兆円                 │
+│  企業が「判断が必要な業務の解決」に払う → UNLID の受託収益  │
+│                                                          │
+│  市場②：副業・ギグワーカー市場    TAM：20兆円              │
+│  若者が「実戦経験＋副収入」を求める → UNLIDが支払うコスト   │
+│                                                          │
+│  市場③：人材紹介市場    TAM：3,000〜4,000億円              │
+│  企業がギルドメンバーを採用 → UNLID の紹介フィー収益        │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+
+既存プレイヤーはそれぞれ1市場しか見ていない。
+UNLIDは3市場を1つのエコシステムで統合する。</div>
+
+      <h3>B2B 実務受託（メイン収益）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>指標</th><th>規模</th><th>根拠</th></tr></thead>
+          <tbody>
+            <tr><td>TAM</td><td>4〜5兆円</td><td>国内BPO・業務委託市場全体</td></tr>
+            <tr><td>SAM</td><td>約200億円</td><td>対象業種の中小〜中堅企業1万社 × 年間受託ポテンシャル（月20万円×12ヶ月）</td></tr>
+            <tr><td><strong>SOM（3〜5年）</strong></td><td><strong>10〜25億円</strong></td><td>250〜500社 × 年間平均受託額400〜500万円</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>人材紹介成功報酬</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>指標</th><th>規模</th><th>根拠</th></tr></thead>
+          <tbody>
+            <tr><td>TAM</td><td>3,000〜4,000億円</td><td>国内人材紹介市場</td></tr>
+            <tr><td><strong>SOM（3〜5年）</strong></td><td><strong>0.5〜2億円</strong></td><td>年間30〜100件 × 平均年収400万円 × 35%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="highlight-box">
+        <strong>3〜5年 SOM合計：約15〜40億円</strong>
+        <div style="margin-top:12px; font-size:13px; color:#a0c4e0;">
+          フェーズ1（0〜1年）：月100〜500万円 / フェーズ2（1〜3年）：月1,500万〜3,000万円 / フェーズ3（3〜5年）：年間15〜40億円
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Section 5 ===== -->
+    <div class="section" id="sec5">
+      <h2><span class="sec-num">05</span>競合分析——真の競合は誰か</h2>
+
+      <blockquote>UNLIDの真の競合は「研修会社」ではない。<strong>BPO・クラウドソーシング・人材紹介・コンサルが真の競合だ。</strong></blockquote>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>カテゴリ</th><th>代表企業</th><th>UNLIDとの違い</th></tr></thead>
+          <tbody>
+            <tr><td><strong>クラウドソーシング</strong></td><td>ランサーズ・CW</td><td>品質保証なし。育成機能なし。「判断が必要な仕事」は取り扱えない</td></tr>
+            <tr><td><strong>BPO</strong></td><td>大手BPO各社</td><td>定型業務の標準化モデル。非定型・判断が必要な業務は不得手</td></tr>
+            <tr><td><strong>零細コンサル</strong></td><td>個人コンサルタント</td><td>高品質だが高価格・個人依存。若手育成機能なし</td></tr>
+            <tr><td><strong>人材紹介</strong></td><td>リクルートエージェント等</td><td>採用「前」の実戦検証ができない</td></tr>
+            <tr><td><strong>研修会社</strong></td><td>インソース・ラーニングエージェンシー</td><td>インプットのみ。実戦完遂体験がない</td></tr>
+            <tr><td><strong>コーチング</strong></td><td>MENTO等</td><td>話を聞くが実力は変わらない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>なぜ既存プレイヤーが参入しにくいか</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>プレイヤー</th><th>参入できない構造的理由</th></tr></thead>
+          <tbody>
+            <tr><td>クラウドソーシング</td><td>品質保証と育成は、マーケットプレイス型と構造上相容れない</td></tr>
+            <tr><td>BPO</td><td>非定型・判断が必要な仕事は「大量処理×標準化」モデルと相性が悪い</td></tr>
+            <tr><td>コンサル</td><td>「若手を育てながら解決する」は「シニアが解決する」利益構造と矛盾</td></tr>
+            <tr><td>人材紹介</td><td>採用前に実戦検証を入れると回転率が下がり短期売上が落ちる</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="highlight-box">
+        <strong>UNLIDが位置する交差点は、既存プレイヤーが構造上参入できない空白地帯。</strong>
+      </div>
+    </div>
+
+    <!-- ===== Section 6 ===== -->
+    <div class="section" id="sec6">
+      <h2><span class="sec-num">06</span>サービス設計——クエストとチーム制</h2>
+
+      <h3>クエストの評価3軸</h3>
+      <div class="flow-box">1. 情報の網羅性：判断材料を揃える際にサボり・恐怖による放置がなかったか
+2. 相手への配慮：伝え方・構成に「相手の立場への想像力」を働かせたか
+3. 目的への執着：摩擦に直面したとき、逃げずに完遂したか
+
+→ この3軸は「AIには代替されにくい人間としての誠実さ」そのものだ</div>
+
+      <h3>クエスト類型（Tier別）</h3>
+      <h4>Tier 1：即始められる（Day 1〜6ヶ月）</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>クエスト</th><th>企業の依頼例</th><th>単価目安</th></tr></thead>
+          <tbody>
+            <tr><td><strong>市場・競合の意思決定用分析</strong></td><td>「競合が値下げした。なぜか・どう対応すべきか調べてくれ」</td><td>50〜150万円</td></tr>
+            <tr><td><strong>新規取引先の信用調査＋提案設計</strong></td><td>「この会社と提携したい。大丈夫か・相手が何を求めているか」</td><td>30〜100万円</td></tr>
+            <tr><td><strong>稟議・投資家説明用の「通る」資料</strong></td><td>「事業部長の稟議が役員会で通らない。どこが問題か」</td><td>30〜80万円</td></tr>
+            <tr><td><strong>AI出力の「人間仕上げ」</strong></td><td>「ChatGPTで資料構成は作れるが、役員に刺さるか分からない」</td><td>月3〜15万円</td></tr>
+            <tr><td><strong>模擬営業ロールプレイ＋FB</strong></td><td>「新入社員の営業練習の相手をしてほしい」</td><td>半日3〜8万円</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h4>Tier 2：少し深い（6ヶ月〜2年）</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>クエスト</th><th>企業の依頼例</th><th>単価目安</th></tr></thead>
+          <tbody>
+            <tr><td><strong>採用ブランディング＋一次調査</strong></td><td>「求人を出しても応募が来ない。魅力をどう伝えればいいか」</td><td>50〜150万円</td></tr>
+            <tr><td><strong>顧客インタビュー設計〜示唆抽出</strong></td><td>「顧客の本音を知りたい。社員が聞くと本音が出ない」</td><td>80〜200万円</td></tr>
+            <tr><td><strong>クレーム後の対応設計</strong></td><td>「取引先に迷惑をかけた。どう謝るか・再発防止をどう説明するか」</td><td>50〜120万円</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h4>Tier 3：将来の本丸</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>クエスト</th><th>企業の依頼例</th><th>単価目安</th></tr></thead>
+          <tbody>
+            <tr><td><strong>部署間の合意形成・地ならし</strong></td><td>「A部署とB部署が対立してプロジェクトが止まっている」</td><td>100〜300万円</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>チーム制（コホート）——なぜ一人でやらせないか</h3>
+      <div class="flow-box">┌──────────────────────────────────────────────────────┐
+│           Quest Team（3〜4名）                           │
+│                                                        │
+│  [調査役 / Researcher]                                  │
+│    情報収集・データ整理が得意                              │
+│    評価：「漏れなく、逃げずに調べたか」                    │
+│                                                        │
+│  [コミュニケーター / Connector]                          │
+│    インタビュー・登壇・ファシリが得意                      │
+│    評価：「本音を引き出せたか、場を作れたか」               │
+│                                                        │
+│  [まとめ役 / Synthesizer]                               │
+│    AIを使ったドキュメント化・構成が得意                    │
+│    評価：「90%を100%に仕上げられたか」                    │
+│                                                        │
+│  [問い役 / Challenger]（任意）                           │
+│    「それ本当に正しいか？」と突っ込む                      │
+│    評価：「チーム全体の思考の質を上げたか」                 │
+│                                                        │
+│              ↑ 週1回：師匠からチーム単位でFB              │
+└──────────────────────────────────────────────────────┘</div>
+    </div>
+
+    <!-- ===== Section 7 ===== -->
+    <div class="section" id="sec7">
+      <h2><span class="sec-num">07</span>収益モデル——数値の根拠</h2>
+
+      <h3>全体の資金フロー</h3>
+      <div class="flow-box">【企業（クライアント）】
+       ↓ 業務委託費（月3〜20万円 or プロジェクト単位50〜300万円）
+【UNLID】
+  ├─ 若手への副業報酬（ランク制、1,000〜5,000円/時）
+  ├─ 師匠のFB・監修費（羽島氏の報酬）
+  └─ UNLID運営マージン（受託費の30〜40%）
+
+【採用成立時】
+  クライアント企業がギルドメンバーを採用
+       ↓
+  人材紹介フィー（年収×35%≒140万円/件）→ UNLID</div>
+
+      <h3>3つの収益源</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>収益源</th><th>モデル</th><th>単価感</th><th>役割</th></tr></thead>
+          <tbody>
+            <tr><td><strong>B2B受託費</strong></td><td>月額継続 or プロジェクト</td><td>月3〜20万円 / 案件50〜300万円</td><td>メイン収益（全体の70〜80%）</td></tr>
+            <tr><td><strong>人材紹介フィー</strong></td><td>採用成立時成功報酬</td><td>年収400万×35%＝<strong>140万円/件</strong></td><td>構造的差別化・高単価収益</td></tr>
+            <tr><td><strong>B2B顧問契約</strong></td><td>優先アクセス・月額</td><td>月30〜100万円</td><td>将来の安定収益</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>若手の収益ロードマップ</h3>
+      <div class="rank-grid">
+        <div class="rank-card r0">
+          <div class="rk-name">Apprentice（見習い）</div>
+          <div class="rk-cond">入会後〜完遂3件</div>
+          <div class="rk-pay">1,000〜1,200円/時</div>
+          <div class="rk-month">月20h → 月2〜2.4万円</div>
+        </div>
+        <div class="rank-card r1">
+          <div class="rk-name">Journeyman（一人前）</div>
+          <div class="rk-cond">完遂5件＋師匠認定</div>
+          <div class="rk-pay">1,500〜2,500円/時</div>
+          <div class="rk-month">月20h → 月3〜5万円</div>
+        </div>
+        <div class="rank-card r2">
+          <div class="rk-name">Craftsman（熟練）</div>
+          <div class="rk-cond">完遂15件＋採用実績1件</div>
+          <div class="rk-pay">3,000〜5,000円/時</div>
+          <div class="rk-month">月20h → 月6〜10万円</div>
+        </div>
+        <div class="rank-card r3">
+          <div class="rk-name">Master（師匠）</div>
+          <div class="rk-cond">後輩育成＋紹介成功実績</div>
+          <div class="rk-pay">FB報酬＋収益シェア</div>
+          <div class="rk-month">月10〜30万円</div>
+        </div>
+      </div>
+
+      <h4>価格設計（B2B）— なぜ月額モデルが中小企業に刺さるか</h4>
+      <div class="flow-box">× 「50万円でこれをします」（稟議が必要・一回で終わり・怖い）
+○ 「月5万円で使い続けられます」（試せる・積み上がる・解約自由）
+  → 月額から積み上げると年間60万円 > 単発プロジェクト単価以上の収益</div>
+    </div>
+
+    <!-- ===== Section 8 ===== -->
+    <div class="section" id="sec8">
+      <h2><span class="sec-num">08</span>オペレーション設計——ギルドOS</h2>
+
+      <h3>完遂ログの仕組み（守秘義務Tier制）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tier</th><th>公開内容</th><th>条件</th></tr></thead>
+          <tbody>
+            <tr><td>Tier 1</td><td>業種・規模感・課題カテゴリのみ</td><td>全クエストで標準適用</td></tr>
+            <tr><td>Tier 2</td><td>企業名（匿名化）＋成果の概要</td><td>クライアント承認後</td></tr>
+            <tr><td>Tier 3</td><td>企業名公開＋詳細ケーススタディ</td><td>採用ブランディング目的での使用承認時</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>スケール設計——師匠依存からギルドOSへ</h3>
+      <div class="flow-box">フェーズ1（0〜12ヶ月）：
+  羽島氏が全FBを担当 → FBの「型」を言語化・記録
+        ↓
+フェーズ2（1〜3年）：
+  「3軸評価チェックリスト」＋「AIログ解析」で評価を構造化
+  実績を積んだCraftsmanをMasterに認定 → 新メンバーのFBを担当
+        ↓
+フェーズ3（3〜5年）：
+  Master複数名体制（目標10名以上）
+  羽島氏は「Masterの品質監査」に専念
+  ギルドOSが自走する</div>
+    </div>
+
+    <!-- ===== Section 9 ===== -->
+    <div class="section" id="sec9">
+      <h2><span class="sec-num">09</span>創業者のアンフェアアドバンテージ</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>アドバンテージ</th><th>内容</th><th>なぜ模倣困難か</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>高成長企業の実務経験</strong></td>
+              <td>レバレジーズ・リクルートという国内トップクラスの密度の高い実務環境を経験</td>
+              <td>「教科書的な正解」ではなく「現場で通用する振る舞い」に基づくFBは経験者にしかできない</td>
+            </tr>
+            <tr>
+              <td><strong>麻雀プロ</strong></td>
+              <td>不完全情報下での期待値判断を繰り返し検証してきたプロフェッショナル</td>
+              <td>摩擦業務での「判断プロセスの期待値検証」と構造が同型。「正解を教える」ではなく「判断プロセスを検証する」能力は他者に容易に模倣できない</td>
+            </tr>
+            <tr>
+              <td><strong>既存のネットワーク</strong></td>
+              <td>B2B側：中堅企業の経営層・人事層との接点。B2C側：現在進行形の若手キャリア支援</td>
+              <td>ゼロからの立ち上げではなく、既存の信頼関係を事業に転換するフェーズから始められる</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== Section 10 ===== -->
+    <div class="section" id="sec10">
+      <h2><span class="sec-num">10</span>ロードマップ</h2>
+
+      <div class="phase-grid">
+        <div class="phase-card p0">
+          <div class="ph-name">フェーズ 0</div>
+          <div class="ph-title">準備（〜3ヶ月）</div>
+          <ul>
+            <li>法的精査（最優先）</li>
+            <li>クエスト類型の確定</li>
+            <li>3軸評価フォーマット設計</li>
+            <li>初期クライアント3〜5社ヒアリング</li>
+            <li>初期メンバー3〜6名選定</li>
+          </ul>
+        </div>
+        <div class="phase-card p1">
+          <div class="ph-name">フェーズ 1</div>
+          <div class="ph-title">徒弟制（3〜12ヶ月）</div>
+          <ul>
+            <li>目標：PMFの検証</li>
+            <li>B2B取引：5〜10社</li>
+            <li>月額受託収益：月100〜500万円</li>
+            <li>メンバー：20〜50名</li>
+            <li>3軸チェックリスト完成</li>
+          </ul>
+        </div>
+        <div class="phase-card p2">
+          <div class="ph-name">フェーズ 2</div>
+          <div class="ph-title">コホート拡大（1〜3年）</div>
+          <ul>
+            <li>目標：スケールの証明</li>
+            <li>B2B取引：50〜100社</li>
+            <li>月額受託収益：月1,500万〜3,000万円</li>
+            <li>メンバー：200〜500名</li>
+            <li>Master認定：3〜5名</li>
+          </ul>
+        </div>
+        <div class="phase-card p3">
+          <div class="ph-name">フェーズ 3</div>
+          <div class="ph-title">ギルドOS確立（3〜5年）</div>
+          <ul>
+            <li>目標：カテゴリーリーダー</li>
+            <li>年間売上：<strong>15〜40億円</strong></li>
+            <li>メンバー：数千名</li>
+            <li>Master：10名以上</li>
+            <li>完遂ログの業界標準化</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Section 11 ===== -->
+    <div class="section" id="sec11">
+      <h2><span class="sec-num">11</span>リスクと対策</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>リスク</th><th>深刻度</th><th>内容</th><th>対策</th></tr></thead>
+          <tbody>
+            <tr class="risk-crit">
+              <td><strong>労働者派遣法への抵触</strong></td>
+              <td><span class="tag tag-crit">最重要</span></td>
+              <td>実務受託の構造が「偽装請負」と判断される可能性</td>
+              <td>フェーズ0で弁護士・社労士による法的精査を必須実施。業務請負の要件（指揮命令・成果責任）を厳格に設計</td>
+            </tr>
+            <tr class="risk-crit">
+              <td><strong>有料職業紹介業の未取得</strong></td>
+              <td><span class="tag tag-crit">最重要</span></td>
+              <td>人材紹介フィーは職業安定法上の許可が必要</td>
+              <td>フェーズ0〜1で申請。許可取得前は紹介フィーを収益に計上しない</td>
+            </tr>
+            <tr class="risk-high">
+              <td><strong>クエストの切り出し困難</strong></td>
+              <td><span class="tag tag-high">★★★</span></td>
+              <td>企業が「何を外に出せるか」判断できない</td>
+              <td>羽島氏がコンサルとして棚卸しから入る。最初の5社でクエスト類型を完成させる</td>
+            </tr>
+            <tr class="risk-high">
+              <td><strong>羽島氏への依存</strong></td>
+              <td><span class="tag tag-high">★★★</span></td>
+              <td>フェーズ1〜2はキャパがボトルネック</td>
+              <td>Master育成を最優先。2年目にMaster3名体制を目指す</td>
+            </tr>
+            <tr class="risk-high">
+              <td><strong>守秘義務・情報管理</strong></td>
+              <td><span class="tag tag-high">★★★</span></td>
+              <td>機密情報の漏洩リスク</td>
+              <td>NDA標準化 ＋ 守秘義務Tier制 ＋ 情報アクセス権限設計</td>
+            </tr>
+            <tr class="risk-mid">
+              <td><strong>若手の品質バラつき</strong></td>
+              <td><span class="tag tag-mid">★★</span></td>
+              <td>チームメンバーの実力差がある</td>
+              <td>師匠の伴走で品質担保。初期は羽島氏が直接管理。失敗もログ化</td>
+            </tr>
+            <tr class="risk-mid">
+              <td><strong>AIの進化リスク</strong></td>
+              <td><span class="tag tag-mid">★★</span></td>
+              <td>「AI代替不可能」とした領域が3〜5年で変化する可能性</td>
+              <td>クエスト定義を「AI代替困難度」だけでなく「企業と人間の信頼関係が必要な業務」軸でも再定義。定期的に見直す</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== Section 12 ===== -->
+    <div class="section" id="sec12">
+      <h2><span class="sec-num">12</span>KPI設計</h2>
+
+      <div class="highlight-box-warn">
+        <strong>North Star Metric：「クエスト完遂件数 × 完遂ログの質スコア」</strong><br>
+        これが上がれば、企業への価値提供・若手の成長・ブランド蓄積が同時に進む。
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>フェーズ</th><th>指標</th><th>目標</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="4"><strong>フェーズ1</strong></td><td>クエスト完遂件数（累計）</td><td>12ヶ月で30〜50件</td></tr>
+            <tr><td>B2B継続率（3ヶ月継続）</td><td>60%以上</td></tr>
+            <tr><td>メンバー継続率（3ヶ月）</td><td>70%以上</td></tr>
+            <tr><td>師匠FB満足度（3軸）</td><td>平均4.0/5.0以上</td></tr>
+            <tr><td rowspan="4"><strong>フェーズ2</strong></td><td>月間クエスト完遂件数</td><td>月30〜50件</td></tr>
+            <tr><td>Master認定数</td><td>3〜5名</td></tr>
+            <tr><td>人材紹介成立件数</td><td>年間10件以上</td></tr>
+            <tr><td>メンバーのランクアップ率</td><td>Journeyman以上 30%以上</td></tr>
+            <tr><td rowspan="2"><strong>フェーズ3</strong></td><td>完遂ログ累計</td><td>5,000件以上</td></tr>
+            <tr><td>採用企業でのメンバー評価</td><td>「UNLIDで鍛えた人材はすぐ使える」という市場評価の獲得</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>ブランドコンセプト</h3>
+      <div class="highlight-box">
+        「UNLIDは、AI時代に若手が生き残るための実戦ギルドだ。<br>逃げなかった実績が、あなたの信頼になる。」
+        <div style="margin-top:16px; font-size:13px; color:#a0c4e0;">
+          使う言葉：クエスト・完遂・師匠・ギルド・ログ・実戦・判断・執着<br>
+          使わない言葉：研修・スクール・学習・eラーニング・資格・認定
+        </div>
+      </div>
+
+      <h3>参考データソース</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>統計・調査</th><th>主な使用箇所</th></tr></thead>
+          <tbody>
+            <tr><td>厚生労働省「能力開発基本調査（令和6年度）」</td><td>OJT崩壊・能力開発費0.1%</td></tr>
+            <tr><td>日本生産性本部「労働生産性の国際比較2024」</td><td>労働生産性OECD28位</td></tr>
+            <tr><td>厚生労働省「新規学卒就職者の離職状況（令和3年）」</td><td>新卒3年離職率34.9%</td></tr>
+            <tr><td>マイナビ「転職動向調査2025年版」</td><td>20代転職率13.4%</td></tr>
+            <tr><td>パーソルキャリア「副業実態調査2024」</td><td>20代副業実施率14.4%</td></tr>
+            <tr><td>JILPT「副業者の就労に関する調査2024」</td><td>副業市場規模・実態</td></tr>
+            <tr><td>ランサーズ「フリーランス実態調査2024」</td><td>副業市場20兆円・登録企業数</td></tr>
+            <tr><td>矢野経済研究所「人材育成・研修サービス市場」</td><td>研修市場規模（概算）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <blockquote>本レポートの市場規模数値はすべて<strong>推定・概算</strong>であり、公開情報・統計データ・業界知見を元に合理的に算出したものである。事業計画への転用時は最新統計データによる検証を推奨する。</blockquote>
+    </div>
+
+  </div><!-- /body -->
+
+  <div class="footer">
+    <span>UNLID 事業戦略チーム</span>
+    <span>投資家向け事業戦略レポート v2.0　|　2026年3月　|　Confidential</span>
+    <span>参照元：事業計画書v1.0 / 戦略v3.0 / 市場調査 / 競合分析 / 批判的分析レポート</span>
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>

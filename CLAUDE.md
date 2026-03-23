@@ -75,8 +75,8 @@ https://wyudao1996-collab.github.io/UNLID/<ファイル名>
 ---
 
 ## Git運用ルール
-- ブランチ：`claude/unlid-business-strategy-o8ZUN`
-- プッシュ：`git push -u origin claude/unlid-business-strategy-o8ZUN`
+- ブランチ：`main`
+- プッシュ：`git push -u origin main`
 - トークン切れが近い場合は途中でもコミット・プッシュして報告すること
 
 ---

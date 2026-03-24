@@ -491,7 +491,7 @@
       SME × AI実装 × フラクショナルFDE × 副業若手ワーカー × 実績ポートフォリオ × スカウト人材紹介<br>
       — 日本にまだ存在しない、3市場を束ねるエコシステム —
     </div>
-    <div class="version-badge">Version 4.2 — SWOT・戦略キャンバス・VRIO分析追加</div>
+    <div class="version-badge">Version 4.2 — SWOT・VRIO分析・リーンキャンバス追加</div>
     <div class="cover-meta">
       <span><strong>作成日</strong>：2026年3月</span>
       <span><strong>対象読者</strong>：投資家・事業パートナー・経営幹部</span>
@@ -511,7 +511,7 @@
         <li><a href="#sec4">解決策 — フラクショナルFDE × 副業若手ワーカーのエコシステム</a></li>
         <li><a href="#sec5">収益モデルとコスト構造 — 月20〜30万でどう利益を出すか</a></li>
         <li><a href="#sec6">参入障壁と競合分析 — 真似されない理由</a></li>
-        <li><a href="#sec6b">競争優位性の構造分析 — SWOT・戦略キャンバス・VRIO</a></li>
+        <li><a href="#sec6b">競争優位性の構造分析 — SWOT・VRIO・リーン・キャンバス</a></li>
         <li><a href="#sec7">成長戦略と将来構想</a></li>
         <li><a href="#sec8">市場規模 — TAM / SAM / SOM</a></li>
         <li><a href="#sec9">ロードマップとKPI — マイルストーンとNorth Star Metric</a></li>
@@ -572,7 +572,7 @@
             </tr>
             <tr>
               <td><strong>将来構想</strong></td>
-              <td>実績ポートフォリオ1,000件到達後、「ビジネス職版GitHub」SaaSとして採用プラットフォームへ。目標売上15〜30億円圏</td>
+              <td>実績ポートフォリオ1,000件到達後、「ビジネス職版GitHub」SaaSとして採用プラットフォームへ。目標売上15〜30億円圏（Polywork・Fueler等が挑戦したが収益化できず。UNLIDは実務の場＋第三者評価＋採用フィー設計で三重の課題を同時に解く）</td>
             </tr>
           </tbody>
         </table>
@@ -821,7 +821,7 @@
           <div style="font-size:0.8rem; color:#1d4ed8; line-height:1.9;">
             職務経歴書は<strong>100%自己申告</strong><br>
             採用担当者の<strong>62%</strong>が「職務経歴書の信頼性に疑問」<br>
-            ビジネス職版GitHubが<strong>世界に存在しない</strong>
+            ビジネス職版GitHubは<strong>収益化に成功したプレイヤーが世界に存在しない</strong>
           </div>
         </div>
       </div>
@@ -1057,21 +1057,76 @@
       </div>
 
       <h3>SIer × SESとの構造的な違い</h3>
-      <div class="flow-box" style="margin-bottom:16px;">【SIer多重下請け構造の実態（公正取引委員会・業界データ）】
-
-エンドクライアント（支払い：月100%）
-   ↓ 15〜20%マージン控除
- 元請けSIer（NTTデータ・富士通等）
-   ↓ さらに10〜20%中抜き
-  2次請け中堅SIer
-   ↓ さらに10〜20%中抜き
-   3次請けSES企業
-   ↓ エンジニア還元率：50〜63%（業界平均）
-    SESエンジニア（実働者）手取り：月30〜48万円
-
-── ソフトウェア業の約7割が再委託（公正取引委員会、令和4年調査）
-── 2024年のソフトウェア業倒産223件中209件が多重下請け型（東京商工リサーチ）
-── 日経クロステック：「人売りITベンダーの倒産は良い知らせ」（旧来型モデルの限界）</div>
+      <!-- SIer多重下請け構造 ビジュアル図 -->
+      <div style="background:#0f172a; border-radius:12px; padding:24px 28px; margin-bottom:20px; color:#f1f5f9;">
+        <div style="font-size:0.78rem; letter-spacing:2px; color:#64748b; text-transform:uppercase; margin-bottom:16px;">SIer多重下請け構造の実態（公正取引委員会・業界データ）</div>
+        <!-- 各層 -->
+        <div style="display:flex; flex-direction:column; gap:0; align-items:stretch;">
+          <!-- エンドクライアント -->
+          <div style="background:#1e3a5f; border:1.5px solid #3b82f6; border-radius:8px; padding:12px 18px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <span style="font-size:0.9rem; font-weight:700; color:#93c5fd;">エンドクライアント</span>
+              <span style="font-size:0.78rem; color:#94a3b8; margin-left:10px;">（支払い：月100%）</span>
+            </div>
+            <span style="background:#1d4ed8; color:#fff; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:4px;">発注元</span>
+          </div>
+          <!-- 矢印 -->
+          <div style="display:flex; align-items:center; padding:4px 28px;">
+            <div style="width:2px; height:28px; background:#ef4444; margin:0 auto;"></div>
+            <div style="font-size:0.75rem; color:#ef4444; margin-left:10px; white-space:nowrap;">▼ 15〜20%マージン控除</div>
+          </div>
+          <!-- 元請けSIer -->
+          <div style="background:#1c2f47; border:1.5px solid #64748b; border-radius:8px; padding:12px 18px; margin-left:24px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <span style="font-size:0.88rem; font-weight:700; color:#cbd5e1;">元請けSIer</span>
+              <span style="font-size:0.75rem; color:#64748b; margin-left:8px;">（NTTデータ・富士通等）</span>
+            </div>
+            <span style="background:#475569; color:#fff; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:4px;">粗利20〜30%</span>
+          </div>
+          <!-- 矢印 -->
+          <div style="display:flex; align-items:center; padding:4px 52px;">
+            <div style="width:2px; height:24px; background:#ef4444; margin:0 auto;"></div>
+            <div style="font-size:0.75rem; color:#ef4444; margin-left:10px; white-space:nowrap;">▼ さらに10〜20%中抜き</div>
+          </div>
+          <!-- 2次請け -->
+          <div style="background:#1a2739; border:1.5px solid #475569; border-radius:8px; padding:12px 18px; margin-left:48px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <span style="font-size:0.85rem; font-weight:700; color:#94a3b8;">2次請け中堅SIer</span>
+            </div>
+            <span style="background:#334155; color:#94a3b8; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:4px;">粗利15〜25%</span>
+          </div>
+          <!-- 矢印 -->
+          <div style="display:flex; align-items:center; padding:4px 76px;">
+            <div style="width:2px; height:24px; background:#ef4444; margin:0 auto;"></div>
+            <div style="font-size:0.75rem; color:#ef4444; margin-left:10px; white-space:nowrap;">▼ さらに10〜20%中抜き</div>
+          </div>
+          <!-- 3次請けSES -->
+          <div style="background:#161f2c; border:1.5px solid #374151; border-radius:8px; padding:12px 18px; margin-left:72px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <span style="font-size:0.82rem; font-weight:700; color:#6b7280;">3次請けSES企業</span>
+            </div>
+            <span style="background:#1f2937; color:#6b7280; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:4px;">粗利10〜20%</span>
+          </div>
+          <!-- 矢印 -->
+          <div style="display:flex; align-items:center; padding:4px 100px;">
+            <div style="width:2px; height:24px; background:#ef4444; margin:0 auto;"></div>
+            <div style="font-size:0.75rem; color:#ef4444; margin-left:10px; white-space:nowrap;">▼ 還元率：50〜63%（業界平均）</div>
+          </div>
+          <!-- SESエンジニア -->
+          <div style="background:#1a1a2e; border:2px solid #dc2626; border-radius:8px; padding:12px 18px; margin-left:96px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <span style="font-size:0.88rem; font-weight:700; color:#fca5a5;">SESエンジニア（実働者）</span>
+            </div>
+            <span style="background:#dc2626; color:#fff; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:4px;">手取り：月30〜48万円</span>
+          </div>
+        </div>
+        <!-- 補足データ -->
+        <div style="margin-top:16px; padding:12px 16px; background:#0f172a; border:1px solid #1e293b; border-radius:8px; font-size:0.75rem; color:#64748b; line-height:1.9;">
+          <span style="color:#94a3b8;">📊</span> ソフトウェア業の約7割が再委託（公正取引委員会、令和4年調査）／
+          2024年のソフトウェア業倒産223件中209件が多重下請け型（東京商工リサーチ）／
+          日経クロステック：「人売りITベンダーの倒産は良い知らせ」（旧来型モデルの限界）
+        </div>
+      </div>
       <div class="table-wrap">
         <table>
           <thead><tr><th>比較軸</th><th>SIer × SES（旧来型）</th><th>UNLID</th></tr></thead>
@@ -1086,7 +1141,7 @@
       </div>
 
       <h3>FDEの採用基準と現場での役割</h3>
-      <p>FDEの役割は<strong>AI実装を成果責任付きで推進するプロデューサー兼ストラテジスト</strong>だ。技術力より「SMEの現場で成果を出す力」を優先する。</p>
+      <p>FDEの役割は<strong>SMEのAI実装を成果責任付きで完遂するプロジェクトマネージャー</strong>だ。技術開発力より「SMEの現場で課題を特定し、チームを動かし、数値で成果を出す力」を優先する。</p>
       <div class="table-wrap">
         <table>
           <thead><tr><th>必須要件（全員）</th><th>判定方法</th></tr></thead>
@@ -1100,19 +1155,62 @@
         </table>
       </div>
 
-      <div class="flow-box">【FDEが現場でやること——Phase別役割】
-
-Phase 1（導入1〜3ヶ月）：最大インパクトの業務課題を特定・AI実装で即時効果
-  → 経費・バックオフィス（経理/法務/事務）の手作業をAIで代替
-  → 削減時間を数値化し、ROIをオーナーに提示
-
-Phase 2（3〜6ヶ月）：空いた時間を「売上拡大」に転用する戦略提言
-  → 削減できた時間 × 人数 = 新たに捻出できる営業稼働時間を計算
-  → 既存顧客への深耕・紹介営業の仕組みをAIデータ活用で設計
-
-Phase 3（6ヶ月〜）：売上側の改善に踏み込む
-  → 営業データの可視化・顧客管理（CRM代替）のAI設計
-  → 「コスト削減係」ではなく「経営改善の実行パートナー」として機能</div>
+      <!-- FDE Phase別役割 ビジュアル図 -->
+      <div style="margin:16px 0 24px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; position:relative;">
+          <!-- Phase 1 -->
+          <div style="background:linear-gradient(135deg,#eff6ff,#dbeafe); border:2px solid #3b82f6; border-radius:12px 0 0 12px; padding:20px 18px; position:relative;">
+            <div style="font-size:0.72rem; font-weight:700; letter-spacing:2px; color:#1d4ed8; text-transform:uppercase; margin-bottom:6px;">Phase 1</div>
+            <div style="font-size:0.92rem; font-weight:700; color:#1e3a8a; margin-bottom:4px;">導入〜3ヶ月</div>
+            <div style="font-size:0.78rem; font-weight:700; color:#1d4ed8; background:#dbeafe; display:inline-block; padding:2px 8px; border-radius:4px; margin-bottom:12px;">バックオフィス効率化</div>
+            <ul style="font-size:0.82rem; color:#1e3a8a; padding-left:14px; margin:0; line-height:1.8;">
+              <li>業務棚卸し・ボトルネック特定</li>
+              <li>議事録・メール・請求書のAI自動化</li>
+              <li>削減時間を数値化しROIをオーナーに提示</li>
+            </ul>
+            <div style="margin-top:12px; padding:8px 10px; background:#fff; border-radius:6px; font-size:0.78rem; color:#1d4ed8; font-weight:700;">
+              🎯 月30時間削減 ≒ 人件費6万円相当
+            </div>
+          </div>
+          <!-- 矢印 -->
+          <div style="display:flex; align-items:center; justify-content:center; position:absolute; left:calc(33.33% - 12px); top:50%; transform:translateY(-50%); z-index:10; width:24px; height:24px; background:#2563eb; border-radius:50; color:#fff; font-size:1rem;">→</div>
+          <!-- Phase 2 -->
+          <div style="background:linear-gradient(135deg,#f0fdf4,#dcfce7); border:2px solid #16a34a; border-top:2px solid #16a34a; border-left:2px solid #16a34a; border-right:2px solid #16a34a; border-bottom:2px solid #16a34a; padding:20px 18px; position:relative; margin-left:-1px;">
+            <div style="font-size:0.72rem; font-weight:700; letter-spacing:2px; color:#15803d; text-transform:uppercase; margin-bottom:6px;">Phase 2</div>
+            <div style="font-size:0.92rem; font-weight:700; color:#14532d; margin-bottom:4px;">3〜6ヶ月</div>
+            <div style="font-size:0.78rem; font-weight:700; color:#15803d; background:#dcfce7; display:inline-block; padding:2px 8px; border-radius:4px; margin-bottom:12px;">売上拡大への転換</div>
+            <ul style="font-size:0.82rem; color:#14532d; padding-left:14px; margin:0; line-height:1.8;">
+              <li>削減時間 × 人数 = 営業稼働時間を計算</li>
+              <li>既存顧客深耕・紹介営業の仕組み設計</li>
+              <li>AIデータ活用でマーケ施策を設計</li>
+            </ul>
+            <div style="margin-top:12px; padding:8px 10px; background:#fff; border-radius:6px; font-size:0.78rem; color:#15803d; font-weight:700;">
+              🎯 月10〜12万円削減効果（累計）
+            </div>
+          </div>
+          <!-- 矢印 -->
+          <div style="display:flex; align-items:center; justify-content:center; position:absolute; left:calc(66.66% - 12px); top:50%; transform:translateY(-50%); z-index:10; width:24px; height:24px; background:#7e22ce; border-radius:50; color:#fff; font-size:1rem;">→</div>
+          <!-- Phase 3 -->
+          <div style="background:linear-gradient(135deg,#faf5ff,#ede9fe); border:2px solid #7c3aed; border-radius:0 12px 12px 0; padding:20px 18px; margin-left:-1px;">
+            <div style="font-size:0.72rem; font-weight:700; letter-spacing:2px; color:#6d28d9; text-transform:uppercase; margin-bottom:6px;">Phase 3</div>
+            <div style="font-size:0.92rem; font-weight:700; color:#4c1d95; margin-bottom:4px;">6ヶ月〜</div>
+            <div style="font-size:0.78rem; font-weight:700; color:#6d28d9; background:#ede9fe; display:inline-block; padding:2px 8px; border-radius:4px; margin-bottom:12px;">経営改善パートナー化</div>
+            <ul style="font-size:0.82rem; color:#4c1d95; padding-left:14px; margin:0; line-height:1.8;">
+              <li>営業データ可視化・CRM代替設計</li>
+              <li>顧客管理AIの設計・導入</li>
+              <li>「コスト削減係」→「経営改善の実行パートナー」へ</li>
+            </ul>
+            <div style="margin-top:12px; padding:8px 10px; background:#fff; border-radius:6px; font-size:0.78rem; color:#6d28d9; font-weight:700;">
+              🎯 月14〜18万円削減効果（累計）
+            </div>
+          </div>
+        </div>
+        <!-- 下部フロー説明 -->
+        <div style="margin-top:14px; padding:12px 18px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; font-size:0.82rem; color:#374151; text-align:center; line-height:1.8;">
+          <strong>Phase 1の成果が起点となり、Phase 2・3へのカスケードが自動的に発生する。</strong><br>
+          業務効率化 → 削減時間の売上転換 → データ活用 → の順で、FDEは「経営改善の実行パートナー」として定着する
+        </div>
+      </div>
 
       <h3>初月の現実的なスコープ——0.2人月（約20時間）でできること</h3>
       <p style="margin-bottom:10px; color:#374151; font-size:0.88rem;"><strong>「月20〜30万円で何をやってくれるのか」</strong>——SMEが最初に持つ疑問への答えだ。初月は「1業務を劇的に変える」ことに集中し、可視化したROIがそのまま継続契約の根拠になる。</p>
@@ -1176,7 +1274,7 @@ Phase 3（6ヶ月〜）：売上側の改善に踏み込む
               </tbody>
             </table>
           </div>
-          月額20〜25万円の支払いに対し、12ヶ月後には年間168〜216万円の削減効果（継続中）が発生しており、<strong>「払い続ける方が得」という状態が数値で証明される。</strong>これが「成果責任付きモデル」の核心だ。
+          <strong>月額20〜25万円の支払いに対し、12ヶ月後には月14〜18万円（年換算168〜216万円）のコスト削減効果が継続的に発生する。</strong>これはバックオフィス効率化だけの試算であり、Phase 2〜3で実現する売上改善効果（営業稼働時間の創出・CRM活用による新規受注）を加味すると、ROIは投資対効果がさらに上回る構造になる。削減効果が積み上がり続ける限り、「契約を止めるコスト（再設計・スイッチング）」が「継続費用」を超える状態が形成される。これが「成果責任付きモデル」の核心だ。
         </div>
       </div>
 
@@ -1359,6 +1457,7 @@ Phase 3（6ヶ月〜）：売上側の改善に踏み込む
 【悪い粒度：細かすぎ】「2024/4/5 14:00 dropduplicates()を実行した」</div>
 
       <h4 style="margin-top:24px; margin-bottom:8px; font-size:0.95rem; color:#1e40af;">③ モチベーション設計と評価の透明性——「方向性は公開、詳細は非公開」の二層構造</h4>
+      <p style="margin-bottom:10px; font-size:0.88rem;"><span style="background:#fef9c3; border:1px solid #ca8a04; border-radius:4px; padding:2px 8px; font-size:0.78rem; font-weight:700; color:#854d0e; margin-right:8px;">用語：ゲーミング（Gaming）</span>評価指標・採点基準を知ったワーカーが「実際の実力を高めることなく、スコアだけを上げようとする行動」。例：「FDEに気に入られるためだけの作業をする」「採点基準に沿った形式だけ整えてアウトプットの質を偽装する」など。評価設計において最も注意すべきリスクの一つ。</p>
       <p style="margin-bottom:10px; font-size:0.88rem;">「ゲーミングを防ぐには評価基準を隠したい」「モチベーションを上げるには基準を見せたい」という矛盾を、二層構造で解く。</p>
       <div class="table-wrap">
         <table>
@@ -1895,67 +1994,6 @@ UNLIDの設計：「完遂すれば採用担当者（市場）に直接見られ
         </div>
       </div>
 
-      <!-- Strategy Canvas (SVG) -->
-      <h3>戦略キャンバス — ブルーオーシャン可視化</h3>
-      <p style="font-size:0.88rem; color:#475569; margin-bottom:16px;">競合5プレイヤーとUNLIDの競争要因別スコア（1〜5点）を可視化。UNLIDが青の海を独占していることが一目でわかる。</p>
-      <div style="background:#0f172a; border-radius:12px; padding:24px; overflow-x:auto; margin-bottom:16px;">
-        <svg viewBox="0 0 820 300" style="width:100%; min-width:600px; font-family:sans-serif;">
-          <!-- Grid lines -->
-          <line x1="40" y1="20" x2="40" y2="250" stroke="#334155" stroke-width="1"/>
-          <line x1="40" y1="270" x2="820" y2="270" stroke="#334155" stroke-width="1"/>
-          <!-- Y-axis labels -->
-          <text x="34" y="24" fill="#94a3b8" font-size="10" text-anchor="end">5</text>
-          <text x="34" y="74" fill="#94a3b8" font-size="10" text-anchor="end">4</text>
-          <text x="34" y="124" fill="#94a3b8" font-size="10" text-anchor="end">3</text>
-          <text x="34" y="174" fill="#94a3b8" font-size="10" text-anchor="end">2</text>
-          <text x="34" y="224" fill="#94a3b8" font-size="10" text-anchor="end">1</text>
-          <!-- Horizontal grid -->
-          <line x1="40" y1="20" x2="820" y2="20" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
-          <line x1="40" y1="70" x2="820" y2="70" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
-          <line x1="40" y1="120" x2="820" y2="120" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
-          <line x1="40" y1="170" x2="820" y2="170" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
-          <line x1="40" y1="220" x2="820" y2="220" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
-          <!-- X-axis labels -->
-          <text x="55" y="288" fill="#94a3b8" font-size="9" text-anchor="middle">成果責任</text>
-          <text x="166" y="288" fill="#94a3b8" font-size="9" text-anchor="middle">AI実装専門性</text>
-          <text x="277" y="288" fill="#94a3b8" font-size="9" text-anchor="middle">SME特化</text>
-          <text x="388" y="288" fill="#94a3b8" font-size="9" text-anchor="middle">副業若手育成</text>
-          <text x="499" y="288" fill="#94a3b8" font-size="9" text-anchor="middle">実績ログ蓄積</text>
-          <text x="610" y="288" fill="#94a3b8" font-size="9" text-anchor="middle">採用連携</text>
-          <text x="716" y="288" fill="#94a3b8" font-size="9" text-anchor="middle">価格アクセス</text>
-          <text x="815" y="288" fill="#94a3b8" font-size="9" text-anchor="middle">フラクショナル</text>
-          <!-- UNLID fill area -->
-          <polygon points="55,20 166,20 277,20 388,20 499,20 610,20 716,70 815,20 815,220 55,220" fill="#2563eb" fill-opacity="0.12"/>
-          <!-- 大手DXコンサル -->
-          <polyline points="55,120 166,70 277,170 388,220 499,220 610,220 716,220 815,170" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5,3"/>
-          <!-- HRコンサル -->
-          <polyline points="55,220 166,220 277,120 388,170 499,220 610,70 716,120 815,170" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="3,3"/>
-          <!-- 外部CTO顧問 -->
-          <polyline points="55,120 166,70 277,170 388,220 499,220 610,220 716,170 815,70" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,3"/>
-          <!-- BPO業者 -->
-          <polyline points="55,170 166,220 277,70 388,220 499,220 610,220 716,20 815,170" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="2,3"/>
-          <!-- UNLID (bold blue) -->
-          <polyline points="55,20 166,20 277,20 388,20 499,20 610,20 716,70 815,20" fill="none" stroke="#3b82f6" stroke-width="3"/>
-          <!-- UNLID dots -->
-          <circle cx="55" cy="20" r="4" fill="#3b82f6"/>
-          <circle cx="166" cy="20" r="4" fill="#3b82f6"/>
-          <circle cx="277" cy="20" r="4" fill="#3b82f6"/>
-          <circle cx="388" cy="20" r="4" fill="#3b82f6"/>
-          <circle cx="499" cy="20" r="4" fill="#3b82f6"/>
-          <circle cx="610" cy="20" r="4" fill="#3b82f6"/>
-          <circle cx="716" cy="70" r="4" fill="#3b82f6"/>
-          <circle cx="815" cy="20" r="4" fill="#3b82f6"/>
-        </svg>
-      </div>
-      <!-- Legend -->
-      <div style="display:flex; flex-wrap:wrap; gap:16px; margin-bottom:32px; font-size:0.82rem;">
-        <span style="display:flex; align-items:center; gap:6px;"><span style="width:28px; height:3px; background:#3b82f6; display:inline-block; border-radius:2px;"></span><strong style="color:#3b82f6;">UNLID</strong></span>
-        <span style="display:flex; align-items:center; gap:6px;"><span style="width:28px; height:2px; background:#64748b; display:inline-block; border-style:dashed;"></span><span style="color:#94a3b8;">大手DXコンサル</span></span>
-        <span style="display:flex; align-items:center; gap:6px;"><span style="width:28px; height:2px; background:#9ca3af; display:inline-block; border-style:dotted;"></span><span style="color:#94a3b8;">HRコンサル</span></span>
-        <span style="display:flex; align-items:center; gap:6px;"><span style="width:28px; height:2px; background:#475569; display:inline-block;"></span><span style="color:#94a3b8;">外部CTO顧問</span></span>
-        <span style="display:flex; align-items:center; gap:6px;"><span style="width:28px; height:2px; background:#6b7280; display:inline-block;"></span><span style="color:#94a3b8;">BPO業者</span></span>
-      </div>
-
       <!-- VRIO Table -->
       <h3>VRIO分析 — 競争優位の持続可能性</h3>
       <div class="table-wrap">
@@ -2023,6 +2061,145 @@ UNLIDの設計：「完遂すれば採用担当者（市場）に直接見られ
         </table>
       </div>
       <p style="font-size:0.85rem; color:#475569; margin-top:8px;">◎持続的競争優位（3資源）：完遂ログDB・フライホイール設計・複合収益モデル。この3つが同時に成立している競合は日本に存在しない。</p>
+
+      <!-- ===== Lean Canvas ===== -->
+      <h3>リーン・キャンバス — 事業モデルの全体像</h3>
+      <p class="lead"><strong>UNLIDのビジネスモデルを9つの要素で構造化する。特に「アンフェア・アドバンテージ」と「検証が必要な仮説」は投資家が注視するポイントだ。</strong></p>
+
+      <!-- Lean Canvas Grid -->
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr 1fr; grid-template-rows:auto auto auto; gap:3px; margin:16px 0 24px; font-size:0.78rem; line-height:1.6;">
+
+        <!-- Row 1 -->
+        <!-- 課題 -->
+        <div style="grid-column:1; grid-row:1/3; background:#fff5f5; border:1.5px solid #fca5a5; border-radius:8px; padding:14px 12px;">
+          <div style="font-size:0.68rem; font-weight:700; color:#dc2626; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">① 課題</div>
+          <ul style="padding-left:12px; margin:0; color:#7f1d1d;">
+            <li>中小企業のAI導入率1.3%（専門家不在・コスト高）</li>
+            <li>若手のOJT崩壊——実戦機会の喪失</li>
+            <li>ビジネス職に客観的実績証明手段がない</li>
+            <li>採用市場の評価精度が低い（ミスマッチ30%）</li>
+          </ul>
+        </div>
+
+        <!-- ソリューション -->
+        <div style="grid-column:2; grid-row:1; background:#f0fdf4; border:1.5px solid #86efac; border-radius:8px; padding:14px 12px;">
+          <div style="font-size:0.68rem; font-weight:700; color:#15803d; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">② ソリューション</div>
+          <ul style="padding-left:12px; margin:0; color:#14532d;">
+            <li>フラクショナルFDEが成果責任付きでAI実装を推進</li>
+            <li>副業若手ワーカーが実務を担い実績ポートフォリオを蓄積</li>
+            <li>完遂ログ = 採用フィーに転換するエコシステム</li>
+          </ul>
+        </div>
+
+        <!-- 独自の価値提案 -->
+        <div style="grid-column:3; grid-row:1/3; background:#0f172a; border:1.5px solid #2563eb; border-radius:8px; padding:14px 12px;">
+          <div style="font-size:0.68rem; font-weight:700; color:#93c5fd; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">③ 独自の価値提案</div>
+          <div style="color:#f1f5f9; font-size:0.82rem; font-weight:700; line-height:1.7; margin-bottom:10px;">「SMEが月20〜30万でAI実装の専門家を持てる」</div>
+          <div style="color:#94a3b8; font-size:0.78rem; line-height:1.7;">
+            ・正社員FDE（成果責任付き）<br>
+            ・副業若手（実戦育成）<br>
+            ・完遂ログ（採用市場へ直結）<br>
+            ・LTV 380万円/社の設計
+          </div>
+        </div>
+
+        <!-- アンフェア・アドバンテージ -->
+        <div style="grid-column:4; grid-row:1; background:#faf5ff; border:2px solid #7c3aed; border-radius:8px; padding:14px 12px;">
+          <div style="font-size:0.68rem; font-weight:700; color:#6d28d9; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">④ アンフェア・アドバンテージ<br><span style="font-weight:400; font-size:0.65rem; color:#a855f7;">（独自の圧倒的優位性）</span></div>
+          <ul style="padding-left:12px; margin:0; color:#4c1d95; font-size:0.78rem;">
+            <li><strong>完遂ログDB（時間的優位）</strong>：先行蓄積したログは後発が追いつけない</li>
+            <li><strong>3市場同時支配</strong>：AI実装×若手育成×採用を束ねる設計</li>
+            <li><strong>FDE内部育成ファネル</strong>：外部採用なしでスケール可能</li>
+            <li><strong>創業者の原体験</strong>：SME・FDE・ワーカー全員の痛みを理解</li>
+          </ul>
+        </div>
+
+        <!-- 顧客セグメント -->
+        <div style="grid-column:5; grid-row:1/3; background:#fff7ed; border:1.5px solid #fdba74; border-radius:8px; padding:14px 12px;">
+          <div style="font-size:0.68rem; font-weight:700; color:#c2410c; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">⑤ 顧客セグメント</div>
+          <div style="color:#7c2d12; font-size:0.8rem; margin-bottom:8px;"><strong>主顧客（ToB）</strong></div>
+          <ul style="padding-left:12px; margin:0 0 10px; color:#7c2d12; font-size:0.78rem;">
+            <li>従業員30〜300名のIT/サービス系SME</li>
+            <li>AI導入意欲はあるが専門家が確保できない経営者</li>
+            <li>外注予算100〜300万円/年を持つ企業</li>
+          </ul>
+          <div style="color:#7c2d12; font-size:0.8rem; margin-bottom:8px;"><strong>副次顧客（ToC）</strong></div>
+          <ul style="padding-left:12px; margin:0; color:#7c2d12; font-size:0.78rem;">
+            <li>実戦経験を積みたい20〜30代副業ワーカー</li>
+            <li>キャリアポートフォリオを構築したい若手</li>
+          </ul>
+        </div>
+
+        <!-- Row 2 -->
+        <!-- 既存の代替手段 -->
+        <div style="grid-column:2; grid-row:2; background:#f8fafc; border:1.5px solid #cbd5e1; border-radius:8px; padding:14px 12px;">
+          <div style="font-size:0.68rem; font-weight:700; color:#475569; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">⑥ 既存の代替手段</div>
+          <ul style="padding-left:12px; margin:0; color:#334155; font-size:0.78rem;">
+            <li>大手DXコンサル（月80〜200万・SMEには高すぎる）</li>
+            <li>外部CTO顧問（技術系のみ・AI実装非専門）</li>
+            <li>BPO業者（成果責任なし）</li>
+            <li>内製AI担当（採用コスト年2,000万超）</li>
+          </ul>
+        </div>
+
+        <!-- チャネル -->
+        <div style="grid-column:4; grid-row:2; background:#eff6ff; border:1.5px solid #93c5fd; border-radius:8px; padding:14px 12px;">
+          <div style="font-size:0.68rem; font-weight:700; color:#1d4ed8; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">⑦ チャネル</div>
+          <ul style="padding-left:12px; margin:0; color:#1e3a8a; font-size:0.78rem;">
+            <li>創業者の直接営業（初期）</li>
+            <li>紹介・口コミ（IT業界ネットワーク）</li>
+            <li>SEOコンテンツ・note/LinkedIn</li>
+            <li>中小企業支援機関・商工会議所</li>
+          </ul>
+        </div>
+
+        <!-- Row 3: コスト構造 + 収益の流れ -->
+        <!-- コスト構造 -->
+        <div style="grid-column:1/4; grid-row:3; background:#fef2f2; border:1.5px solid #fca5a5; border-radius:8px; padding:14px 16px;">
+          <div style="font-size:0.68rem; font-weight:700; color:#dc2626; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">⑧ コスト構造</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; color:#7f1d1d; font-size:0.78rem;">
+            <div><strong>固定費：</strong>FDE正社員給与（月40万円/名）、創業者給与</div>
+            <div><strong>変動費：</strong>副業ワーカー費（月18〜30万円/FDE）、SaaSツール費（月1〜3万円）</div>
+            <div><strong>損益分岐：</strong>FDE1名×6社×月20万円。6社担当で粗利50〜62万円（42〜52%）</div>
+          </div>
+        </div>
+
+        <!-- 収益の流れ -->
+        <div style="grid-column:4/6; grid-row:3; background:#f0fdf4; border:1.5px solid #86efac; border-radius:8px; padding:14px 16px;">
+          <div style="font-size:0.68rem; font-weight:700; color:#15803d; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">⑨ 収益の流れ</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; color:#14532d; font-size:0.78rem;">
+            <div><strong>① B2B受託（継続）：</strong>月20〜30万/社</div>
+            <div><strong>② 人材紹介フィー：</strong>年収400万×35%=140万/件</div>
+            <div><strong>③ プロジェクト型：</strong>80〜200万/件</div>
+            <div><strong>LTV：</strong>月額12ヶ月 + 紹介フィー = <strong style="color:#15803d;">380万円/社</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 検証が必要な仮説 -->
+      <div style="border:2px solid #f59e0b; border-radius:10px; padding:20px 24px; background:linear-gradient(135deg,#fffbeb,#fef3c7); margin-bottom:20px;">
+        <div style="font-size:0.78rem; font-weight:700; letter-spacing:2px; color:#d97706; text-transform:uppercase; margin-bottom:12px;">🧪 検証が必要な仮説</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div>
+            <div style="font-size:0.82rem; font-weight:700; color:#78350f; margin-bottom:8px;">【検証中 / 未検証の前提】</div>
+            <ol style="font-size:0.8rem; color:#78350f; padding-left:16px; line-height:1.9; margin:0;">
+              <li><strong>月20〜30万円がSMEのWTP（支払意欲）に収まるか</strong>——初期顧客の継続率で検証中</li>
+              <li><strong>FDE1名で6社を同時担当できるか</strong>——Phase別の業務量・品質担保の実証が必要</li>
+              <li><strong>副業ワーカーが継続的に集まり、完遂ログを積み続けられるか</strong>——ワーカー離脱率の把握が必要</li>
+              <li><strong>SMEが12ヶ月継続後にワーカーを採用したいと思うか</strong>——採用転換率の実績データが必要</li>
+            </ol>
+          </div>
+          <div>
+            <div style="font-size:0.82rem; font-weight:700; color:#78350f; margin-bottom:8px;">【検証で証明すべきこと】</div>
+            <ol style="font-size:0.8rem; color:#78350f; padding-left:16px; line-height:1.9; margin:0;">
+              <li><strong>初月ROIの再現性</strong>——「月30時間削減」が複数クライアントで再現されるか</li>
+              <li><strong>完遂ログの採用価値</strong>——採用企業がログを見て実際にスカウトするか</li>
+              <li><strong>フライホイールの自走開始タイミング</strong>——何社・何件のログで自走するか</li>
+              <li><strong>外部FDE認定制度のスケール可否</strong>——Ph2以降の品質担保と管理コスト</li>
+            </ol>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- ===== Section 7: Growth Strategy & Future Vision ===== -->
@@ -2044,30 +2221,75 @@ UNLIDの設計：「完遂すれば採用担当者（市場）に直接見られ
       </div>
 
       <h3>FDE高速育成ファネル——「採用」ではなく「内部育成」でスケールする</h3>
-      <div class="flow-box">【FDE育成ファネル（内部登用型）——誰が何を教えるか】
-
-─────────────────────────────────────────────────────────
-【前提条件：FDE候補者は「AI実装経験3件以上」が採用選抜条件】
- → AIを使って業務課題を解決した実績はUNLIDが教えるのではなく「選抜で担保」する
- → UNLIDが育成で教えるのは「PMとしての現場力」であり「技術開発力」ではない
-─────────────────────────────────────────────────────────
-
-Step 1：副業ワーカーとして入会（Journeyman〜）
-  実装タスクを担当しながら「クライアントの課題感の掴み方」「完遂の習慣」を身につける
-  ▶ 教える人：創業者本人（クライアント管理・KPI設計・報告スタイル）
-
-Step 2：シニアワーカーとして後輩指導（Craftsman〜Master）
-  後輩ワーカーへのフィードバックを担当 → 「他者を評価・改善指示する力」がFDEの核心スキル
-  ▶ 教える人：先輩ワーカー → これ自体がFDE的能力の予行練習になる
-
-Step 3：副業FDEとして試用稼働（副業・業務委託）
-  1〜2社のクライアントを担当。月商60〜80万円の変動費ポジション
-  失敗しても固定費リスクなし。創業者が密着してOJT（営業・交渉・報連相）
-  ▶ 教える人：創業者本人（SME社長との折衝術・PoC設計・副業ワーカーのマネジメント）
-
-Step 4：正社員FDEへの内部登用
-  副業FDE期間中の実績ポートフォリオ・クライアント満足度で評価
-  外部採用費ゼロ。能力が証明された人材だけを正社員化</div>
+      <!-- FDE育成ファネル ビジュアル図 -->
+      <div style="margin:16px 0 24px;">
+        <!-- 前提条件バナー -->
+        <div style="background:#0f172a; border:1px solid #334155; border-radius:8px; padding:12px 18px; margin-bottom:16px; font-size:0.82rem; color:#94a3b8; line-height:1.8;">
+          <span style="color:#93c5fd; font-weight:700;">【前提条件】</span>
+          FDE候補者は「AI実装経験3件以上」が選抜条件。AIで業務課題を解決した実績は<strong style="color:#f1f5f9;">UNLIDが教えるのではなく選抜で担保する</strong>。UNLIDが育成で教えるのは「PMとしての現場力」であり「技術開発力」ではない。
+        </div>
+        <!-- ファネルステップ -->
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <!-- Step 1 -->
+          <div style="display:grid; grid-template-columns:120px 1fr; gap:16px; align-items:stretch;">
+            <div style="background:#dbeafe; border:2px solid #3b82f6; border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:12px 8px; text-align:center;">
+              <div style="font-size:0.72rem; font-weight:700; color:#1d4ed8; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Step 1</div>
+              <div style="font-size:0.82rem; font-weight:700; color:#1e3a8a; line-height:1.3;">副業ワーカー</div>
+              <div style="font-size:0.7rem; color:#3b82f6; margin-top:4px;">Journeyman〜</div>
+            </div>
+            <div style="background:#f0f7ff; border:1px solid #bfdbfe; border-radius:10px; padding:14px 18px;">
+              <div style="font-size:0.85rem; font-weight:700; color:#1e3a8a; margin-bottom:6px;">実装タスクを担当しながら「完遂の習慣」を身につける</div>
+              <div style="font-size:0.8rem; color:#374151; line-height:1.7;">クライアントの課題感の掴み方・タスクの切り方・KPI報告スタイルを実践で習得</div>
+              <div style="margin-top:8px; font-size:0.78rem; color:#1d4ed8; font-weight:700;">👤 教える人：創業者本人（クライアント管理・KPI設計）</div>
+            </div>
+          </div>
+          <!-- 矢印 -->
+          <div style="text-align:center; color:#64748b; font-size:1rem;">▼</div>
+          <!-- Step 2 -->
+          <div style="display:grid; grid-template-columns:120px 1fr; gap:16px; align-items:stretch;">
+            <div style="background:#dcfce7; border:2px solid #16a34a; border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:12px 8px; text-align:center;">
+              <div style="font-size:0.72rem; font-weight:700; color:#15803d; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Step 2</div>
+              <div style="font-size:0.82rem; font-weight:700; color:#14532d; line-height:1.3;">シニアワーカー</div>
+              <div style="font-size:0.7rem; color:#16a34a; margin-top:4px;">Craftsman〜Master</div>
+            </div>
+            <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:10px; padding:14px 18px;">
+              <div style="font-size:0.85rem; font-weight:700; color:#14532d; margin-bottom:6px;">後輩ワーカーへのフィードバック担当 → FDEの核心スキルの予行練習</div>
+              <div style="font-size:0.8rem; color:#374151; line-height:1.7;">「他者を評価し改善指示する力」がFDEの核心。この経験が自然にFDE能力を鍛える</div>
+              <div style="margin-top:8px; font-size:0.78rem; color:#15803d; font-weight:700;">👤 教える人：先輩ワーカー（ピアラーニング）</div>
+            </div>
+          </div>
+          <!-- 矢印 -->
+          <div style="text-align:center; color:#64748b; font-size:1rem;">▼</div>
+          <!-- Step 3 -->
+          <div style="display:grid; grid-template-columns:120px 1fr; gap:16px; align-items:stretch;">
+            <div style="background:#fef9c3; border:2px solid #ca8a04; border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:12px 8px; text-align:center;">
+              <div style="font-size:0.72rem; font-weight:700; color:#a16207; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Step 3</div>
+              <div style="font-size:0.82rem; font-weight:700; color:#78350f; line-height:1.3;">副業FDE</div>
+              <div style="font-size:0.7rem; color:#ca8a04; margin-top:4px;">業務委託</div>
+            </div>
+            <div style="background:#fffbeb; border:1px solid #fde68a; border-radius:10px; padding:14px 18px;">
+              <div style="font-size:0.85rem; font-weight:700; color:#78350f; margin-bottom:6px;">1〜2社を担当。固定費リスクなしで実地OJT</div>
+              <div style="font-size:0.8rem; color:#374151; line-height:1.7;">月商60〜80万円の変動費ポジション。失敗しても固定費リスクなし。創業者が密着してOJT（SME社長との折衝術・PoC設計・ワーカーマネジメント）</div>
+              <div style="margin-top:8px; font-size:0.78rem; color:#a16207; font-weight:700;">👤 教える人：創業者本人（実践密着OJT）</div>
+            </div>
+          </div>
+          <!-- 矢印 -->
+          <div style="text-align:center; color:#64748b; font-size:1rem;">▼</div>
+          <!-- Step 4 -->
+          <div style="display:grid; grid-template-columns:120px 1fr; gap:16px; align-items:stretch;">
+            <div style="background:#0f172a; border:2px solid #3b82f6; border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:12px 8px; text-align:center;">
+              <div style="font-size:0.72rem; font-weight:700; color:#93c5fd; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Step 4</div>
+              <div style="font-size:0.82rem; font-weight:700; color:#f1f5f9; line-height:1.3;">正社員FDE</div>
+              <div style="font-size:0.7rem; color:#3b82f6; margin-top:4px;">内部登用</div>
+            </div>
+            <div style="background:#0f172a; border:1px solid #1e3a5f; border-radius:10px; padding:14px 18px;">
+              <div style="font-size:0.85rem; font-weight:700; color:#93c5fd; margin-bottom:6px;">副業FDE期間の実績ポートフォリオ・満足度で評価 → 外部採用費ゼロ</div>
+              <div style="font-size:0.8rem; color:#94a3b8; line-height:1.7;">能力が証明された人材だけを正社員化。採用リスクがなく、入社後即戦力の確実性が高い。外部採用コスト（50〜100万円/人）を完全に節約できる</div>
+              <div style="margin-top:8px; font-size:0.78rem; color:#3b82f6; font-weight:700;">✅ 外部採用費ゼロ・即戦力確実・FIT精度100%</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <h3>将来構想——実績ポートフォリオのSaaS化（GitHubのビジネス職版）</h3>
       <div class="table-wrap">
@@ -2077,7 +2299,7 @@ Step 4：正社員FDEへの内部登用
             <tr><td><strong>実績の記録単位</strong></td><td>コードのコミット履歴</td><td>実績ポートフォリオ（本人記述＋FDE3軸スコア＋クライアント確認）</td></tr>
             <tr><td><strong>客観性の担保</strong></td><td>コード自体がデータ（改ざん不可）</td><td>FDE第三者評価＋クライアント確認の3層構造</td></tr>
             <tr><td><strong>採用での活用</strong></td><td>GitHub Enterprise（月21ドル/ユーザー）</td><td>実績ポートフォリオDB閲覧課金（月3〜10万円/採用企業）</td></tr>
-            <tr><td><strong>既存の代替品</strong></td><td>なし（エンジニアにはGitHubしかない）</td><td><strong>世界にも存在しない</strong>（Polywork・Fueler等が挑戦したが収益化できず）</td></tr>
+            <tr><td><strong>既存の代替品</strong></td><td>なし（エンジニアにはGitHubしかない）</td><td><strong>収益化に成功したプレイヤーが世界に存在しない</strong>（Polywork・Fueler等が挑戦したが事業継続できず）</td></tr>
           </tbody>
         </table>
       </div>

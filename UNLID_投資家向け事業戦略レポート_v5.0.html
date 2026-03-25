@@ -25,6 +25,7 @@
       line-height: 1.75;
       color: var(--ink);
       background: #eef0f4;
+      font-variant-emoji: text; /* 丸数字①②③等をカラー絵文字ではなくテキストで描画 */
     }
 
     .page {
@@ -605,21 +606,21 @@
       <h3>なぜ今か——3つの構造的追い風</h3>
       <div style="display:flex; flex-direction:column; gap:12px; margin:14px 0 22px;">
         <div style="border:1.5px solid #bbf7d0; border-radius:10px; padding:16px 20px; background:#f0fdf4; display:grid; grid-template-columns:48px 1fr; gap:12px; align-items:start;">
-          <div style="background:#16a34a; color:#fff; border-radius:8px; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:800;">①</div>
+          <div style="background:#16a34a; color:#fff; border-radius:8px; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:800;">1</div>
           <div>
             <div style="font-size:0.9rem; font-weight:700; color:#15803d; margin-bottom:4px;">生成AI市場の爆発的成長——SMEに「やらなければ」圧力</div>
             <div style="font-size:0.8rem; color:#14532d; line-height:1.7;">ChatGPT登場（2022年）→国内生成AI市場が2028年に8,028億円（8倍）見込み。SMEの競合が相次いでAI導入。「やらないと遅れる」という経営者の危機感が急上昇中</div>
           </div>
         </div>
         <div style="border:1.5px solid #bfdbfe; border-radius:10px; padding:16px 20px; background:#eff6ff; display:grid; grid-template-columns:48px 1fr; gap:12px; align-items:start;">
-          <div style="background:#2563eb; color:#fff; border-radius:8px; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:800;">②</div>
+          <div style="background:#2563eb; color:#fff; border-radius:8px; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:800;">2</div>
           <div>
             <div style="font-size:0.9rem; font-weight:700; color:#1d4ed8; margin-bottom:4px;">副業解禁・フラクショナル普及——供給側の準備が整いつつある</div>
             <div style="font-size:0.8rem; color:#1e3a8a; line-height:1.7;">副業可企業が2019年比で約3倍に。サーキュレーション・Visionalなどフラクショナル市場がCAGR15%超で拡大。FDE候補となる「AI実装経験のある副業人材」の供給が2024〜2026年に急増</div>
           </div>
         </div>
         <div style="border:1.5px solid #e9d5ff; border-radius:10px; padding:16px 20px; background:#faf5ff; display:grid; grid-template-columns:48px 1fr; gap:12px; align-items:start;">
-          <div style="background:#7c3aed; color:#fff; border-radius:8px; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:800;">③</div>
+          <div style="background:#7c3aed; color:#fff; border-radius:8px; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:800;">3</div>
           <div>
             <div style="font-size:0.9rem; font-weight:700; color:#6d28d9; margin-bottom:4px;">採用市場のスキルベース移行——データ評価への需要爆増</div>
             <div style="font-size:0.8rem; color:#4c1d95; line-height:1.7;">スキルベース採用に転換したい企業79%（LinkedIn 2024）。AI関連求人が2022年比3.5倍（doda 2024）。「本当にAIが使える人材か」を証明・判定する評価軸が採用側にも応募者側にも切実に必要とされている</div>
@@ -1578,23 +1579,23 @@
       <h3>真似されない5つの壁</h3>
       <div class="barrier-grid">
         <div class="barrier-card">
-          <div class="bc-title">壁① 完遂ログDB（時間的優位）</div>
+          <div class="bc-title"><span style="display:inline-block;background:var(--navy);color:#fff;font-size:11px;font-weight:800;width:20px;height:20px;line-height:20px;text-align:center;border-radius:4px;margin-right:6px;">1</span>壁 — 完遂ログDB（時間的優位）</div>
           <div class="bc-desc">先行蓄積した完遂ログは後発が追いつけない。ログ数×質×採用実績が蓄積するほど採用企業への訴求力が高まる自己強化型資産</div>
         </div>
         <div class="barrier-card">
-          <div class="bc-title">壁② 3市場同時支配</div>
+          <div class="bc-title"><span style="display:inline-block;background:var(--navy);color:#fff;font-size:11px;font-weight:800;width:20px;height:20px;line-height:20px;text-align:center;border-radius:4px;margin-right:6px;">2</span>壁 — 3市場同時支配</div>
           <div class="bc-desc">AI実装×若手育成×採用人材紹介を束ねる設計。1市場だけ攻めるプレイヤーは必ずどこかでUNLIDに依存する構造になる</div>
         </div>
         <div class="barrier-card">
-          <div class="bc-title">壁③ 複合収益モデル</div>
+          <div class="bc-title"><span style="display:inline-block;background:var(--navy);color:#fff;font-size:11px;font-weight:800;width:20px;height:20px;line-height:20px;text-align:center;border-radius:4px;margin-right:6px;">3</span>壁 — 複合収益モデル</div>
           <div class="bc-desc">月額＋紹介フィー＋案件型の3収益源。単一収益プレイヤーよりLTV・収益安定性が構造的に高い</div>
         </div>
         <div class="barrier-card">
-          <div class="bc-title">壁④ FDE育成ファネル</div>
+          <div class="bc-title"><span style="display:inline-block;background:var(--navy);color:#fff;font-size:11px;font-weight:800;width:20px;height:20px;line-height:20px;text-align:center;border-radius:4px;margin-right:6px;">4</span>壁 — FDE育成ファネル</div>
           <div class="bc-desc">副業→シニア→副業FDE→正社員の内部育成ルート。採用費ゼロ・能力確認済み・即戦力で正社員化できる仕組み</div>
         </div>
         <div class="barrier-card" style="grid-column:1/3;">
-          <div class="bc-title">壁⑤ 創業者の原体験（模倣不可）</div>
+          <div class="bc-title"><span style="display:inline-block;background:var(--navy);color:#fff;font-size:11px;font-weight:800;width:20px;height:20px;line-height:20px;text-align:center;border-radius:4px;margin-right:6px;">5</span>壁 — 創業者の原体験（模倣不可）</div>
           <div class="bc-desc">SME・FDE・ワーカー全員の痛みを理解した創業者が設計する仕組みは、外部から模倣できない。「なぜこの設計か」の文脈が競合参入の最大の壁になる</div>
         </div>
       </div>

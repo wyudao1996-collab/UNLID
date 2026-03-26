@@ -129,9 +129,54 @@
       margin-bottom:10px;
     }
     h2 .s-num {
-      font-size:11px; font-weight:700; color:#fff;
-      background:var(--blue); border-radius:4px;
-      padding:3px 8px; letter-spacing:1px;
+      font-size:13px; font-weight:700; color:var(--navy);
+      letter-spacing:1px;
+    }
+    /* ===== Flywheel ===== */
+    .fw-visual { margin: 20px 0; }
+    .fw-row { display: flex; align-items: stretch; gap: 0; }
+    .fw-row-rev { display: flex; align-items: stretch; gap: 0; flex-direction: row-reverse; }
+    .fw-step {
+      flex: 1;
+      background: #e8f0fb;
+      border: 2px solid #3b6dbf;
+      border-radius: 10px;
+      padding: 14px 12px;
+      text-align: center;
+      font-size: 0.83rem;
+      line-height: 1.5;
+    }
+    .fw-step.sme { background: #dbeafe; border-color: #2563eb; }
+    .fw-step.fde { background: #dcfce7; border-color: #16a34a; }
+    .fw-step.log { background: #fef9c3; border-color: #ca8a04; }
+    .fw-step.fee { background: #fff7ed; border-color: #ea580c; }
+    .fw-step.up  { background: #f0fdf4; border-color: #15803d; }
+    .fw-step.new { background: #dbeafe; border-color: #1d4ed8; }
+    .fw-arr {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: #64748b;
+      padding: 0 6px;
+      font-weight: bold;
+    }
+    .fw-bridge {
+      display: flex;
+      justify-content: space-between;
+      padding: 2px 16px;
+      font-size: 1.2rem;
+      color: #64748b;
+    }
+    .fw-center-label {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #374151;
+      padding: 5px 10px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 6px;
+      margin: 2px auto;
     }
     h3 {
       font-size:16px; font-weight:700; color:var(--navy);
@@ -409,7 +454,7 @@
               <td><strong>何をやるか</strong></td>
               <td>フラクショナルFDE（週1〜2日複数社掛け持ちの正社員）がSMEのAI実装を成果責任付きで完遂。その監督下で副業若手ワーカーが実務を担い、実績ポートフォリオ（第三者評価付き実績記録）を蓄積する</td>
             </tr>
-            <tr class="hl-row">
+            <tr>
               <td><strong>なぜ今か</strong></td>
               <td>①中小企業のAI導入率1.3%（大企業の1/15）②OJT崩壊で若手の実戦機会が消滅③ビジネス職には「収益化に成功した実績証明」が世界に存在しない——3つの構造変化が同時に起きている</td>
             </tr>
@@ -417,7 +462,7 @@
               <td><strong>差別化の核心</strong></td>
               <td>「SME × AI実装 × フラクショナル × 副業若手育成 × 実績ポートフォリオ × スカウト人材紹介」の組み合わせは日本に存在しない</td>
             </tr>
-            <tr class="hl-row">
+            <tr>
               <td><strong>収益モデル</strong></td>
               <td>①B2B受託：月20〜30万円/社（継続）②人材紹介フィー：140万円/件（成功報酬）③プロジェクト型：80〜200万円/件</td>
             </tr>
@@ -425,7 +470,7 @@
               <td><strong>ユニットエコノミクス</strong></td>
               <td>FDE1名×6社×月20万円＝月商120万円。ワーカー費18〜30万＋FDE給与40万を控除し粗利44〜56万円（37〜47%）。損益分岐：6社担当かつ単価20万円以上</td>
             </tr>
-            <tr class="hl-row">
+            <tr>
               <td><strong>LTV</strong></td>
               <td>月20万×12ヶ月＋人材紹介140万＝<strong>380万円/社</strong></td>
             </tr>
@@ -433,7 +478,7 @@
               <td><strong>市場規模</strong></td>
               <td>TAM 5,000億〜9,000億円 / SAM 280億〜560億円 / SOM（3〜5年）4〜6億円</td>
             </tr>
-            <tr class="hl-row">
+            <tr>
               <td><strong>将来構想</strong></td>
               <td>実績ポートフォリオ1,000件到達後、「ビジネス職版GitHub」SaaSとして採用プラットフォームへ。目標売上15〜30億円圏（Polywork・Fueler等が挑戦したが収益化できず。UNLIDは実務の場＋第三者評価＋採用フィー設計で三重の課題を同時に解く）</td>
             </tr>
@@ -474,7 +519,7 @@
         <table>
           <thead><tr><th>用語</th><th>定義（一言）</th><th>UNLIDでの意味</th></tr></thead>
           <tbody>
-            <tr class="hl-row">
+            <tr>
               <td><strong>FDE</strong><br><small style="color:#64748b;">Forward Deployed Engineer</small></td>
               <td>クライアント現場に入り、AI実装を成果責任付きで完遂する技術職。Palantir発祥</td>
               <td>UNLID正社員として複数SMEに週1〜2日ずつ関与。KPI設定・ワーカー管理・成果物納品まで責任を負う</td>
@@ -484,7 +529,7 @@
               <td>1名の専門人材が複数社に分割稼働するモデル。「外部CTO」「副業顧問」が典型</td>
               <td>FDE1名が4〜6社を同時担当。企業は正社員採用（年2,000万超）の1/10コストで専門家を確保できる</td>
             </tr>
-            <tr class="hl-row">
+            <tr>
               <td><strong>SME</strong><br><small style="color:#64748b;">Small and Medium Enterprise</small></td>
               <td>中小企業。本レポートでは従業員30〜300名規模を指す</td>
               <td>日本企業数の99.7%・雇用の約7割を占める。AI導入率は大企業の1/15（1.3%）</td>
@@ -494,7 +539,7 @@
               <td>実装タスク完了時に記録する「本人記述＋FDE3軸スコア＋クライアント確認」の3層評価記録</td>
               <td>「嘘のつけないビジネス職の実績DB」として蓄積。将来SaaS化し採用プラットフォームへ展開</td>
             </tr>
-            <tr class="hl-row">
+            <tr>
               <td><strong>実装タスク</strong></td>
               <td>1〜2週間で完遂できるよう設計された実務タスク単位</td>
               <td>副業ワーカーが担う実務の最小単位。「AI出力仕上げ」「採用取材」「インタビュー整理」など</td>
@@ -603,6 +648,23 @@
         </div>
       </div>
 
+      <h3>問題③ 採用市場における評価軸の限界——面接・学歴だけでは「実力ある人材」を選べなくなった<span style="font-size:0.72rem; font-weight:400; background:#fce7f3; color:#9d174d; padding:2px 8px; border-radius:4px; margin-left:10px; vertical-align:middle;">ToB（採用企業）側の課題</span></h3>
+      <div style="margin-bottom:16px; padding:14px 18px; background:#fef2f2; border-left:4px solid #ef4444; border-radius:6px; font-size:0.88rem; line-height:1.8; color:#1f2937;">
+        <strong>【問題：現状の評価手段の限界】</strong><br>
+        採用側は現在、「面接・学歴・職務経歴書（自己申告）」のみで人材を評価している。<br>
+        しかしこれでは採用精度が低く、採用ミスマッチ率は<strong>約30%</strong>、採用コストは<strong>平均93.6万円/人</strong>、大卒3年以内離職率は<strong>34.9%</strong>に達している。
+      </div>
+      <div style="margin-bottom:16px; padding:14px 18px; background:#fef9c3; border-left:4px solid #ca8a04; border-radius:6px; font-size:0.88rem; line-height:1.8; color:#1f2937;">
+        <strong>【課題：既存評価を補完する「客観的実務実績データ」が不足している】</strong><br>
+        面接・学歴はあくまで「ポテンシャル・コミュニケーション能力」の評価であり、「実務でAIを使い課題を解決できるか」を測る手段ではない。<br>
+        スキルベース採用に転換したい企業は<strong>79%</strong>（LinkedIn 2024）にのぼるが、ビジネス職に対して使える「実務実績の客観データ」が存在しないため転換できずにいる。<br>
+        AI関連求人が2022年比<strong>3.5倍</strong>増（doda 2024）の中、「本当にAIが使える人材か」を証明・判定する評価軸が採用側にも応募者側にもない。
+      </div>
+      <div class="hbox">
+        <strong>UNLIDの解への導線：</strong>問題は「既存評価（面接・学歴）を補完する客観的実務実績データの不在」だ。<br>
+        UNLIDの実績ポートフォリオがこのギャップを埋める——SMEのAI実装という実戦を経た、<strong>本人記述＋FDE3軸スコア＋クライアント確認</strong>の3者証明済みデータが、採用市場で機能する実績評価軸になる。これがUNLIDの人材紹介収益（採用フィー）の根拠だ。
+      </div>
+
       <h3>なぜ今か——3つの構造的追い風</h3>
       <div style="display:flex; flex-direction:column; gap:12px; margin:14px 0 22px;">
         <div style="border:1.5px solid #bbf7d0; border-radius:10px; padding:16px 20px; background:#f0fdf4; display:grid; grid-template-columns:48px 1fr; gap:12px; align-items:start;">
@@ -637,125 +699,84 @@
       </div>
 
       <!-- SME Top10 関心事テーブル -->
-      <h3>SME経営者が本当に気にしていること — Top 10</h3>
-      <p style="font-size:0.85rem; color:#374151; margin-bottom:12px;">UNLIDが訴求すべき「経営者の頭の中」を整理する。フラクショナルFDEの提案ロジックは、この優先順位を逆なでしない設計になっている。</p>
+      <h3>中小企業の社長が外部支援に求めるもの — 関心事 Top 10</h3>
+      <p style="font-size:0.83rem; color:#374151; margin-bottom:10px;">中小企業経営者が直面する課題を優先度順に整理した。<strong>UNLIDは上位10項目のうち8項目に直接対応できる。</strong></p>
       <div class="tw">
         <table>
           <thead>
             <tr>
-              <th style="width:5%">順位</th>
-              <th style="width:30%">関心事</th>
-              <th style="width:30%">現状の痛み</th>
-              <th style="width:35%">UNLIDの訴求ポイント</th>
+              <th style="width:6%">順位</th>
+              <th style="width:22%">課題</th>
+              <th style="width:40%">データ</th>
+              <th style="width:32%">UNLIDとの関連</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="hl-row">
-              <td style="text-align:center;"><strong>1</strong></td>
-              <td><strong>売上・利益を今すぐ増やしたい</strong></td>
-              <td>AI導入のROIが不透明。投資対効果を測れない</td>
-              <td>初月から削減時間×コストでROIを数値化して報告</td>
+            <tr style="background:#eff6ff; border-left:3px solid #2563eb;">
+              <td style="text-align:center; font-weight:800; color:#1d4ed8; font-size:1.1rem;">1</td>
+              <td><strong>人材確保</strong></td>
+              <td>46.6%が最優先。74.4%が「人材面の課題あり」（帝国データバンク2025）</td>
+              <td><span style="color:#1d4ed8; font-weight:700;">● 対応</span>　ワーカーの採用フィー経路。FDEが「採用前に仕事を試せる」試用期間代替を提供</td>
             </tr>
-            <tr>
-              <td style="text-align:center;">2</td>
-              <td>人手不足・採用難を解消したい</td>
-              <td>採用してもすぐ辞める。スキルある人材が来ない</td>
-              <td>副業ワーカーが即戦力として参加。採用リスクゼロ</td>
+            <tr style="background:#eff6ff; border-left:3px solid #2563eb;">
+              <td style="text-align:center; font-weight:800; color:#1d4ed8; font-size:1.1rem;">2</td>
+              <td><strong>人材育成</strong></td>
+              <td>13.1%が最重要課題（帝国データバンク）</td>
+              <td><span style="color:#1d4ed8; font-weight:700;">● 対応</span>　FDE監督下でワーカーが実戦育成。育成コストをUNLIDが負担</td>
             </tr>
-            <tr class="hl-row">
-              <td style="text-align:center;"><strong>3</strong></td>
-              <td><strong>毎日の業務を楽にしたい</strong></td>
-              <td>社長が雑務に追われ経営に集中できない</td>
-              <td>議事録・メール・請求書自動化で月30時間を即解放</td>
+            <tr style="background:#eff6ff; border-left:3px solid #2563eb;">
+              <td style="text-align:center; font-weight:800; color:#1d4ed8; font-size:1.1rem;">3</td>
+              <td><strong>DX・AI推進の人材不足</strong></td>
+              <td>「専門的人材がいない」42.3%、「費用が高い」33.3%（NTT西日本2024）</td>
+              <td><span style="color:#1d4ed8; font-weight:700;">● 対応</span>　AI実装特化のFDEを月20〜30万円で提供。「専門家が高い」問題を正面から解く</td>
             </tr>
-            <tr>
-              <td style="text-align:center;">4</td>
-              <td>競合に遅れを取りたくない</td>
-              <td>「他社がAIを導入し始めた」という焦り</td>
-              <td>1〜3ヶ月で競合が使っていないAI実装を先行導入</td>
+            <tr style="background:#f8fafc; border-left:3px solid #e2e8f0;">
+              <td style="text-align:center; font-weight:700; color:#94a3b8; font-size:1rem;">4</td>
+              <td><strong style="color:#6b7280;">コスト上昇への対応</strong></td>
+              <td style="color:#6b7280;">原材料・人件費上昇を「感じる」企業が約7割（東京商工会議所2024）</td>
+              <td style="color:#94a3b8;">— AI自動化による間接コスト削減で部分的に対応</td>
             </tr>
-            <tr>
-              <td style="text-align:center;">5</td>
-              <td>コストを削減したい</td>
-              <td>外注費・人件費が重い。削れる場所がわからない</td>
-              <td>業務棚卸しでボトルネックを特定し費用対効果を明示</td>
+            <tr style="background:#f8fafc; border-left:3px solid #e2e8f0;">
+              <td style="text-align:center; font-weight:700; color:#94a3b8; font-size:1rem;">5</td>
+              <td><strong style="color:#6b7280;">後継者問題</strong></td>
+              <td style="color:#6b7280;">後継者「いない・未定」52.1%（帝国データバンク2024）</td>
+              <td style="color:#94a3b8;">— 直接対応外（長期的にはDX化が事業価値向上に貢献）</td>
             </tr>
-            <tr>
-              <td style="text-align:center;">6</td>
-              <td>信頼できる外部パートナーが欲しい</td>
-              <td>DXコンサルは高すぎる。フリーランスは品質不安定</td>
-              <td>FDEが成果責任を持ち、月次でKPIを報告するパートナー</td>
+            <tr style="background:#eff6ff; border-left:3px solid #2563eb;">
+              <td style="text-align:center; font-weight:800; color:#1d4ed8; font-size:1.1rem;">6</td>
+              <td><strong>業務の自動化・効率化</strong></td>
+              <td>DX期待効果の38.6%（中小機構2024）</td>
+              <td><span style="color:#1d4ed8; font-weight:700;">● 対応</span>　Phase 1のコアミッション。議事録・請求書・メール自動化を初月から実装</td>
             </tr>
-            <tr>
-              <td style="text-align:center;">7</td>
-              <td>社員を育てたい・定着させたい</td>
-              <td>育成コストと時間がない。教えても辞める</td>
-              <td>副業ワーカーの完遂ログが社員育成の外部教材になる</td>
+            <tr style="background:#eff6ff; border-left:3px solid #2563eb;">
+              <td style="text-align:center; font-weight:800; color:#1d4ed8; font-size:1.1rem;">7</td>
+              <td><strong>コスト削減・生産性向上</strong></td>
+              <td>DX期待効果の38.8%（中小機構2024）</td>
+              <td><span style="color:#1d4ed8; font-weight:700;">● 対応</span>　初月で月30時間削減・年間168〜216万円の人件費削減効果（12ヶ月累計）</td>
             </tr>
-            <tr>
-              <td style="text-align:center;">8</td>
-              <td>営業・マーケを強化したい</td>
-              <td>新規顧客開拓の仕組みがない。既存顧客頼み</td>
-              <td>AIマーケ施策・CRM設計でリード獲得を仕組み化</td>
+            <tr style="background:#eff6ff; border-left:3px solid #2563eb;">
+              <td style="text-align:center; font-weight:800; color:#1d4ed8; font-size:1.1rem;">8</td>
+              <td><strong>DX成果の見えなさ</strong></td>
+              <td>「効果が見えない」23.9%が取り組まない理由（中小機構2024）</td>
+              <td><span style="color:#1d4ed8; font-weight:700;">● 対応</span>　成果責任付き（KPI設定・ROI試算を毎月提示）。「見える化」を契約の前提条件にする</td>
             </tr>
-            <tr>
-              <td style="text-align:center;">9</td>
-              <td>IT・DXを導入したいが何から始めればいいかわからない</td>
-              <td>何が自社に合うか判断できない。失敗が怖い</td>
-              <td>業務棚卸し→課題特定→PoC設計を3ステップで実施</td>
+            <tr style="background:#eff6ff; border-left:3px solid #2563eb;">
+              <td style="text-align:center; font-weight:800; color:#1d4ed8; font-size:1.1rem;">9</td>
+              <td><strong>データ活用・意思決定</strong></td>
+              <td>DX期待効果の26.2%（中小機構2024）</td>
+              <td><span style="color:#1d4ed8; font-weight:700;">● 対応</span>　Phase 2で売上データ・顧客データの分析・可視化を実施。CRM代替設計も対応</td>
             </tr>
-            <tr>
-              <td style="text-align:center;">10</td>
-              <td>リスクを取りたくない</td>
-              <td>月80〜200万円のDXコンサルは博打に見える</td>
-              <td>月20〜30万円の継続型。成果が出なければ解約可能</td>
+            <tr style="background:#eff6ff; border-left:3px solid #2563eb;">
+              <td style="text-align:center; font-weight:800; color:#1d4ed8; font-size:1.1rem;">10</td>
+              <td><strong>補助金・助成金の活用</strong></td>
+              <td>DX外部支援で最も期待するもの41.6%（中小機構2024）</td>
+              <td><span style="color:#1d4ed8; font-weight:700;">● 対応</span>　IT導入補助金（最大450万円）の申請支援をFDEが代行。初期費用ハードルを下げる</td>
             </tr>
           </tbody>
         </table>
       </div>
-
-      <!-- なぜ今：定量データ表 -->
-      <h3>「なぜ今か」— 定量データで示す3つの追い風</h3>
-      <div class="tw">
-        <table>
-          <thead>
-            <tr>
-              <th style="width:22%">追い風</th>
-              <th style="width:30%">定量データ</th>
-              <th style="width:24%">出典</th>
-              <th style="width:24%">UNLIDへの影響</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>① 生成AI市場の爆発</strong></td>
-              <td>国内市場2028年予測：8,028億円（2024年比8倍）<br>ChatGPT登場後18ヶ月で国内利用者数1,000万人超</td>
-              <td>IDC Japan 2024<br>MMD研究所 2023</td>
-              <td>「AI導入しなければ」という経営者の危機感が最高潮。テイクレートが上昇</td>
-            </tr>
-            <tr class="hl-row">
-              <td><strong>② SMEのAI格差が拡大</strong></td>
-              <td>中小企業AI導入率：1.3%（大企業19.0%の1/15）<br>DX推進人材「不足」：85.1%<br>AI活用「検討中・予定なし」：68%</td>
-              <td>総務省 2024<br>帝国データバンク 2024</td>
-              <td>未導入SMEが市場の大半。早期に信頼関係を結んだFDEが長期LTVを独占できる</td>
-            </tr>
-            <tr>
-              <td><strong>③ 副業・フラクショナル普及</strong></td>
-              <td>副業可企業数：2019年比約3倍<br>フラクショナルCxO市場：CAGR 15%超<br>AI実装経験者の副業需要：2024年に急増</td>
-              <td>リクルート 2024<br>サーキュレーション社推定</td>
-              <td>FDE候補の供給が整いつつある。採用競争が激化する前に内部育成ファネルを確立</td>
-            </tr>
-            <tr>
-              <td><strong>④ 採用市場のデータ移行</strong></td>
-              <td>スキルベース採用転換希望企業：79%<br>AI関連求人：2022年比3.5倍<br>採用ミスマッチによる損失：平均93.6万円/件</td>
-              <td>LinkedIn 2024<br>doda 2024<br>リクルートWR研究所</td>
-              <td>完遂ログの価値が採用企業に認識される環境が整う。紹介フィー収益の加速条件が揃っている</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="hbox" style="margin-top:14px;">
-        <strong>結論：</strong>「今始めなければならない理由」は需要側（SMEの焦り）・供給側（副業人材の増加）・採用側（データ評価へのシフト）の3方向から同時に加速している。2024〜2026年は先行者が市場を刷り込む最初の2年だ。
+      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:10px 16px; margin-bottom:20px; font-size:0.83rem; color:#1e3a8a; line-height:1.7;">
+        <strong>出典：</strong>帝国データバンク「中小企業の人材課題調査」2025年 / NTT西日本「中小企業のDX実態調査」2024年 / 東京商工会議所「中小企業経営者の景況感調査」2024年 / 中小企業基盤整備機構「中小企業のDXに関する調査」2024年
       </div>
 
     </div><!-- /sec3 -->
@@ -767,56 +788,31 @@
 
       <!-- フライホイール ビジュアル -->
       <h3>フライホイール — 自己強化するエコシステム</h3>
-      <div style="background:linear-gradient(160deg,#0c1629 0%,#0f2244 50%,#0c1629 100%); border-radius:14px; padding:28px 24px; margin:14px 0 22px;">
-        <!-- 上段：Step 1→2→3 -->
-        <div style="display:grid; grid-template-columns:1fr 36px 1fr 36px 1fr; align-items:center; margin-bottom:10px;">
-          <div style="background:#1a3560; border:2px solid #3b82f6; border-radius:10px; padding:18px 14px; text-align:center;">
-            <div style="font-size:0.6rem; letter-spacing:1.5px; color:#64748b; text-transform:uppercase; margin-bottom:5px;">Step 1</div>
-            <div style="font-size:0.9rem; font-weight:700; color:#93c5fd; line-height:1.4; margin-bottom:5px;">SMEがFDEを採用</div>
-            <div style="font-size:0.72rem; color:#475569;">月20〜30万円</div>
-          </div>
-          <div style="text-align:center; font-size:1.5rem; font-weight:700; color:#3b82f6;">→</div>
-          <div style="background:#163a26; border:2px solid #22c55e; border-radius:10px; padding:18px 14px; text-align:center;">
-            <div style="font-size:0.6rem; letter-spacing:1.5px; color:#64748b; text-transform:uppercase; margin-bottom:5px;">Step 2</div>
-            <div style="font-size:0.9rem; font-weight:700; color:#86efac; line-height:1.4; margin-bottom:5px;">副業ワーカーが実務参加</div>
-            <div style="font-size:0.72rem; color:#475569;">成果責任付き</div>
-          </div>
-          <div style="text-align:center; font-size:1.5rem; font-weight:700; color:#22c55e;">→</div>
-          <div style="background:#2a2210; border:2px solid #f59e0b; border-radius:10px; padding:18px 14px; text-align:center;">
-            <div style="font-size:0.6rem; letter-spacing:1.5px; color:#64748b; text-transform:uppercase; margin-bottom:5px;">Step 3</div>
-            <div style="font-size:0.9rem; font-weight:700; color:#fde68a; line-height:1.4; margin-bottom:5px;">完遂ログ蓄積</div>
-            <div style="font-size:0.72rem; color:#475569;">3層評価記録</div>
-          </div>
+      <div class="fw-visual">
+        <!-- 上段：左から右へ -->
+        <div class="fw-row">
+          <div class="fw-step sme"><strong>① SMEが契約</strong><br>月20〜30万円でAI実装を依頼</div>
+          <div class="fw-arr">→</div>
+          <div class="fw-step fde"><strong>② FDE監督下で</strong><br>副業ワーカーが実務参加</div>
+          <div class="fw-arr">→</div>
+          <div class="fw-step log"><strong>③ 実装タスク完遂</strong><br>実績ポートフォリオが第三者評価付きで蓄積</div>
         </div>
-        <!-- 縦矢印（↑左端 ↓右端） -->
-        <div style="display:flex; justify-content:space-between; padding:2px calc(50% - 18px); font-size:1.4rem; font-weight:700; color:#475569;">
-          <span>↑</span><span>↓</span>
+        <!-- 橋渡し矢印 -->
+        <div class="fw-bridge">
+          <span style="font-size:1.2rem;">↙</span>
+          <div class="fw-center-label">④ ログが採用材料に → クライアントがワーカーをスカウト採用</div>
+          <span style="font-size:1.2rem;">↘</span>
         </div>
-        <!-- 下段：Step 6←5←4（右から左へ循環） -->
-        <div style="display:grid; grid-template-columns:1fr 36px 1fr 36px 1fr; align-items:center; margin-top:10px;">
-          <div style="background:#1e1530; border:2px solid #a855f7; border-radius:10px; padding:18px 14px; text-align:center;">
-            <div style="font-size:0.6rem; letter-spacing:1.5px; color:#64748b; text-transform:uppercase; margin-bottom:5px;">Step 6</div>
-            <div style="font-size:0.9rem; font-weight:700; color:#d8b4fe; line-height:1.4; margin-bottom:5px;">FDEの担当社増加</div>
-            <div style="font-size:0.72rem; color:#475569;">スケール加速</div>
-          </div>
-          <div style="text-align:center; font-size:1.5rem; font-weight:700; color:#a855f7;">←</div>
-          <div style="background:#1a1030; border:2px solid #7c3aed; border-radius:10px; padding:18px 14px; text-align:center;">
-            <div style="font-size:0.6rem; letter-spacing:1.5px; color:#64748b; text-transform:uppercase; margin-bottom:5px;">Step 5</div>
-            <div style="font-size:0.9rem; font-weight:700; color:#c4b5fd; line-height:1.4; margin-bottom:5px;">信頼・実績蓄積</div>
-            <div style="font-size:0.72rem; color:#475569;">SME口コミ</div>
-          </div>
-          <div style="text-align:center; font-size:1.5rem; font-weight:700; color:#7c3aed;">←</div>
-          <div style="background:#2a0f1e; border:2px solid #ec4899; border-radius:10px; padding:18px 14px; text-align:center;">
-            <div style="font-size:0.6rem; letter-spacing:1.5px; color:#64748b; text-transform:uppercase; margin-bottom:5px;">Step 4</div>
-            <div style="font-size:0.9rem; font-weight:700; color:#f9a8d4; line-height:1.4; margin-bottom:5px;">採用フィー発生</div>
-            <div style="font-size:0.72rem; color:#475569;">140万円/件</div>
-          </div>
+        <!-- 下段：右から左へ（逆方向） -->
+        <div class="fw-row-rev">
+          <div class="fw-step new"><strong>⑦ 新規SME獲得</strong><br>信頼・実績が次の顧客を呼ぶ</div>
+          <div class="fw-arr">←</div>
+          <div class="fw-step up"><strong>⑥ FDE担当社数増加</strong><br>実績でFDEの評価が上がる</div>
+          <div class="fw-arr">←</div>
+          <div class="fw-step fee"><strong>⑤ 採用フィー発生</strong><br>年収400万×35%＝<strong>140万円/件</strong></div>
         </div>
-        <!-- フッターラベル -->
-        <div style="text-align:center; margin-top:18px;">
-          <span style="font-size:0.75rem; color:#64748b; background:rgba(255,255,255,0.04); border:1px dashed #334155; border-radius:6px; padding:5px 18px; display:inline-block; letter-spacing:0.5px;">
-            ↺ フライホイールが自走するほど新規SME獲得コストが下がる
-          </span>
+        <div style="text-align:center; font-size:0.78rem; color:#6b7280; margin-top:8px;">
+          ⑦ → ① へ循環。ログが積まれるほど紹介が増え、フライホイールが加速する
         </div>
       </div>
 
@@ -1013,6 +1009,10 @@
 
       <!-- AI実装ユースケース集 -->
       <h3>AI実装ユースケース集 — SME業種別 × フェーズ別</h3>
+      <p style="font-size:0.85rem; color:#374151; margin-bottom:12px;">
+        詳細版はこちら：
+        <a href="https://wyudao1996-collab.github.io/UNLID/UNLID_AI実装ユースケース集_v1.0.html" target="_blank" style="display:inline-block; background:#2563eb; color:#fff; font-size:0.82rem; font-weight:700; padding:5px 14px; border-radius:6px; text-decoration:none; margin-left:6px;">AI実装ユースケース集 v1.0（20ケース完成版・導入手順付き）</a>
+      </p>
       <div class="tw">
         <table>
           <thead>

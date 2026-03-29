@@ -1267,8 +1267,199 @@
           <div style="font-size:0.72rem; font-weight:700; color:#6d28d9; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">収益源③</div>
           <div style="font-size:0.9rem; font-weight:700; color:#4c1d95; margin-bottom:4px;">プロジェクト型</div>
           <div style="font-size:1.6rem; font-weight:800; color:#0f172a; margin:8px 0;">80〜200万円</div>
-          <div style="font-size:0.75rem; color:#475569; line-height:1.7;">/ 件・案件型<br>スポットAI実装プロジェクト</div>
+          <div style="font-size:0.75rem; color:#475569; line-height:1.7;">/ 件・請負型<br>①継続顧客の大型追加案件 or 中堅企業の単発AI実装依頼。スコープ・納品物・完了条件を明確に定義した請負型。月額伴走とは別予算で受注。</div>
         </div>
+      </div>
+
+      <!-- 収益源①と③の詳細定義 -->
+      <h3>収益源① vs ③ — 定義・実態・技術境界線</h3>
+      <p style="font-size:0.88rem; color:#374151; margin-bottom:14px;"><strong>「①と③は何が違うのか」は投資家から必ず聞かれる問いだ。契約形態・スコープ・担当者・技術レベルの4軸で明確に区分する。</strong></p>
+
+      <div class="tw" style="margin-bottom:18px;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:18%">比較軸</th>
+              <th style="width:41%; background:#1e3a8a; color:#fff;">① B2B受託（継続型）</th>
+              <th style="width:41%; background:#4c1d95; color:#fff;">③ プロジェクト型</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>契約形態</td>
+              <td>月額サブスクリプション（無期限）</td>
+              <td>請負型（期間・納品物を定義）</td>
+            </tr>
+            <tr>
+              <td>スコープ</td>
+              <td>オープンエンド（毎月AIを前進させる）</td>
+              <td>明確な完了条件あり（「このシステムを作る」）</td>
+            </tr>
+            <tr>
+              <td>アウトプット</td>
+              <td>月次の改善進捗・小〜中規模自動化</td>
+              <td>動作するシステム・ドキュメント・引き渡し</td>
+            </tr>
+            <tr>
+              <td>単価</td>
+              <td>月20〜30万円</td>
+              <td>80〜200万円/件</td>
+            </tr>
+            <tr>
+              <td>期間</td>
+              <td>継続（平均12ヶ月以上）</td>
+              <td>4〜12週間で完結</td>
+            </tr>
+            <tr>
+              <td>発生経路</td>
+              <td>新規SME獲得</td>
+              <td>①継続顧客の追加大型案件 or 中堅企業（100〜300名）の単発依頼</td>
+            </tr>
+            <tr>
+              <td>担当者</td>
+              <td>ビジネス系FDE＋副業ワーカー</td>
+              <td>技術系FDE（or外部フリーランス協業）＋副業ワーカー</td>
+            </tr>
+            <tr>
+              <td>技術レベル</td>
+              <td>ノーコード〜軽量Python・API連携</td>
+              <td>RAG・Vector DB・データパイプライン・システム統合</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- プロジェクト型3タイプ -->
+      <h3>プロジェクト型の3タイプ — できること・できないこと</h3>
+      <div class="tw" style="margin-bottom:16px;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:10%">タイプ</th>
+              <th style="width:28%">内容例</th>
+              <th style="width:14%">単価目安</th>
+              <th style="width:14%">期間</th>
+              <th style="width:16%">UNLID単体で可能か</th>
+              <th style="width:18%">副業ワーカーの参加</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:#f0fdf4;">
+              <td style="font-weight:700; color:#15803d;">A<br><small>集中実装</small></td>
+              <td>RAG構築・業務全自動化パイプライン・AI chatbot（SME特化）</td>
+              <td style="font-weight:700;">80〜120万円</td>
+              <td>4〜8週間</td>
+              <td style="text-align:center; color:#16a34a; font-weight:700;">◎ 可能</td>
+              <td>◎ 実行タスク中心（テスト・データ整備・ドキュメント）</td>
+            </tr>
+            <tr style="background:#fffbeb;">
+              <td style="font-weight:700; color:#92400e;">B<br><small>システム連携</small></td>
+              <td>既存CRM/ERPとAI接続・データ基盤整備・複数ツール統合</td>
+              <td style="font-weight:700;">120〜200万円</td>
+              <td>8〜12週間</td>
+              <td style="text-align:center; color:#ca8a04; font-weight:700;">△ 技術FDE or 外部協業が必要</td>
+              <td>○ 一部参加（実行補助）</td>
+            </tr>
+            <tr style="background:#fff5f5;">
+              <td style="font-weight:700; color:#dc2626;">C<br><small>カスタム開発</small></td>
+              <td>独自AIモデル開発・専用アプリ構築・基幹システム開発</td>
+              <td style="font-weight:700;">200万円〜</td>
+              <td>3ヶ月〜</td>
+              <td style="text-align:center; color:#dc2626; font-weight:700;">× 対象外</td>
+              <td>△ 補助のみ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="padding:10px 16px; background:#fef9c3; border-left:4px solid #ca8a04; border-radius:6px; font-size:0.83rem; color:#78350f; margin-bottom:18px; line-height:1.7;">
+        <strong>対象範囲の明確な境界線：</strong>LLM API・RAG・ノーコード統合・軽量スクリプト（Python）の組み合わせで完結する案件に限定する。独自モデル開発・基幹システム構築・官公庁・金融向け案件はUNLIDの対象外。SIer・システム開発会社の領域には参入しない。
+      </div>
+
+      <!-- 人月単価の市場比較 -->
+      <h3>価格競争力 — 市場相場との比較</h3>
+      <div class="tw" style="margin-bottom:16px;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:30%">プレイヤー</th>
+              <th style="width:25%">人月単価目安</th>
+              <th style="width:45%">特徴・制約</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>大手SIer・アクセンチュア等</td>
+              <td>150〜300万円/人月</td>
+              <td>品質高いが予算外。SMEは対象外</td>
+            </tr>
+            <tr>
+              <td>AI専門コンサル（中小）</td>
+              <td>80〜150万円/人月</td>
+              <td>AI特化だが成果責任なし・実装まで伴走しない</td>
+            </tr>
+            <tr>
+              <td>技術フリーランス</td>
+              <td>50〜100万円/人月</td>
+              <td>安いが品質管理なし・属人化・継続性なし</td>
+            </tr>
+            <tr class="hl-row">
+              <td><strong>UNLID（技術FDE＋ワーカー）</strong></td>
+              <td><strong>40〜70万円/人月（推計）</strong></td>
+              <td><strong>成果責任付き・ワーカー並走で実装速度速い・SME特化</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="padding:10px 16px; background:#eff6ff; border-left:4px solid #2563eb; border-radius:6px; font-size:0.83rem; color:#1e3a8a; margin-bottom:18px; line-height:1.7;">
+        <strong>試算例（RAG構築・2ヶ月・タイプA）：</strong>技術FDE 80時間＋ワーカー×2名 240時間 → 原価約40万円 → 受注単価100万円 → 粗利約60万円（60%）。フリーランス単体（100〜150万円・品質保証なし）と比べ、価格競争力と成果責任を両立できる。
+      </div>
+
+      <!-- 技術力と担当者の問題 -->
+      <h3>技術力の確保 — 誰がプロジェクトを担うか</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+        <div style="background:#eff6ff; border:1.5px solid #93c5fd; border-radius:10px; padding:16px 14px;">
+          <div style="font-size:0.72rem; font-weight:700; color:#1d4ed8; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">①月額受託を担うFDE（ビジネス系）</div>
+          <div style="font-size:0.82rem; color:#1e3a8a; line-height:1.7;">業務フロー設計・ノーコードツール実装・プロンプト設計・クライアント折衝が中心。PythonやAPIの基礎は使えるが、システム構築は対象外。月給35〜45万円。</div>
+        </div>
+        <div style="background:#faf5ff; border:1.5px solid #c4b5fd; border-radius:10px; padding:16px 14px;">
+          <div style="font-size:0.72rem; font-weight:700; color:#6d28d9; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">③プロジェクト型を担うFDE（技術系）</div>
+          <div style="font-size:0.82rem; color:#4c1d95; line-height:1.7;">RAG・Vector DB・API統合・データパイプライン構築が可能なエンジニア寄りFDE。タイプA〜B案件のリード役。月給50〜70万円。初期フェーズでは技術フリーランスとの案件別協業も現実的。</div>
+        </div>
+      </div>
+      <div class="tw" style="margin-bottom:6px;">
+        <table>
+          <thead>
+            <tr>
+              <th>技術確保の選択肢</th>
+              <th>メリット</th>
+              <th>デメリット</th>
+              <th>推奨フェーズ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>技術フリーランスと案件別協業</td>
+              <td>固定費ゼロ・柔軟</td>
+              <td>品質管理コスト・マージン低下・属人化</td>
+              <td style="color:#16a34a; font-weight:700;">Phase 0〜1（初期）</td>
+            </tr>
+            <tr>
+              <td>技術系FDE正社員採用</td>
+              <td>品質安定・ノウハウ蓄積・ブランド向上</td>
+              <td>固定費増・採用競争激しい</td>
+              <td style="color:#2563eb; font-weight:700;">Phase 1〜2</td>
+            </tr>
+            <tr>
+              <td>副業ワーカーから技術FDEへ内部育成</td>
+              <td>採用コストゼロ・能力確認済み・文化統一</td>
+              <td>育成に時間がかかる</td>
+              <td style="color:#7c3aed; font-weight:700;">Phase 2〜（長期）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="hbox" style="margin-top:14px; margin-bottom:22px;">
+        <strong>初期フェーズの結論：</strong>プロジェクト型はタイプAに限定し、技術フリーランスとの協業で受注可能性を確保する。タイプBへの拡張は技術系FDEを確保してから。<strong>無理な受注でブランドを毀損するリスクを避け、できる範囲で高品質を維持することを優先する。</strong>
       </div>
 
       <!-- ユニットエコノミクス -->

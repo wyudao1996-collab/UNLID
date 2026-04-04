@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNLID ブランドカラー提案 — 4案比較</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      background: #0a0a0f;
+      color: #f1f5f9;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      text-align: center;
+      padding: 60px 24px 40px;
+    }
+    .page-header .eyebrow {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #64748b;
+      margin-bottom: 14px;
+    }
+    .page-header h1 {
+      font-size: 32px;
+      font-weight: 900;
+      color: #f8fafc;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+    .page-header p {
+      color: #64748b;
+      font-size: 14px;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* ===== GRID ===== */
+    .proposals {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      max-width: 1160px;
+      margin: 0 auto 80px;
+      padding: 0 28px;
+    }
+
+    /* ===== PROPOSAL CARD ===== */
+    .proposal {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    /* --- HERO SECTION of each card --- */
+    .p-hero {
+      padding: 40px 36px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .p-hero::after {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      opacity: 0.12;
+    }
+    .p-plan-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 20px;
+      opacity: 0.6;
+    }
+    .p-brand-name {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .p-tagline {
+      font-size: 13px;
+      opacity: 0.65;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+    .p-btn {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: default;
+    }
+
+    /* --- PALETTE STRIP --- */
+    .p-palette {
+      display: flex;
+      height: 52px;
+    }
+    .p-swatch {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 6px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: rgba(255,255,255,0.55);
+      transition: flex 0.2s;
+    }
+    .p-swatch:hover { flex: 1.5; }
+
+    /* --- BODY --- */
+    .p-body {
+      padding: 24px 28px 28px;
+      background: #0f1117;
+    }
+
+    /* --- KEYWORDS --- */
+    .p-kw-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .p-kw {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* --- SAMPLE COMPONENTS --- */
+    .p-sample-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #475569;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .p-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-bottom: 16px;
+    }
+    .p-table thead tr { }
+    .p-table thead th {
+      padding: 9px 14px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 11px;
+    }
+    .p-table tbody tr:nth-child(even) { background: rgba(255,255,255,0.03); }
+    .p-table tbody td {
+      padding: 8px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      color: #94a3b8;
+    }
+    .p-table tbody td strong { color: #e2e8f0; }
+
+    /* --- LEAD BOX --- */
+    .p-lead {
+      border-left: 3px solid;
+      padding: 10px 14px;
+      border-radius: 0 6px 6px 0;
+      font-size: 12px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    /* --- METRIC ROW --- */
+    .p-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .p-metric {
+      border-radius: 8px;
+      padding: 12px 10px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .p-metric .m-val { font-size: 18px; font-weight: 800; }
+    .p-metric .m-lbl { font-size: 10px; margin-top: 2px; opacity: 0.5; }
+
+    /* --- REFERENCE --- */
+    .p-ref {
+      font-size: 11px;
+      color: #334155;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 14px;
+      line-height: 1.6;
+    }
+    .p-ref strong { color: #475569; }
+
+    /* ===== COMPARISON TABLE ===== */
+    .compare-section {
+      max-width: 1160px;
+      margin: 0 auto 80px;
+      padding: 0 28px;
+    }
+    .compare-section h2 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #f1f5f9;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .compare-table thead th {
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 12px;
+      background: #0f1117;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      color: #64748b;
+    }
+    .compare-table tbody td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: #94a3b8;
+      vertical-align: top;
+    }
+    .compare-table tbody td:first-child { color: #cbd5e1; font-weight: 600; }
+    .compare-table tbody tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* ===================================================
+       PLAN A: Electric Navy（現行洗練版）
+    =================================================== */
+    .plan-a .p-hero {
+      background: linear-gradient(135deg, #060e1f 0%, #0f1e3c 60%, #16307a 100%);
+      color: #fff;
+    }
+    .plan-a .p-hero::after { background: #2563eb; }
+    .plan-a .p-plan-label { color: #93c5fd; }
+    .plan-a .p-brand-name { color: #fff; }
+    .plan-a .p-btn {
+      background: #2563eb;
+      color: #fff;
+    }
+    .plan-a .p-palette .sw1 { background: #0f172a; }
+    .plan-a .p-palette .sw2 { background: #2563eb; }
+    .plan-a .p-palette .sw3 { background: #93c5fd; }
+    .plan-a .p-palette .sw4 { background: #eff6ff; color: #1e3a8a; }
+    .plan-a .p-palette .sw5 { background: #10b981; }
+    .plan-a .p-table thead tr { background: #0f172a; }
+    .plan-a .p-table thead th { color: #fff; }
+    .plan-a .p-table .hl td { background: rgba(37,99,235,0.12); }
+    .plan-a .p-lead { border-color: #2563eb; background: rgba(37,99,235,0.08); color: #bfdbfe; }
+    .plan-a .p-metric .m-val { color: #93c5fd; }
+    .plan-a .p-metric { background: rgba(37,99,235,0.06); }
+
+    /* ===================================================
+       PLAN B: Midnight Indigo（プレミアム路線）
+    =================================================== */
+    .plan-b .p-hero {
+      background: linear-gradient(135deg, #0e0722 0%, #1e1051 60%, #2d1585 100%);
+      color: #fff;
+    }
+    .plan-b .p-hero::after { background: #7c3aed; }
+    .plan-b .p-plan-label { color: #c4b5fd; }
+    .plan-b .p-brand-name { color: #fff; }
+    .plan-b .p-btn {
+      background: linear-gradient(135deg, #7c3aed, #6d28d9);
+      color: #fff;
+    }
+    .plan-b .p-palette .sw1 { background: #0e0722; }
+    .plan-b .p-palette .sw2 { background: #6d28d9; }
+    .plan-b .p-palette .sw3 { background: #c4b5fd; color: #2e1065; }
+    .plan-b .p-palette .sw4 { background: #f5f3ff; color: #4c1d95; }
+    .plan-b .p-palette .sw5 { background: #f59e0b; color: #78350f; }
+    .plan-b .p-table thead tr { background: #1e1051; }
+    .plan-b .p-table thead th { color: #c4b5fd; }
+    .plan-b .p-table .hl td { background: rgba(109,40,217,0.12); }
+    .plan-b .p-lead { border-color: #7c3aed; background: rgba(109,40,217,0.08); color: #ddd6fe; }
+    .plan-b .p-metric .m-val { color: #c4b5fd; }
+    .plan-b .p-metric { background: rgba(109,40,217,0.06); }
+
+    /* ===================================================
+       PLAN C: Slate & Teal（ヒューマン路線）
+    =================================================== */
+    .plan-c .p-hero {
+      background: linear-gradient(135deg, #0f2027 0%, #1a3040 60%, #0e4f4a 100%);
+      color: #fff;
+    }
+    .plan-c .p-hero::after { background: #0d9488; }
+    .plan-c .p-plan-label { color: #5eead4; }
+    .plan-c .p-brand-name { color: #fff; }
+    .plan-c .p-btn {
+      background: linear-gradient(135deg, #0d9488, #0f766e);
+      color: #fff;
+    }
+    .plan-c .p-palette .sw1 { background: #0f2027; }
+    .plan-c .p-palette .sw2 { background: #0d9488; }
+    .plan-c .p-palette .sw3 { background: #5eead4; color: #134e4a; }
+    .plan-c .p-palette .sw4 { background: #f0fdfa; color: #0f766e; }
+    .plan-c .p-palette .sw5 { background: #f97316; }
+    .plan-c .p-table thead tr { background: #0f2027; }
+    .plan-c .p-table thead th { color: #5eead4; }
+    .plan-c .p-table .hl td { background: rgba(13,148,136,0.12); }
+    .plan-c .p-lead { border-color: #0d9488; background: rgba(13,148,136,0.08); color: #99f6e4; }
+    .plan-c .p-metric .m-val { color: #5eead4; }
+    .plan-c .p-metric { background: rgba(13,148,136,0.06); }
+
+    /* ===================================================
+       PLAN D: Obsidian & Amber（コンサル重厚路線）
+    =================================================== */
+    .plan-d .p-hero {
+      background: linear-gradient(135deg, #0c0a09 0%, #1c1917 60%, #292524 100%);
+      color: #fff;
+    }
+    .plan-d .p-hero::after { background: #d97706; }
+    .plan-d .p-plan-label { color: #fbbf24; }
+    .plan-d .p-brand-name { color: #fef3c7; }
+    .plan-d .p-btn {
+      background: linear-gradient(135deg, #d97706, #b45309);
+      color: #fff;
+    }
+    .plan-d .p-palette .sw1 { background: #0c0a09; }
+    .plan-d .p-palette .sw2 { background: #292524; }
+    .plan-d .p-palette .sw3 { background: #d97706; }
+    .plan-d .p-palette .sw4 { background: #fde68a; color: #78350f; }
+    .plan-d .p-palette .sw5 { background: #fef3c7; color: #92400e; }
+    .plan-d .p-table thead tr { background: #1c1917; }
+    .plan-d .p-table thead th { color: #fbbf24; }
+    .plan-d .p-table .hl td { background: rgba(217,119,6,0.10); }
+    .plan-d .p-lead { border-color: #d97706; background: rgba(217,119,6,0.08); color: #fde68a; }
+    .plan-d .p-metric .m-val { color: #fbbf24; }
+    .plan-d .p-metric { background: rgba(217,119,6,0.06); }
+
+    @media (max-width: 860px) {
+      .proposals { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="eyebrow">Brand Identity Exploration · UNLID</div>
+    <h1>ブランドカラー 4案比較</h1>
+    <p>各案はパレット・タイポグラフィ・コンポーネント（表・リード・数値カード）を含めたフルビジュアルで提案。</p>
+  </div>
+
+  <!-- 4 PROPOSALS GRID -->
+  <div class="proposals">
+
+    <!-- ==================== PLAN A ==================== -->
+    <div class="proposal plan-a">
+      <div class="p-hero">
+        <div class="p-plan-label">案 A · Electric Navy</div>
+        <div class="p-brand-name">UNLID</div>
+        <p class="p-tagline">SME × AI実装 × フラクショナルFDE<br>日本にまだ存在しない3市場エコシステム</p>
+        <div class="p-btn">無料相談はこちら →</div>
+      </div>
+      <div class="p-palette">
+        <div class="p-swatch sw1">#0f172a</div>
+        <div class="p-swatch sw2">#2563eb</div>
+        <div class="p-swatch sw3">#93c5fd</div>
+        <div class="p-swatch sw4">#eff6ff</div>
+        <div class="p-swatch sw5">#10b981</div>
+      </div>
+      <div class="p-body">
+        <div class="p-kw-list">
+          <span class="p-kw">テック信頼性</span>
+          <span class="p-kw">Palantir的重厚感</span>
+          <span class="p-kw">投資家向け◎</span>
+          <span class="p-kw">冷静・論理的</span>
+          <span class="p-kw">SaaS標準</span>
+        </div>
+
+        <div class="p-sample-label">Sample · リード文</div>
+        <div class="p-lead">
+          <strong>UNLIDは「SMEのAI実装」「若手育成」「スカウト採用」の3市場を1つのエコシステムで統合する。</strong>
+        </div>
+
+        <div class="p-sample-label">Sample · 数値カード</div>
+        <div class="p-metrics">
+          <div class="p-metric"><div class="m-val">月20万</div><div class="m-lbl">FDE月額単価</div></div>
+          <div class="p-metric"><div class="m-val">380万</div><div class="m-lbl">LTV/社</div></div>
+          <div class="p-metric"><div class="m-val">52%</div><div class="m-lbl">粗利率</div></div>
+        </div>
+
+        <div class="p-sample-label">Sample · テーブル</div>
+        <table class="p-table">
+          <thead><tr><th>収益源</th><th>単価</th><th>頻度</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td><strong>B2B受託</strong></td><td><strong>月20〜30万</strong></td><td>継続</td></tr>
+            <tr><td>プロジェクト型</td><td>80〜200万</td><td>案件</td></tr>
+            <tr class="hl"><td><strong>人材紹介フィー</strong></td><td><strong>140万</strong></td><td>成功報酬</td></tr>
+          </tbody>
+        </table>
+
+        <div class="p-ref">
+          <strong>参考ブランド：</strong>Palantir / Linear / Stripe（ダーク系B2Bテック）<br>
+          <strong>向いている読み手：</strong>VCなど機関投資家・テック系B2B企業
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== PLAN B ==================== -->
+    <div class="proposal plan-b">
+      <div class="p-hero">
+        <div class="p-plan-label">案 B · Midnight Indigo</div>
+        <div class="p-brand-name">UNLID</div>
+        <p class="p-tagline">AI実装の専門家を持てない300万社のSMEに、<br>成果責任付きのフラクショナルFDEという選択肢を作る</p>
+        <div class="p-btn">無料相談はこちら →</div>
+      </div>
+      <div class="p-palette">
+        <div class="p-swatch sw1">#0e0722</div>
+        <div class="p-swatch sw2">#6d28d9</div>
+        <div class="p-swatch sw3">#c4b5fd</div>
+        <div class="p-swatch sw4">#f5f3ff</div>
+        <div class="p-swatch sw5">#f59e0b</div>
+      </div>
+      <div class="p-body">
+        <div class="p-kw-list">
+          <span class="p-kw">プレミアム感</span>
+          <span class="p-kw">独自性・差別化</span>
+          <span class="p-kw">神秘的・先進的</span>
+          <span class="p-kw">Notionライク</span>
+          <span class="p-kw">個性派スタートアップ</span>
+        </div>
+
+        <div class="p-sample-label">Sample · リード文</div>
+        <div class="p-lead">
+          <strong>UNLIDは「SMEのAI実装」「若手育成」「スカウト採用」の3市場を1つのエコシステムで統合する。</strong>
+        </div>
+
+        <div class="p-sample-label">Sample · 数値カード</div>
+        <div class="p-metrics">
+          <div class="p-metric"><div class="m-val">月20万</div><div class="m-lbl">FDE月額単価</div></div>
+          <div class="p-metric"><div class="m-val">380万</div><div class="m-lbl">LTV/社</div></div>
+          <div class="p-metric"><div class="m-val">52%</div><div class="m-lbl">粗利率</div></div>
+        </div>
+
+        <div class="p-sample-label">Sample · テーブル</div>
+        <table class="p-table">
+          <thead><tr><th>収益源</th><th>単価</th><th>頻度</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td><strong>B2B受託</strong></td><td><strong>月20〜30万</strong></td><td>継続</td></tr>
+            <tr><td>プロジェクト型</td><td>80〜200万</td><td>案件</td></tr>
+            <tr class="hl"><td><strong>人材紹介フィー</strong></td><td><strong>140万</strong></td><td>成功報酬</td></tr>
+          </tbody>
+        </table>
+
+        <div class="p-ref">
+          <strong>参考ブランド：</strong>Notion / Figma / Pitch（プレミアム・クリエイティブ系）<br>
+          <strong>向いている読み手：</strong>スタートアップ系投資家・若手ターゲット採用
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== PLAN C ==================== -->
+    <div class="proposal plan-c">
+      <div class="p-hero">
+        <div class="p-plan-label">案 C · Slate &amp; Teal</div>
+        <div class="p-brand-name">UNLID</div>
+        <p class="p-tagline">AI実装の専門家を持てない300万社のSMEに、<br>成果責任付きのフラクショナルFDEという選択肢を作る</p>
+        <div class="p-btn">無料相談はこちら →</div>
+      </div>
+      <div class="p-palette">
+        <div class="p-swatch sw1">#0f2027</div>
+        <div class="p-swatch sw2">#0d9488</div>
+        <div class="p-swatch sw3">#5eead4</div>
+        <div class="p-swatch sw4">#f0fdfa</div>
+        <div class="p-swatch sw5">#f97316</div>
+      </div>
+      <div class="p-body">
+        <div class="p-kw-list">
+          <span class="p-kw">ヒューマン・温かみ</span>
+          <span class="p-kw">成長・自然</span>
+          <span class="p-kw">信頼性◎</span>
+          <span class="p-kw">SMEに刺さる</span>
+          <span class="p-kw">医療・HRブランド的</span>
+        </div>
+
+        <div class="p-sample-label">Sample · リード文</div>
+        <div class="p-lead">
+          <strong>UNLIDは「SMEのAI実装」「若手育成」「スカウト採用」の3市場を1つのエコシステムで統合する。</strong>
+        </div>
+
+        <div class="p-sample-label">Sample · 数値カード</div>
+        <div class="p-metrics">
+          <div class="p-metric"><div class="m-val">月20万</div><div class="m-lbl">FDE月額単価</div></div>
+          <div class="p-metric"><div class="m-val">380万</div><div class="m-lbl">LTV/社</div></div>
+          <div class="p-metric"><div class="m-val">52%</div><div class="m-lbl">粗利率</div></div>
+        </div>
+
+        <div class="p-sample-label">Sample · テーブル</div>
+        <table class="p-table">
+          <thead><tr><th>収益源</th><th>単価</th><th>頻度</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td><strong>B2B受託</strong></td><td><strong>月20〜30万</strong></td><td>継続</td></tr>
+            <tr><td>プロジェクト型</td><td>80〜200万</td><td>案件</td></tr>
+            <tr class="hl"><td><strong>人材紹介フィー</strong></td><td><strong>140万</strong></td><td>成功報酬</td></tr>
+          </tbody>
+        </table>
+
+        <div class="p-ref">
+          <strong>参考ブランド：</strong>Wealthsimple / Atlassian / Monday.com（ヒューマン系SaaS）<br>
+          <strong>向いている読み手：</strong>SME経営者・副業ワーカー・HR担当者
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== PLAN D ==================== -->
+    <div class="proposal plan-d">
+      <div class="p-hero">
+        <div class="p-plan-label">案 D · Obsidian &amp; Amber</div>
+        <div class="p-brand-name">UNLID</div>
+        <p class="p-tagline">AI実装の専門家を持てない300万社のSMEに、<br>成果責任付きのフラクショナルFDEという選択肢を作る</p>
+        <div class="p-btn">無料相談はこちら →</div>
+      </div>
+      <div class="p-palette">
+        <div class="p-swatch sw1">#0c0a09</div>
+        <div class="p-swatch sw2">#292524</div>
+        <div class="p-swatch sw3">#d97706</div>
+        <div class="p-swatch sw4">#fde68a</div>
+        <div class="p-swatch sw5">#fef3c7</div>
+      </div>
+      <div class="p-body">
+        <div class="p-kw-list">
+          <span class="p-kw">重厚・格式</span>
+          <span class="p-kw">プレミアムコンサル</span>
+          <span class="p-kw">McKinsey的</span>
+          <span class="p-kw">日本的信頼感</span>
+          <span class="p-kw">経営者に響く</span>
+        </div>
+
+        <div class="p-sample-label">Sample · リード文</div>
+        <div class="p-lead">
+          <strong>UNLIDは「SMEのAI実装」「若手育成」「スカウト採用」の3市場を1つのエコシステムで統合する。</strong>
+        </div>
+
+        <div class="p-sample-label">Sample · 数値カード</div>
+        <div class="p-metrics">
+          <div class="p-metric"><div class="m-val">月20万</div><div class="m-lbl">FDE月額単価</div></div>
+          <div class="p-metric"><div class="m-val">380万</div><div class="m-lbl">LTV/社</div></div>
+          <div class="p-metric"><div class="m-val">52%</div><div class="m-lbl">粗利率</div></div>
+        </div>
+
+        <div class="p-sample-label">Sample · テーブル</div>
+        <table class="p-table">
+          <thead><tr><th>収益源</th><th>単価</th><th>頻度</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td><strong>B2B受託</strong></td><td><strong>月20〜30万</strong></td><td>継続</td></tr>
+            <tr><td>プロジェクト型</td><td>80〜200万</td><td>案件</td></tr>
+            <tr class="hl"><td><strong>人材紹介フィー</strong></td><td><strong>140万</strong></td><td>成功報酬</td></tr>
+          </tbody>
+        </table>
+
+        <div class="p-ref">
+          <strong>参考ブランド：</strong>McKinsey / Bain / 大手戦略コンサル（重厚・格式系）<br>
+          <strong>向いている読み手：</strong>伝統的な大企業系投資家・経営者層・金融機関
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /proposals -->
+
+  <!-- COMPARISON TABLE -->
+  <div class="compare-section">
+    <h2>4案 総合比較</h2>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>評価軸</th>
+          <th>案A · Electric Navy</th>
+          <th>案B · Midnight Indigo</th>
+          <th>案C · Slate &amp; Teal</th>
+          <th>案D · Obsidian &amp; Amber</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>投資家向け印象</td>
+          <td>★★★★★ テック系VC◎</td>
+          <td>★★★★☆ スタートアップ系◎</td>
+          <td>★★★☆☆ HR系投資家向け</td>
+          <td>★★★★☆ 伝統的機関投資家</td>
+        </tr>
+        <tr>
+          <td>SME経営者への訴求</td>
+          <td>★★★☆☆ テック感強すぎ</td>
+          <td>★★☆☆☆ やや難解・抽象的</td>
+          <td>★★★★★ 親しみやすさ◎</td>
+          <td>★★★★☆ 信頼感・格式◎</td>
+        </tr>
+        <tr>
+          <td>副業若手ワーカー訴求</td>
+          <td>★★★★☆ クール・憧れ系</td>
+          <td>★★★★★ 個性・差別化感◎</td>
+          <td>★★★★☆ 親しみやすさ◎</td>
+          <td>★★☆☆☆ 重すぎる印象</td>
+        </tr>
+        <tr>
+          <td>ブランド独自性</td>
+          <td>★★★☆☆ SaaS標準に近い</td>
+          <td>★★★★★ 市場で差別化◎</td>
+          <td>★★★★☆ Teal系は少ない</td>
+          <td>★★★★☆ コンサル系で独自</td>
+        </tr>
+        <tr>
+          <td>日本市場との相性</td>
+          <td>★★★★☆ 馴染みやすい</td>
+          <td>★★★☆☆ 先進すぎる感も</td>
+          <td>★★★★★ 日本人に安心感</td>
+          <td>★★★★★ 格式が日本市場◎</td>
+        </tr>
+        <tr>
+          <td>長期ブランド耐久性</td>
+          <td>★★★★☆ 定番で安定</td>
+          <td>★★★☆☆ トレンド依存リスク</td>
+          <td>★★★★☆ 飽きが来にくい</td>
+          <td>★★★★★ 時代を超える格式</td>
+        </tr>
+        <tr>
+          <td>現行レポートからの変更コスト</td>
+          <td>低（最小変更）</td>
+          <td>高（全体再設計）</td>
+          <td>高（色哲学が変わる）</td>
+          <td>高（全体再設計）</td>
+        </tr>
+        <tr>
+          <td>@designerの推奨度</td>
+          <td>★★★★☆ 現行改良なら最速</td>
+          <td>★★★☆☆ 差別化戦略なら選択</td>
+          <td>★★★★☆ SME向けLP開発に最適</td>
+          <td>★★★☆☆ 将来のシリーズB以降に向く</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:28px; padding:22px 24px; background:#0f1117; border-radius:12px; border:1px solid rgba(255,255,255,0.06);">
+      <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#475569; margin-bottom:12px; font-weight:700;">@designer 総評</div>
+      <div style="font-size:13px; color:#94a3b8; line-height:1.9;">
+        <strong style="color:#e2e8f0;">現フェーズ（投資家向け資料・初期SME営業）には案Aか案Cが適切。</strong>
+        案Aは「今すぐ改善」なら最小コスト。Google Fonts（Inter + Noto Sans JP）追加とブランドカラー統一で既存レポートを刷新できる。
+        案Cは「SMEの経営者に温かく・親しみやすく伝える」のが最も優れており、LPや営業資料を別途作る場合に向く。
+        案Bは独自性が高く将来のブランド強化フェーズで検討余地あり。
+        案Dはシリーズ以降の格式アップグレード時に向く選択肢。
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

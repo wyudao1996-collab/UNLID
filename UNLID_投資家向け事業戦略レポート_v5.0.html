@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UNLID 投資家向け事業戦略レポート v5.0</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -20,8 +22,8 @@
     }
 
     body {
-      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
-      font-size: 14px;
+      font-family: 'Inter', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
+      font-size: 15px;
       line-height: 1.75;
       color: var(--ink);
       background: #eef0f4;
@@ -147,10 +149,10 @@
       line-height: 1.5;
     }
     .fw-step.sme { background: #dbeafe; border-color: #2563eb; }
-    .fw-step.fde { background: #dcfce7; border-color: #16a34a; }
-    .fw-step.log { background: #fef9c3; border-color: #ca8a04; }
-    .fw-step.fee { background: #fff7ed; border-color: #ea580c; }
-    .fw-step.up  { background: #f0fdf4; border-color: #15803d; }
+    .fw-step.fde { background: #eff6ff; border-color: #0f172a; }
+    .fw-step.log { background: #e8f0fe; border-color: #1d4ed8; }
+    .fw-step.fee { background: #f0f7ff; border-color: #2563eb; }
+    .fw-step.up  { background: #f8fafc; border-color: #475569; }
     .fw-step.new { background: #dbeafe; border-color: #1d4ed8; }
     .fw-arr {
       display: flex;
@@ -212,19 +214,19 @@
     }
     .hbox strong { color:var(--sky); }
     .hbox-warn {
-      background:linear-gradient(135deg,#fffbeb,#fef3c7);
-      border-left:4px solid #f59e0b;
+      background:linear-gradient(135deg,#f0f7ff,#eff6ff);
+      border-left:4px solid #2563eb;
       border-radius:0 8px 8px 0; padding:16px 22px;
       margin:16px 0; font-size:13.5px; line-height:1.7;
     }
-    .hbox-warn strong { color:#92400e; }
+    .hbox-warn strong { color:#1e3a8a; }
     .hbox-green {
-      background:linear-gradient(135deg,#f0fdf4,#dcfce7);
-      border-left:4px solid #16a34a;
+      background:linear-gradient(135deg,#f8fafc,#eff6ff);
+      border-left:4px solid #86efac;
       border-radius:0 8px 8px 0; padding:16px 22px;
       margin:16px 0; font-size:13.5px; line-height:1.7;
     }
-    .hbox-green strong { color:#14532d; }
+    .hbox-green strong { color:#0f172a; }
 
     /* ===== METRIC GRID ===== */
     .metric-grid {
@@ -494,17 +496,17 @@
       <!-- 3市場インターセクション図 -->
       <h3>3市場の交差点 — UNLIDのポジション</h3>
       <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:3px; margin:16px 0 24px;">
-        <div style="background:#fff5f5; border:2px solid #fca5a5; border-radius:10px 0 0 10px; padding:20px 18px; text-align:center;">
-          <div style="font-size:0.88rem; font-weight:700; color:#dc2626; margin-bottom:8px;">SME向けAI実装</div>
-          <div style="font-size:0.78rem; color:#7f1d1d; line-height:1.7;">市場規模：2,000億〜5,000億円<br>既存プレイヤー：大手DXコンサル<br>SMEへのアクセス：<strong>ほぼゼロ</strong></div>
+        <div style="background:#f8fafc; border:2px solid #0f172a; border-radius:10px 0 0 10px; padding:20px 18px; text-align:center;">
+          <div style="font-size:0.88rem; font-weight:700; color:#0f172a; margin-bottom:8px;">SME向けAI実装</div>
+          <div style="font-size:0.78rem; color:#334155; line-height:1.7;">市場規模：2,000億〜5,000億円<br>既存プレイヤー：大手DXコンサル<br>SMEへのアクセス：<strong>ほぼゼロ</strong></div>
         </div>
         <div style="background:linear-gradient(135deg,#0f172a,#1e3a8a); border:2px solid #2563eb; padding:20px 18px; text-align:center; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2; transform:scale(1.02); border-radius:10px; box-shadow:0 8px 32px rgba(37,99,235,0.3);">
           <div style="font-size:1rem; font-weight:800; color:#93c5fd; margin-bottom:10px;">UNLID</div>
           <div style="font-size:0.78rem; color:#94a3b8; line-height:1.8;">月20〜30万で<br>3市場を同時に解く<br><strong style="color:#93c5fd;">唯一のポジション</strong></div>
         </div>
-        <div style="background:#f0fdf4; border:2px solid #86efac; border-radius:0 10px 10px 0; padding:20px 18px; text-align:center;">
-          <div style="font-size:0.88rem; font-weight:700; color:#15803d; margin-bottom:8px;">若手育成 × 人材紹介</div>
-          <div style="font-size:0.78rem; color:#14532d; line-height:1.7;">市場規模：3,000億〜4,000億円<br>既存プレイヤー：HRコンサル各社<br>実務実績の証明：<strong>手段が存在しない</strong></div>
+        <div style="background:#eff6ff; border:2px solid #2563eb; border-radius:0 10px 10px 0; padding:20px 18px; text-align:center;">
+          <div style="font-size:0.88rem; font-weight:700; color:#1d4ed8; margin-bottom:8px;">若手育成 × 人材紹介</div>
+          <div style="font-size:0.78rem; color:#1e3a8a; line-height:1.7;">市場規模：3,000億〜4,000億円<br>既存プレイヤー：HRコンサル各社<br>実務実績の証明：<strong>手段が存在しない</strong></div>
         </div>
       </div>
 
@@ -569,22 +571,22 @@
 
       <!-- 3問題カード -->
       <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:16px 0 28px;">
-        <div style="border:2px solid #fca5a5; border-radius:12px; padding:20px 16px; background:#fff5f5;">
-          <div style="font-size:0.78rem; font-weight:700; color:#dc2626; background:#fee2e2; display:inline-block; padding:2px 10px; border-radius:4px; margin-bottom:10px;">問題① ToB（SME）</div>
-          <div style="font-size:1rem; font-weight:700; color:#7f1d1d; margin-bottom:10px;">AI格差——<br>大企業との差が15倍</div>
-          <div style="font-size:0.8rem; color:#7f1d1d; line-height:1.8;">
-            中小企業のAI全社導入率：<strong>1.3%</strong>（大企業19%の1/15）<br>
-            DX推進人材「不足」：<strong>85.1%</strong><br>
+        <div style="border:2px solid #2563eb; border-radius:12px; padding:20px 16px; background:#0f172a;">
+          <div style="font-size:0.78rem; font-weight:700; color:#fff; background:#2563eb; display:inline-block; padding:2px 10px; border-radius:4px; margin-bottom:10px;">問題① ToB（SME）</div>
+          <div style="font-size:1rem; font-weight:700; color:#f1f5f9; margin-bottom:10px;">AI格差——<br>大企業との差が15倍</div>
+          <div style="font-size:0.8rem; color:#94a3b8; line-height:1.8;">
+            中小企業のAI全社導入率：<strong style="color:#93c5fd;">1.3%</strong>（大企業19%の1/15）<br>
+            DX推進人材「不足」：<strong style="color:#93c5fd;">85.1%</strong><br>
             DXコンサル相場：月80〜200万円（SME予算外）
           </div>
         </div>
-        <div style="border:2px solid #fdba74; border-radius:12px; padding:20px 16px; background:#fff8f0;">
-          <div style="font-size:0.78rem; font-weight:700; color:#ea580c; background:#fed7aa; display:inline-block; padding:2px 10px; border-radius:4px; margin-bottom:10px;">問題② ToC（若手）</div>
-          <div style="font-size:1rem; font-weight:700; color:#7c2d12; margin-bottom:10px;">実戦機会消滅——<br>育てない・試せない・証明できない</div>
-          <div style="font-size:0.8rem; color:#7c2d12; line-height:1.8;">
-            計画的OJT実施率：<strong>40.9%→30.3%</strong>（10年で低下）<br>
-            職務経歴書は<strong>100%自己申告</strong><br>
-            ビジネス職版GitHubが<strong>収益化に成功したプレイヤーなし</strong>
+        <div style="border:2px solid #93c5fd; border-radius:12px; padding:20px 16px; background:#1e3a8a;">
+          <div style="font-size:0.78rem; font-weight:700; color:#fff; background:#1d4ed8; display:inline-block; padding:2px 10px; border-radius:4px; margin-bottom:10px;">問題② ToC（若手）</div>
+          <div style="font-size:1rem; font-weight:700; color:#f1f5f9; margin-bottom:10px;">実戦機会消滅——<br>育てない・試せない・証明できない</div>
+          <div style="font-size:0.8rem; color:#bfdbfe; line-height:1.8;">
+            計画的OJT実施率：<strong style="color:#93c5fd;">40.9%→30.3%</strong>（10年で低下）<br>
+            職務経歴書は<strong style="color:#93c5fd;">100%自己申告</strong><br>
+            ビジネス職版GitHubが<strong style="color:#93c5fd;">収益化に成功したプレイヤーなし</strong>
           </div>
         </div>
         <div style="border:2px solid #93c5fd; border-radius:12px; padding:20px 16px; background:#eff6ff;">
@@ -628,19 +630,19 @@
 
       <h3>問題② 若手の三重苦——育てない × 試せない × 証明できない</h3>
       <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin:14px 0 22px;">
-        <div style="border:1.5px solid #fca5a5; border-radius:10px; padding:16px 14px; background:#fff5f5;">
-          <div style="font-size:0.92rem; font-weight:700; color:#dc2626; margin-bottom:6px;">① 育てられない</div>
-          <div style="font-size:0.72rem; font-weight:600; color:#7f1d1d; background:#fee2e2; display:inline-block; padding:2px 7px; border-radius:4px; margin-bottom:8px;">起因：OJT崩壊</div>
-          <div style="font-size:0.78rem; color:#7f1d1d; line-height:1.8;">
+        <div style="border:1.5px solid #0f172a; border-radius:10px; padding:16px 14px; background:#f8fafc;">
+          <div style="font-size:0.92rem; font-weight:700; color:#0f172a; margin-bottom:6px;">① 育てられない</div>
+          <div style="font-size:0.72rem; font-weight:600; color:#fff; background:#0f172a; display:inline-block; padding:2px 7px; border-radius:4px; margin-bottom:8px;">起因：OJT崩壊</div>
+          <div style="font-size:0.78rem; color:#334155; line-height:1.8;">
             計画的OJT：<strong>40.9%→30.3%</strong><br>
             「指導人材不足」：<strong>59.5%</strong><br>
             「育成時間なし」：<strong>47.4%</strong>
           </div>
         </div>
-        <div style="border:1.5px solid #fdba74; border-radius:10px; padding:16px 14px; background:#fff8f0;">
-          <div style="font-size:0.92rem; font-weight:700; color:#ea580c; margin-bottom:6px;">② 試せない</div>
-          <div style="font-size:0.72rem; font-weight:600; color:#7c2d12; background:#fed7aa; display:inline-block; padding:2px 7px; border-radius:4px; margin-bottom:8px;">起因：副業・実戦機会の壁</div>
-          <div style="font-size:0.78rem; color:#7c2d12; line-height:1.8;">
+        <div style="border:1.5px solid #2563eb; border-radius:10px; padding:16px 14px; background:#eff6ff;">
+          <div style="font-size:0.92rem; font-weight:700; color:#1d4ed8; margin-bottom:6px;">② 試せない</div>
+          <div style="font-size:0.72rem; font-weight:600; color:#fff; background:#2563eb; display:inline-block; padding:2px 7px; border-radius:4px; margin-bottom:8px;">起因：副業・実戦機会の壁</div>
+          <div style="font-size:0.78rem; color:#1e3a8a; line-height:1.8;">
             副業を認められていると感じる従業員：<strong>約27.5%</strong>（doda 2023）<br>
             実戦案件へのアクセス：<strong>ほぼゼロ</strong><br>
             「試して学ぶ場」が構造的に存在しない
@@ -657,33 +659,33 @@
         </div>
       </div>
 
-      <div style="margin-bottom:16px; padding:14px 18px; background:#fef2f2; border-left:4px solid #ef4444; border-radius:6px; font-size:0.88rem; line-height:1.8; color:#1f2937;">
+      <div style="margin-bottom:16px; padding:14px 18px; background:#f8fafc; border-left:4px solid #0f172a; border-radius:6px; font-size:0.88rem; line-height:1.8; color:#1f2937;">
         <strong>【問題：若手のキャリア形成に必要な3つの要素がすべて欠けている】</strong><br>
         <strong>①育てられない：</strong>計画的OJTは10年で40.9%→30.3%に低下。指導人材不足59.5%、育成時間なし47.4%。現場で適切なフィードバックを得られる環境が消えた。<br>
         <strong>②試せない：</strong>副業を認められていると感じる従業員は約27.5%にとどまり（doda 2023）、実戦案件へのアクセスはほぼゼロ。「やってみる場」が構造的に存在しない。<br>
         <strong>③証明できない：</strong>仮に実務をこなしても職務経歴書は100%自己申告。採用担当の62%が信頼性に疑問を持ち、客観的な実績証明手段がない。
       </div>
-      <div style="margin-bottom:22px; padding:14px 18px; background:#fef9c3; border-left:4px solid #ca8a04; border-radius:6px; font-size:0.88rem; line-height:1.8; color:#1f2937;">
+      <div style="margin-bottom:22px; padding:14px 18px; background:#eff6ff; border-left:4px solid #2563eb; border-radius:6px; font-size:0.88rem; line-height:1.8; color:#1e3a8a;">
         <strong>【課題：「育てる × 試せる × 証明できる」の3つを同時に満たす環境が構造的に存在しない】</strong><br>
         OJT崩壊で育成・フィードバック環境が消え、副業規制で実戦機会も絶たれ、証明インフラもない——この3つの欠如が連鎖して若手のキャリア形成を詰まらせている。エンジニアにはGitHubという「試して→証明できる」インフラがあるが、ビジネス職にはそれがなく、フィードバックを与える上位者（メンター）も不在だ。<strong>この3重の構造的不在がUNLIDの解くべき課題の本質だ。</strong>
       </div>
 
       <h3>問題③ AI人材評価の限界——「本当にAIが使える人材か」を判定する手段がない</h3>
-      <div style="margin-bottom:16px; padding:14px 18px; background:#fef2f2; border-left:4px solid #ef4444; border-radius:6px; font-size:0.88rem; line-height:1.8; color:#1f2937;">
+      <div style="margin-bottom:16px; padding:14px 18px; background:#f8fafc; border-left:4px solid #0f172a; border-radius:6px; font-size:0.88rem; line-height:1.8; color:#1f2937;">
         <strong>【問題：AI人材需要が急増する一方、AI実務能力を評価できる手段が存在しない】</strong><br>
         AI関連求人は2022年比<strong>3.5倍</strong>増（doda 2024）に達し、企業のAI人材獲得競争が激化している。しかし面接・学歴・自己申告の職務経歴書では「実務でAIを使い成果を出せるか」を判定する手段がなく、採用側も応募者側も客観的な評価軸を持てていない。採用ミスマッチ率は<strong>約30%</strong>、採用コストは<strong>平均93.6万円/人</strong>に達している。
       </div>
-      <div style="margin-bottom:16px; padding:14px 18px; background:#fef9c3; border-left:4px solid #ca8a04; border-radius:6px; font-size:0.88rem; line-height:1.8; color:#1f2937;">
+      <div style="margin-bottom:16px; padding:14px 18px; background:#eff6ff; border-left:4px solid #2563eb; border-radius:6px; font-size:0.88rem; line-height:1.8; color:#1e3a8a;">
         <strong>【課題：ビジネス職のAI実務実績を第三者評価で証明できるデータが存在しない】</strong><br>
         スキルベース採用に転換したい企業は<strong>79%</strong>（LinkedIn 2024）にのぼるが、転換に必要な「実務でAIを使った実績の客観データ」がビジネス職には存在しない。エンジニアのGitHubに相当する「AIを使った実業務の成果を第三者が評価したデータ」が世界的に不在のため、需要があっても転換できない状態が続いている。
       </div>
       <h3>なぜ今か——3つの構造的追い風</h3>
       <div style="display:flex; flex-direction:column; gap:12px; margin:14px 0 22px;">
-        <div style="border:1.5px solid #bbf7d0; border-radius:10px; padding:16px 20px; background:#f0fdf4; display:grid; grid-template-columns:48px 1fr; gap:12px; align-items:start;">
-          <div style="background:#16a34a; color:#fff; border-radius:8px; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:800;">1</div>
+        <div style="border:1.5px solid #bfdbfe; border-radius:10px; padding:16px 20px; background:#eff6ff; display:grid; grid-template-columns:48px 1fr; gap:12px; align-items:start;">
+          <div style="background:#2563eb; color:#fff; border-radius:8px; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:800;">1</div>
           <div>
-            <div style="font-size:0.9rem; font-weight:700; color:#15803d; margin-bottom:4px;">生成AI市場の爆発的成長——SMEに「やらなければ」圧力</div>
-            <div style="font-size:0.8rem; color:#14532d; line-height:1.7;">ChatGPT登場（2022年）→国内生成AI市場が2028年に8,028億円（8倍）見込み。SMEの競合が相次いでAI導入。「やらないと遅れる」という経営者の危機感が急上昇中</div>
+            <div style="font-size:0.9rem; font-weight:700; color:#1d4ed8; margin-bottom:4px;">生成AI市場の爆発的成長——SMEに「やらなければ」圧力</div>
+            <div style="font-size:0.8rem; color:#1e3a8a; line-height:1.7;">ChatGPT登場（2022年）→国内生成AI市場が2028年に8,028億円（8倍）見込み。SMEの競合が相次いでAI導入。「やらないと遅れる」という経営者の危機感が急上昇中</div>
           </div>
         </div>
         <div style="border:1.5px solid #bfdbfe; border-radius:10px; padding:16px 20px; background:#eff6ff; display:grid; grid-template-columns:48px 1fr; gap:12px; align-items:start;">
@@ -693,24 +695,24 @@
             <div style="font-size:0.8rem; color:#1e3a8a; line-height:1.7;">副業可企業が2019年比で約3倍に。フラクショナル市場がCAGR15%超で拡大。UNLIDのモデルはFDE・副業ワーカー双方の人材が存在して初めて機能するが、AI実装経験のある副業人材の<strong>供給（ワーカー候補）</strong>が2024〜2026年に急増しており、モデル稼働の前提条件が整いつつある。需要（SMEのAI実装ニーズ）はすでに存在——今が参入のタイミングだ</div>
           </div>
         </div>
-        <div style="border:1.5px solid #e9d5ff; border-radius:10px; padding:16px 20px; background:#faf5ff; display:grid; grid-template-columns:48px 1fr; gap:12px; align-items:start;">
-          <div style="background:#7c3aed; color:#fff; border-radius:8px; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:800;">3</div>
+        <div style="border:1.5px solid #cbd5e1; border-radius:10px; padding:16px 20px; background:#f8fafc; display:grid; grid-template-columns:48px 1fr; gap:12px; align-items:start;">
+          <div style="background:#0f172a; color:#fff; border-radius:8px; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:800;">3</div>
           <div>
-            <div style="font-size:0.9rem; font-weight:700; color:#6d28d9; margin-bottom:4px;">採用市場のスキルベース移行——データ評価への需要爆増</div>
-            <div style="font-size:0.8rem; color:#4c1d95; line-height:1.7;">スキルベース採用に転換したい企業79%（LinkedIn 2024）。AI関連求人が2022年比3.5倍（doda 2024）。「本当にAIが使える人材か」を証明・判定する評価軸が採用側にも応募者側にも切実に必要とされている</div>
+            <div style="font-size:0.9rem; font-weight:700; color:#0f172a; margin-bottom:4px;">採用市場のスキルベース移行——データ評価への需要爆増</div>
+            <div style="font-size:0.8rem; color:#334155; line-height:1.7;">スキルベース採用に転換したい企業79%（LinkedIn 2024）。AI関連求人が2022年比3.5倍（doda 2024）。「本当にAIが使える人材か」を証明・判定する評価軸が採用側にも応募者側にも切実に必要とされている</div>
           </div>
         </div>
       </div>
 
       <div class="hbox">
         <strong>UNLIDが3つの問題すべてを1つのエコシステムで同時に解く：</strong><br><br>
-        <strong style="color:#dc2626;">【ToB①：SMEのAI格差】</strong><br>
+        <strong style="color:#93c5fd;">【ToB①：SMEのAI格差】</strong><br>
         月20〜30万円で成果責任付きFDEがSMEに入り込み、副業ワーカーと共にAI実装を完遂する。大企業向けコンサル（月80〜200万円）では届かない価格帯で、SMEのAI格差を構造的に埋める。<br><br>
-        <strong style="color:#ea580c;">【ToC②：若手の三重苦】</strong><br>
+        <strong style="color:#93c5fd;">【ToC②：若手の三重苦】</strong><br>
         「育てられない」→ FDE監督下でSMEの実務プロジェクトに参加し、質の高いフィードバックを得られる場を提供する。<br>
         「試せない」→ AI実装という実戦案件に副業という形で安全に参加できる構造を設計する。<br>
         「証明できない」→ 実績ポートフォリオ（本人記述＋FDE3軸スコア＋クライアント確認）が第三者証明済みの実務実績データになる。<br><br>
-        <strong style="color:#1d4ed8;">【ToB③：AI人材評価の限界】</strong><br>
+        <strong style="color:#93c5fd;">【ToB③：AI人材評価の限界】</strong><br>
         完遂ログは採用企業にとって「このワーカーはAIを実務で使えることが証明済み」の評価データとして機能する。スキルベース採用への転換を望む企業（79%）が求めるAI実務実績の客観データを、UNLIDが唯一供給できる。<br><br>
         <strong>3問題・3市場を1つのエコシステムで同時に解くのがUNLIDだ。</strong>
       </div>
@@ -2667,9 +2669,9 @@
       <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:24px 28px; margin-bottom:16px;">
         <h3 style="font-size:1.05rem; margin-bottom:12px; color:#1e293b; border-left:3px solid #2563eb; padding-left:10px;">確信：二つの矛盾を一つで解く</h3>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
-          <div style="background:#fef3c7; padding:16px; border-radius:8px; border-left:4px solid #f59e0b;">
-            <div style="font-weight:700; color:#92400e; margin-bottom:8px; font-size:0.88rem;">中小企業の矛盾</div>
-            <div style="font-size:0.82rem; color:#78350f; line-height:1.8;">AI化したい × 予算がない<br>人を雇えない × 外注は怖い<br>→ 「成果責任付きのFDE」で解決</div>
+          <div style="background:#f8fafc; padding:16px; border-radius:8px; border-left:4px solid #0f172a;">
+            <div style="font-weight:700; color:#0f172a; margin-bottom:8px; font-size:0.88rem;">中小企業の矛盾</div>
+            <div style="font-size:0.82rem; color:#334155; line-height:1.8;">AI化したい × 予算がない<br>人を雇えない × 外注は怖い<br>→ 「成果責任付きのFDE」で解決</div>
           </div>
           <div style="background:#dbeafe; padding:16px; border-radius:8px; border-left:4px solid #3b82f6;">
             <div style="font-weight:700; color:#1e3a8a; margin-bottom:8px; font-size:0.88rem;">若手の矛盾</div>

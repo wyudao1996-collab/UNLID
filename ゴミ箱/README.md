@@ -10,4 +10,10 @@
 
 | 移動日 | 元のパス | 移動理由 |
 |---|---|---|
-| 2026-04-05 | `archive/scripts/` | 財務モデル生成Pythonスクリプト。現在はExcelファイルに移行済みのため不要 |
+| 2026-04-05 | `archive/scripts/` | 財務モデル生成Pythonスクリプト。Excel移行済みのため不要 |
+| 2026-04-05 | `UNLID_ブランドカラー提案.html` | ブランドカラーはPlan A（Electric Navy）に決定済み。役割終了 |
+| 2026-04-05 | `archive/financial/UNLID_財務モデル_v4.2.xlsx` | 古すぎる世代（v4.6〜v4.9を残存）。v4.2〜v4.5を整理 |
+| 2026-04-05 | `archive/financial/UNLID_財務モデル_v4.3.xlsx` | 同上 |
+| 2026-04-05 | `archive/financial/UNLID_財務モデル_v4.4.xlsx` | 同上 |
+| 2026-04-05 | `archive/financial/UNLID_財務モデル_v4.5.xlsx` | 同上 |
+| 2026-04-05 | `skill-creator/` | Claude Code内部ツール一式。UNLIDの事業コンテンツではない |

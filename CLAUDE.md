@@ -84,7 +84,7 @@ https://wyudao1996-collab.github.io/UNLID/<ファイル名>
 ## /ai-impl-team（外部AI実装支援チーム）
 
 外部クライアントへのAI実装支援プロジェクトでは必ずこのチームで動作すること。
-詳細定義：`@ai-impl-team.md`
+詳細定義：`ai-impl-team/README.md`（エージェント個別定義：`ai-impl-team/agents/`）
 
 ### トリガーワード
 

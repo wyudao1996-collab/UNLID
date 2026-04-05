@@ -16,4 +16,4 @@
 | 2026-04-05 | `archive/financial/UNLID_財務モデル_v4.3.xlsx` | 同上 |
 | 2026-04-05 | `archive/financial/UNLID_財務モデル_v4.4.xlsx` | 同上 |
 | 2026-04-05 | `archive/financial/UNLID_財務モデル_v4.5.xlsx` | 同上 |
-| 2026-04-05 | `skill-creator/` | Claude Code内部ツール一式。UNLIDの事業コンテンツではない |
+| ~~2026-04-05~~ | ~~`skill-creator/`~~ | ~~Claude Code内部ツール~~ → **復元済み（2026-04-05）。スキル評価エージェントチームとして正式利用** |
